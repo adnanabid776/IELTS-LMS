@@ -1,0 +1,117 @@
+const mongoose = require("mongoose");
+
+const questionSchema = new mongoose.Schema(
+  {
+    // Which section this question belongs to
+    sectionId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Section",
+      required: true,
+    },
+
+    // Question number in the test (1-40)
+    questionNumber: {
+      type: Number,
+      required: true,
+    },
+
+    // Question text
+    questionText: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    // Question type
+    questionType: {
+      type: String,
+      required: true,
+      enum: [
+        "multiple-choice",
+        "true-false-not-given",
+        "yes-no-not-given",
+        "matching-headings",
+        "matching-information",
+        "matching-features",
+        "sentence-completion",
+        "summary-completion",
+        "note-completion",
+        "table-completion",
+        "flow-chart-completion",
+        "diagram-labeling",
+        "short-answer",
+        "writing-task",
+      ],
+    },
+
+    // Options (for multiple choice, matching, etc.)
+    options: [
+      {
+        type: String,
+        trim: true,
+      },
+    ],
+
+    // Correct answer
+    correctAnswer: {
+      type: String,
+      required: function () {
+        return (
+          this.questionType !== "essay" &&
+          this.questionType !== "speaking-prompt" &&
+          this.questionType !== "writing-task"
+        );
+      },
+      trim: true,
+    },
+    // Grading rubric (for Writing and Speaking)
+    gradingRubric: {
+      type: String,
+      trim: true,
+      // Contains criteria for manual grading
+    },
+
+    // For matching questions (Headings, Information, Features)
+    items: [
+      {
+        label: { type: String, trim: true }, // e.g., 'A', 'B', '1'
+        text: { type: String, trim: true }, // The content/paragraph
+        correctAnswer: { type: String, trim: true }, // The matching option
+      },
+    ],
+
+    // Alternative correct answers (for spelling variations)
+    alternativeAnswers: [
+      {
+        type: String,
+        trim: true,
+      },
+    ],
+
+    // Points for this question
+    points: {
+      type: Number,
+      default: 1,
+    },
+
+    // Image for question (if needed)
+    imageUrl: {
+      type: String,
+      trim: true,
+    },
+
+    // Explanation for correct answer
+    explanation: {
+      type: String,
+      trim: true,
+    },
+  },
+  {
+    timestamps: true,
+  },
+);
+
+// Index for faster queries
+questionSchema.index({ sectionId: 1, questionNumber: 1 }, { unique: true });
+
+module.exports = mongoose.model("Question", questionSchema);

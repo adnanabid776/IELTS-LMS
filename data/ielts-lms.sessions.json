@@ -1,0 +1,8359 @@
+[{
+  "_id": {
+    "$oid": "696e098b67a31eb55ac7f5b3"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "696e08a4357f3b8cc1ec1a7c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-19T10:38:03.388Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 1095,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-19T10:38:03.399Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-19T10:38:03.409Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T10:56:18.660Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-19T10:56:18.650Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696e0ff75b235ab4be0a2b4e"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-19T11:05:27.714Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-19T11:05:27.757Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-19T11:05:27.759Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T13:15:14.994Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-19T13:15:14.980Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696e2e7fb17896f2aa6cdb8c"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "696e08a4357f3b8cc1ec1a7c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-19T13:15:43.405Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 471,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "6969d887bea2570c7800cf90"
+      },
+      "userAnswer": "the human brain",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T13:21:52.485Z"
+      },
+      "_id": {
+        "$oid": "696e2ff0b17896f2aa6cdb93"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-19T13:21:52.491Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-19T13:15:43.411Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T13:23:34.865Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-19T13:23:34.863Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696e3b8f91bfdd48749f9c49"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-19T14:11:27.220Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 25,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e0"
+      },
+      "userAnswer": "england",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T14:11:52.345Z"
+      },
+      "_id": {
+        "$oid": "696e3ba891bfdd48749f9c50"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e1"
+      },
+      "userAnswer": "england",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T14:11:52.370Z"
+      },
+      "_id": {
+        "$oid": "696e3ba891bfdd48749f9c51"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e2"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T14:11:52.371Z"
+      },
+      "_id": {
+        "$oid": "696e3ba891bfdd48749f9c52"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e3"
+      },
+      "userAnswer": "16th",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T14:11:52.372Z"
+      },
+      "_id": {
+        "$oid": "696e3ba891bfdd48749f9c53"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e4"
+      },
+      "userAnswer": "england",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T14:11:52.372Z"
+      },
+      "_id": {
+        "$oid": "696e3ba891bfdd48749f9c54"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-19T14:11:52.373Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-19T14:11:27.256Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T14:11:52.414Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-19T14:11:52.405Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696e3d8691bfdd48749f9c70"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-19T14:19:50.534Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 2395,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-19T14:19:50.535Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-19T14:19:50.536Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T14:59:45.908Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-19T14:59:45.907Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696e46ed91bfdd48749f9c9f"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-19T14:59:57.266Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 1692,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-19T14:59:57.266Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-19T14:59:57.267Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T15:28:09.267Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-19T15:28:09.266Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696e4d8d91bfdd48749f9cd0"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-19T15:28:13.705Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 318,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-19T15:28:13.706Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-19T15:28:13.708Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T15:33:31.749Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-19T15:33:31.747Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696e4f2e91bfdd48749f9d0a"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-19T15:35:10.984Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 25,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e0"
+      },
+      "userAnswer": "England",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T15:35:36.158Z"
+      },
+      "_id": {
+        "$oid": "696e4f4891bfdd48749f9d11"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e1"
+      },
+      "userAnswer": "England",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T15:35:36.159Z"
+      },
+      "_id": {
+        "$oid": "696e4f4891bfdd48749f9d12"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e2"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T15:35:36.159Z"
+      },
+      "_id": {
+        "$oid": "696e4f4891bfdd48749f9d13"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e3"
+      },
+      "userAnswer": "16th",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T15:35:36.160Z"
+      },
+      "_id": {
+        "$oid": "696e4f4891bfdd48749f9d14"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e4"
+      },
+      "userAnswer": "England",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T15:35:36.160Z"
+      },
+      "_id": {
+        "$oid": "696e4f4891bfdd48749f9d15"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-19T15:35:36.160Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-19T15:35:10.986Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T15:35:36.217Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-19T15:35:36.216Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696e4f6091bfdd48749f9d3e"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-19T15:36:00.781Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 87,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e4"
+      },
+      "userAnswer": "crude oil",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T15:37:28.233Z"
+      },
+      "_id": {
+        "$oid": "696e4fb891bfdd48749f9d45"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e3"
+      },
+      "userAnswer": "17th",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T15:37:28.234Z"
+      },
+      "_id": {
+        "$oid": "696e4fb891bfdd48749f9d46"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e2"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T15:37:28.236Z"
+      },
+      "_id": {
+        "$oid": "696e4fb891bfdd48749f9d47"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e1"
+      },
+      "userAnswer": "Kaldi",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T15:37:28.237Z"
+      },
+      "_id": {
+        "$oid": "696e4fb891bfdd48749f9d48"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e0"
+      },
+      "userAnswer": "Ethiopia",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T15:37:28.238Z"
+      },
+      "_id": {
+        "$oid": "696e4fb891bfdd48749f9d49"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-19T15:37:28.238Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-19T15:36:00.783Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T15:37:28.265Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-19T15:37:28.263Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696e57c091bfdd48749f9d81"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-19T16:11:44.935Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 31,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e0"
+      },
+      "userAnswer": "Ethiopia",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T16:12:16.168Z"
+      },
+      "_id": {
+        "$oid": "696e57e091bfdd48749f9d88"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e1"
+      },
+      "userAnswer": "yemen",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T16:12:16.168Z"
+      },
+      "_id": {
+        "$oid": "696e57e091bfdd48749f9d89"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e2"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T16:12:16.169Z"
+      },
+      "_id": {
+        "$oid": "696e57e091bfdd48749f9d8a"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e3"
+      },
+      "userAnswer": "17th",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T16:12:16.169Z"
+      },
+      "_id": {
+        "$oid": "696e57e091bfdd48749f9d8b"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e4"
+      },
+      "userAnswer": "crude-oil",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-19T16:12:16.169Z"
+      },
+      "_id": {
+        "$oid": "696e57e091bfdd48749f9d8c"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-19T16:12:16.169Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-19T16:11:44.936Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T16:12:16.581Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-19T16:12:16.579Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f1be84bea93b88279784a"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-20T06:08:40.886Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 24,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-20T06:08:40.965Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-20T06:08:40.979Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T06:09:05.547Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-20T06:09:05.546Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f1c5e4bea93b882797871"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "696a160a5cd412447b0d3e1c"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-20T06:10:38.954Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-20T06:10:38.955Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-20T06:10:38.956Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T11:03:56.732Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-20T11:03:56.732Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f1c634bea93b88279787d"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-20T06:10:43.776Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 12,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-20T06:10:43.777Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-20T06:10:43.779Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T06:10:56.026Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-20T06:10:56.024Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f1db04bea93b8827978a5"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-20T06:16:16.202Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 64,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e0"
+      },
+      "userAnswer": "1wss",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-20T06:17:20.259Z"
+      },
+      "_id": {
+        "$oid": "696f1df04bea93b8827978d2"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e1"
+      },
+      "userAnswer": "cdsdv",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-20T06:17:20.264Z"
+      },
+      "_id": {
+        "$oid": "696f1df04bea93b8827978d3"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e2"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-20T06:17:20.265Z"
+      },
+      "_id": {
+        "$oid": "696f1df04bea93b8827978d4"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e3"
+      },
+      "userAnswer": "15th",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-20T06:17:20.266Z"
+      },
+      "_id": {
+        "$oid": "696f1df04bea93b8827978d5"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e4"
+      },
+      "userAnswer": "vaddc",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-20T06:17:20.266Z"
+      },
+      "_id": {
+        "$oid": "696f1df04bea93b8827978d6"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-20T06:17:20.267Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-20T06:16:16.204Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T06:17:20.314Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-20T06:17:20.312Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f1f144bea93b88279799b"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-20T06:22:12.595Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 11,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-20T06:22:12.596Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-20T06:22:12.596Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T06:22:24.220Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-20T06:22:24.220Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f26a99bcbb6ff957ce190"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-20T06:54:33.708Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 8,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-20T06:54:33.714Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-20T06:54:33.719Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T06:54:42.513Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-20T06:54:42.510Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f26eb9bcbb6ff957ce1c7"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-20T06:55:39.709Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-20T06:55:39.711Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-20T06:55:39.712Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T11:03:31.604Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-20T11:03:31.601Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f6108be77746d01c9c599"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-20T11:03:36.749Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 5,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-20T11:03:36.751Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-20T11:03:36.752Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T11:03:41.799Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-20T11:03:41.799Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f619fbe77746d01c9c92c"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-20T11:06:07.654Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 3,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-20T11:06:07.656Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-20T11:06:07.656Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T11:06:11.611Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-20T11:06:11.610Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f6280be77746d01c9cd0a"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-20T11:09:52.112Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 34,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-20T11:09:52.114Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-20T11:09:52.114Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T11:10:26.165Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-20T11:10:26.164Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6970b48d767ccd0563ad7dda"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "696e32e891bfdd48749f9c35"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-21T11:12:13.982Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-21T11:12:13.985Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-21T11:12:13.986Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-22T06:29:46.319Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-22T06:29:46.318Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6971c3f05da5b00173efa80f"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-22T06:30:08.433Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 138,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e0"
+      },
+      "userAnswer": "ethiopia",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-22T06:32:26.961Z"
+      },
+      "_id": {
+        "$oid": "6971c47a5da5b00173efa861"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e1"
+      },
+      "userAnswer": "Kaldi",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-22T06:32:26.964Z"
+      },
+      "_id": {
+        "$oid": "6971c47a5da5b00173efa862"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e2"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-22T06:32:26.964Z"
+      },
+      "_id": {
+        "$oid": "6971c47a5da5b00173efa863"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e3"
+      },
+      "userAnswer": "17th",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-22T06:32:26.965Z"
+      },
+      "_id": {
+        "$oid": "6971c47a5da5b00173efa864"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6969eb9275bdaef97823b3e4"
+      },
+      "userAnswer": "crude oil",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-22T06:32:26.966Z"
+      },
+      "_id": {
+        "$oid": "6971c47a5da5b00173efa865"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-22T06:32:26.966Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-22T06:30:08.437Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-22T06:32:26.994Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-22T06:32:26.992Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6971c81c5da5b00173efa946"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "696e32e891bfdd48749f9c35"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-22T06:47:56.438Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-22T06:47:56.439Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-22T06:47:56.440Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-23T07:28:57.476Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-23T07:28:57.475Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6973234f38df251e0c29ad16"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-23T07:29:19.848Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 6,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-23T07:29:19.852Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-23T07:29:19.853Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-23T07:29:26.208Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-23T07:29:26.207Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697710de2a918e0335e6ff7a"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-26T06:59:42.728Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-26T06:59:42.730Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-26T06:59:42.731Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T15:49:19.812Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-26T15:49:19.810Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697720ac2a918e0335e70270"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-26T08:07:08.854Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 469,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014e"
+      },
+      "userAnswer": "Digital technology",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T08:14:58.547Z"
+      },
+      "_id": {
+        "$oid": "697722822a918e0335e70277"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014f"
+      },
+      "userAnswer": "Higher salaries",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T08:14:58.586Z"
+      },
+      "_id": {
+        "$oid": "697722822a918e0335e70278"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70150"
+      },
+      "userAnswer": "Lower motivation",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T08:14:58.587Z"
+      },
+      "_id": {
+        "$oid": "697722822a918e0335e70279"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70151"
+      },
+      "userAnswer": "Increased office costs",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T08:14:58.587Z"
+      },
+      "_id": {
+        "$oid": "697722822a918e0335e7027a"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70152"
+      },
+      "userAnswer": "Results and outcomes",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T08:14:58.587Z"
+      },
+      "_id": {
+        "$oid": "697722822a918e0335e7027b"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fb"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T08:14:58.588Z"
+      },
+      "_id": {
+        "$oid": "697722822a918e0335e7027c"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fc"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T08:14:58.588Z"
+      },
+      "_id": {
+        "$oid": "697722822a918e0335e7027d"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fd"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T08:14:58.589Z"
+      },
+      "_id": {
+        "$oid": "697722822a918e0335e7027e"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fe"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T08:14:58.589Z"
+      },
+      "_id": {
+        "$oid": "697722822a918e0335e7027f"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701ff"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T08:14:58.592Z"
+      },
+      "_id": {
+        "$oid": "697722822a918e0335e70280"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-26T08:14:58.593Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-26T08:07:08.856Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T08:14:58.651Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-26T08:14:58.647Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69772df82a918e0335e70459"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-26T09:03:52.368Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-26T09:03:52.369Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-26T09:03:52.370Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T10:39:38.397Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-26T10:39:38.386Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697744c06cf817f13cd956a6"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-26T10:41:04.980Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 44,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014e"
+      },
+      "userAnswer": "Employee demands",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T10:41:49.348Z"
+      },
+      "_id": {
+        "$oid": "697744ed6cf817f13cd95782"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014f"
+      },
+      "userAnswer": "Less responsibility",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T10:41:49.353Z"
+      },
+      "_id": {
+        "$oid": "697744ed6cf817f13cd95783"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70150"
+      },
+      "userAnswer": "Poor communication skills",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T10:41:49.354Z"
+      },
+      "_id": {
+        "$oid": "697744ed6cf817f13cd95784"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70151"
+      },
+      "userAnswer": "Strict working schedules",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T10:41:49.356Z"
+      },
+      "_id": {
+        "$oid": "697744ed6cf817f13cd95785"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70152"
+      },
+      "userAnswer": "Office discipline",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T10:41:49.356Z"
+      },
+      "_id": {
+        "$oid": "697744ed6cf817f13cd95786"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fb"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T10:41:49.357Z"
+      },
+      "_id": {
+        "$oid": "697744ed6cf817f13cd95787"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fc"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T10:41:49.358Z"
+      },
+      "_id": {
+        "$oid": "697744ed6cf817f13cd95788"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fd"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T10:41:49.358Z"
+      },
+      "_id": {
+        "$oid": "697744ed6cf817f13cd95789"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fe"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T10:41:49.359Z"
+      },
+      "_id": {
+        "$oid": "697744ed6cf817f13cd9578a"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701ff"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T10:41:49.360Z"
+      },
+      "_id": {
+        "$oid": "697744ed6cf817f13cd9578b"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-26T10:41:49.361Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-26T10:41:04.988Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T10:41:49.451Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-26T10:41:49.445Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697745096cf817f13cd957d9"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-26T10:42:17.829Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 6,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-26T10:42:17.830Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-26T10:42:17.832Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T10:42:24.510Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-26T10:42:24.509Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69778b7398ff0e05fefb3367"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-26T15:42:43.193Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "6977899f98ff0e05fefb335e"
+      },
+      "userAnswer": "The chart illustrates the proportion of households that owned various types of technology in a European country between 1997 and 2007. Overall, there was a significant increase in the ownership of all technologies shown during this period.\n\nIn 1997, mobile phones were the least common, owned by approximately 20% of households, while CD players were the most popular at around 60%. By 2007, mobile phone ownership had skyrocketed to nearly 80%, becoming the second-most owned technology after DVD players, which reached about 85%.\n\nComputer ownership also saw substantial growth, rising from roughly 30% in 1997 to 70% in 2007. Internet access, which was negligible in 1997 at less than 10%, grew dramatically to approximately 45% by 2007, though it remained the least common technology overall.\n\nIn conclusion, the chart demonstrates a clear trend of increasing technology adoption across all categories, with mobile phones and computers showing the most dramatic growth rates during the ten-year period.",
+      "timeSpent": 1200,
+      "answeredAt": {
+        "$date": "2026-01-26T15:53:12.383Z"
+      },
+      "_id": {
+        "$oid": "69778de898ff0e05fefb3371"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-26T15:53:12.388Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-26T15:42:43.205Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T06:30:12.029Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-27T06:30:12.023Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697794fa95885df1fad1138e"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-26T16:23:22.470Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 43,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014e"
+      },
+      "userAnswer": "Government policies",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T16:24:06.235Z"
+      },
+      "_id": {
+        "$oid": "6977952695885df1fad11395"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014f"
+      },
+      "userAnswer": "Less responsibility",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T16:24:06.240Z"
+      },
+      "_id": {
+        "$oid": "6977952695885df1fad11396"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70150"
+      },
+      "userAnswer": "Poor communication skills",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T16:24:06.241Z"
+      },
+      "_id": {
+        "$oid": "6977952695885df1fad11397"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70151"
+      },
+      "userAnswer": "Strict working schedules",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T16:24:06.243Z"
+      },
+      "_id": {
+        "$oid": "6977952695885df1fad11398"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70152"
+      },
+      "userAnswer": "Results and outcomes",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T16:24:06.243Z"
+      },
+      "_id": {
+        "$oid": "6977952695885df1fad11399"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fb"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T16:24:06.244Z"
+      },
+      "_id": {
+        "$oid": "6977952695885df1fad1139a"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fc"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T16:24:06.245Z"
+      },
+      "_id": {
+        "$oid": "6977952695885df1fad1139b"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fd"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T16:24:06.247Z"
+      },
+      "_id": {
+        "$oid": "6977952695885df1fad1139c"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fe"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T16:24:06.248Z"
+      },
+      "_id": {
+        "$oid": "6977952695885df1fad1139d"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701ff"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T16:24:06.250Z"
+      },
+      "_id": {
+        "$oid": "6977952695885df1fad1139e"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-26T16:24:06.251Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-26T16:23:22.475Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T16:24:06.292Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-26T16:24:06.288Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69779fb995885df1fad1160f"
+  },
+  "userId": {
+    "$oid": "696224e285a932bf633f0156"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-26T17:09:13.146Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 31,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014e"
+      },
+      "userAnswer": "Employee demands",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T17:09:44.410Z"
+      },
+      "_id": {
+        "$oid": "69779fd895885df1fad11616"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014f"
+      },
+      "userAnswer": "Reduced commuting",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T17:09:44.411Z"
+      },
+      "_id": {
+        "$oid": "69779fd895885df1fad11617"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70150"
+      },
+      "userAnswer": "Poor communication skills",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T17:09:44.411Z"
+      },
+      "_id": {
+        "$oid": "69779fd895885df1fad11618"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70151"
+      },
+      "userAnswer": "Strict working schedules",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T17:09:44.411Z"
+      },
+      "_id": {
+        "$oid": "69779fd895885df1fad11619"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70152"
+      },
+      "userAnswer": "Results and outcomes",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T17:09:44.412Z"
+      },
+      "_id": {
+        "$oid": "69779fd895885df1fad1161a"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fb"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T17:09:44.412Z"
+      },
+      "_id": {
+        "$oid": "69779fd895885df1fad1161b"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fc"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T17:09:44.412Z"
+      },
+      "_id": {
+        "$oid": "69779fd895885df1fad1161c"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fd"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T17:09:44.413Z"
+      },
+      "_id": {
+        "$oid": "69779fd895885df1fad1161d"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fe"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T17:09:44.413Z"
+      },
+      "_id": {
+        "$oid": "69779fd895885df1fad1161e"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701ff"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-26T17:09:44.414Z"
+      },
+      "_id": {
+        "$oid": "69779fd895885df1fad1161f"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-26T17:09:44.414Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-26T17:09:13.148Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T17:09:44.444Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-26T17:09:44.442Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69785b99655f9385a918c0a6"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-27T06:30:49.129Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T06:30:49.133Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T06:30:49.135Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T07:55:18.441Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-27T07:55:18.429Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69785deda275bfa7ceaff298"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-27T06:40:45.466Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 6,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T06:40:45.469Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T06:40:45.473Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T06:40:51.886Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-27T06:40:51.884Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69785dfda275bfa7ceaff2b1"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-27T06:41:01.342Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 806,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "697787556cf817f13cd95afe"
+      },
+      "userAnswer": "fffpf[idfpof\n;lj;lkg\ngfk;flgk;lg\ngkg;dk;k\n;;lglkjojiuhoihihiubnfisf fj ofj of  okj lkjf kj flkjf pkfj \n f\nf ' \n  pkj lkjf\n fpkjflkjf\ns f;jl\ns fj;lf\n ",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-27T06:54:27.850Z"
+      },
+      "_id": {
+        "$oid": "69786123a275bfa7ceaff347"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T06:54:27.851Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T06:41:01.344Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T06:54:27.895Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-27T06:54:27.894Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6978614fa275bfa7ceaff3c9"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-27T06:55:11.798Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 240,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "697787556cf817f13cd95afe"
+      },
+      "userAnswer": "hgdfgfbfbffgggfgdfgfdg g g d etet  e eer tkjlkjlkfjf fljfl flkjf fls fjflkd fl flfkjljf;d flkdjf;ljf;kjf lfjf flsjlf \nf flfjslfj fsf\n flfjljf s\n lfjlkfjsf\n sflsj fs\nf fljfljkfjs\nf sflsfjlsjff\ns flsfjlsjfs\nf sflsf\n sfs fs\nf s\nf f \nsf'sf\ns \n \n f\ns f'sf s\nf sf\n sf \nsf\ns fsf slk;f\nsdf s'f s\nf sjflksjf\nsf s'fskf;ljf;s\nf sf;'sjfksjflsf \n fslfjslkfjlsjf\ns fs;f;lksjfk slskf\ns slfjsljlskjfs\nfs sjlsjljf\ndsf ;'jslkjslkjs s]f flskjfls\nfs fslfjslkjsldf\n fslfjlsjf;f\n lsjflksjfljf\n fldfjlkjf;lkf sd\nf lsdjljlsfl f\n ljlklj\n ljlskfjs f\nsf slfjslkfj\n'f sfljlksj;lf\n flsjlkj;f\n sljflkjlsdf\n flj;lkjf\nss lsjljs\n lsjlksjflj;j\nljjlj \n]lkj ds\nf kj;lkjd\n ;lj f\nkfs;f's flsjfljfljf\nf slsfj;lsjf\n ljsf;lkjfs\nf lfjlfjsf \n]sf sfljslfs \nfsf \n \n\n  \n\nv\n\n\n\n\n\nf\nf\n\nf\nf\nf\nf\nf\nf\nf\nf\nf\nf\nf\nf\n\nf\nf\nf\nf\nf\nf\nf\nf\nf\nf\n\nf\nf\nf\nf\n\nf\nf\nf\nf\nf\n\nf\nf\nf\nf\nf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-27T06:59:12.187Z"
+      },
+      "_id": {
+        "$oid": "69786240a275bfa7ceaff4ea"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T06:59:12.188Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T06:55:11.802Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T06:59:12.205Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-27T06:59:12.204Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69786257a275bfa7ceaff56c"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-27T06:59:35.673Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 276,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T06:59:35.673Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T06:59:35.674Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T07:04:12.655Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-27T07:04:12.654Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697864074f9edbb1a2e46682"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-27T07:06:47.116Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 62,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "697787556cf817f13cd95afe"
+      },
+      "userAnswer": "fdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-27T07:07:49.428Z"
+      },
+      "_id": {
+        "$oid": "697864454f9edbb1a2e46698"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T07:07:49.429Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T07:06:47.122Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T07:07:49.478Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-27T07:07:49.476Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6978661a08d906eb377fd9bb"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-27T07:15:38.730Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 48,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T07:15:38.736Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T07:15:38.742Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T07:16:27.423Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-27T07:16:27.420Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697866ef08d906eb377fd9e2"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-27T07:19:11.607Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 500,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "697787556cf817f13cd95afe"
+      },
+      "userAnswer": "ffdfdsfffsffff sd   f f fcf f f f        g g g g g g    g g g g g g g g g g g g g g g g g g g g g g g g g g g g g g g g g g g g g g g g g g g  g g g g g g g g g g g g g g g g g g g g g g g g g gg g g g g g g g g g g g g g g g g g g g g g g g g g  g g g g g g g g g g g g g g g g g g g g g g g g g gg g g g g g g g g g g g g g g g g g g g g g g g g g  g g g g g g g g g g g g g g g g g g g g g g g g g gg g g g g g g g g g g g g g g g g g g g g g g g g g  g g g g g g g g g g g g g g g g g g",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-27T07:27:32.257Z"
+      },
+      "_id": {
+        "$oid": "697868e408d906eb377fda42"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T07:27:32.265Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T07:19:11.609Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T07:27:32.295Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-27T07:27:32.293Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6978691308d906eb377fda5e"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-27T07:28:19.415Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 1716,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T07:28:19.416Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T07:28:19.417Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T07:56:55.748Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-27T07:56:55.747Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69786f77c44f91b4ee020a1c"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-27T07:55:35.640Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 12,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T07:55:35.647Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T07:55:35.649Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T07:55:48.436Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-27T07:55:48.434Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69786f92c44f91b4ee020a5d"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-27T07:56:02.225Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T07:56:02.226Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T07:56:02.227Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T10:03:06.246Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-28T10:03:06.244Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69786fa3c44f91b4ee020a72"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "in-progress",
+  "startedAt": {
+    "$date": "2026-01-27T07:56:19.164Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T07:56:19.165Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T07:56:19.167Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T07:56:19.167Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69786facc44f91b4ee020a80"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-27T07:56:28.824Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 894,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T07:56:28.825Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T07:56:28.826Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T08:11:23.338Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-27T08:11:23.337Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69787110c44f91b4ee020df4"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-27T08:02:24.533Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T08:02:24.535Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T08:02:24.539Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T07:34:59.342Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-28T07:34:59.340Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69787286c44f91b4ee020f91"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69787250c44f91b4ee020f01"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-27T08:08:38.368Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 153,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T08:08:38.369Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T08:08:38.371Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T08:11:11.795Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-27T08:11:11.794Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69787357c44f91b4ee0210c4"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69787250c44f91b4ee020f01"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-27T08:12:07.417Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T08:12:07.418Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T08:12:07.420Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T06:30:08.463Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-28T06:30:08.462Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69787370c44f91b4ee0210ee"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69787250c44f91b4ee020f01"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-27T08:12:32.140Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 10,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "6978726bc44f91b4ee020f0a"
+      },
+      "userAnswer": "jkjmnbbdfdbbhhbfdfd",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-27T08:12:42.495Z"
+      },
+      "_id": {
+        "$oid": "6978737ac44f91b4ee0210fc"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T08:12:42.500Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T08:12:32.142Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T08:12:42.600Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-27T08:12:42.588Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69787383c44f91b4ee021134"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-27T08:12:51.662Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 73,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014e"
+      },
+      "userAnswer": "Employee demands",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-27T08:14:04.653Z"
+      },
+      "_id": {
+        "$oid": "697873ccc44f91b4ee02114e"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014f"
+      },
+      "userAnswer": "Higher salaries",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-27T08:14:04.654Z"
+      },
+      "_id": {
+        "$oid": "697873ccc44f91b4ee02114f"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70150"
+      },
+      "userAnswer": "Poor communication skills",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-27T08:14:04.654Z"
+      },
+      "_id": {
+        "$oid": "697873ccc44f91b4ee021150"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70151"
+      },
+      "userAnswer": "Communication problems",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-27T08:14:04.655Z"
+      },
+      "_id": {
+        "$oid": "697873ccc44f91b4ee021151"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70152"
+      },
+      "userAnswer": "Results and outcomes",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-27T08:14:04.655Z"
+      },
+      "_id": {
+        "$oid": "697873ccc44f91b4ee021152"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fb"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-27T08:14:04.656Z"
+      },
+      "_id": {
+        "$oid": "697873ccc44f91b4ee021153"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fc"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-27T08:14:04.656Z"
+      },
+      "_id": {
+        "$oid": "697873ccc44f91b4ee021154"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fd"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-27T08:14:04.656Z"
+      },
+      "_id": {
+        "$oid": "697873ccc44f91b4ee021155"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fe"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-27T08:14:04.657Z"
+      },
+      "_id": {
+        "$oid": "697873ccc44f91b4ee021156"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701ff"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-27T08:14:04.657Z"
+      },
+      "_id": {
+        "$oid": "697873ccc44f91b4ee021157"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T08:14:04.658Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T08:12:51.666Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T08:14:04.789Z"
+  },
+  "__v": 2,
+  "completedAt": {
+    "$date": "2026-01-27T08:14:04.779Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69787e56c44f91b4ee02126b"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "status": "in-progress",
+  "startedAt": {
+    "$date": "2026-01-27T08:59:02.383Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T08:59:02.384Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T08:59:02.385Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T08:59:02.385Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69787feec44f91b4ee02148c"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69787250c44f91b4ee020f01"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-27T09:05:50.303Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 15,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "6978726bc44f91b4ee020f0a"
+      },
+      "userAnswer": "ssss",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-27T09:06:05.427Z"
+      },
+      "_id": {
+        "$oid": "69787ffdc44f91b4ee02149c"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T09:06:05.428Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T09:05:50.306Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T09:06:05.455Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-27T09:06:05.452Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69788e40c44f91b4ee0214d3"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69787250c44f91b4ee020f01"
+  },
+  "status": "in-progress",
+  "startedAt": {
+    "$date": "2026-01-27T10:06:56.385Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T10:06:56.387Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T10:06:56.389Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T10:06:56.389Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6978939bc44f91b4ee0215fa"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-27T10:29:47.441Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 11,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-27T10:29:47.442Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-27T10:29:47.443Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T10:29:58.981Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-27T10:29:58.979Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6979acfbc40e2d6ffef9ae2e"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69787250c44f91b4ee020f01"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-28T06:30:19.313Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 5,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "6978726bc44f91b4ee020f0a"
+      },
+      "userAnswer": "fgffsfdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T06:30:25.072Z"
+      },
+      "_id": {
+        "$oid": "6979ad01c40e2d6ffef9ae42"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T06:30:25.074Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T06:30:19.318Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T06:30:25.138Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-28T06:30:25.138Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6979b7f6cb6119bf8f107055"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69787250c44f91b4ee020f01"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-28T07:17:10.847Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 71,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "6978726bc44f91b4ee020f0a"
+      },
+      "userAnswer": "This is the dumbell and this picture shows that the it would be the logo of the particular website logo and used for the website and it is good in design but lack of explaining things.",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:18:22.429Z"
+      },
+      "_id": {
+        "$oid": "6979b83ecb6119bf8f107069"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T07:18:22.433Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T07:17:10.852Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T07:18:22.458Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-28T07:18:22.457Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6979bb13cb6119bf8f1074cc"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69787250c44f91b4ee020f01"
+  },
+  "status": "in-progress",
+  "startedAt": {
+    "$date": "2026-01-28T07:30:27.486Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T07:30:27.488Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T07:30:27.492Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T07:30:27.492Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6979bb1bcb6119bf8f1074ec"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-28T07:30:35.752Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 37,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014e"
+      },
+      "userAnswer": "Digital technology",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:31:13.045Z"
+      },
+      "_id": {
+        "$oid": "6979bb41cb6119bf8f1074f6"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014f"
+      },
+      "userAnswer": "Higher salaries",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:31:13.047Z"
+      },
+      "_id": {
+        "$oid": "6979bb41cb6119bf8f1074f7"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70150"
+      },
+      "userAnswer": "Poor communication skills",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:31:13.050Z"
+      },
+      "_id": {
+        "$oid": "6979bb41cb6119bf8f1074f8"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70151"
+      },
+      "userAnswer": "Increased office costs",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:31:13.051Z"
+      },
+      "_id": {
+        "$oid": "6979bb41cb6119bf8f1074f9"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70152"
+      },
+      "userAnswer": "Results and outcomes",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:31:13.051Z"
+      },
+      "_id": {
+        "$oid": "6979bb41cb6119bf8f1074fa"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fb"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:31:13.052Z"
+      },
+      "_id": {
+        "$oid": "6979bb41cb6119bf8f1074fb"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fc"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:31:13.053Z"
+      },
+      "_id": {
+        "$oid": "6979bb41cb6119bf8f1074fc"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fd"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:31:13.054Z"
+      },
+      "_id": {
+        "$oid": "6979bb41cb6119bf8f1074fd"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fe"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:31:13.055Z"
+      },
+      "_id": {
+        "$oid": "6979bb41cb6119bf8f1074fe"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701ff"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:31:13.056Z"
+      },
+      "_id": {
+        "$oid": "6979bb41cb6119bf8f1074ff"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T07:31:13.057Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T07:30:35.754Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T07:31:13.102Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-28T07:31:13.097Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6979bb5fcb6119bf8f1075c3"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-28T07:31:43.274Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 325,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014e"
+      },
+      "userAnswer": "Government policies",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:37:08.953Z"
+      },
+      "_id": {
+        "$oid": "6979bca4cb6119bf8f10771c"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014f"
+      },
+      "userAnswer": "Higher salaries",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:37:08.954Z"
+      },
+      "_id": {
+        "$oid": "6979bca4cb6119bf8f10771d"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70150"
+      },
+      "userAnswer": "Poor communication skills",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:37:08.954Z"
+      },
+      "_id": {
+        "$oid": "6979bca4cb6119bf8f10771e"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70151"
+      },
+      "userAnswer": "Increased office costs",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:37:08.954Z"
+      },
+      "_id": {
+        "$oid": "6979bca4cb6119bf8f10771f"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70152"
+      },
+      "userAnswer": "Employee attendance",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:37:08.955Z"
+      },
+      "_id": {
+        "$oid": "6979bca4cb6119bf8f107720"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fb"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:37:08.955Z"
+      },
+      "_id": {
+        "$oid": "6979bca4cb6119bf8f107721"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fd"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:37:08.956Z"
+      },
+      "_id": {
+        "$oid": "6979bca4cb6119bf8f107722"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701ff"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:37:08.956Z"
+      },
+      "_id": {
+        "$oid": "6979bca4cb6119bf8f107723"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fe"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:37:08.957Z"
+      },
+      "_id": {
+        "$oid": "6979bca4cb6119bf8f107724"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T07:37:08.957Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T07:31:43.276Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T07:37:08.986Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-28T07:37:08.985Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6979bc26cb6119bf8f1076c9"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-28T07:35:02.460Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 14,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "697787556cf817f13cd95afe"
+      },
+      "userAnswer": "fggfbbfghhhfhfgbbbbfbngfhgb",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T07:35:16.845Z"
+      },
+      "_id": {
+        "$oid": "6979bc34cb6119bf8f1076de"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T07:35:16.845Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T07:35:02.462Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T07:35:16.863Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-28T07:35:16.863Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6979bcd8cb6119bf8f1078bd"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-28T07:38:00.944Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T07:38:00.946Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T07:38:00.948Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T09:20:54.955Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-28T09:20:54.953Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6979d4f9711c064152c406ff"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-28T09:20:57.904Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 385,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T09:20:57.906Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T09:20:57.907Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T09:27:23.643Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-28T09:27:23.642Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6979d692711c064152c4095e"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-28T09:27:46.769Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T09:27:46.769Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T09:27:46.770Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T10:01:48.887Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-28T10:01:48.874Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6979de8fd791a33d9a47f2e9"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-28T10:01:51.547Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T10:01:51.553Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T10:01:51.555Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T10:47:44.688Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-28T10:47:44.687Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6979dedcd791a33d9a47f4e4"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-28T10:03:08.736Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 12,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T10:03:08.737Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T10:03:08.737Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T10:03:21.289Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-28T10:03:21.288Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6979e949d791a33d9a47f9b0"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-28T10:47:37.510Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T10:47:37.511Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T10:47:37.512Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T14:55:05.061Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-28T14:55:05.059Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6979e953d791a33d9a47f9dc"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-28T10:47:47.954Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 194,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701ff"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T10:51:01.936Z"
+      },
+      "_id": {
+        "$oid": "6979ea15d791a33d9a47fb48"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fe"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T10:51:01.943Z"
+      },
+      "_id": {
+        "$oid": "6979ea15d791a33d9a47fb49"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fd"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T10:51:01.944Z"
+      },
+      "_id": {
+        "$oid": "6979ea15d791a33d9a47fb4a"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T10:51:01.944Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T10:47:47.956Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T10:51:02.324Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-28T10:51:02.323Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6979ea47d791a33d9a47fb8e"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-28T10:51:51.278Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T10:51:51.279Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T10:51:51.281Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T14:55:21.132Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-28T14:55:21.131Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697a234aff39d79947ae048a"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-28T14:55:06.765Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T14:55:06.769Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T14:55:06.770Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T07:05:11.511Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-29T07:05:11.509Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697a235bff39d79947ae04a8"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-28T14:55:23.480Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T14:55:23.481Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T14:55:23.482Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T04:54:14.933Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-29T04:54:14.932Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697a276cff39d79947ae0848"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697a2400ff39d79947ae076e"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-28T15:12:44.549Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 656,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "697a25dcff39d79947ae0826"
+      },
+      "userAnswer": "jkjkjk k j j k k jk jk jk kkjkj kj kj j kj kj kj k j kj kj kj kj kj kkj kkj kj kkj kkj kj kj kjj  jjjjjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjj                                                           jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj       jj j j  j jj j j j  j j j j j jj  j j",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T15:23:40.935Z"
+      },
+      "_id": {
+        "$oid": "697a29fcff39d79947ae08f3"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T15:23:40.941Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T15:12:44.551Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T15:23:40.970Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-28T15:23:40.969Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697a2aecff39d79947ae0af0"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "697a2400ff39d79947ae076e"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-28T15:27:40.821Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 375,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "697a25dcff39d79947ae0826"
+      },
+      "userAnswer": "This is the logo of the ascend ai.. There is something wrong about it.",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-28T15:33:55.941Z"
+      },
+      "_id": {
+        "$oid": "697a2c63ff39d79947ae0b4c"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T15:33:55.942Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T15:27:40.823Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T15:33:55.969Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-28T15:33:55.968Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697a2dd3ff39d79947ae0c32"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "status": "in-progress",
+  "startedAt": {
+    "$date": "2026-01-28T15:40:03.492Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T15:40:03.492Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T15:40:03.493Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T15:40:03.493Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697a2ddfff39d79947ae0c48"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-28T15:40:15.047Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T15:40:15.047Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T15:40:15.048Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T16:03:06.404Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-28T16:03:06.404Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697a3330ff39d79947ae0d73"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "697a2400ff39d79947ae076e"
+  },
+  "status": "in-progress",
+  "startedAt": {
+    "$date": "2026-01-28T16:02:56.151Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T16:02:56.152Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T16:02:56.153Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T16:02:56.153Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697a333dff39d79947ae0d8f"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-28T16:03:09.130Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-28T16:03:09.130Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-28T16:03:09.131Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T17:04:46.724Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-29T17:04:46.723Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697ae7f1d7c0ee75173d35a7"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697a2400ff39d79947ae076e"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-29T04:54:09.750Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-29T04:54:09.756Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-29T04:54:09.761Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T07:04:51.715Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-29T07:04:51.713Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697ae7fbd7c0ee75173d35c3"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-29T04:54:19.138Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 92,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014e"
+      },
+      "userAnswer": "Digital technology",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-29T04:55:51.353Z"
+      },
+      "_id": {
+        "$oid": "697ae857d7c0ee75173d35cd"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014f"
+      },
+      "userAnswer": "Higher salaries",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-29T04:55:51.358Z"
+      },
+      "_id": {
+        "$oid": "697ae857d7c0ee75173d35ce"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70150"
+      },
+      "userAnswer": "Poor communication skills",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-29T04:55:51.359Z"
+      },
+      "_id": {
+        "$oid": "697ae857d7c0ee75173d35cf"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70151"
+      },
+      "userAnswer": "Communication problems",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-29T04:55:51.360Z"
+      },
+      "_id": {
+        "$oid": "697ae857d7c0ee75173d35d0"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70152"
+      },
+      "userAnswer": "Results and outcomes",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-29T04:55:51.361Z"
+      },
+      "_id": {
+        "$oid": "697ae857d7c0ee75173d35d1"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fb"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-29T04:55:51.361Z"
+      },
+      "_id": {
+        "$oid": "697ae857d7c0ee75173d35d2"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fc"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-29T04:55:51.362Z"
+      },
+      "_id": {
+        "$oid": "697ae857d7c0ee75173d35d3"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fd"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-29T04:55:51.362Z"
+      },
+      "_id": {
+        "$oid": "697ae857d7c0ee75173d35d4"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fe"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-29T04:55:51.363Z"
+      },
+      "_id": {
+        "$oid": "697ae857d7c0ee75173d35d5"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701ff"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-29T04:55:51.365Z"
+      },
+      "_id": {
+        "$oid": "697ae857d7c0ee75173d35d6"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-29T04:55:51.365Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-29T04:54:19.140Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T04:55:51.425Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-29T04:55:51.421Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697b0327d7c0ee75173d3bd0"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b0038d7c0ee75173d3bac"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-29T06:50:15.046Z"
+  },
+  "timeRemaining": 1800,
+  "totalTimeSpent": 790,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "697b05a4d7c0ee75173d3c0c"
+      },
+      "userAnswer": "omae wa mou shindeiru",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-29T07:03:25.412Z"
+      },
+      "_id": {
+        "$oid": "697b063dd7c0ee75173d3c54"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697b05d9d7c0ee75173d3c1f"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-29T07:03:25.415Z"
+      },
+      "_id": {
+        "$oid": "697b063dd7c0ee75173d3c55"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697b0620d7c0ee75173d3c32"
+      },
+      "userAnswer": "\"You're dead\"",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-29T07:03:25.415Z"
+      },
+      "_id": {
+        "$oid": "697b063dd7c0ee75173d3c56"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-29T07:03:25.416Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-29T06:50:15.074Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T07:03:25.459Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-29T07:03:25.457Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697b065ed7c0ee75173d3d8a"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b0038d7c0ee75173d3bac"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-29T07:03:58.176Z"
+  },
+  "timeRemaining": 1800,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-29T07:03:58.177Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-29T07:03:58.179Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T06:11:10.961Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-30T06:11:10.960Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697b0696d7c0ee75173d3ecd"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697a2400ff39d79947ae076e"
+  },
+  "status": "in-progress",
+  "startedAt": {
+    "$date": "2026-01-29T07:04:54.113Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-29T07:04:54.114Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-29T07:04:54.115Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T07:04:54.115Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697b06aad7c0ee75173d3f91"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-29T07:05:14.521Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-29T07:05:14.522Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-29T07:05:14.522Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T06:13:30.318Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-30T06:13:30.317Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697b14237b48510be35828ca"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b13a27b48510be35827fc"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-29T08:02:43.045Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 72,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-29T08:02:43.047Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-29T08:02:43.049Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T08:03:55.219Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-29T08:03:55.219Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697b24d17b48510be3582a43"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b13a27b48510be35827fc"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-29T09:13:53.109Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 1844,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-29T09:13:53.110Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-29T09:13:53.112Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T09:44:37.771Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-29T09:44:37.768Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697b2f197b48510be3582ce8"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b13a27b48510be35827fc"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-29T09:57:45.485Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 24,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-29T09:57:45.485Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-29T09:57:45.486Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T09:58:10.477Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-29T09:58:10.453Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697b335ab04f4be4cb677892"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b13a27b48510be35827fc"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-29T10:15:54.936Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 2029,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "697b14157b48510be35828b0"
+      },
+      "userAnswer": "https://res.cloudinary.com/dhjxqafnu/video/upload/v1769683779/ielts-lms/audio/eh8xc4obl0hbtmfq8gmw.mp3",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-29T10:49:40.676Z"
+      },
+      "_id": {
+        "$oid": "697b3b44194cf33b05d2980b"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-29T10:49:40.687Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-29T10:15:54.941Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T10:49:44.704Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-29T10:49:44.699Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697b3f8a194cf33b05d29d47"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b13a27b48510be35827fc"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-29T11:07:54.827Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-29T11:07:54.830Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-29T11:07:54.832Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T15:35:57.781Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-29T15:35:57.780Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697b7e6a55ecfb6e6a1cad4a"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b13a27b48510be35827fc"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-29T15:36:10.912Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 868,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "697b14157b48510be35828b0"
+      },
+      "userAnswer": "https://res.cloudinary.com/dhjxqafnu/video/upload/v1769701830/ielts-lms/audio/mgzhojlpkhhhpx2fww59.mp3",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-29T15:50:30.826Z"
+      },
+      "_id": {
+        "$oid": "697b81c63777f9e5264698a9"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-29T15:50:30.838Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-29T15:36:10.915Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T15:50:39.485Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-29T15:50:39.481Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697b82e93777f9e526469c11"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b13a27b48510be35827fc"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-29T15:55:21.229Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-29T15:55:21.232Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-29T15:55:21.234Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T05:58:11.500Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-30T05:58:11.499Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697b92faf3b06044af6a6537"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "697b13a27b48510be35827fc"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-29T17:03:54.188Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-29T17:03:54.194Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-29T17:03:54.196Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T06:40:13.492Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-30T06:40:13.484Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697b9333f3b06044af6a654f"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-29T17:04:51.042Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-29T17:04:51.043Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-29T17:04:51.044Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T06:37:59.828Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-30T06:37:59.827Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697b95eff3b06044af6a6624"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "697b0038d7c0ee75173d3bac"
+  },
+  "status": "in-progress",
+  "startedAt": {
+    "$date": "2026-01-29T17:16:31.319Z"
+  },
+  "timeRemaining": 1800,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-29T17:16:31.320Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-29T17:16:31.321Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T17:16:31.321Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697c487a867a6f3267e10a75"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b13a27b48510be35827fc"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-30T05:58:18.366Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-30T05:58:18.368Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-30T05:58:18.369Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T07:11:19.190Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-30T07:11:19.188Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c4b98867a6f3267e10b1d"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b0038d7c0ee75173d3bac"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-30T06:11:36.588Z"
+  },
+  "timeRemaining": 1800,
+  "totalTimeSpent": 36,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "697b05a4d7c0ee75173d3c0c"
+      },
+      "userAnswer": "omae wa mou shindeiru",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-30T06:12:13.125Z"
+      },
+      "_id": {
+        "$oid": "697c4bbd867a6f3267e10b27"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697b05d9d7c0ee75173d3c1f"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-30T06:12:13.131Z"
+      },
+      "_id": {
+        "$oid": "697c4bbd867a6f3267e10b28"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697b0620d7c0ee75173d3c32"
+      },
+      "userAnswer": "It means you're already dead.",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-30T06:12:13.132Z"
+      },
+      "_id": {
+        "$oid": "697c4bbd867a6f3267e10b29"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-30T06:12:13.133Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-30T06:11:36.593Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T06:12:13.219Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-30T06:12:13.214Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c4be9867a6f3267e10beb"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-30T06:12:57.642Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-30T06:12:57.643Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-30T06:12:57.645Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T07:29:37.085Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-30T07:29:37.084Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c4c22867a6f3267e10d6d"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-30T06:13:54.563Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-30T06:13:54.564Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-30T06:13:54.565Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T07:29:31.313Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-30T07:29:31.311Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c519fe4af3bafb181e17c"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b0038d7c0ee75173d3bac"
+  },
+  "status": "in-progress",
+  "startedAt": {
+    "$date": "2026-01-30T06:37:19.969Z"
+  },
+  "timeRemaining": 1800,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-30T06:37:19.975Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-30T06:37:19.983Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T06:37:19.983Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697c51c7e4af3bafb181e24c"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-30T06:37:59.831Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-30T06:37:59.832Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-30T06:37:59.833Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T07:24:59.459Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-02-04T07:24:59.457Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c524dfafc92d0de0c80b6"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "697b13a27b48510be35827fc"
+  },
+  "status": "in-progress",
+  "startedAt": {
+    "$date": "2026-01-30T06:40:13.510Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-30T06:40:13.517Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-30T06:40:13.519Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T06:40:13.519Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697c5997fafc92d0de0c8189"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b13a27b48510be35827fc"
+  },
+  "status": "in-progress",
+  "startedAt": {
+    "$date": "2026-01-30T07:11:19.199Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-30T07:11:19.201Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-30T07:11:19.202Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T07:11:19.202Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697c5ddbfafc92d0de0c8478"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-30T07:29:31.361Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-30T07:29:31.362Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-30T07:29:31.365Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:55:52.966Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-30T09:55:52.965Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c5de1fafc92d0de0c848f"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-01-30T07:29:37.114Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-30T07:29:37.115Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-30T07:29:37.116Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T07:11:51.850Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-02-02T07:11:51.845Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c7599105dbb5fc9d2ac32"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697c5d7bfafc92d0de0c8375"
+  },
+  "status": "in-progress",
+  "startedAt": {
+    "$date": "2026-01-30T09:10:49.814Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "697c5d9bfafc92d0de0c8385"
+      },
+      "userAnswer": "dadfsffdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-30T09:11:05.496Z"
+      },
+      "_id": {
+        "$oid": "697c75a9105dbb5fc9d2ac3a"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-30T09:11:05.500Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-30T09:10:49.824Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:11:05.502Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "697c8028105dbb5fc9d2b1f9"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-30T09:55:52.971Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 2894,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "697c7eef105dbb5fc9d2b199"
+      },
+      "userAnswer": "limits employment",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-30T10:44:07.185Z"
+      },
+      "_id": {
+        "$oid": "697c8b770cf49f70c31c21f0"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7eef105dbb5fc9d2b19b"
+      },
+      "userAnswer": "Better infrastructure",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-30T10:44:07.194Z"
+      },
+      "_id": {
+        "$oid": "697c8b770cf49f70c31c21f1"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7eef105dbb5fc9d2b19a"
+      },
+      "userAnswer": "Local residents",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-30T10:44:07.195Z"
+      },
+      "_id": {
+        "$oid": "697c8b770cf49f70c31c21f2"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7eef105dbb5fc9d2b19c"
+      },
+      "userAnswer": "They may lose authenticity",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-30T10:44:07.196Z"
+      },
+      "_id": {
+        "$oid": "697c8b770cf49f70c31c21f3"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7eef105dbb5fc9d2b19d"
+      },
+      "userAnswer": "Resort construction",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-30T10:44:07.197Z"
+      },
+      "_id": {
+        "$oid": "697c8b770cf49f70c31c21f4"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7eef105dbb5fc9d2b19e"
+      },
+      "userAnswer": "Increase tourist numbers",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-30T10:44:07.197Z"
+      },
+      "_id": {
+        "$oid": "697c8b770cf49f70c31c21f5"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7feb105dbb5fc9d2b1b1"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-30T10:44:07.197Z"
+      },
+      "_id": {
+        "$oid": "697c8b770cf49f70c31c21f6"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7feb105dbb5fc9d2b1b2"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-30T10:44:07.197Z"
+      },
+      "_id": {
+        "$oid": "697c8b770cf49f70c31c21f7"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7feb105dbb5fc9d2b1b5"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-30T10:44:07.198Z"
+      },
+      "_id": {
+        "$oid": "697c8b770cf49f70c31c21f8"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7feb105dbb5fc9d2b1b6"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-30T10:44:07.198Z"
+      },
+      "_id": {
+        "$oid": "697c8b770cf49f70c31c21f9"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7feb105dbb5fc9d2b1b7"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-30T10:44:07.198Z"
+      },
+      "_id": {
+        "$oid": "697c8b770cf49f70c31c21fa"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-30T10:44:07.199Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-30T09:55:52.976Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T10:44:07.271Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-30T10:44:07.268Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c9201b3313374ebe768ff"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-30T11:12:01.360Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 1086,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-30T11:12:01.362Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-30T11:12:01.363Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T11:30:08.085Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-01-30T11:30:08.075Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697dd6b9fbcfb9a981f609f9"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-31T10:17:29.425Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 1349,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "697ddbadfbcfb9a981f60b13"
+      },
+      "userAnswer": "Not Given",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T10:39:58.651Z"
+      },
+      "_id": {
+        "$oid": "697ddbfefbcfb9a981f60b47"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697ddbadfbcfb9a981f60b12"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T10:39:58.654Z"
+      },
+      "_id": {
+        "$oid": "697ddbfefbcfb9a981f60b48"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697ddbadfbcfb9a981f60b11"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T10:39:58.654Z"
+      },
+      "_id": {
+        "$oid": "697ddbfefbcfb9a981f60b49"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697ddbadfbcfb9a981f60b10"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T10:39:58.654Z"
+      },
+      "_id": {
+        "$oid": "697ddbfefbcfb9a981f60b4a"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697ddbadfbcfb9a981f60b0f"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T10:39:58.654Z"
+      },
+      "_id": {
+        "$oid": "697ddbfefbcfb9a981f60b4b"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697ddbadfbcfb9a981f60b0e"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T10:39:58.655Z"
+      },
+      "_id": {
+        "$oid": "697ddbfefbcfb9a981f60b4c"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697ddbadfbcfb9a981f60b0d"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T10:39:58.655Z"
+      },
+      "_id": {
+        "$oid": "697ddbfefbcfb9a981f60b4d"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-31T10:39:58.655Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-31T10:17:29.428Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:39:58.752Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-01-31T10:39:58.747Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697de039fbcfb9a981f60c47"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-01-31T10:58:01.505Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 365,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "697c7eef105dbb5fc9d2b199"
+      },
+      "userAnswer": "replaces local culture",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.902Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e0b"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7eef105dbb5fc9d2b19a"
+      },
+      "userAnswer": "Only tourists",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.903Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e0c"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7eef105dbb5fc9d2b19b"
+      },
+      "userAnswer": "Lower rent prices",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.904Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e0d"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7eef105dbb5fc9d2b19c"
+      },
+      "userAnswer": "They completely disappear",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.904Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e0e"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7eef105dbb5fc9d2b19d"
+      },
+      "userAnswer": "Lack of tourists",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.904Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e0f"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7eef105dbb5fc9d2b19e"
+      },
+      "userAnswer": "Increase tourist numbers",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.905Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e10"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7feb105dbb5fc9d2b1b1"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.905Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e11"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7feb105dbb5fc9d2b1b2"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.905Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e12"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7feb105dbb5fc9d2b1b3"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.905Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e13"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7feb105dbb5fc9d2b1b4"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.906Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e14"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7feb105dbb5fc9d2b1b5"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.906Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e15"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7feb105dbb5fc9d2b1b6"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.906Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e16"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697c7feb105dbb5fc9d2b1b7"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.907Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e17"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dd58ffbcfb9a981f609ac"
+      },
+      "userAnswer": {
+        "0": "The origins of written communication"
+      },
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.907Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e18"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dd639fbcfb9a981f609c1"
+      },
+      "userAnswer": {
+        "0": "The evolution from pictures to symbols"
+      },
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.908Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e19"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dd6affbcfb9a981f609d7"
+      },
+      "userAnswer": {
+        "0": "The influence of culture on writing"
+      },
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.908Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e1a"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dd824fbcfb9a981f60aa4"
+      },
+      "userAnswer": {
+        "0": "The decline of spoken language"
+      },
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.908Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e1b"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dd87bfbcfb9a981f60abc"
+      },
+      "userAnswer": {
+        "0": "The continued importance of spoken language"
+      },
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.908Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e1c"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dda7dfbcfb9a981f60adc"
+      },
+      "userAnswer": "permanent",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.909Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e1d"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dda7dfbcfb9a981f60add"
+      },
+      "userAnswer": "pictographs",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.909Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e1e"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dda7dfbcfb9a981f60ade"
+      },
+      "userAnswer": "culture",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.911Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e1f"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dda7dfbcfb9a981f60ae1"
+      },
+      "userAnswer": "fgsff",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.912Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e20"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dda7dfbcfb9a981f60ae2"
+      },
+      "userAnswer": "dfsfsdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.913Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e21"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dda7dfbcfb9a981f60ae3"
+      },
+      "userAnswer": "dfdfsf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.914Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e22"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dda7dfbcfb9a981f60ae0"
+      },
+      "userAnswer": "sfdsfdsf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.915Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e23"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dda7dfbcfb9a981f60adf"
+      },
+      "userAnswer": "sounds",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.916Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e24"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697ddbadfbcfb9a981f60b0d"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.917Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e25"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697ddbadfbcfb9a981f60b0e"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.917Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e26"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697ddbadfbcfb9a981f60b0f"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.918Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e27"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697ddbadfbcfb9a981f60b10"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.918Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e28"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697ddbadfbcfb9a981f60b11"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.918Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e29"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697ddbadfbcfb9a981f60b12"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.919Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e2a"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697ddbadfbcfb9a981f60b13"
+      },
+      "userAnswer": "Not Given",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.919Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e2b"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dde67fbcfb9a981f60be5"
+      },
+      "userAnswer": "recall",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.919Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e2c"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dde67fbcfb9a981f60be6"
+      },
+      "userAnswer": "repetition",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.919Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e2d"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dde67fbcfb9a981f60be7"
+      },
+      "userAnswer": "long",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.920Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e2e"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dde67fbcfb9a981f60be8"
+      },
+      "userAnswer": "clearly",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.920Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e2f"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dde67fbcfb9a981f60be9"
+      },
+      "userAnswer": "association",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.920Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e30"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dde67fbcfb9a981f60bea"
+      },
+      "userAnswer": "aging",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.921Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e31"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697dde67fbcfb9a981f60beb"
+      },
+      "userAnswer": "perfect",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-01-31T11:04:06.921Z"
+      },
+      "_id": {
+        "$oid": "697de1a6fbcfb9a981f60e32"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-01-31T11:04:06.921Z"
+  },
+  "createdAt": {
+    "$date": "2026-01-31T10:58:01.506Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T11:04:06.984Z"
+  },
+  "__v": 2,
+  "completedAt": {
+    "$date": "2026-01-31T11:04:06.973Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69804e379333ed5cfb45019f"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-02-02T07:11:51.864Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 148,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014e"
+      },
+      "userAnswer": "Digital technology",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-02T07:14:20.194Z"
+      },
+      "_id": {
+        "$oid": "69804ecc9333ed5cfb4501ae"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014f"
+      },
+      "userAnswer": "Higher salaries",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-02T07:14:20.196Z"
+      },
+      "_id": {
+        "$oid": "69804ecc9333ed5cfb4501af"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70150"
+      },
+      "userAnswer": "Higher productivity",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-02T07:14:20.197Z"
+      },
+      "_id": {
+        "$oid": "69804ecc9333ed5cfb4501b0"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70151"
+      },
+      "userAnswer": "Communication problems",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-02T07:14:20.197Z"
+      },
+      "_id": {
+        "$oid": "69804ecc9333ed5cfb4501b1"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70152"
+      },
+      "userAnswer": "Results and outcomes",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-02T07:14:20.198Z"
+      },
+      "_id": {
+        "$oid": "69804ecc9333ed5cfb4501b2"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fb"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-02T07:14:20.199Z"
+      },
+      "_id": {
+        "$oid": "69804ecc9333ed5cfb4501b3"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fc"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-02T07:14:20.199Z"
+      },
+      "_id": {
+        "$oid": "69804ecc9333ed5cfb4501b4"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fd"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-02T07:14:20.200Z"
+      },
+      "_id": {
+        "$oid": "69804ecc9333ed5cfb4501b5"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fe"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-02T07:14:20.202Z"
+      },
+      "_id": {
+        "$oid": "69804ecc9333ed5cfb4501b6"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701ff"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-02T07:14:20.204Z"
+      },
+      "_id": {
+        "$oid": "69804ecc9333ed5cfb4501b7"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-02-02T07:14:20.205Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-02T07:11:51.907Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T07:14:20.265Z"
+  },
+  "__v": 2,
+  "completedAt": {
+    "$date": "2026-02-02T07:14:20.263Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6980767f7c1102973e1b61bf"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69806b037c1102973e1b5e9a"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-02-02T10:03:43.731Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-02-02T10:03:43.733Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-02T10:03:43.758Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T07:07:54.030Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-02-03T07:07:54.028Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6981902035114250994ca4e9"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "expired",
+  "startedAt": {
+    "$date": "2026-02-03T06:05:20.985Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-02-03T06:05:20.988Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-03T06:05:20.991Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T06:11:05.145Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-02-04T06:11:05.143Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69819eca35114250994ca84b"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69806b037c1102973e1b5e9a"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-02-03T07:07:54.472Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 142,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "69806d867c1102973e1b5ee0"
+      },
+      "userAnswer": {
+        "0": "From pictures to sounds"
+      },
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.227Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca873"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69806e267c1102973e1b5efa"
+      },
+      "userAnswer": {
+        "0": "Literacy expansion through alphabets"
+      },
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.598Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca874"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69806e967c1102973e1b5f15"
+      },
+      "userAnswer": {
+        "0": "Digital transformation of writing"
+      },
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.598Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca875"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69806f1a7c1102973e1b5f31"
+      },
+      "userAnswer": {
+        "0": "The origins of administrative records"
+      },
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.599Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca876"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69806fe57c1102973e1b5f4e"
+      },
+      "userAnswer": {
+        "0": "Calligraphic traditions"
+      },
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.599Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca877"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "698077f37c1102973e1b62e2"
+      },
+      "userAnswer": "pictographs",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.599Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca878"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "698077f37c1102973e1b62e3"
+      },
+      "userAnswer": "ideas and sounds",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.600Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca879"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "698077f37c1102973e1b62e4"
+      },
+      "userAnswer": "reducing symbol inventory",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.600Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca87a"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "698077f37c1102973e1b62e5"
+      },
+      "userAnswer": "speed and global reach",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.600Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca87b"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "698078627c1102973e1b6302"
+      },
+      "userAnswer": "fsdfsf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.600Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca87c"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "698078627c1102973e1b6303"
+      },
+      "userAnswer": "sdfsdfsdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.600Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca87d"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "698078627c1102973e1b6304"
+      },
+      "userAnswer": "adfsdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.601Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca87e"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "698078627c1102973e1b6305"
+      },
+      "userAnswer": "sdfsdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.601Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca87f"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69807f1a7c1102973e1b6351"
+      },
+      "userAnswer": {
+        "0": "Mitigation measures include reflective materials, green roofs, and expanded urban forestry."
+      },
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.601Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca880"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69807f7f7c1102973e1b6370"
+      },
+      "userAnswer": {
+        "0": "Sparse vegetation reduces cooling via evapotranspiration, exacerbating thermal retention."
+      },
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.601Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca881"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "698192ea35114250994ca6d8"
+      },
+      "userAnswer": {
+        "0": "Mitigation measures include reflective materials, green roofs, and expanded urban forestry"
+      },
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.601Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca882"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6981934135114250994ca6f9"
+      },
+      "userAnswer": {
+        "0": "Sparse vegetation reduces cooling via evapotranspiration, exacerbating thermal retention"
+      },
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.602Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca883"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "698193dc35114250994ca71b"
+      },
+      "userAnswer": {
+        "0": "Mitigation measures include reflective materials, green roofs, and expanded urban forestry"
+      },
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.605Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca884"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6981944d35114250994ca73e"
+      },
+      "userAnswer": {
+        "0": "Mitigation measures include reflective materials, green roofs, and expanded urban forestry"
+      },
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.606Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca885"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6981953b35114250994ca762"
+      },
+      "userAnswer": "Not Given",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.606Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca886"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6981953b35114250994ca763"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.607Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca887"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6981953b35114250994ca764"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.608Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca888"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6981953b35114250994ca765"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.608Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca889"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6981953b35114250994ca766"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.609Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca88a"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6981953b35114250994ca767"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.609Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca88b"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6981968335114250994ca7a6"
+      },
+      "userAnswer": "sdfsdfsdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.610Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca88c"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6981968335114250994ca7a7"
+      },
+      "userAnswer": "asdfsdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.610Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca88d"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6981968335114250994ca7a8"
+      },
+      "userAnswer": "sdfsdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.610Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca88e"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6981968335114250994ca7a9"
+      },
+      "userAnswer": "sdfsdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.611Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca88f"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6981968335114250994ca7aa"
+      },
+      "userAnswer": "sdfsdfs",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.611Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca890"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "6981968335114250994ca7ab"
+      },
+      "userAnswer": "sdfsdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.612Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca891"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "698198f035114250994ca7ea"
+      },
+      "userAnswer": "light exposure",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.612Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca892"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "698198f035114250994ca7eb"
+      },
+      "userAnswer": "improved cognition",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.612Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca893"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "698198f035114250994ca7ec"
+      },
+      "userAnswer": "adequate sleep",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.613Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca894"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "698198f035114250994ca7ed"
+      },
+      "userAnswer": "the lifespan",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.613Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca895"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69819bee35114250994ca814"
+      },
+      "userAnswer": "sdfsdfsdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.614Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca896"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69819bee35114250994ca815"
+      },
+      "userAnswer": "sdfsdfsdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.614Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca897"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69819bee35114250994ca816"
+      },
+      "userAnswer": "sdfsdfsdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.614Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca898"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69819bee35114250994ca817"
+      },
+      "userAnswer": "sdfsdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.614Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca899"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69819bee35114250994ca818"
+      },
+      "userAnswer": "sdfsdfsdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:10:16.615Z"
+      },
+      "_id": {
+        "$oid": "69819f5835114250994ca89a"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-02-03T07:10:16.615Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-03T07:07:54.474Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T07:10:16.666Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-02-03T07:10:16.662Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6981a72535114250994cafd3"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6981a4a535114250994caf5b"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-02-03T07:43:33.702Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 3,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-02-03T07:43:33.703Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-03T07:43:33.704Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T07:43:37.490Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-02-03T07:43:37.489Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6981a93e3fd2550c1d6feae5"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6981a4a535114250994caf5b"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-02-03T07:52:30.910Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 83,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "6981a51735114250994caf7f"
+      },
+      "userAnswer": "this is the picture where it says the ascends ai and this is for the website and here is the detail of the logo and this is in the essay writing and this is the item-wise test and it is the writing test for the IELTS for the preparing for the international countries.",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-03T07:53:54.567Z"
+      },
+      "_id": {
+        "$oid": "6981a9923fd2550c1d6feaed"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-02-03T07:53:54.570Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-03T07:52:30.913Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T07:53:54.613Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-02-03T07:53:54.612Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6982e0235b436d9fd7cd926f"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6981a4a535114250994caf5b"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-02-04T05:58:59.233Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 302,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "6981a51735114250994caf7f"
+      },
+      "userAnswer": "ljljflsjflsdjkflksjffffsdfsdfddfdfsdfsdfsdfsfsdfsdfsdf",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:04:01.718Z"
+      },
+      "_id": {
+        "$oid": "6982e1515b436d9fd7cd96a2"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-02-04T06:04:01.728Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-04T05:58:59.245Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T06:04:01.781Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-02-04T06:04:01.778Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6982e0b45b436d9fd7cd95bd"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69806b037c1102973e1b5e9a"
+  },
+  "status": "in-progress",
+  "startedAt": {
+    "$date": "2026-02-04T06:01:24.021Z"
+  },
+  "timeRemaining": 3600,
+  "totalTimeSpent": 0,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-02-04T06:01:24.023Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-04T06:01:24.026Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T06:01:24.026Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6982e2f95b436d9fd7cd96c4"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-02-04T06:11:05.178Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 29,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014e"
+      },
+      "userAnswer": "Government policies",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:11:34.879Z"
+      },
+      "_id": {
+        "$oid": "6982e3165b436d9fd7cd96ce"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014f"
+      },
+      "userAnswer": "Shorter working hours",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:11:34.881Z"
+      },
+      "_id": {
+        "$oid": "6982e3165b436d9fd7cd96cf"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70150"
+      },
+      "userAnswer": "Poor communication skills",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:11:34.882Z"
+      },
+      "_id": {
+        "$oid": "6982e3165b436d9fd7cd96d0"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70151"
+      },
+      "userAnswer": "Increased office costs",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:11:34.883Z"
+      },
+      "_id": {
+        "$oid": "6982e3165b436d9fd7cd96d1"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70152"
+      },
+      "userAnswer": "Office discipline",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:11:34.884Z"
+      },
+      "_id": {
+        "$oid": "6982e3165b436d9fd7cd96d2"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fb"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:11:34.885Z"
+      },
+      "_id": {
+        "$oid": "6982e3165b436d9fd7cd96d3"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fc"
+      },
+      "userAnswer": "Not Given",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:11:34.886Z"
+      },
+      "_id": {
+        "$oid": "6982e3165b436d9fd7cd96d4"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fd"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:11:34.887Z"
+      },
+      "_id": {
+        "$oid": "6982e3165b436d9fd7cd96d5"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fe"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:11:34.889Z"
+      },
+      "_id": {
+        "$oid": "6982e3165b436d9fd7cd96d6"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701ff"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:11:34.890Z"
+      },
+      "_id": {
+        "$oid": "6982e3165b436d9fd7cd96d7"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-02-04T06:11:34.890Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-04T06:11:05.180Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T06:11:35.045Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-02-04T06:11:35.042Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6982e39b5b436d9fd7cd9bd7"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-02-04T06:13:47.612Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 24,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014e"
+      },
+      "userAnswer": "Economic pressure",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:14:12.075Z"
+      },
+      "_id": {
+        "$oid": "6982e3b45b436d9fd7cd9be1"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014f"
+      },
+      "userAnswer": "Less responsibility",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:14:12.076Z"
+      },
+      "_id": {
+        "$oid": "6982e3b45b436d9fd7cd9be2"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70150"
+      },
+      "userAnswer": "Higher productivity",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:14:12.077Z"
+      },
+      "_id": {
+        "$oid": "6982e3b45b436d9fd7cd9be3"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70151"
+      },
+      "userAnswer": "Increased office costs",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:14:12.077Z"
+      },
+      "_id": {
+        "$oid": "6982e3b45b436d9fd7cd9be4"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70152"
+      },
+      "userAnswer": "Results and outcomes",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:14:12.078Z"
+      },
+      "_id": {
+        "$oid": "6982e3b45b436d9fd7cd9be5"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fb"
+      },
+      "userAnswer": "Not Given",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:14:12.078Z"
+      },
+      "_id": {
+        "$oid": "6982e3b45b436d9fd7cd9be6"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fc"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:14:12.079Z"
+      },
+      "_id": {
+        "$oid": "6982e3b45b436d9fd7cd9be7"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fd"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:14:12.079Z"
+      },
+      "_id": {
+        "$oid": "6982e3b45b436d9fd7cd9be8"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fe"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:14:12.080Z"
+      },
+      "_id": {
+        "$oid": "6982e3b45b436d9fd7cd9be9"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701ff"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:14:12.081Z"
+      },
+      "_id": {
+        "$oid": "6982e3b45b436d9fd7cd9bea"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-02-04T06:14:12.081Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-04T06:13:47.615Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T06:14:12.220Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-02-04T06:14:12.218Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6982ebdd5b436d9fd7cda579"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6981a4a535114250994caf5b"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-02-04T06:49:01.115Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 11,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "6981a51735114250994caf7f"
+      },
+      "userAnswer": "gdfgg bdfgfg df df dff bsb  dbdb ds dfbdf d   fb df dfdf fv ",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T06:49:12.804Z"
+      },
+      "_id": {
+        "$oid": "6982ebe85b436d9fd7cda583"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-02-04T06:49:12.805Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-04T06:49:01.118Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T06:49:12.841Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-02-04T06:49:12.838Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6982ef465b436d9fd7cdad4e"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-02-04T07:03:34.741Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 3,
+  "answers": [],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-02-04T07:03:34.743Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-04T07:03:34.745Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T07:03:38.608Z"
+  },
+  "__v": 0,
+  "completedAt": {
+    "$date": "2026-02-04T07:03:38.607Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6982f3bc5b436d9fd7cdb116"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-02-04T07:22:36.608Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 18,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014e"
+      },
+      "userAnswer": "Economic pressure",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:22:54.598Z"
+      },
+      "_id": {
+        "$oid": "6982f3ce5b436d9fd7cdb120"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014f"
+      },
+      "userAnswer": "Reduced commuting",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:22:54.599Z"
+      },
+      "_id": {
+        "$oid": "6982f3ce5b436d9fd7cdb121"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70150"
+      },
+      "userAnswer": "Increased working hours",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:22:54.600Z"
+      },
+      "_id": {
+        "$oid": "6982f3ce5b436d9fd7cdb122"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70151"
+      },
+      "userAnswer": "Communication problems",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:22:54.600Z"
+      },
+      "_id": {
+        "$oid": "6982f3ce5b436d9fd7cdb123"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70152"
+      },
+      "userAnswer": "Results and outcomes",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:22:54.600Z"
+      },
+      "_id": {
+        "$oid": "6982f3ce5b436d9fd7cdb124"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fb"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:22:54.601Z"
+      },
+      "_id": {
+        "$oid": "6982f3ce5b436d9fd7cdb125"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fd"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:22:54.601Z"
+      },
+      "_id": {
+        "$oid": "6982f3ce5b436d9fd7cdb126"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fc"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:22:54.601Z"
+      },
+      "_id": {
+        "$oid": "6982f3ce5b436d9fd7cdb127"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701ff"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:22:54.602Z"
+      },
+      "_id": {
+        "$oid": "6982f3ce5b436d9fd7cdb128"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fe"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:22:54.602Z"
+      },
+      "_id": {
+        "$oid": "6982f3ce5b436d9fd7cdb129"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-02-04T07:22:54.603Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-04T07:22:36.610Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T07:22:54.698Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-02-04T07:22:54.690Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6982f44b5b436d9fd7cdb580"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-02-04T07:24:59.463Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 16,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014e"
+      },
+      "userAnswer": "Digital technology",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:25:15.590Z"
+      },
+      "_id": {
+        "$oid": "6982f45b5b436d9fd7cdb58a"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014f"
+      },
+      "userAnswer": "Less responsibility",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:25:15.591Z"
+      },
+      "_id": {
+        "$oid": "6982f45b5b436d9fd7cdb58b"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70150"
+      },
+      "userAnswer": "Higher productivity",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:25:15.592Z"
+      },
+      "_id": {
+        "$oid": "6982f45b5b436d9fd7cdb58c"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70151"
+      },
+      "userAnswer": "Communication problems",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:25:15.592Z"
+      },
+      "_id": {
+        "$oid": "6982f45b5b436d9fd7cdb58d"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70152"
+      },
+      "userAnswer": "Results and outcomes",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:25:15.593Z"
+      },
+      "_id": {
+        "$oid": "6982f45b5b436d9fd7cdb58e"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fb"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:25:15.594Z"
+      },
+      "_id": {
+        "$oid": "6982f45b5b436d9fd7cdb58f"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fc"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:25:15.595Z"
+      },
+      "_id": {
+        "$oid": "6982f45b5b436d9fd7cdb590"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fd"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:25:15.595Z"
+      },
+      "_id": {
+        "$oid": "6982f45b5b436d9fd7cdb591"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fe"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:25:15.596Z"
+      },
+      "_id": {
+        "$oid": "6982f45b5b436d9fd7cdb592"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701ff"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:25:15.597Z"
+      },
+      "_id": {
+        "$oid": "6982f45b5b436d9fd7cdb593"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-02-04T07:25:15.597Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-04T07:24:59.465Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T07:25:15.661Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-02-04T07:25:15.657Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6982f4ab5b436d9fd7cdb667"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "6981a4a535114250994caf5b"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-02-04T07:26:35.154Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 102,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "6981a51735114250994caf7f"
+      },
+      "userAnswer": "This is the picture i have uploaded and this is the logo of the company that i have already uploaded in the cloud, and i don't know that what am i writing and why i am writing this but for this shit's sake i am writing this and don't know why this is happening and every shit is happening to me.",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T07:28:17.121Z"
+      },
+      "_id": {
+        "$oid": "6982f5115b436d9fd7cdb68f"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-02-04T07:28:17.122Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-04T07:26:35.156Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T07:28:17.164Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-02-04T07:28:17.162Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69830a2fa951f79df36142b5"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-02-04T08:58:23.718Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 12,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014e"
+      },
+      "userAnswer": "Digital technology",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:58:36.298Z"
+      },
+      "_id": {
+        "$oid": "69830a3ca951f79df36142bf"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014f"
+      },
+      "userAnswer": "Higher salaries",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:58:36.301Z"
+      },
+      "_id": {
+        "$oid": "69830a3ca951f79df36142c0"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70150"
+      },
+      "userAnswer": "Higher productivity",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:58:36.302Z"
+      },
+      "_id": {
+        "$oid": "69830a3ca951f79df36142c1"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70151"
+      },
+      "userAnswer": "Communication problems",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:58:36.303Z"
+      },
+      "_id": {
+        "$oid": "69830a3ca951f79df36142c2"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70152"
+      },
+      "userAnswer": "Working hours",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:58:36.304Z"
+      },
+      "_id": {
+        "$oid": "69830a3ca951f79df36142c3"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fb"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:58:36.304Z"
+      },
+      "_id": {
+        "$oid": "69830a3ca951f79df36142c4"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fc"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:58:36.305Z"
+      },
+      "_id": {
+        "$oid": "69830a3ca951f79df36142c5"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fd"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:58:36.305Z"
+      },
+      "_id": {
+        "$oid": "69830a3ca951f79df36142c6"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fe"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:58:36.305Z"
+      },
+      "_id": {
+        "$oid": "69830a3ca951f79df36142c7"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701ff"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:58:36.306Z"
+      },
+      "_id": {
+        "$oid": "69830a3ca951f79df36142c8"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-02-04T08:58:36.308Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-04T08:58:23.727Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T08:58:36.353Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-02-04T08:58:36.352Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69830a64a951f79df36143c1"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "status": "completed",
+  "startedAt": {
+    "$date": "2026-02-04T08:59:16.083Z"
+  },
+  "timeRemaining": 1200,
+  "totalTimeSpent": 37,
+  "answers": [
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014e"
+      },
+      "userAnswer": "Digital technology",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:59:53.757Z"
+      },
+      "_id": {
+        "$oid": "69830a89a951f79df36143cb"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e7014f"
+      },
+      "userAnswer": "Reduced commuting",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:59:53.759Z"
+      },
+      "_id": {
+        "$oid": "69830a89a951f79df36143cc"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70150"
+      },
+      "userAnswer": "Higher productivity",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:59:53.759Z"
+      },
+      "_id": {
+        "$oid": "69830a89a951f79df36143cd"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70151"
+      },
+      "userAnswer": "Communication problems",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:59:53.760Z"
+      },
+      "_id": {
+        "$oid": "69830a89a951f79df36143ce"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "69771fa82a918e0335e70152"
+      },
+      "userAnswer": "Results and outcomes",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:59:53.761Z"
+      },
+      "_id": {
+        "$oid": "69830a89a951f79df36143cf"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fb"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:59:53.762Z"
+      },
+      "_id": {
+        "$oid": "69830a89a951f79df36143d0"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fc"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:59:53.762Z"
+      },
+      "_id": {
+        "$oid": "69830a89a951f79df36143d1"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fd"
+      },
+      "userAnswer": "False",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:59:53.762Z"
+      },
+      "_id": {
+        "$oid": "69830a89a951f79df36143d2"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701fe"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:59:53.763Z"
+      },
+      "_id": {
+        "$oid": "69830a89a951f79df36143d3"
+      }
+    },
+    {
+      "questionId": {
+        "$oid": "697720892a918e0335e701ff"
+      },
+      "userAnswer": "True",
+      "timeSpent": 0,
+      "answeredAt": {
+        "$date": "2026-02-04T08:59:53.763Z"
+      },
+      "_id": {
+        "$oid": "69830a89a951f79df36143d4"
+      }
+    }
+  ],
+  "currentQuestionIndex": 0,
+  "currentSectionNumber": 1,
+  "tabSwitchCount": 0,
+  "flaggedForReview": false,
+  "lastActivityAt": {
+    "$date": "2026-02-04T08:59:53.764Z"
+  },
+  "createdAt": {
+    "$date": "2026-02-04T08:59:16.086Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T08:59:53.808Z"
+  },
+  "__v": 1,
+  "completedAt": {
+    "$date": "2026-02-04T08:59:53.805Z"
+  }
+}]

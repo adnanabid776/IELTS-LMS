@@ -1,0 +1,5 @@
+# ignoring files for pushing or something like this.
+node_modules/
+.env
+.DS_Store
+uploads/

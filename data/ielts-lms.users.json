@@ -1,0 +1,262 @@
+[{
+  "_id": {
+    "$oid": "6960daf301b58a73d15e7849"
+  },
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john@example.com",
+  "password": "$2b$10$TxQpUIcSQMYweD4urCG5M.3eq69Jxtjbey/ZYUMlpVtiaE.yGi7.a",
+  "role": "student",
+  "isActive": false,
+  "createdAt": {
+    "$date": "2026-01-09T10:39:47.418Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T10:44:27.988Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6960dccc70c5a38de3360013"
+  },
+  "firstName": "Sarah",
+  "lastName": "Ali",
+  "email": "sali@example.com",
+  "password": "$2b$10$g9du4v20AjEFnWpoZTGMFOP821V4KrTRCnnvdujG6EDZ79vqtnlgi",
+  "role": "student",
+  "isActive": false,
+  "createdAt": {
+    "$date": "2026-01-09T10:47:40.638Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T10:44:37.494Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6960dd2170c5a38de3360017"
+  },
+  "firstName": "Admin",
+  "lastName": "1",
+  "email": "admin@example.com",
+  "password": "$2b$10$m3a9e1TPduIUyWW6EupVlO6drBMw.JFsW4OWTIl3ZhY7/c1Z.Fqtu",
+  "role": "admin",
+  "isActive": true,
+  "createdAt": {
+    "$date": "2026-01-09T10:49:05.166Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T06:46:15.360Z"
+  },
+  "__v": 0,
+  "activeSessionToken": "cafef54de8619122c67959c613ce7b4f197c84a3a9ef12272c9a4255434caeee",
+  "lastLoginAt": {
+    "$date": "2026-02-04T06:46:15.358Z"
+  },
+  "lastLoginDevice": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+},
+{
+  "_id": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "firstName": "Ali",
+  "lastName": "Khan",
+  "email": "ali@test.com",
+  "password": "$2b$10$vVlJABHrVSYOAx0ZD98UleZYdCtV9gpvN0d9QnOXAPTIkWSDXugvW",
+  "role": "teacher",
+  "isActive": true,
+  "createdAt": {
+    "$date": "2026-01-10T09:10:06.905Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T07:28:53.999Z"
+  },
+  "__v": 0,
+  "activeSessionToken": "5567c2264fabc22e7123a614ac322de5cf612230d40d3fae33b2d9236a374f41",
+  "lastLoginAt": {
+    "$date": "2026-02-04T07:28:53.999Z"
+  },
+  "lastLoginDevice": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+},
+{
+  "_id": {
+    "$oid": "696224e285a932bf633f0156"
+  },
+  "firstName": "Sara",
+  "lastName": "Ali",
+  "email": "sara@example.com",
+  "password": "$2b$10$P3VyUjBUceISDrG1l2G7YuRM51BsNg7T871akKig/CA7cbn4qj9kC",
+  "role": "student",
+  "isActive": true,
+  "createdAt": {
+    "$date": "2026-01-10T10:07:30.149Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-13T06:01:52.526Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "firstName": "Afzal",
+  "lastName": "Ali",
+  "email": "af@example.com",
+  "password": "$2b$10$TKO6zOSBQO8lCOIVrWb9DecCxdTl9DTm99V7ZJAzoqEqL/pQn79gC",
+  "role": "student",
+  "isActive": true,
+  "createdAt": {
+    "$date": "2026-01-10T13:08:59.577Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T06:48:13.271Z"
+  },
+  "__v": 0,
+  "activeSessionToken": "4581bfb9beaae16c6f10804cae8879208763c16d9a62c234bfe253e38b77d966",
+  "lastLoginAt": {
+    "$date": "2026-02-04T06:48:13.271Z"
+  },
+  "lastLoginDevice": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+},
+{
+  "_id": {
+    "$oid": "6965d6e356f21ca63ba76ebe"
+  },
+  "firstName": "adnan",
+  "lastName": "a",
+  "email": "adnan@gmail.com",
+  "password": "$2b$10$prdnt7G1aY686I9ft7Coju45HTQlxrNEz9.BRI6/LqFkM4JqaWLhe",
+  "role": "teacher",
+  "isActive": true,
+  "createdAt": {
+    "$date": "2026-01-13T05:23:47.128Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-13T05:23:47.128Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "firstName": "Danish",
+  "lastName": "ch",
+  "email": "dani@example.com",
+  "password": "$2b$10$BuJI7umAarNHL56PtA2woO3himJhG4hivhgqeBwXqalcYRu520Cfe",
+  "role": "student",
+  "isActive": true,
+  "createdAt": {
+    "$date": "2026-01-20T10:40:34.942Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T07:24:51.532Z"
+  },
+  "__v": 0,
+  "activeSessionToken": "ee9165d3cb78af338240028f22e65894085f8ec780b477f746ec98a0bb2d409f",
+  "lastLoginAt": {
+    "$date": "2026-02-04T07:24:51.532Z"
+  },
+  "lastLoginDevice": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+},
+{
+  "_id": {
+    "$oid": "6973191c38df251e0c29a8bd"
+  },
+  "firstName": "Test",
+  "lastName": "User",
+  "email": "testuser@example.com",
+  "password": "$2b$10$mRENFOry0V.yOyO.X4tCqOgSXbKZAUM7UOpLlIIpBOqFG4h0sweIe",
+  "role": "student",
+  "isActive": true,
+  "createdAt": {
+    "$date": "2026-01-23T06:45:49.232Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-23T06:45:49.232Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6973193338df251e0c29a8c0"
+  },
+  "firstName": "Test",
+  "lastName": "User 2",
+  "email": "testuser2@example.com",
+  "password": "$2b$10$NQedOibeKEty4f/f6DGtP.wcVeBP5mPZu1XKiAAdCKWix3T8GUZSy",
+  "role": "teacher",
+  "isActive": false,
+  "createdAt": {
+    "$date": "2026-01-23T06:46:11.146Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:07:59.784Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6973201038df251e0c29a8d8"
+  },
+  "firstName": "Abdul",
+  "lastName": "Manan",
+  "email": "manan@example.com",
+  "password": "$2b$10$QWm3.ZO7lNJt18mz3EQBR.fGwAS5/EapLrz0MYl175rUdKJjpjqUi",
+  "role": "student",
+  "isActive": true,
+  "createdAt": {
+    "$date": "2026-01-23T07:15:28.037Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-23T07:15:28.037Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697b74a455ecfb6e6a1cab87"
+  },
+  "firstName": "Hamid",
+  "lastName": "Ali",
+  "email": "hami@example.com",
+  "password": "$2b$10$BkGvyFt5.XsTs38yW79SRulYxD5/U9YAH2LLkKh39KxSPaXyjAhI.",
+  "role": "teacher",
+  "isActive": true,
+  "activeSessionToken": null,
+  "lastLoginAt": null,
+  "lastLoginDevice": null,
+  "createdAt": {
+    "$date": "2026-01-29T14:54:28.164Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T14:54:28.164Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6981bb8f3fd2550c1d6fef48"
+  },
+  "firstName": "Admin",
+  "lastName": "2",
+  "email": "admin2@example.com",
+  "password": "$2b$10$HMFjqKcNWNSMVLnrEVWPSueePOSx0cUMjbQouFav.eSTTc6GpX5kK",
+  "role": "admin",
+  "isActive": true,
+  "activeSessionToken": "82083cbecb6ec9d42a8ca9f517f1d0a500b9a840b3b5b4beac1f6aad5466fe0f",
+  "lastLoginAt": {
+    "$date": "2026-02-03T09:11:15.142Z"
+  },
+  "lastLoginDevice": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+  "createdAt": {
+    "$date": "2026-02-03T09:10:39.673Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T09:11:15.143Z"
+  },
+  "__v": 0
+}]

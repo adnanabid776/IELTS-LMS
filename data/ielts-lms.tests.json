@@ -1,0 +1,120 @@
+[{
+  "_id": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "title": "IELTS Item-wise Reading Test 1",
+  "module": "reading",
+  "description": "",
+  "totalQuestions": 10,
+  "totalSections": 1,
+  "duration": 20,
+  "difficulty": "medium",
+  "isActive": true,
+  "createdBy": {
+    "$oid": "6960dd2170c5a38de3360017"
+  },
+  "instructions": "",
+  "createdAt": {
+    "$date": "2026-01-26T07:50:00.277Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T07:58:24.563Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "title": "IELTS Full Academic Reading Test 1",
+  "module": "reading",
+  "description": "",
+  "totalQuestions": 40,
+  "totalSections": 3,
+  "duration": 60,
+  "difficulty": "medium",
+  "isActive": true,
+  "createdBy": {
+    "$oid": "6960dd2170c5a38de3360017"
+  },
+  "instructions": "Answer all the questions in the given sections carefully.",
+  "createdAt": {
+    "$date": "2026-01-26T07:52:48.757Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T07:26:19.445Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69806b037c1102973e1b5e9a"
+  },
+  "title": "IELTS Full Reading Test 2",
+  "module": "reading",
+  "description": "This test will have the three sections or more and have different types of questions. Answer them carefully.",
+  "totalQuestions": 40,
+  "totalSections": 3,
+  "duration": 60,
+  "difficulty": "medium",
+  "isActive": true,
+  "createdBy": {
+    "$oid": "6960dd2170c5a38de3360017"
+  },
+  "instructions": "Read each passage carefully. For completion questions, write NO MORE THAN the stated number of words.",
+  "createdAt": {
+    "$date": "2026-02-02T09:14:43.365Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:55:42.136Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6981a4a535114250994caf5b"
+  },
+  "title": "Academic Report Writing (Task 1)",
+  "module": "writing",
+  "description": "This is the item-wise test for the academic writing.",
+  "totalQuestions": 1,
+  "totalSections": 1,
+  "duration": 20,
+  "difficulty": "easy",
+  "isActive": true,
+  "createdBy": {
+    "$oid": "6960dd2170c5a38de3360017"
+  },
+  "instructions": "",
+  "createdAt": {
+    "$date": "2026-02-03T07:32:53.692Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T07:52:21.673Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6982f74f5b436d9fd7cdb79e"
+  },
+  "title": "Listening Test 1",
+  "module": "listening",
+  "description": "",
+  "totalQuestions": 0,
+  "totalSections": 0,
+  "duration": 20,
+  "difficulty": "easy",
+  "isActive": true,
+  "createdBy": {
+    "$oid": "6960dd2170c5a38de3360017"
+  },
+  "instructions": "",
+  "createdAt": {
+    "$date": "2026-02-04T07:37:51.616Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T07:37:59.869Z"
+  },
+  "__v": 0
+}]

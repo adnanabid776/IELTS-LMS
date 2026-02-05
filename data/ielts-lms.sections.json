@@ -1,0 +1,275 @@
+[{
+  "_id": {
+    "$oid": "696775b5175e9f0863f0852e"
+  },
+  "testId": {
+    "$oid": "696772e4c40bfd60019c0fce"
+  },
+  "sectionNumber": 1,
+  "title": "History of Coffee",
+  "passageText": "Coffee is one of the most popular beverages...",
+  "instructions": "Read the passage and answer questions 1-13",
+  "questionRange": "Questions 1-13",
+  "totalQuestions": 20,
+  "createdAt": {
+    "$date": "2026-01-14T10:53:42.345Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-14T15:24:26.741Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6969d67fbea2570c7800cf85"
+  },
+  "testId": {
+    "$oid": "696772e4c40bfd60019c0fce"
+  },
+  "sectionNumber": 3,
+  "title": "Section 3: Artificial Intelligence in Healthcare",
+  "passageText": "ARTIFICIAL INTELLIGENCE IN HEALTHCARE\n\nArtificial intelligence (AI) is revolutionizing healthcare in ways that were unimaginable just a decade ago. From diagnosing diseases to developing new drugs, AI systems are demonstrating capabilities that match or even exceed human expert performance in specific tasks. This technological transformation promises to address some of healthcare's most pressing challenges, including rising costs, physician burnout, and unequal access to quality care.\n\nOne of the most successful applications of AI in healthcare has been in medical imaging. Deep learning algorithms, a subset of AI that uses neural networks inspired by the human brain, have shown remarkable ability to analyze medical images such as X-rays, CT scans, and MRIs. In 2020, researchers at Google Health developed an AI system that could detect breast cancer in mammograms with greater accuracy than human radiologists. The system reduced false positives by 5.7% and false negatives by 9.4% compared to human experts. More importantly, the AI achieved these results while processing images much faster than humans, potentially allowing for earlier detection and treatment.\n\nSimilar breakthroughs have occurred in ophthalmology. An AI system developed by researchers at Moorfields Eye Hospital in London can analyze retinal scans to detect over 50 different eye diseases with 94% accuracy. The system can also prioritize urgent cases, ensuring that patients who need immediate treatment are identified quickly. In diabetic retinopathy, a leading cause of blindness, AI systems have demonstrated the ability to screen patients in remote or underserved areas where specialist ophthalmologists are scarce.\n\nBeyond diagnosis, AI is transforming drug discovery and development. Traditionally, developing a new drug takes 10-15 years and costs approximately $2.6 billion. AI can dramatically accelerate this process by predicting which chemical compounds are most likely to be effective against specific diseases. In 2020, researchers used AI to identify a powerful new antibiotic capable of killing drug-resistant bacteria, a discovery that took only a few days of computational analysis compared to the years it would have taken using traditional methods.\n\nAI is also being deployed to predict patient deterioration in hospitals. Early warning systems analyze data from electronic health records, including vital signs, laboratory results, and medication administration, to identify patients at risk of serious complications such as sepsis or cardiac arrest. These systems can alert medical staff hours before obvious symptoms appear, potentially saving thousands of lives. A study at the University of Pennsylvania found that an AI early warning system reduced cardiac arrests outside the intensive care unit by 20%.\n\nPersonalized medicine represents another frontier for AI in healthcare. By analyzing a patient's genetic information, medical history, lifestyle factors, and even data from wearable devices, AI systems can recommend treatments tailored to individual patients rather than relying on one-size-fits-all approaches. This precision medicine approach is particularly promising in oncology, where AI can help oncologists select the most effective cancer treatments based on the specific genetic mutations present in a patient's tumor.\n\nHowever, the integration of AI into healthcare faces significant challenges. One major concern is the 'black box' problem—many AI systems, particularly deep learning models, make decisions in ways that are difficult for humans to understand or explain. When an AI system recommends a particular diagnosis or treatment, physicians and patients may want to know why, but current AI technology often cannot provide clear explanations. This lack of transparency raises concerns about accountability, especially when AI systems make errors.\n\nData privacy and security present additional challenges. AI systems require vast amounts of patient data to train effectively, but this data is highly sensitive and must be protected. There are also concerns about algorithmic bias—if AI systems are trained primarily on data from certain demographic groups, they may perform poorly for underrepresented populations. Studies have shown that some AI systems for skin cancer detection perform less accurately on darker skin tones because they were trained predominantly on images of lighter-skinned patients.\n\nThe potential for AI to replace human healthcare workers has sparked debates about the future of medical employment. While some fear widespread job losses, most experts believe AI will augment rather than replace healthcare professionals. Radiologists, for example, are unlikely to be replaced by AI but may find their roles evolving to focus more on complex cases and patient communication while AI handles routine screenings. The goal is not to eliminate human expertise but to allow healthcare workers to focus on tasks that require empathy, complex decision-making, and human judgment.\n\nRegulatory frameworks are struggling to keep pace with AI development. The U.S. Food and Drug Administration (FDA) has approved several AI-based medical devices, but questions remain about how to ensure AI systems remain safe and effective as they continue to learn from new data. Unlike traditional medical devices that remain static after approval, AI systems can change and potentially degrade over time, requiring new approaches to regulation and oversight.\n\nDespite these challenges, the potential benefits of AI in healthcare are enormous. McKinsey Global Institute estimates that AI applications could create $100 billion in annual value for the U.S. healthcare system by reducing medical errors, improving efficiency, and enabling better health outcomes. As the technology matures and challenges are addressed, AI is likely to become an integral part of healthcare delivery, fundamentally changing how we diagnose, treat, and prevent disease.",
+  "instructions": "Read the passage and answer Questions 27-40.",
+  "questionRange": "Questions 27-40",
+  "totalQuestions": 14,
+  "createdAt": {
+    "$date": "2026-01-16T06:11:11.785Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T08:03:22.850Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6969e0c970a43d811ddba644"
+  },
+  "testId": {
+    "$oid": "6969e05e70a43d811ddba635"
+  },
+  "sectionNumber": 1,
+  "title": "The History of Coffee",
+  "passageText": "Coffee is one of the world's most beloved beverages...",
+  "instructions": "Read and answer questions 1-13",
+  "questionRange": "Questions 1-13",
+  "totalQuestions": 13,
+  "createdAt": {
+    "$date": "2026-01-16T06:55:05.202Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:22:39.830Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69771ce42a918e0335e70122"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sectionNumber": 1,
+  "title": "The Rise of Remote Work",
+  "passageText": "In recent years, remote work has moved from being a rare arrangement to a common practice across many industries. Advances in digital technology, such as high-speed internet and video conferencing tools, have made it possible for employees to work effectively from locations outside traditional offices. This shift has changed not only how people work, but also how organizations operate.\nOne major advantage of remote work is flexibility. Employees can manage their time more efficiently, often resulting in better work-life balance. Without long daily commutes, workers save time and money, which can reduce stress levels. Studies have shown that employees who work remotely are often more satisfied with their jobs and show higher levels of productivity.\nHowever, remote work also presents challenges. Communication can become difficult when team members are not physically present in the same place. Misunderstandings may arise due to the lack of face-to-face interaction. In addition, some employees may feel isolated, which can negatively affect mental health and motivation if not properly managed.\nFrom an employer’s perspective, remote work can reduce operational costs. Companies may spend less on office space, utilities, and maintenance. At the same time, managing remote teams requires new strategies. Employers must focus more on outcomes rather than hours worked, and they need to invest in digital tools and training to ensure effective collaboration.\nLooking ahead, many experts believe that remote work will continue to grow, even after global disruptions such as pandemics. Hybrid models, where employees divide their time between home and office, are becoming increasingly popular. This approach aims to combine the benefits of flexibility with the advantages of in-person interaction.",
+  "audioUrl": "",
+  "instructions": "Choose the correct answer",
+  "questionRange": "Questions 1–5",
+  "totalQuestions": 10,
+  "duration": 20,
+  "createdAt": {
+    "$date": "2026-01-26T07:51:00.970Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T08:06:33.398Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69771d822a918e0335e70131"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "sectionNumber": 1,
+  "title": "The Effects of Tourism on Local Communities",
+  "passageText": "Tourism has become one of the world’s largest industries, providing employment and economic growth for many regions. In areas with limited industrial development, tourism often creates job opportunities in hotels, transport, and local services. This income can significantly improve living standards.\nHowever, tourism can also bring negative consequences. Increased demand for land and housing may raise prices, making it difficult for local residents to afford accommodation. Popular tourist destinations often experience overcrowding, which places pressure on infrastructure and public services.\nCultural impact is another concern. While tourism can promote cultural exchange, it may also lead to the commercialization of traditions. Local customs can be altered or simplified to meet tourists’ expectations, resulting in a loss of cultural authenticity.\nEnvironmental damage is frequently linked to tourism growth. Natural habitats may be destroyed to build resorts and roads. Pollution from transport and waste further threatens ecosystems, especially in fragile coastal and mountain regions.\nTo address these issues, sustainable tourism practices are increasingly encouraged. These aim to balance economic benefits with environmental protection and cultural preservation, ensuring tourism remains beneficial in the long term.",
+  "audioUrl": "",
+  "instructions": "Choose the correct answer",
+  "questionRange": "Questions 1-13",
+  "totalQuestions": 13,
+  "duration": 20,
+  "createdAt": {
+    "$date": "2026-01-26T07:53:38.426Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:54:51.561Z"
+  },
+  "__v": 0,
+  "speakingPartNumber": 1,
+  "taskImageUrl": "",
+  "taskType": "task1",
+  "wordLimit": 150
+},
+{
+  "_id": {
+    "$oid": "69771de32a918e0335e70138"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "sectionNumber": 2,
+  "title": "The Development of Writing Systems",
+  "passageText": "A.\tWriting systems developed as societies grew more complex. Early humans relied on spoken language, but as trade and administration expanded, permanent records became necessary. The earliest known writing systems appeared around 5,000 years ago in Mesopotamia and Egypt.\nB.\tInitially, writing consisted of pictographs representing objects or ideas. Over time, these evolved into more abstract symbols, allowing complex thoughts to be recorded efficiently. This development played a key role in the advancement of law, science, and literature.\n\nC.\t Different regions created distinct writing systems. Alphabetic systems, such as those used in Europe, represent individual sounds, while logographic systems, like Chinese characters, represent words or meanings. Each system reflects the needs and history of its culture.\nD. In the modern era, digital technology has transformed writing once again. Typing and electronic communication have replaced handwritten texts in many contexts. Despite this shift, writing remains a fundamental tool for communication and knowledge preservation.\nE.  Despite the importance of writing, spoken language has never disappeared. Oral communication continues to play a central role in daily interaction, storytelling, and cultural traditions. Even in highly literate societies, speech remains essential for social connection and the transmission of ideas.",
+  "audioUrl": "",
+  "instructions": "",
+  "questionRange": "Questions 14-26",
+  "totalQuestions": 13,
+  "duration": 20,
+  "createdAt": {
+    "$date": "2026-01-26T07:55:15.824Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:33:33.769Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69771e322a918e0335e7013d"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "sectionNumber": 3,
+  "title": "The Science of Memory",
+  "passageText": "Memory allows humans to store, retain, and recall information. Psychologists generally divide memory into three types: sensory memory, short-term memory, and long-term memory. Each plays a distinct role in processing information.\nShort-term memory has limited capacity and duration. Without repetition, information quickly fades. Long-term memory, however, can store vast amounts of information for extended periods, sometimes lasting a lifetime.\nResearch suggests that emotion plays a crucial role in memory formation. Events associated with strong emotions are often remembered more clearly. This explains why people vividly recall significant life experiences.\nMemory can also be improved through training. Techniques such as repetition, association, and visualization help strengthen recall. However, memory is not perfect and can be influenced by stress, fatigue, and aging.",
+  "audioUrl": "",
+  "instructions": "",
+  "questionRange": "Questions 27-40",
+  "totalQuestions": 14,
+  "duration": 20,
+  "createdAt": {
+    "$date": "2026-01-26T07:56:34.164Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:50:15.989Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69806b507c1102973e1b5eaa"
+  },
+  "testId": {
+    "$oid": "69806b037c1102973e1b5e9a"
+  },
+  "sectionNumber": 1,
+  "title": "The Development of Writing Systems",
+  "passageText": "A. Writing systems emerged as societies became administratively complex. Early record keeping relied on pictographs representing concrete objects.\nB. Over time, pictographs were abstracted into symbols that could represent ideas and, later, sounds.\nC. The invention of alphabetic systems reduced the number of symbols required and accelerated literacy diffusion.\nD. Contemporary digital platforms prioritize speed and global dissemination, reshaping conventions of permanence\nand authorship.\nE. Standardization by institutions enabled interoperability across regions, stabilizing orthographic norms.",
+  "audioUrl": "",
+  "instructions": "",
+  "questionRange": "Questions 1-13",
+  "totalQuestions": 13,
+  "duration": 20,
+  "taskType": "task1",
+  "taskImageUrl": "",
+  "wordLimit": 150,
+  "cueCard": {
+    "bulletPoints": []
+  },
+  "createdAt": {
+    "$date": "2026-02-02T09:16:00.991Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T10:11:46.221Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69806ba07c1102973e1b5eb5"
+  },
+  "testId": {
+    "$oid": "69806b037c1102973e1b5e9a"
+  },
+  "sectionNumber": 2,
+  "title": "Urban Heat Islands",
+  "passageText": "A. Urban surfaces such as asphalt and concrete store heat, elevating local temperatures relative to rural areas.\nB. Sparse vegetation reduces cooling via evapotranspiration, exacerbating thermal retention.\nC. Anthropogenic heat from transport and buildings compounds ambient temperature increases.\nD. Mitigation measures include reflective materials, green roofs, and expanded urban forestry.",
+  "audioUrl": "",
+  "instructions": "",
+  "questionRange": "Questions 14-25",
+  "totalQuestions": 12,
+  "duration": 20,
+  "taskType": "task1",
+  "taskImageUrl": "",
+  "wordLimit": 150,
+  "cueCard": {
+    "bulletPoints": []
+  },
+  "createdAt": {
+    "$date": "2026-02-02T09:17:20.605Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:27:07.211Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69806bc67c1102973e1b5ec0"
+  },
+  "testId": {
+    "$oid": "69806b037c1102973e1b5e9a"
+  },
+  "sectionNumber": 3,
+  "title": "The Science of Sleep",
+  "passageText": "A. Sleep facilitates memory consolidation and executive functioning.\nB. Circadian rhythms are entrained by zeitgebers such as light exposure.\nC. Chronic sleep deprivation correlates with cardiometabolic and cognitive risks.\nD. Sleep architecture varies across the lifespan, altering restorative efficiency.",
+  "audioUrl": "",
+  "instructions": "",
+  "questionRange": "Question 26-40",
+  "totalQuestions": 15,
+  "duration": 20,
+  "taskType": "task1",
+  "taskImageUrl": "",
+  "wordLimit": 150,
+  "cueCard": {
+    "bulletPoints": []
+  },
+  "createdAt": {
+    "$date": "2026-02-02T09:17:58.366Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:55:42.097Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6981a51735114250994caf7f"
+  },
+  "testId": {
+    "$oid": "6981a4a535114250994caf5b"
+  },
+  "sectionNumber": 1,
+  "title": "Report Writing",
+  "passageText": "",
+  "audioUrl": "",
+  "instructions": "",
+  "questionRange": "0",
+  "totalQuestions": 1,
+  "duration": 20,
+  "taskType": "task1",
+  "taskImageUrl": "https://res.cloudinary.com/dhjxqafnu/image/upload/v1769493454/ielts-lms/writing-tasks/p82mowoba2471an6ijhh.jpg",
+  "wordLimit": 150,
+  "cueCard": {
+    "bulletPoints": []
+  },
+  "createdAt": {
+    "$date": "2026-02-03T07:34:47.480Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T07:52:21.659Z"
+  },
+  "__v": 0
+}]

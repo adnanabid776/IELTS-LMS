@@ -1,0 +1,5302 @@
+[{
+  "_id": {
+    "$oid": "696e3ba891bfdd48749f9c67"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "696e3b8f91bfdd48749f9c49"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 1,
+  "incorrectAnswers": 4,
+  "unanswered": 0,
+  "bandScore": 4,
+  "percentage": 20,
+  "questionTypeBreakdown": [
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e3ba891bfdd48749f9c68"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 1,
+      "percentage": 100,
+      "_id": {
+        "$oid": "696e3ba891bfdd48749f9c69"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e3ba891bfdd48749f9c6a"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e3ba891bfdd48749f9c6b"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 5,
+      "correctAnswers": 1,
+      "percentage": 20,
+      "_id": {
+        "$oid": "696e3ba891bfdd48749f9c6c"
+      }
+    }
+  ],
+  "timeTaken": 25,
+  "weakAreas": [
+    "short-answer",
+    "multiple-choice",
+    "sentence-completion"
+  ],
+  "recommendations": [
+    "Practice more short answer questions to improve your score.",
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more sentence completion questions to improve your score.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-19T14:11:52.486Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T14:11:52.486Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696e46e191bfdd48749f9c96"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "696e3d8691bfdd48749f9c70"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 5,
+  "bandScore": 2.5,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e46e191bfdd48749f9c97"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e46e191bfdd48749f9c98"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e46e191bfdd48749f9c99"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e46e191bfdd48749f9c9a"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e46e191bfdd48749f9c9b"
+      }
+    }
+  ],
+  "timeTaken": 2395,
+  "weakAreas": [
+    "short-answer",
+    "true-false-not-given",
+    "multiple-choice",
+    "sentence-completion"
+  ],
+  "recommendations": [
+    "Practice more short answer questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more sentence completion questions to improve your score.",
+    "You left 5 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-19T14:59:45.935Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T14:59:45.935Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696e4d8991bfdd48749f9cc7"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "696e46ed91bfdd48749f9c9f"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 5,
+  "bandScore": 2.5,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e4d8991bfdd48749f9cc8"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e4d8991bfdd48749f9cc9"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e4d8991bfdd48749f9cca"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e4d8991bfdd48749f9ccb"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e4d8991bfdd48749f9ccc"
+      }
+    }
+  ],
+  "timeTaken": 1692,
+  "weakAreas": [
+    "short-answer",
+    "true-false-not-given",
+    "multiple-choice",
+    "sentence-completion"
+  ],
+  "recommendations": [
+    "Practice more short answer questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more sentence completion questions to improve your score.",
+    "You left 5 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-19T15:28:09.344Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T15:28:09.344Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696e4ecb91bfdd48749f9cf4"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "696e4d8d91bfdd48749f9cd0"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 5,
+  "bandScore": 2.5,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e4ecb91bfdd48749f9cf5"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e4ecb91bfdd48749f9cf6"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e4ecb91bfdd48749f9cf7"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e4ecb91bfdd48749f9cf8"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e4ecb91bfdd48749f9cf9"
+      }
+    }
+  ],
+  "timeTaken": 318,
+  "weakAreas": [
+    "short-answer",
+    "true-false-not-given",
+    "multiple-choice",
+    "sentence-completion"
+  ],
+  "recommendations": [
+    "Practice more short answer questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more sentence completion questions to improve your score.",
+    "You left 5 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-19T15:33:31.814Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T15:33:31.814Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696e4f4891bfdd48749f9d28"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "696e4f2e91bfdd48749f9d0a"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 0,
+  "incorrectAnswers": 5,
+  "unanswered": 0,
+  "bandScore": 2.5,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e4f4891bfdd48749f9d29"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e4f4891bfdd48749f9d2a"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e4f4891bfdd48749f9d2b"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e4f4891bfdd48749f9d2c"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 5,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e4f4891bfdd48749f9d2d"
+      }
+    }
+  ],
+  "timeTaken": 25,
+  "weakAreas": [
+    "short-answer",
+    "true-false-not-given",
+    "multiple-choice",
+    "sentence-completion"
+  ],
+  "recommendations": [
+    "Practice more short answer questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more sentence completion questions to improve your score.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-19T15:35:36.248Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T15:35:36.248Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696e4fb891bfdd48749f9d5c"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "696e4f6091bfdd48749f9d3e"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 5,
+  "incorrectAnswers": 0,
+  "unanswered": 0,
+  "bandScore": 9,
+  "percentage": 100,
+  "questionTypeBreakdown": [
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 1,
+      "percentage": 100,
+      "_id": {
+        "$oid": "696e4fb891bfdd48749f9d5d"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 1,
+      "percentage": 100,
+      "_id": {
+        "$oid": "696e4fb891bfdd48749f9d5e"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 1,
+      "percentage": 100,
+      "_id": {
+        "$oid": "696e4fb891bfdd48749f9d5f"
+      }
+    },
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 2,
+      "percentage": 100,
+      "_id": {
+        "$oid": "696e4fb891bfdd48749f9d60"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 5,
+      "correctAnswers": 5,
+      "percentage": 100,
+      "_id": {
+        "$oid": "696e4fb891bfdd48749f9d61"
+      }
+    }
+  ],
+  "timeTaken": 87,
+  "weakAreas": [],
+  "recommendations": [],
+  "createdAt": {
+    "$date": "2026-01-19T15:37:28.302Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T15:37:28.302Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696e57e091bfdd48749f9d9f"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "696e57c091bfdd48749f9d81"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 3,
+  "incorrectAnswers": 2,
+  "unanswered": 0,
+  "bandScore": 7,
+  "percentage": 60,
+  "questionTypeBreakdown": [
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 1,
+      "percentage": 50,
+      "_id": {
+        "$oid": "696e57e091bfdd48749f9da0"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696e57e091bfdd48749f9da1"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 1,
+      "percentage": 100,
+      "_id": {
+        "$oid": "696e57e091bfdd48749f9da2"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 1,
+      "percentage": 100,
+      "_id": {
+        "$oid": "696e57e091bfdd48749f9da3"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 5,
+      "correctAnswers": 3,
+      "percentage": 60,
+      "_id": {
+        "$oid": "696e57e091bfdd48749f9da4"
+      }
+    }
+  ],
+  "timeTaken": 31,
+  "weakAreas": [
+    "true-false-not-given"
+  ],
+  "recommendations": [
+    "Practice more true false not given questions to improve your score."
+  ],
+  "createdAt": {
+    "$date": "2026-01-19T16:12:16.646Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-19T16:12:16.646Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696f1c034bea93b882797858"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "696f1be84bea93b88279784a"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 5,
+  "bandScore": 2.5,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1c034bea93b882797859"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1c034bea93b88279785a"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1c034bea93b88279785b"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1c034bea93b88279785c"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1c034bea93b88279785d"
+      }
+    }
+  ],
+  "timeTaken": 24,
+  "weakAreas": [
+    "short-answer",
+    "true-false-not-given",
+    "multiple-choice",
+    "sentence-completion"
+  ],
+  "recommendations": [
+    "Practice more short answer questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more sentence completion questions to improve your score.",
+    "You left 5 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-20T06:09:07.647Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T06:09:07.647Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696f1c834bea93b88279788b"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "696f1c634bea93b88279787d"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 5,
+  "bandScore": 2.5,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1c834bea93b88279788c"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1c834bea93b88279788d"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1c834bea93b88279788e"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1c834bea93b88279788f"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1c834bea93b882797890"
+      }
+    }
+  ],
+  "timeTaken": 12,
+  "weakAreas": [
+    "short-answer",
+    "true-false-not-given",
+    "multiple-choice",
+    "sentence-completion"
+  ],
+  "recommendations": [
+    "Practice more short answer questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more sentence completion questions to improve your score.",
+    "You left 5 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-20T06:11:15.370Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T06:11:15.370Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696f1df04bea93b8827978e9"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "696f1db04bea93b8827978a5"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 1,
+  "incorrectAnswers": 4,
+  "unanswered": 0,
+  "bandScore": 4,
+  "percentage": 20,
+  "questionTypeBreakdown": [
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1df04bea93b8827978ea"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 1,
+      "percentage": 100,
+      "_id": {
+        "$oid": "696f1df04bea93b8827978eb"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1df04bea93b8827978ec"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1df04bea93b8827978ed"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 5,
+      "correctAnswers": 1,
+      "percentage": 20,
+      "_id": {
+        "$oid": "696f1df04bea93b8827978ee"
+      }
+    }
+  ],
+  "timeTaken": 64,
+  "weakAreas": [
+    "short-answer",
+    "multiple-choice",
+    "sentence-completion"
+  ],
+  "recommendations": [
+    "Practice more short answer questions to improve your score.",
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more sentence completion questions to improve your score.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-20T06:17:20.364Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T06:17:20.364Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696f1f204bea93b8827979a8"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "696f1f144bea93b88279799b"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 5,
+  "bandScore": 2.5,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1f204bea93b8827979a9"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1f204bea93b8827979aa"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1f204bea93b8827979ab"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1f204bea93b8827979ac"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f1f204bea93b8827979ad"
+      }
+    }
+  ],
+  "timeTaken": 11,
+  "weakAreas": [
+    "short-answer",
+    "true-false-not-given",
+    "multiple-choice",
+    "sentence-completion"
+  ],
+  "recommendations": [
+    "Practice more short answer questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more sentence completion questions to improve your score.",
+    "You left 5 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-20T06:22:24.253Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T06:22:24.253Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696f26b29bcbb6ff957ce19d"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "696f26a99bcbb6ff957ce190"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 5,
+  "bandScore": 2.5,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f26b29bcbb6ff957ce19e"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f26b29bcbb6ff957ce19f"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f26b29bcbb6ff957ce1a0"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f26b29bcbb6ff957ce1a1"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f26b29bcbb6ff957ce1a2"
+      }
+    }
+  ],
+  "timeTaken": 8,
+  "weakAreas": [
+    "short-answer",
+    "true-false-not-given",
+    "multiple-choice",
+    "sentence-completion"
+  ],
+  "recommendations": [
+    "Practice more short answer questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more sentence completion questions to improve your score.",
+    "You left 5 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-20T06:54:42.589Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T06:54:42.589Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696f610dbe77746d01c9c5a6"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "696f6108be77746d01c9c599"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 5,
+  "bandScore": 2.5,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f610dbe77746d01c9c5a7"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f610dbe77746d01c9c5a8"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f610dbe77746d01c9c5a9"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f610dbe77746d01c9c5aa"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f610dbe77746d01c9c5ab"
+      }
+    }
+  ],
+  "timeTaken": 5,
+  "weakAreas": [
+    "short-answer",
+    "true-false-not-given",
+    "multiple-choice",
+    "sentence-completion"
+  ],
+  "recommendations": [
+    "Practice more short answer questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more sentence completion questions to improve your score.",
+    "You left 5 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-20T11:03:41.839Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T11:03:41.839Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696f61a3be77746d01c9c939"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "696f619fbe77746d01c9c92c"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 5,
+  "bandScore": 2.5,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f61a3be77746d01c9c93a"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f61a3be77746d01c9c93b"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f61a3be77746d01c9c93c"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f61a3be77746d01c9c93d"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f61a3be77746d01c9c93e"
+      }
+    }
+  ],
+  "timeTaken": 3,
+  "weakAreas": [
+    "short-answer",
+    "true-false-not-given",
+    "multiple-choice",
+    "sentence-completion"
+  ],
+  "recommendations": [
+    "Practice more short answer questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more sentence completion questions to improve your score.",
+    "You left 5 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-20T11:06:11.647Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T11:06:11.647Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "696f62a2be77746d01c9cd17"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "696f6280be77746d01c9cd0a"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 5,
+  "bandScore": 2.5,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f62a2be77746d01c9cd18"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f62a2be77746d01c9cd19"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f62a2be77746d01c9cd1a"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f62a2be77746d01c9cd1b"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "696f62a2be77746d01c9cd1c"
+      }
+    }
+  ],
+  "timeTaken": 34,
+  "weakAreas": [
+    "short-answer",
+    "true-false-not-given",
+    "multiple-choice",
+    "sentence-completion"
+  ],
+  "recommendations": [
+    "Practice more short answer questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more sentence completion questions to improve your score.",
+    "You left 5 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-20T11:10:26.206Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-20T11:10:26.206Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6971c47b5da5b00173efa878"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "6971c3f05da5b00173efa80f"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 5,
+  "incorrectAnswers": 0,
+  "unanswered": 0,
+  "bandScore": 9,
+  "percentage": 100,
+  "questionTypeBreakdown": [
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 2,
+      "percentage": 100,
+      "_id": {
+        "$oid": "6971c47b5da5b00173efa879"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 1,
+      "percentage": 100,
+      "_id": {
+        "$oid": "6971c47b5da5b00173efa87a"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 1,
+      "percentage": 100,
+      "_id": {
+        "$oid": "6971c47b5da5b00173efa87b"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 1,
+      "percentage": 100,
+      "_id": {
+        "$oid": "6971c47b5da5b00173efa87c"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 5,
+      "correctAnswers": 5,
+      "percentage": 100,
+      "_id": {
+        "$oid": "6971c47b5da5b00173efa87d"
+      }
+    }
+  ],
+  "timeTaken": 138,
+  "weakAreas": [],
+  "recommendations": [],
+  "createdAt": {
+    "$date": "2026-01-22T06:32:27.034Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-22T06:32:27.034Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6973235638df251e0c29ad23"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "6973234f38df251e0c29ad16"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 5,
+  "bandScore": 2.5,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6973235638df251e0c29ad24"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6973235638df251e0c29ad25"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6973235638df251e0c29ad26"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6973235638df251e0c29ad27"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6973235638df251e0c29ad28"
+      }
+    }
+  ],
+  "timeTaken": 6,
+  "weakAreas": [
+    "short-answer",
+    "true-false-not-given",
+    "multiple-choice",
+    "sentence-completion"
+  ],
+  "recommendations": [
+    "Practice more short answer questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more sentence completion questions to improve your score.",
+    "You left 5 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-23T07:29:26.291Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-23T07:29:26.291Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697722822a918e0335e7029d"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "697720ac2a918e0335e70270"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 3,
+  "incorrectAnswers": 7,
+  "unanswered": 0,
+  "bandScore": 5,
+  "percentage": 30,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 2,
+      "percentage": 40,
+      "_id": {
+        "$oid": "697722822a918e0335e7029e"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 1,
+      "percentage": 20,
+      "_id": {
+        "$oid": "697722822a918e0335e7029f"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 10,
+      "correctAnswers": 3,
+      "percentage": 30,
+      "_id": {
+        "$oid": "697722822a918e0335e702a0"
+      }
+    }
+  ],
+  "timeTaken": 469,
+  "weakAreas": [
+    "multiple-choice",
+    "true-false-not-given"
+  ],
+  "recommendations": [
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-26T08:14:58.718Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T08:14:58.718Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697744ed6cf817f13cd957a8"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "697744c06cf817f13cd956a6"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 5,
+  "incorrectAnswers": 5,
+  "unanswered": 0,
+  "bandScore": 6,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 50,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697744ed6cf817f13cd957a9"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 5,
+      "percentage": 100,
+      "_id": {
+        "$oid": "697744ed6cf817f13cd957aa"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 10,
+      "correctAnswers": 5,
+      "percentage": 50,
+      "_id": {
+        "$oid": "697744ed6cf817f13cd957ab"
+      }
+    }
+  ],
+  "timeTaken": 44,
+  "weakAreas": [
+    "multiple-choice"
+  ],
+  "recommendations": [
+    "Practice more multiple choice questions to improve your score."
+  ],
+  "createdAt": {
+    "$date": "2026-01-26T10:41:49.534Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T10:41:49.534Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697745106cf817f13cd957e8"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "sessionId": {
+    "$oid": "697745096cf817f13cd957d9"
+  },
+  "module": "reading",
+  "totalQuestions": 0,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 0,
+  "bandScore": 2.5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 0,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Effects of Tourism on Local Communities",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697745106cf817f13cd957e9"
+      }
+    },
+    {
+      "sectionNumber": 2,
+      "sectionTitle": "The Development of Writing Systems",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697745106cf817f13cd957ea"
+      }
+    },
+    {
+      "sectionNumber": 3,
+      "sectionTitle": "The Science of Memory",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697745106cf817f13cd957eb"
+      }
+    }
+  ],
+  "timeTaken": 6,
+  "weakAreas": [],
+  "recommendations": [
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-26T10:42:24.574Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T10:42:24.574Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69778fdb95885df1fad112ca"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "sessionId": {
+    "$oid": "69778b7398ff0e05fefb3367"
+  },
+  "module": "writing",
+  "totalQuestions": 2,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 7,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-26T16:14:16.815Z"
+  },
+  "gradingNotes": "Good essay structure with clear paragraphs. Effective use of data from the chart. Minor grammatical errors. Well-organized comparison of trends.",
+  "percentage": null,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 0,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-26T16:01:31.258Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T16:14:16.820Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 7,
+    "coherenceCohesion": 7,
+    "lexicalResource": 7,
+    "grammaticalRange": 7
+  }
+},
+{
+  "_id": {
+    "$oid": "6977952695885df1fad113bb"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "697794fa95885df1fad1138e"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 5,
+  "incorrectAnswers": 5,
+  "unanswered": 0,
+  "bandScore": 6,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 50,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 1,
+      "percentage": 20,
+      "_id": {
+        "$oid": "6977952695885df1fad113bc"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 4,
+      "percentage": 80,
+      "_id": {
+        "$oid": "6977952695885df1fad113bd"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 10,
+      "correctAnswers": 5,
+      "percentage": 50,
+      "_id": {
+        "$oid": "6977952695885df1fad113be"
+      }
+    }
+  ],
+  "timeTaken": 43,
+  "weakAreas": [
+    "multiple-choice"
+  ],
+  "recommendations": [
+    "Practice more multiple choice questions to improve your score."
+  ],
+  "createdAt": {
+    "$date": "2026-01-26T16:24:06.353Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T16:24:06.353Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69779fd895885df1fad1163c"
+  },
+  "userId": {
+    "$oid": "696224e285a932bf633f0156"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "69779fb995885df1fad1160f"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 6,
+  "incorrectAnswers": 4,
+  "unanswered": 0,
+  "bandScore": 7,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 60,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 2,
+      "percentage": 40,
+      "_id": {
+        "$oid": "69779fd895885df1fad1163d"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 4,
+      "percentage": 80,
+      "_id": {
+        "$oid": "69779fd895885df1fad1163e"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 10,
+      "correctAnswers": 6,
+      "percentage": 60,
+      "_id": {
+        "$oid": "69779fd895885df1fad1163f"
+      }
+    }
+  ],
+  "timeTaken": 31,
+  "weakAreas": [
+    "multiple-choice"
+  ],
+  "recommendations": [
+    "Practice more multiple choice questions to improve your score."
+  ],
+  "createdAt": {
+    "$date": "2026-01-26T17:09:44.476Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T17:09:44.476Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69785df3a275bfa7ceaff2a5"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "sessionId": {
+    "$oid": "69785deda275bfa7ceaff298"
+  },
+  "module": "writing",
+  "totalQuestions": 2,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 5,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-28T06:55:39.849Z"
+  },
+  "gradingNotes": "ggh",
+  "percentage": null,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 6,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-27T06:40:51.964Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T06:55:39.861Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 5,
+    "coherenceCohesion": 5,
+    "lexicalResource": 5,
+    "grammaticalRange": 5
+  }
+},
+{
+  "_id": {
+    "$oid": "69786123a275bfa7ceaff352"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "sessionId": {
+    "$oid": "69785dfda275bfa7ceaff2b1"
+  },
+  "module": "writing",
+  "totalQuestions": 2,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 5,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-28T06:57:37.662Z"
+  },
+  "gradingNotes": "not good",
+  "percentage": null,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 806,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-27T06:54:27.932Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T06:57:37.663Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 5,
+    "coherenceCohesion": 5,
+    "lexicalResource": 5,
+    "grammaticalRange": 5
+  }
+},
+{
+  "_id": {
+    "$oid": "69786240a275bfa7ceaff4f5"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "sessionId": {
+    "$oid": "6978614fa275bfa7ceaff3c9"
+  },
+  "module": "writing",
+  "totalQuestions": 2,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 2,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-28T09:03:57.207Z"
+  },
+  "gradingNotes": "df",
+  "percentage": 22,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 240,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-27T06:59:12.241Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T09:03:57.211Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 7.5,
+    "coherenceCohesion": 0,
+    "lexicalResource": 0,
+    "grammaticalRange": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "6978636ca275bfa7ceaff8b0"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "sessionId": {
+    "$oid": "69786257a275bfa7ceaff56c"
+  },
+  "module": "writing",
+  "totalQuestions": 2,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 1,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-28T06:58:42.292Z"
+  },
+  "gradingNotes": "Very bad",
+  "percentage": null,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 276,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-27T07:04:12.730Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T06:58:42.296Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 1.5,
+    "coherenceCohesion": 0.5,
+    "lexicalResource": 0.5,
+    "grammaticalRange": 0.5
+  }
+},
+{
+  "_id": {
+    "$oid": "697864454f9edbb1a2e466a3"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "sessionId": {
+    "$oid": "697864074f9edbb1a2e46682"
+  },
+  "module": "writing",
+  "totalQuestions": 2,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 5,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-28T15:26:16.441Z"
+  },
+  "gradingNotes": ",mmm",
+  "percentage": 56,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 62,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-27T07:07:49.520Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T15:26:16.444Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 5,
+    "coherenceCohesion": 5,
+    "lexicalResource": 5,
+    "grammaticalRange": 5
+  }
+},
+{
+  "_id": {
+    "$oid": "6978664b08d906eb377fd9d0"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "sessionId": {
+    "$oid": "6978661a08d906eb377fd9bb"
+  },
+  "module": "writing",
+  "totalQuestions": 2,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 5,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-28T15:26:08.314Z"
+  },
+  "gradingNotes": "kk",
+  "percentage": 56,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 48,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-27T07:16:27.459Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T15:26:08.318Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 5,
+    "coherenceCohesion": 5,
+    "lexicalResource": 5,
+    "grammaticalRange": 5
+  }
+},
+{
+  "_id": {
+    "$oid": "697868e408d906eb377fda4d"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "sessionId": {
+    "$oid": "697866ef08d906eb377fd9e2"
+  },
+  "module": "writing",
+  "totalQuestions": 2,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 1,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-28T07:11:21.367Z"
+  },
+  "gradingNotes": "poor",
+  "percentage": 11,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 500,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-27T07:27:32.333Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T07:11:21.371Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 2,
+    "coherenceCohesion": 0.5,
+    "lexicalResource": 0.5,
+    "grammaticalRange": 0.5
+  }
+},
+{
+  "_id": {
+    "$oid": "69786f84c44f91b4ee020a2d"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "69786f77c44f91b4ee020a1c"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 10,
+  "bandScore": 2.5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "69786f84c44f91b4ee020a2e"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "69786f84c44f91b4ee020a2f"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "69786f84c44f91b4ee020a30"
+      }
+    },
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "Task 1: Describe the Chart",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "69786f84c44f91b4ee020a31"
+      }
+    },
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "Task 1: Describe the Chart",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "69786f84c44f91b4ee020a32"
+      }
+    },
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "Task 1: Describe the Chart",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "69786f84c44f91b4ee020a33"
+      }
+    }
+  ],
+  "timeTaken": 12,
+  "weakAreas": [
+    "multiple-choice",
+    "true-false-not-given"
+  ],
+  "recommendations": [
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "You left 10 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-27T07:55:48.523Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T07:55:48.523Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69786fc7c44f91b4ee020b15"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "sessionId": {
+    "$oid": "6978691308d906eb377fda5e"
+  },
+  "module": "writing",
+  "totalQuestions": 2,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 1,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-28T07:10:30.072Z"
+  },
+  "gradingNotes": "no",
+  "percentage": 11,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 1716,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-27T07:56:55.845Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T07:10:30.086Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 0.5,
+    "coherenceCohesion": 1.5,
+    "lexicalResource": 2,
+    "grammaticalRange": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "6978731fc44f91b4ee020fa6"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69787250c44f91b4ee020f01"
+  },
+  "sessionId": {
+    "$oid": "69787286c44f91b4ee020f91"
+  },
+  "module": "writing",
+  "totalQuestions": 0,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 5,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-28T07:06:04.025Z"
+  },
+  "gradingNotes": "gggg",
+  "percentage": null,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 153,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-27T08:11:11.919Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T07:06:04.028Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 5,
+    "coherenceCohesion": 5,
+    "lexicalResource": 5,
+    "grammaticalRange": 5
+  }
+},
+{
+  "_id": {
+    "$oid": "6978732bc44f91b4ee020fc2"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "69786facc44f91b4ee020a80"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 10,
+  "bandScore": 2.5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6978732bc44f91b4ee020fc3"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6978732bc44f91b4ee020fc4"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6978732bc44f91b4ee020fc5"
+      }
+    }
+  ],
+  "timeTaken": 894,
+  "weakAreas": [
+    "multiple-choice",
+    "true-false-not-given"
+  ],
+  "recommendations": [
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "You left 10 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-27T08:11:23.407Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T08:11:23.407Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6978737ac44f91b4ee021107"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69787250c44f91b4ee020f01"
+  },
+  "sessionId": {
+    "$oid": "69787370c44f91b4ee0210ee"
+  },
+  "module": "writing",
+  "totalQuestions": 0,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 1,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-28T06:56:28.251Z"
+  },
+  "gradingNotes": "not good",
+  "percentage": null,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 10,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-27T08:12:42.727Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T06:56:28.254Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 1,
+    "coherenceCohesion": 2,
+    "lexicalResource": 0,
+    "grammaticalRange": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "697873ccc44f91b4ee021174"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "69787383c44f91b4ee021134"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 6,
+  "incorrectAnswers": 4,
+  "unanswered": 0,
+  "bandScore": 7,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 60,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 2,
+      "percentage": 40,
+      "_id": {
+        "$oid": "697873ccc44f91b4ee021175"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 4,
+      "percentage": 80,
+      "_id": {
+        "$oid": "697873ccc44f91b4ee021176"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 10,
+      "correctAnswers": 6,
+      "percentage": 60,
+      "_id": {
+        "$oid": "697873ccc44f91b4ee021177"
+      }
+    }
+  ],
+  "timeTaken": 73,
+  "weakAreas": [
+    "multiple-choice"
+  ],
+  "recommendations": [
+    "Practice more multiple choice questions to improve your score."
+  ],
+  "createdAt": {
+    "$date": "2026-01-27T08:14:04.933Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T08:14:04.933Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69787ffdc44f91b4ee0214a7"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69787250c44f91b4ee020f01"
+  },
+  "sessionId": {
+    "$oid": "69787feec44f91b4ee02148c"
+  },
+  "module": "writing",
+  "totalQuestions": 0,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 2,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-28T06:59:39.071Z"
+  },
+  "gradingNotes": "very poor",
+  "percentage": null,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 15,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-27T09:06:05.495Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T06:59:39.072Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 1,
+    "coherenceCohesion": 5,
+    "lexicalResource": 1,
+    "grammaticalRange": 1.5
+  }
+},
+{
+  "_id": {
+    "$oid": "697893a7c44f91b4ee021608"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "6969e66a64eba2811b90f475"
+  },
+  "sessionId": {
+    "$oid": "6978939bc44f91b4ee0215fa"
+  },
+  "module": "reading",
+  "totalQuestions": 5,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 5,
+  "bandScore": 2.5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "short-answer",
+      "total": 2,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697893a7c44f91b4ee021609"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697893a7c44f91b4ee02160a"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697893a7c44f91b4ee02160b"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697893a7c44f91b4ee02160c"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The History of Coffee",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697893a7c44f91b4ee02160d"
+      }
+    },
+    {
+      "sectionNumber": 2,
+      "sectionTitle": "GFGGGHGFNVHGHF",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697893a7c44f91b4ee02160e"
+      }
+    }
+  ],
+  "timeTaken": 11,
+  "weakAreas": [
+    "short-answer",
+    "true-false-not-given",
+    "multiple-choice",
+    "sentence-completion"
+  ],
+  "recommendations": [
+    "Practice more short answer questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more sentence completion questions to improve your score.",
+    "You left 5 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-27T10:29:59.031Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-27T10:29:59.031Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6979ad01c40e2d6ffef9ae4f"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69787250c44f91b4ee020f01"
+  },
+  "sessionId": {
+    "$oid": "6979acfbc40e2d6ffef9ae2e"
+  },
+  "module": "writing",
+  "totalQuestions": 0,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 5,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-28T06:59:11.819Z"
+  },
+  "gradingNotes": "Average.",
+  "percentage": null,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 5,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-28T06:30:25.184Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T06:59:11.820Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 5,
+    "coherenceCohesion": 5,
+    "lexicalResource": 5,
+    "grammaticalRange": 5
+  }
+},
+{
+  "_id": {
+    "$oid": "6979b83ecb6119bf8f107076"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69787250c44f91b4ee020f01"
+  },
+  "sessionId": {
+    "$oid": "6979b7f6cb6119bf8f107055"
+  },
+  "module": "writing",
+  "totalQuestions": 0,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 5.5,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-28T07:19:19.444Z"
+  },
+  "gradingNotes": "That is okay, but you have to improve more.",
+  "percentage": 61,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 71,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-28T07:18:22.534Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T07:19:19.446Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 8,
+    "coherenceCohesion": 5,
+    "lexicalResource": 4.5,
+    "grammaticalRange": 5
+  }
+},
+{
+  "_id": {
+    "$oid": "6979bb41cb6119bf8f10751e"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "6979bb1bcb6119bf8f1074ec"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 4,
+  "incorrectAnswers": 6,
+  "unanswered": 0,
+  "bandScore": 5.5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 40,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 2,
+      "percentage": 40,
+      "_id": {
+        "$oid": "6979bb41cb6119bf8f10751f"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 2,
+      "percentage": 40,
+      "_id": {
+        "$oid": "6979bb41cb6119bf8f107520"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 10,
+      "correctAnswers": 4,
+      "percentage": 40,
+      "_id": {
+        "$oid": "6979bb41cb6119bf8f107521"
+      }
+    }
+  ],
+  "timeTaken": 37,
+  "weakAreas": [
+    "multiple-choice",
+    "true-false-not-given"
+  ],
+  "recommendations": [
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-28T07:31:13.156Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T07:31:13.156Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6979bc34cb6119bf8f1076eb"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697786806cf817f13cd95afb"
+  },
+  "sessionId": {
+    "$oid": "6979bc26cb6119bf8f1076c9"
+  },
+  "module": "writing",
+  "totalQuestions": 2,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 5,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-28T15:26:00.778Z"
+  },
+  "gradingNotes": "k",
+  "percentage": 56,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 14,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-28T07:35:16.895Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T15:26:00.781Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 5,
+    "coherenceCohesion": 5,
+    "lexicalResource": 5,
+    "grammaticalRange": 5
+  }
+},
+{
+  "_id": {
+    "$oid": "6979bca5cb6119bf8f107741"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "6979bb5fcb6119bf8f1075c3"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 1,
+  "incorrectAnswers": 8,
+  "unanswered": 1,
+  "bandScore": 3.5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 10,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6979bca5cb6119bf8f107742"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 1,
+      "percentage": 20,
+      "_id": {
+        "$oid": "6979bca5cb6119bf8f107743"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 9,
+      "correctAnswers": 1,
+      "percentage": 11,
+      "_id": {
+        "$oid": "6979bca5cb6119bf8f107744"
+      }
+    }
+  ],
+  "timeTaken": 325,
+  "weakAreas": [
+    "multiple-choice",
+    "true-false-not-given"
+  ],
+  "recommendations": [
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "You left 1 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-28T07:37:09.027Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T07:37:09.027Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6979d67b711c064152c407d5"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "6979d4f9711c064152c406ff"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 10,
+  "bandScore": 2.5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6979d67b711c064152c407d6"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6979d67b711c064152c407d7"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6979d67b711c064152c407d8"
+      }
+    }
+  ],
+  "timeTaken": 385,
+  "weakAreas": [
+    "multiple-choice",
+    "true-false-not-given"
+  ],
+  "recommendations": [
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "You left 10 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-28T09:27:23.718Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T09:27:23.718Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6979dee9d791a33d9a47f4f9"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "sessionId": {
+    "$oid": "6979dedcd791a33d9a47f4e4"
+  },
+  "module": "reading",
+  "totalQuestions": 0,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 0,
+  "bandScore": 2.5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 0,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Effects of Tourism on Local Communities",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6979dee9d791a33d9a47f4fa"
+      }
+    },
+    {
+      "sectionNumber": 2,
+      "sectionTitle": "The Development of Writing Systems",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6979dee9d791a33d9a47f4fb"
+      }
+    },
+    {
+      "sectionNumber": 3,
+      "sectionTitle": "The Science of Memory",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6979dee9d791a33d9a47f4fc"
+      }
+    }
+  ],
+  "timeTaken": 12,
+  "weakAreas": [],
+  "recommendations": [
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-28T10:03:21.342Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T10:03:21.342Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6979ea16d791a33d9a47fb5b"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "6979e953d791a33d9a47f9dc"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 1,
+  "incorrectAnswers": 2,
+  "unanswered": 7,
+  "bandScore": 3.5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 10,
+  "questionTypeBreakdown": [
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 1,
+      "percentage": 20,
+      "_id": {
+        "$oid": "6979ea16d791a33d9a47fb5c"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6979ea16d791a33d9a47fb5d"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 3,
+      "correctAnswers": 1,
+      "percentage": 33,
+      "_id": {
+        "$oid": "6979ea16d791a33d9a47fb5e"
+      }
+    }
+  ],
+  "timeTaken": 194,
+  "weakAreas": [
+    "true-false-not-given",
+    "multiple-choice"
+  ],
+  "recommendations": [
+    "Practice more true false not given questions to improve your score.",
+    "Practice more multiple choice questions to improve your score.",
+    "You left 7 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-28T10:51:02.361Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T10:51:02.361Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697a29fdff39d79947ae0900"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697a2400ff39d79947ae076e"
+  },
+  "sessionId": {
+    "$oid": "697a276cff39d79947ae0848"
+  },
+  "module": "writing",
+  "totalQuestions": 0,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 2.5,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-28T15:25:31.368Z"
+  },
+  "gradingNotes": "dsfsdfv sd s sd",
+  "percentage": 28,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 656,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-28T15:23:41.009Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T15:25:31.371Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 6,
+    "coherenceCohesion": 2,
+    "lexicalResource": 1.5,
+    "grammaticalRange": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "697a2c64ff39d79947ae0b59"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "697a2400ff39d79947ae076e"
+  },
+  "sessionId": {
+    "$oid": "697a2aecff39d79947ae0af0"
+  },
+  "module": "writing",
+  "totalQuestions": 0,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 7,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-28T15:35:42.786Z"
+  },
+  "gradingNotes": "good",
+  "percentage": 78,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 375,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-28T15:33:56.006Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T15:35:42.789Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 8,
+    "coherenceCohesion": 7,
+    "lexicalResource": 6.5,
+    "grammaticalRange": 5.5
+  }
+},
+{
+  "_id": {
+    "$oid": "697ae857d7c0ee75173d35f5"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "697ae7fbd7c0ee75173d35c3"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 8,
+  "incorrectAnswers": 2,
+  "unanswered": 0,
+  "bandScore": 8,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 80,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 3,
+      "percentage": 60,
+      "_id": {
+        "$oid": "697ae857d7c0ee75173d35f6"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 5,
+      "percentage": 100,
+      "_id": {
+        "$oid": "697ae857d7c0ee75173d35f7"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 10,
+      "correctAnswers": 8,
+      "percentage": 80,
+      "_id": {
+        "$oid": "697ae857d7c0ee75173d35f8"
+      }
+    }
+  ],
+  "timeTaken": 92,
+  "weakAreas": [],
+  "recommendations": [],
+  "createdAt": {
+    "$date": "2026-01-29T04:55:51.492Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T04:55:51.492Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697b063dd7c0ee75173d3c67"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b0038d7c0ee75173d3bac"
+  },
+  "sessionId": {
+    "$oid": "697b0327d7c0ee75173d3bd0"
+  },
+  "module": "listening",
+  "totalQuestions": 3,
+  "correctAnswers": 1,
+  "incorrectAnswers": 2,
+  "unanswered": 0,
+  "bandScore": 5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 33,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 1,
+      "percentage": 100,
+      "_id": {
+        "$oid": "697b063dd7c0ee75173d3c68"
+      }
+    },
+    {
+      "type": "yes-no-not-given",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697b063dd7c0ee75173d3c69"
+      }
+    },
+    {
+      "type": "short-answer",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697b063dd7c0ee75173d3c6a"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "Listening Section No. 1",
+      "questionsAttempted": 3,
+      "correctAnswers": 1,
+      "percentage": 33,
+      "_id": {
+        "$oid": "697b063dd7c0ee75173d3c6b"
+      }
+    }
+  ],
+  "timeTaken": 790,
+  "weakAreas": [
+    "yes-no-not-given",
+    "short-answer"
+  ],
+  "recommendations": [
+    "Practice more yes no not given questions to improve your score.",
+    "Practice more short answer questions to improve your score.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-29T07:03:25.573Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T07:03:25.573Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697b146b7b48510be35828db"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b13a27b48510be35827fc"
+  },
+  "sessionId": {
+    "$oid": "697b14237b48510be35828ca"
+  },
+  "module": "speaking",
+  "totalQuestions": 0,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 5,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-29T11:07:38.579Z"
+  },
+  "gradingNotes": "fahhhhh",
+  "percentage": 56,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 72,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-29T08:03:55.300Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T11:07:38.581Z"
+  },
+  "__v": 0,
+  "speakingScores": {
+    "fluencyCoherence": 5,
+    "lexicalResource": 5,
+    "grammaticalRange": 5,
+    "pronunciation": 5
+  }
+},
+{
+  "_id": {
+    "$oid": "697b2c057b48510be3582c42"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b13a27b48510be35827fc"
+  },
+  "sessionId": {
+    "$oid": "697b24d17b48510be3582a43"
+  },
+  "module": "speaking",
+  "totalQuestions": 0,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 5,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-29T11:07:29.769Z"
+  },
+  "gradingNotes": "fh",
+  "percentage": 56,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 1844,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-29T09:44:37.897Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T11:07:29.773Z"
+  },
+  "__v": 0,
+  "speakingScores": {
+    "fluencyCoherence": 5,
+    "lexicalResource": 5,
+    "grammaticalRange": 5,
+    "pronunciation": 5
+  }
+},
+{
+  "_id": {
+    "$oid": "697b2f327b48510be3582cf9"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b13a27b48510be35827fc"
+  },
+  "sessionId": {
+    "$oid": "697b2f197b48510be3582ce8"
+  },
+  "module": "speaking",
+  "totalQuestions": 0,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 2,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-29T11:07:14.787Z"
+  },
+  "gradingNotes": "dsfdffdfdf",
+  "percentage": 22,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 24,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-01-29T09:58:10.529Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T11:07:14.790Z"
+  },
+  "__v": 0,
+  "speakingScores": {
+    "fluencyCoherence": 0,
+    "lexicalResource": 0.5,
+    "grammaticalRange": 5,
+    "pronunciation": 2
+  }
+},
+{
+  "_id": {
+    "$oid": "697b3b49194cf33b05d29831"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b13a27b48510be35827fc"
+  },
+  "sessionId": {
+    "$oid": "697b335ab04f4be4cb677892"
+  },
+  "module": "speaking",
+  "totalQuestions": 0,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 0,
+  "bandScore": 5,
+  "isManuallyGraded": true,
+  "gradingNotes": "cccc",
+  "percentage": 56,
+  "weakAreas": [],
+  "recommendations": [],
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "createdAt": {
+    "$date": "2026-01-29T10:49:45.208Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-29T11:06:59.808Z"
+  },
+  "__v": 0,
+  "speakingScores": {
+    "fluencyCoherence": 5,
+    "lexicalResource": 5,
+    "grammaticalRange": 5,
+    "pronunciation": 5
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-29T11:06:59.803Z"
+  },
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  }
+},
+{
+  "_id": {
+    "$oid": "697b81d03777f9e5264698b5"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b13a27b48510be35827fc"
+  },
+  "sessionId": {
+    "$oid": "697b7e6a55ecfb6e6a1cad4a"
+  },
+  "module": "speaking",
+  "totalQuestions": 0,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 0,
+  "bandScore": 5,
+  "isManuallyGraded": true,
+  "gradingNotes": "xcccc",
+  "percentage": 56,
+  "weakAreas": [],
+  "recommendations": [],
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "createdAt": {
+    "$date": "2026-01-29T15:50:40.077Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:12:44.667Z"
+  },
+  "__v": 0,
+  "speakingScores": {
+    "fluencyCoherence": 5,
+    "lexicalResource": 5,
+    "grammaticalRange": 5,
+    "pronunciation": 5
+  },
+  "teacherGradedAt": {
+    "$date": "2026-01-30T09:12:44.660Z"
+  },
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c4bbd867a6f3267e10b3a"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "697b0038d7c0ee75173d3bac"
+  },
+  "sessionId": {
+    "$oid": "697c4b98867a6f3267e10b1d"
+  },
+  "module": "listening",
+  "totalQuestions": 3,
+  "correctAnswers": 1,
+  "incorrectAnswers": 2,
+  "unanswered": 0,
+  "bandScore": 5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 33,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 1,
+      "correct": 1,
+      "percentage": 100,
+      "_id": {
+        "$oid": "697c4bbd867a6f3267e10b3b"
+      }
+    },
+    {
+      "type": "yes-no-not-given",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697c4bbd867a6f3267e10b3c"
+      }
+    },
+    {
+      "type": "short-answer",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697c4bbd867a6f3267e10b3d"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "Listening Section No. 1",
+      "questionsAttempted": 3,
+      "correctAnswers": 1,
+      "percentage": 33,
+      "_id": {
+        "$oid": "697c4bbd867a6f3267e10b3e"
+      }
+    }
+  ],
+  "timeTaken": 36,
+  "weakAreas": [
+    "yes-no-not-given",
+    "short-answer"
+  ],
+  "recommendations": [
+    "Practice more yes no not given questions to improve your score.",
+    "Practice more short answer questions to improve your score.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-30T06:12:13.399Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T06:12:13.399Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697c8b770cf49f70c31c221b"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "sessionId": {
+    "$oid": "697c8028105dbb5fc9d2b1f9"
+  },
+  "module": "reading",
+  "totalQuestions": 13,
+  "correctAnswers": 5,
+  "incorrectAnswers": 6,
+  "unanswered": 2,
+  "bandScore": 5.5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 38,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 6,
+      "correct": 3,
+      "percentage": 50,
+      "_id": {
+        "$oid": "697c8b770cf49f70c31c221c"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 7,
+      "correct": 2,
+      "percentage": 29,
+      "_id": {
+        "$oid": "697c8b770cf49f70c31c221d"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Effects of Tourism on Local Communities",
+      "questionsAttempted": 11,
+      "correctAnswers": 5,
+      "percentage": 45,
+      "_id": {
+        "$oid": "697c8b770cf49f70c31c221e"
+      }
+    },
+    {
+      "sectionNumber": 2,
+      "sectionTitle": "The Development of Writing Systems",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697c8b770cf49f70c31c221f"
+      }
+    },
+    {
+      "sectionNumber": 3,
+      "sectionTitle": "The Science of Memory",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697c8b770cf49f70c31c2220"
+      }
+    }
+  ],
+  "timeTaken": 2894,
+  "weakAreas": [
+    "true-false-not-given"
+  ],
+  "recommendations": [
+    "Practice more true false not given questions to improve your score.",
+    "You left 2 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-30T10:44:07.345Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T10:44:07.345Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697c964048b40a9bd85cd596"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "sessionId": {
+    "$oid": "697c9201b3313374ebe768ff"
+  },
+  "module": "reading",
+  "totalQuestions": 14,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 14,
+  "bandScore": 2.5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 6,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697c964048b40a9bd85cd597"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 7,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697c964048b40a9bd85cd598"
+      }
+    },
+    {
+      "type": "matching-headings",
+      "total": 1,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697c964048b40a9bd85cd599"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Effects of Tourism on Local Communities",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697c964048b40a9bd85cd59a"
+      }
+    },
+    {
+      "sectionNumber": 2,
+      "sectionTitle": "The Development of Writing Systems",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697c964048b40a9bd85cd59b"
+      }
+    },
+    {
+      "sectionNumber": 3,
+      "sectionTitle": "The Science of Memory",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697c964048b40a9bd85cd59c"
+      }
+    }
+  ],
+  "timeTaken": 1086,
+  "weakAreas": [
+    "multiple-choice",
+    "true-false-not-given",
+    "matching-headings"
+  ],
+  "recommendations": [
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "Practice more matching headings questions to improve your score.",
+    "You left 14 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-30T11:30:08.201Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T11:30:08.201Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697ddbfefbcfb9a981f60b6b"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "sessionId": {
+    "$oid": "697dd6b9fbcfb9a981f609f9"
+  },
+  "module": "reading",
+  "totalQuestions": 33,
+  "correctAnswers": 3,
+  "incorrectAnswers": 4,
+  "unanswered": 26,
+  "bandScore": 3,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 9,
+  "questionTypeBreakdown": [
+    {
+      "type": "true-false-not-given",
+      "total": 14,
+      "correct": 3,
+      "percentage": 21,
+      "_id": {
+        "$oid": "697ddbfefbcfb9a981f60b6c"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 6,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697ddbfefbcfb9a981f60b6d"
+      }
+    },
+    {
+      "type": "matching-headings",
+      "total": 5,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697ddbfefbcfb9a981f60b6e"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 8,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697ddbfefbcfb9a981f60b6f"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Effects of Tourism on Local Communities",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697ddbfefbcfb9a981f60b70"
+      }
+    },
+    {
+      "sectionNumber": 2,
+      "sectionTitle": "The Development of Writing Systems",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697ddbfefbcfb9a981f60b71"
+      }
+    },
+    {
+      "sectionNumber": 3,
+      "sectionTitle": "The Science of Memory",
+      "questionsAttempted": 7,
+      "correctAnswers": 3,
+      "percentage": 43,
+      "_id": {
+        "$oid": "697ddbfefbcfb9a981f60b72"
+      }
+    }
+  ],
+  "timeTaken": 1349,
+  "weakAreas": [
+    "true-false-not-given",
+    "multiple-choice",
+    "matching-headings",
+    "sentence-completion"
+  ],
+  "recommendations": [
+    "Practice more true false not given questions to improve your score.",
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more matching headings questions to improve your score.",
+    "Practice more sentence completion questions to improve your score.",
+    "You left 26 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-01-31T10:39:58.838Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:39:58.838Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697de1a7fbcfb9a981f60e92"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771d502a918e0335e7012b"
+  },
+  "sessionId": {
+    "$oid": "697de039fbcfb9a981f60c47"
+  },
+  "module": "reading",
+  "totalQuestions": 40,
+  "correctAnswers": 22,
+  "incorrectAnswers": 18,
+  "unanswered": 0,
+  "bandScore": 6.5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 55,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 6,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697de1a7fbcfb9a981f60e93"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 14,
+      "correct": 11,
+      "percentage": 79,
+      "_id": {
+        "$oid": "697de1a7fbcfb9a981f60e94"
+      }
+    },
+    {
+      "type": "matching-headings",
+      "total": 5,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "697de1a7fbcfb9a981f60e95"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 15,
+      "correct": 11,
+      "percentage": 73,
+      "_id": {
+        "$oid": "697de1a7fbcfb9a981f60e96"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Effects of Tourism on Local Communities",
+      "questionsAttempted": 13,
+      "correctAnswers": 4,
+      "percentage": 31,
+      "_id": {
+        "$oid": "697de1a7fbcfb9a981f60e97"
+      }
+    },
+    {
+      "sectionNumber": 2,
+      "sectionTitle": "The Development of Writing Systems",
+      "questionsAttempted": 13,
+      "correctAnswers": 4,
+      "percentage": 31,
+      "_id": {
+        "$oid": "697de1a7fbcfb9a981f60e98"
+      }
+    },
+    {
+      "sectionNumber": 3,
+      "sectionTitle": "The Science of Memory",
+      "questionsAttempted": 14,
+      "correctAnswers": 14,
+      "percentage": 100,
+      "_id": {
+        "$oid": "697de1a7fbcfb9a981f60e99"
+      }
+    }
+  ],
+  "timeTaken": 365,
+  "weakAreas": [
+    "multiple-choice",
+    "matching-headings"
+  ],
+  "recommendations": [
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more matching headings questions to improve your score."
+  ],
+  "createdAt": {
+    "$date": "2026-01-31T11:04:07.042Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T11:04:07.042Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69804ecc9333ed5cfb4501d6"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "69804e379333ed5cfb45019f"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 9,
+  "incorrectAnswers": 1,
+  "unanswered": 0,
+  "bandScore": 9,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 90,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 4,
+      "percentage": 80,
+      "_id": {
+        "$oid": "69804ecc9333ed5cfb4501d7"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 5,
+      "percentage": 100,
+      "_id": {
+        "$oid": "69804ecc9333ed5cfb4501d8"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 10,
+      "correctAnswers": 9,
+      "percentage": 90,
+      "_id": {
+        "$oid": "69804ecc9333ed5cfb4501d9"
+      }
+    }
+  ],
+  "timeTaken": 148,
+  "weakAreas": [],
+  "recommendations": [],
+  "createdAt": {
+    "$date": "2026-02-02T07:14:20.357Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T07:14:20.357Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69819f5835114250994ca900"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69806b037c1102973e1b5e9a"
+  },
+  "sessionId": {
+    "$oid": "69819eca35114250994ca84b"
+  },
+  "module": "reading",
+  "totalQuestions": 40,
+  "correctAnswers": 11,
+  "incorrectAnswers": 29,
+  "unanswered": 0,
+  "bandScore": 4.5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 28,
+  "questionTypeBreakdown": [
+    {
+      "type": "matching-headings",
+      "total": 5,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "69819f5835114250994ca901"
+      }
+    },
+    {
+      "type": "multiple-choice",
+      "total": 8,
+      "correct": 7,
+      "percentage": 88,
+      "_id": {
+        "$oid": "69819f5835114250994ca902"
+      }
+    },
+    {
+      "type": "sentence-completion",
+      "total": 10,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "69819f5835114250994ca903"
+      }
+    },
+    {
+      "type": "matching-information",
+      "total": 6,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "69819f5835114250994ca904"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 6,
+      "correct": 4,
+      "percentage": 67,
+      "_id": {
+        "$oid": "69819f5835114250994ca905"
+      }
+    },
+    {
+      "type": "short-answer",
+      "total": 5,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "69819f5835114250994ca906"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Development of Writing Systems",
+      "questionsAttempted": 13,
+      "correctAnswers": 4,
+      "percentage": 31,
+      "_id": {
+        "$oid": "69819f5835114250994ca907"
+      }
+    },
+    {
+      "sectionNumber": 2,
+      "sectionTitle": "Urban Heat Islands",
+      "questionsAttempted": 12,
+      "correctAnswers": 4,
+      "percentage": 33,
+      "_id": {
+        "$oid": "69819f5835114250994ca908"
+      }
+    },
+    {
+      "sectionNumber": 3,
+      "sectionTitle": "The Science of Sleep",
+      "questionsAttempted": 15,
+      "correctAnswers": 3,
+      "percentage": 20,
+      "_id": {
+        "$oid": "69819f5835114250994ca909"
+      }
+    }
+  ],
+  "timeTaken": 142,
+  "weakAreas": [
+    "matching-headings",
+    "sentence-completion",
+    "matching-information",
+    "short-answer"
+  ],
+  "recommendations": [
+    "Practice more matching headings questions to improve your score.",
+    "Practice more sentence completion questions to improve your score.",
+    "Practice more matching information questions to improve your score.",
+    "Practice more short answer questions to improve your score.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-02-03T07:10:16.750Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T07:10:16.750Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6981a72935114250994cafe2"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6981a4a535114250994caf5b"
+  },
+  "sessionId": {
+    "$oid": "6981a72535114250994cafd3"
+  },
+  "module": "writing",
+  "totalQuestions": 0,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 1,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-02-03T07:44:14.511Z"
+  },
+  "gradingNotes": "poor",
+  "percentage": 11,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 3,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-02-03T07:43:37.528Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T07:44:14.516Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 4,
+    "coherenceCohesion": 0,
+    "lexicalResource": 0,
+    "grammaticalRange": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "6981a9923fd2550c1d6feafa"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6981a4a535114250994caf5b"
+  },
+  "sessionId": {
+    "$oid": "6981a93e3fd2550c1d6feae5"
+  },
+  "module": "writing",
+  "totalQuestions": 1,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 6,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-02-03T07:54:45.530Z"
+  },
+  "gradingNotes": "good but you should improve it.",
+  "percentage": 67,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 83,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-02-03T07:53:54.659Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T07:54:45.536Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 8,
+    "coherenceCohesion": 7.5,
+    "lexicalResource": 4,
+    "grammaticalRange": 4.5
+  }
+},
+{
+  "_id": {
+    "$oid": "6982e1515b436d9fd7cd96af"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6981a4a535114250994caf5b"
+  },
+  "sessionId": {
+    "$oid": "6982e0235b436d9fd7cd926f"
+  },
+  "module": "writing",
+  "totalQuestions": 1,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 3.5,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-02-04T07:06:51.703Z"
+  },
+  "gradingNotes": "sdfsdfs",
+  "percentage": 39,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 302,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-02-04T06:04:01.835Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T07:06:51.706Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 5,
+    "coherenceCohesion": 9,
+    "lexicalResource": 0,
+    "grammaticalRange": 0
+  }
+},
+{
+  "_id": {
+    "$oid": "6982e3175b436d9fd7cd96f6"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "6982e2f95b436d9fd7cd96c4"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 3,
+  "incorrectAnswers": 7,
+  "unanswered": 0,
+  "bandScore": 5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 30,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6982e3175b436d9fd7cd96f7"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 3,
+      "percentage": 60,
+      "_id": {
+        "$oid": "6982e3175b436d9fd7cd96f8"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 10,
+      "correctAnswers": 3,
+      "percentage": 30,
+      "_id": {
+        "$oid": "6982e3175b436d9fd7cd96f9"
+      }
+    }
+  ],
+  "timeTaken": 29,
+  "weakAreas": [
+    "multiple-choice"
+  ],
+  "recommendations": [
+    "Practice more multiple choice questions to improve your score.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-02-04T06:11:35.204Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T06:11:35.204Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6982e3b45b436d9fd7cd9c09"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "6982e39b5b436d9fd7cd9bd7"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 5,
+  "incorrectAnswers": 5,
+  "unanswered": 0,
+  "bandScore": 6,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 50,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 2,
+      "percentage": 40,
+      "_id": {
+        "$oid": "6982e3b45b436d9fd7cd9c0a"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 3,
+      "percentage": 60,
+      "_id": {
+        "$oid": "6982e3b45b436d9fd7cd9c0b"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 10,
+      "correctAnswers": 5,
+      "percentage": 50,
+      "_id": {
+        "$oid": "6982e3b45b436d9fd7cd9c0c"
+      }
+    }
+  ],
+  "timeTaken": 24,
+  "weakAreas": [
+    "multiple-choice"
+  ],
+  "recommendations": [
+    "Practice more multiple choice questions to improve your score."
+  ],
+  "createdAt": {
+    "$date": "2026-02-04T06:14:12.308Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T06:14:12.308Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6982ebe85b436d9fd7cda590"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "6981a4a535114250994caf5b"
+  },
+  "sessionId": {
+    "$oid": "6982ebdd5b436d9fd7cda579"
+  },
+  "module": "writing",
+  "totalQuestions": 1,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 3.5,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-02-04T06:51:36.817Z"
+  },
+  "gradingNotes": "poorffcj",
+  "percentage": 39,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 11,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-02-04T06:49:12.898Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T06:51:36.823Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 7,
+    "coherenceCohesion": 1,
+    "lexicalResource": 5.5,
+    "grammaticalRange": 1
+  }
+},
+{
+  "_id": {
+    "$oid": "6982ef4a5b436d9fd7cdad5f"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "6982ef465b436d9fd7cdad4e"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 0,
+  "incorrectAnswers": 0,
+  "unanswered": 10,
+  "bandScore": 2.5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 0,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6982ef4a5b436d9fd7cdad60"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6982ef4a5b436d9fd7cdad61"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 0,
+      "correctAnswers": 0,
+      "percentage": 0,
+      "_id": {
+        "$oid": "6982ef4a5b436d9fd7cdad62"
+      }
+    }
+  ],
+  "timeTaken": 3,
+  "weakAreas": [
+    "multiple-choice",
+    "true-false-not-given"
+  ],
+  "recommendations": [
+    "Practice more multiple choice questions to improve your score.",
+    "Practice more true false not given questions to improve your score.",
+    "You left 10 question(s) unanswered. Try to manage your time better.",
+    "Focus on building your fundamentals in this module."
+  ],
+  "createdAt": {
+    "$date": "2026-02-04T07:03:38.676Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T07:03:38.676Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6982f3ce5b436d9fd7cdb148"
+  },
+  "userId": {
+    "$oid": "69624f6bc353be9866cec7cb"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "6982f3bc5b436d9fd7cdb116"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 7,
+  "incorrectAnswers": 3,
+  "unanswered": 0,
+  "bandScore": 7.5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 70,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 3,
+      "percentage": 60,
+      "_id": {
+        "$oid": "6982f3ce5b436d9fd7cdb149"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 4,
+      "percentage": 80,
+      "_id": {
+        "$oid": "6982f3ce5b436d9fd7cdb14a"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 10,
+      "correctAnswers": 7,
+      "percentage": 70,
+      "_id": {
+        "$oid": "6982f3ce5b436d9fd7cdb14b"
+      }
+    }
+  ],
+  "timeTaken": 18,
+  "weakAreas": [],
+  "recommendations": [],
+  "createdAt": {
+    "$date": "2026-02-04T07:22:54.771Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T07:22:54.771Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6982f45b5b436d9fd7cdb5b2"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "6982f44b5b436d9fd7cdb580"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 6,
+  "incorrectAnswers": 4,
+  "unanswered": 0,
+  "bandScore": 7,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-02-04T07:59:05.383Z"
+  },
+  "gradingNotes": "jhgfdghjiougybh",
+  "percentage": 78,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 4,
+      "percentage": 80,
+      "_id": {
+        "$oid": "6982f45b5b436d9fd7cdb5b3"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 2,
+      "percentage": 40,
+      "_id": {
+        "$oid": "6982f45b5b436d9fd7cdb5b4"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 10,
+      "correctAnswers": 6,
+      "percentage": 60,
+      "_id": {
+        "$oid": "6982f45b5b436d9fd7cdb5b5"
+      }
+    }
+  ],
+  "timeTaken": 16,
+  "weakAreas": [
+    "true-false-not-given"
+  ],
+  "recommendations": [
+    "Practice more true false not given questions to improve your score."
+  ],
+  "createdAt": {
+    "$date": "2026-02-04T07:25:15.738Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T07:59:05.399Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6982f5115b436d9fd7cdb69c"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "6981a4a535114250994caf5b"
+  },
+  "sessionId": {
+    "$oid": "6982f4ab5b436d9fd7cdb667"
+  },
+  "module": "writing",
+  "totalQuestions": 1,
+  "correctAnswers": null,
+  "incorrectAnswers": null,
+  "unanswered": null,
+  "bandScore": 7,
+  "isManuallyGraded": true,
+  "teacherGradedBy": {
+    "$oid": "6962176e85a932bf633f014a"
+  },
+  "teacherGradedAt": {
+    "$date": "2026-02-04T07:31:49.089Z"
+  },
+  "gradingNotes": "This is good.",
+  "percentage": 78,
+  "questionTypeBreakdown": [],
+  "sectionPerformance": [],
+  "timeTaken": 102,
+  "weakAreas": [],
+  "recommendations": [
+    "Your test is being reviewed by your teacher. Results will be available soon."
+  ],
+  "createdAt": {
+    "$date": "2026-02-04T07:28:17.214Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T07:31:49.091Z"
+  },
+  "__v": 0,
+  "writingScores": {
+    "taskAchievement": 9,
+    "coherenceCohesion": 6.5,
+    "lexicalResource": 5.5,
+    "grammaticalRange": 6
+  }
+},
+{
+  "_id": {
+    "$oid": "69830a3ca951f79df36142e7"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "69830a2fa951f79df36142b5"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 5,
+  "incorrectAnswers": 5,
+  "unanswered": 0,
+  "bandScore": 6,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 50,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 3,
+      "percentage": 60,
+      "_id": {
+        "$oid": "69830a3ca951f79df36142e8"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 2,
+      "percentage": 40,
+      "_id": {
+        "$oid": "69830a3ca951f79df36142e9"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 10,
+      "correctAnswers": 5,
+      "percentage": 50,
+      "_id": {
+        "$oid": "69830a3ca951f79df36142ea"
+      }
+    }
+  ],
+  "timeTaken": 12,
+  "weakAreas": [
+    "true-false-not-given"
+  ],
+  "recommendations": [
+    "Practice more true false not given questions to improve your score."
+  ],
+  "createdAt": {
+    "$date": "2026-02-04T08:58:36.410Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T08:58:36.410Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69830a89a951f79df36143f3"
+  },
+  "userId": {
+    "$oid": "696f5ba2be77746d01c9c501"
+  },
+  "testId": {
+    "$oid": "69771ca82a918e0335e7011c"
+  },
+  "sessionId": {
+    "$oid": "69830a64a951f79df36143c1"
+  },
+  "module": "reading",
+  "totalQuestions": 10,
+  "correctAnswers": 7,
+  "incorrectAnswers": 3,
+  "unanswered": 0,
+  "bandScore": 7.5,
+  "isManuallyGraded": false,
+  "teacherGradedBy": null,
+  "teacherGradedAt": null,
+  "gradingNotes": null,
+  "percentage": 70,
+  "questionTypeBreakdown": [
+    {
+      "type": "multiple-choice",
+      "total": 5,
+      "correct": 5,
+      "percentage": 100,
+      "_id": {
+        "$oid": "69830a89a951f79df36143f4"
+      }
+    },
+    {
+      "type": "true-false-not-given",
+      "total": 5,
+      "correct": 2,
+      "percentage": 40,
+      "_id": {
+        "$oid": "69830a89a951f79df36143f5"
+      }
+    }
+  ],
+  "sectionPerformance": [
+    {
+      "sectionNumber": 1,
+      "sectionTitle": "The Rise of Remote Work",
+      "questionsAttempted": 10,
+      "correctAnswers": 7,
+      "percentage": 70,
+      "_id": {
+        "$oid": "69830a89a951f79df36143f6"
+      }
+    }
+  ],
+  "timeTaken": 37,
+  "weakAreas": [
+    "true-false-not-given"
+  ],
+  "recommendations": [
+    "Practice more true false not given questions to improve your score."
+  ],
+  "createdAt": {
+    "$date": "2026-02-04T08:59:53.856Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T08:59:53.856Z"
+  },
+  "__v": 0
+}]
