@@ -2,8 +2,8 @@
 
 A full-featured Learning Management System designed specifically for IELTS preparation. This platform bridges the gap between students and educators by providing a realistic testing environment and streamlined grading workflows.
 
-![IELTS LMS Dashboard](https://via.placeholder.com/800x400?text=IELTS+LMS+Preview)
-_(Replace with actual screenshot of your dashboard)_
+<img width="1365" height="594" alt="image" src="https://github.com/user-attachments/assets/27d9e9da-4a10-4036-9761-ecb50e7ba84e" />
+
 
 ## 🚀 Key Features
 
