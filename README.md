@@ -3,6 +3,10 @@
 A full-featured Learning Management System designed specifically for IELTS preparation. This platform bridges the gap between students and educators by providing a realistic testing environment and streamlined grading workflows.
 
 <img width="1365" height="594" alt="image" src="https://github.com/user-attachments/assets/27d9e9da-4a10-4036-9761-ecb50e7ba84e" />
+<img width="1365" height="602" alt="image" src="https://github.com/user-attachments/assets/95c6bd40-4f7d-490e-9805-5a11d040e601" />
+<img width="1365" height="601" alt="image" src="https://github.com/user-attachments/assets/eccfd066-df9f-414d-8a93-3e0575c096a8" />
+
+
 
 
 ## 🚀 Key Features
