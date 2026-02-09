@@ -1,6 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const AudioPlayer = ({ audioUrl, title, onEnded }) => {
+const AudioPlayer = ({
+  audioUrl,
+  title,
+  onEnded,
+  playOnce = false,
+  disableSeeking = false,
+  initialPlayed = false, // ✅ Added prop
+}) => {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -8,6 +15,7 @@ const AudioPlayer = ({ audioUrl, title, onEnded }) => {
   const [volume, setVolume] = useState(1);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasPlayedOnce, setHasPlayedOnce] = useState(initialPlayed); // ✅ Initialize with prop
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -23,6 +31,10 @@ const AudioPlayer = ({ audioUrl, title, onEnded }) => {
     };
     const handleEnded = () => {
       setIsPlaying(false);
+      if (playOnce) {
+        setHasPlayedOnce(true); // ✅ Mark as played
+      }
+      if (onEnded) onEnded();
     };
     const handleError = (error) => {
       console.error("Audio Loading error: ", error);
@@ -35,23 +47,28 @@ const AudioPlayer = ({ audioUrl, title, onEnded }) => {
     audio.addEventListener("error", handleError);
 
     return () => {
-      audio.addEventListener("loadedmetadata", handleLoadedMetadata);
-      audio.addEventListener("timeupdate", handleTimeUpdate);
-      audio.addEventListener("ended", handleEnded);
-      audio.addEventListener("error", handleError);
+      audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      audio.removeEventListener("timeupdate", handleTimeUpdate);
+      audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener("error", handleError);
     };
-  }, [onEnded]);
+  }, [onEnded, playOnce]);
+
   const togglePlayPause = () => {
+    if (playOnce && hasPlayedOnce) return; // ✅ Prevent replay
+
     const audio = audioRef.current;
     if (!isPlaying) {
-      audio.pause();
-    } else {
       audio.play();
+    } else {
+      audio.pause();
     }
     setIsPlaying(!isPlaying);
   };
 
   const handleSeek = (e) => {
+    if (disableSeeking) return; // ✅ Prevent seeking
+
     const audio = audioRef.current;
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -87,7 +104,7 @@ const AudioPlayer = ({ audioUrl, title, onEnded }) => {
   }
 
   return (
-    <div className="bg-linear-to-r from-blue-50 to-indigo-50 rounded-lg shadow-md p-6 border border-blue-200">
+    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg shadow-md p-6 border border-blue-200">
       {/* hidden audio element */}
       <audio ref={audioRef} src={audioUrl} preload="metadata" />
       {/* title */}
@@ -105,11 +122,17 @@ const AudioPlayer = ({ audioUrl, title, onEnded }) => {
         {/* Play/Pause Button */}
         <button
           onClick={togglePlayPause}
-          disabled={isLoading}
-          className="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={isLoading || (playOnce && hasPlayedOnce)}
+          className={`w-14 h-14 rounded-full flex items-center justify-center transition shadow-lg ${
+            isLoading || (playOnce && hasPlayedOnce)
+              ? "bg-gray-400 cursor-not-allowed opacity-50"
+              : "bg-blue-600 hover:bg-blue-700 text-white"
+          }`}
         >
           {isLoading ? (
             <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+          ) : playOnce && hasPlayedOnce ? (
+            <span className="text-xs font-bold">Ended</span>
           ) : isPlaying ? (
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
               <path d="M5 4h3v12H5V4zm7 0h3v12h-3V4z" />
@@ -128,20 +151,28 @@ const AudioPlayer = ({ audioUrl, title, onEnded }) => {
         {/* Progress Bar */}
         <div className="flex-1">
           <div
-            className="h-3 bg-gray-300 rounded-full cursor-pointer relative overflow-hidden"
-            onClick={handleSeek}
+            className={`h-3 bg-gray-300 rounded-full relative overflow-hidden ${
+              disableSeeking ? "cursor-not-allowed" : "cursor-pointer"
+            }`}
+            onClick={disableSeeking ? undefined : handleSeek}
           >
             {/* Progress fill */}
             <div
-              className="h-full bg-linear-to-r from-blue-500 to-indigo-600 rounded-full transition-all"
+              className={`h-full rounded-full transition-all ${
+                disableSeeking
+                  ? "bg-gray-500"
+                  : "bg-gradient-to-r from-blue-500 to-indigo-600"
+              }`}
               style={{ width: `${progressPercentage}%` }}
             />
 
-            {/* Playhead */}
-            <div
-              className="absolute top-0 w-1 h-full bg-blue-700"
-              style={{ left: `${progressPercentage}%` }}
-            />
+            {/* Playhead (Hidden if seeking disabled) */}
+            {!disableSeeking && (
+              <div
+                className="absolute top-0 w-1 h-full bg-blue-700"
+                style={{ left: `${progressPercentage}%` }}
+              />
+            )}
           </div>
 
           {/* Time Display */}
@@ -166,7 +197,9 @@ const AudioPlayer = ({ audioUrl, title, onEnded }) => {
             onChange={handleVolumeChange}
             className="flex-1 h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer"
             style={{
-              background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${volume * 100}%, #d1d5db ${volume * 100}%, #d1d5db 100%)`,
+              background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${
+                volume * 100
+              }%, #d1d5db ${volume * 100}%, #d1d5db 100%)`,
             }}
           />
           <span className="text-sm text-gray-600 w-10 text-right">

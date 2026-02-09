@@ -103,6 +103,12 @@ const sessionSchema = new mongoose.Schema(
       default: false,
     },
 
+    // Track which sections' audio has been played (for Play Once feature)
+    audioPlayedSections: {
+      type: [String], // Array of Section IDs
+      default: [],
+    },
+
     // Scoring (populated after submission)
     score: {
       type: Number,
@@ -119,7 +125,7 @@ const sessionSchema = new mongoose.Schema(
     moduleScores: {
       reading: Number,
       listening: Number,
-      writing: Number
+      writing: Number,
       // speaking: Number,
     },
   },

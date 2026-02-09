@@ -41,6 +41,9 @@ const questionSchema = new mongoose.Schema(
         "diagram-labeling",
         "short-answer",
         "writing-task",
+        "form-completion",
+        "multiple-choice-multi",
+        "map-labeling",
       ],
     },
 
@@ -69,6 +72,16 @@ const questionSchema = new mongoose.Schema(
       type: String,
       trim: true,
       // Contains criteria for manual grading
+    },
+
+    // Constraints for Listening/Reading
+    wordLimit: {
+      type: Number,
+      default: null,
+    },
+    allowNumber: {
+      type: Boolean,
+      default: true,
     },
 
     // For matching questions (Headings, Information, Features)

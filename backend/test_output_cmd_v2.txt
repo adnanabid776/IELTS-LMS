@@ -1,0 +1,14 @@
+
+> backend@1.0.0 test
+> jest tests/result.test.js
+
+PASS tests/result.test.js (10.804 s)
+  Result Controller - submitTest
+    √ should calculate correct score for Map Labeling question (48 ms)
+    √ should calculate correct score for Multiple Choice Multi (10 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        11.262 s, estimated 16 s
+Ran all test suites matching tests/result.test.js.

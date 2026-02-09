@@ -13,6 +13,8 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
     alternativeAnswers: [],
     points: 1,
     imageUrl: "",
+    wordLimit: "", // ✅ ADDED
+    allowNumber: true, // ✅ ADDED
 
     explanation: "",
     items: [], // For matching questions
@@ -21,7 +23,8 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
   const [errors, setErrors] = useState({});
 
   const questionTypes = [
-    { value: "multiple-choice", label: "Multiple Choice", needsOptions: true },
+    { value: "multiple-choice", label: "Multiple Choice (Single)", needsOptions: true },
+    { value: "multiple-choice-multi", label: "Multiple Choice (Multi-Select)", needsOptions: true },
     {
       value: "true-false-not-given",
       label: "True/False/Not Given",
@@ -140,7 +143,8 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
   React.useEffect(() => {
     if (
       (formData.questionType === "matching-headings" ||
-        formData.questionType === "matching-information") &&
+        formData.questionType === "matching-information" ||
+        formData.questionType === "map-labeling") && // ✅ ADDED
       formData.items.length === 0
     ) {
       setFormData((prev) => ({
@@ -202,7 +206,8 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
 
     if (
       formData.questionType === "matching-headings" ||
-      formData.questionType === "matching-information"
+      formData.questionType === "matching-information" ||
+      formData.questionType === "map-labeling"
     ) {
       const validItems = formData.items.filter(
         (item) => item.text.trim() && item.correctAnswer,
@@ -241,7 +246,8 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
       // Handle Matching Headings/Information specific data structure
       if (
         formData.questionType === "matching-headings" ||
-        formData.questionType === "matching-information"
+        formData.questionType === "matching-information" ||
+        formData.questionType === "map-labeling"
       ) {
         submitData.items = formData.items.filter((i) => i.text.trim());
         // Allow empty correctAnswer at root level if backend requires it, or set a dummy one
@@ -369,6 +375,59 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
               </select>
             </div>
 
+            {/* Validation & Constraints (Word Limit, etc.) */}
+            {!currentType?.needsOptions && !currentType?.isSubjective && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-3 rounded-lg border">
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">
+                    Word Limit (Optional)
+                  </label>
+                  <input
+                    type="number"
+                    name="wordLimit"
+                    value={formData.wordLimit}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded-lg"
+                    placeholder="e.g. 2 (No more than 2 words)"
+                  />
+                </div>
+                <div className="flex items-center pt-8">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      name="allowNumber"
+                      checked={formData.allowNumber}
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          allowNumber: e.target.checked,
+                        }))
+                      }
+                      className="w-5 h-5 text-blue-600"
+                    />
+                    <span className="text-sm font-bold text-gray-700">
+                      Allow Numbers?
+                    </span>
+                  </label>
+                </div>
+              </div>
+            )}
+
+            {/* Image URL (For Map Labeling or Visual Questions) */}
+            <div>
+              <label className="block text-sm font-bold text-gray-700 mb-2">
+                Image URL (Optional - for Maps/Diagrams)
+              </label>
+              <input
+                type="url"
+                name="imageUrl"
+                value={formData.imageUrl}
+                onChange={handleChange}
+                className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="https://example.com/map.png"
+              />
+            </div>
+
             {/* Question Text */}
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-2">
@@ -396,7 +455,8 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
             {/* Options (for multiple choice, matching, etc.) */}
             {currentType?.needsOptions &&
               formData.questionType !== "matching-headings" &&
-              formData.questionType !== "matching-information" && (
+              formData.questionType !== "matching-information" &&
+              formData.questionType !== "map-labeling" && (
                 <div className="bg-blue-50 p-4 rounded-lg border-2 border-blue-200">
                   <label className="block text-sm font-bold text-gray-700 mb-3">
                     Options <span className="text-red-500">*</span>
@@ -443,9 +503,10 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
                 </div>
               )}
 
-            {/* MATCHING HEADINGS / INFORMATION SPECIFIC UI */}
+            {/* MATCHING HEADINGS / INFORMATION / MAP LABELING SPECIFIC UI */}
             {(formData.questionType === "matching-headings" ||
-              formData.questionType === "matching-information") && (
+              formData.questionType === "matching-information" ||
+              formData.questionType === "map-labeling") && ( // ✅ ADDED
               <div className="space-y-6">
                 {/* Options List */}
                 <div className="bg-white p-4 rounded-lg border-2 border-gray-200">
@@ -512,7 +573,9 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
                   <label className="block text-sm font-bold text-gray-700 mb-3">
                     {formData.questionType === "matching-headings"
                       ? "Questions (Paragraphs) & Correct Headings"
-                      : "Questions (Statements) & Correct Paragraphs"}{" "}
+                      : formData.questionType === "map-labeling"
+                        ? "Labels on Map & Correct Option"
+                        : "Questions (Statements) & Correct Paragraphs"}{" "}
                     <span className="text-red-500">*</span>
                   </label>
                   <div className="space-y-4">
@@ -598,6 +661,7 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
             {/* Correct Answer (Hidden for Matching types and Subjective types) */}
             {formData.questionType !== "matching-headings" &&
               formData.questionType !== "matching-information" &&
+              formData.questionType !== "map-labeling" && // ✅ ADDED
               !currentType?.isSubjective && (
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2">

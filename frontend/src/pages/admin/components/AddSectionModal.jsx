@@ -14,6 +14,10 @@ const AddSectionModal = ({
     title: "",
     passageText: "",
     audioUrl: "",
+    audioScript: "", // ✅ ADDED
+    playOnceOnly: false, // ✅ ADDED
+    disableReplay: true, // ✅ ADDED
+    lockNavigationDuringAudio: false, // ✅ ADDED
     instructions: "",
     questionRange: "",
     duration: 20,
@@ -252,6 +256,87 @@ const AddSectionModal = ({
                 For Listening module, provide the audio file URL
               </p>
             </div>
+
+            {/* Listening Fields */}
+            {testModule === "listening" && (
+              <div className="border-t-2 border-gray-200 pt-4 mt-4">
+                <h4 className="text-lg font-bold text-gray-800 mb-4">
+                  🎧 Listening Settings
+                </h4>
+
+                {/* Audio Script */}
+                <div className="mb-4">
+                  <label className="block text-sm font-bold text-gray-700 mb-2">
+                    Audio Script (Hidden from students)
+                  </label>
+                  <textarea
+                    name="audioScript"
+                    value={formData.audioScript}
+                    onChange={handleChange}
+                    rows="4"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Paste the transcript here..."
+                  />
+                </div>
+
+                {/* Toggles */}
+                <div className="space-y-3">
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      name="playOnceOnly"
+                      checked={formData.playOnceOnly}
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          playOnceOnly: e.target.checked,
+                        }))
+                      }
+                      className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                    />
+                    <span className="text-gray-700 font-medium">
+                      Play Once Only
+                    </span>
+                  </label>
+
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      name="disableReplay"
+                      checked={formData.disableReplay}
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          disableReplay: e.target.checked,
+                        }))
+                      }
+                      className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                    />
+                    <span className="text-gray-700 font-medium">
+                      Disable Replay (Hide seek bar)
+                    </span>
+                  </label>
+
+                  <label className="flex items-center gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      name="lockNavigationDuringAudio"
+                      checked={formData.lockNavigationDuringAudio}
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          lockNavigationDuringAudio: e.target.checked,
+                        }))
+                      }
+                      className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
+                    />
+                    <span className="text-gray-700 font-medium">
+                      Lock Navigation During Audio
+                    </span>
+                  </label>
+                </div>
+              </div>
+            )}
 
             {/* Writing Fields */}
             {testModule === "writing" && (

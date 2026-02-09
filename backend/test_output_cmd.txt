@@ -1,0 +1,50 @@
+
+> backend@1.0.0 test
+> jest tests/result.test.js
+
+  console.error
+    Submit test error: TypeError: Cannot read properties of undefined (reading 'toString')
+        at toString (D:\ielts-lms\backend\controllers\resultController.js:204:56)
+        at Array.forEach (<anonymous>)
+        at Object.forEach [as submitTest] (D:\ielts-lms\backend\controllers\resultController.js:203:23)
+        at Object.<anonymous> (D:\ielts-lms\backend\tests\result.test.js:74:5)
+
+    [0m [90m 437 |[39m     })[33m;[39m
+     [90m 438 |[39m   } [36mcatch[39m (error) {
+    [31m[1m>[22m[39m[90m 439 |[39m     console[33m.[39merror([32m"Submit test error:"[39m[33m,[39m error)[33m;[39m
+     [90m     |[39m             [31m[1m^[22m[39m
+     [90m 440 |[39m     res[33m.[39mstatus([35m500[39m)[33m.[39mjson({ error[33m:[39m [32m"Server error"[39m })[33m;[39m
+     [90m 441 |[39m   }
+     [90m 442 |[39m }[33m;[39m[0m
+
+      at Object.error [as submitTest] (controllers/resultController.js:439:13)
+      at Object.<anonymous> (tests/result.test.js:74:5)
+
+FAIL tests/result.test.js (5.771 s)
+  Result Controller - submitTest
+    × should calculate correct score for Map Labeling question (237 ms)
+    √ should calculate correct score for Multiple Choice Multi (7 ms)
+
+  ● Result Controller - submitTest › should calculate correct score for Map Labeling question
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    Expected: ObjectContaining {"correctAnswers": 1, "percentage": 50, "totalQuestions": 2}
+
+    Number of calls: 0
+
+    [0m [90m 75 |[39m
+     [90m 76 |[39m     [90m// 5. Assertions[39m
+    [31m[1m>[22m[39m[90m 77 |[39m     expect([33mResult[39m[33m.[39mcreate)[33m.[39mtoHaveBeenCalledWith(
+     [90m    |[39m                           [31m[1m^[22m[39m
+     [90m 78 |[39m       expect[33m.[39mobjectContaining({
+     [90m 79 |[39m         correctAnswers[33m:[39m [35m1[39m[33m,[39m
+     [90m 80 |[39m         totalQuestions[33m:[39m [35m2[39m[33m,[39m [90m// Important: checked total calculation[39m[0m
+
+      at Object.toHaveBeenCalledWith (tests/result.test.js:77:27)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 passed, 2 total
+Snapshots:   0 total
+Time:        6.218 s, estimated 11 s
+Ran all test suites matching tests/result.test.js.

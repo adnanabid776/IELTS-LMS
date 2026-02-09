@@ -34,6 +34,24 @@ const sectionSchema = new mongoose.Schema(
       trim: true,
     },
 
+    // Audio configuration for Listening
+    audioScript: {
+      type: String,
+      select: false, // Hidden by default from students
+    },
+    playOnceOnly: {
+      type: Boolean,
+      default: false,
+    },
+    disableReplay: {
+      type: Boolean,
+      default: true,
+    },
+    lockNavigationDuringAudio: {
+      type: Boolean,
+      default: false,
+    },
+
     // Section instructions
     instructions: {
       type: String,
@@ -77,7 +95,7 @@ const sectionSchema = new mongoose.Schema(
       bulletPoints: [String],
       preparationTime: Number, // seconds (usually 60)
       speakingTime: Number, // seconds (usually 120)
-    }
+    },
     // speakingPartNumber: {
     //   type: Number,
     //   enum: [1, 2, 3],

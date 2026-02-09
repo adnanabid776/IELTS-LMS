@@ -93,6 +93,54 @@ const calculateBandScore = (correctAnswers, totalQuestions, module) => {
 // ==========================================
 // SUBMIT TEST AND CALCULATE RESULT
 // ==========================================
+// Helper to calculate points for a question
+const calculatePoints = (userAnswer, question) => {
+  // 1. Composite Types (Map Labeling, Matching)
+  if (
+    question.questionType === "map-labeling" ||
+    question.questionType === "matching-headings" ||
+    question.questionType === "matching-information"
+  ) {
+    const items = question.items || [];
+    let scored = 0;
+    const total = items.length; // Each item counts as one question/point
+
+    if (!userAnswer || typeof userAnswer !== "object") {
+      return { scored: 0, total };
+    }
+
+    items.forEach((item) => {
+      // userAnswer is expected to be { "A": "Option X", "B": "Option Y" }
+      const userVal = userAnswer[item.label];
+      if (isAnswerCorrect(userVal, item.correctAnswer)) {
+        scored++;
+      }
+    });
+
+    return { scored, total };
+  }
+
+  if (question.questionType === "multiple-choice-multi") {
+    const isCorrect = isAnswerCorrect(
+      userAnswer,
+      question.correctAnswer,
+      question.alternativeAnswers,
+    );
+    return { scored: isCorrect ? 1 : 0, total: 1 };
+  }
+
+  // 3. Standard Types
+  const isCorrect = isAnswerCorrect(
+    userAnswer,
+    question.correctAnswer,
+    question.alternativeAnswers,
+  );
+  return { scored: isCorrect ? 1 : 0, total: 1 };
+};
+
+// ==========================================
+// SUBMIT TEST AND CALCULATE RESULT
+// ==========================================
 exports.submitTest = async (req, res) => {
   try {
     const { sessionId } = req.body;
@@ -139,11 +187,11 @@ exports.submitTest = async (req, res) => {
     let correctAnswers = needsManualGrading ? null : 0;
     let incorrectAnswers = needsManualGrading ? null : 0;
     let unanswered = needsManualGrading ? null : 0;
+    let totalQuestionsCalc = 0; // Calculated based on sub-items
 
     const questionTypeBreakdown = {};
     const sectionPerformance = [];
 
-    // Create a map of questions for faster lookup
     // Create a map of questions for faster lookup
     const questionMap = {};
     allQuestions.forEach((q) => {
@@ -157,20 +205,20 @@ exports.submitTest = async (req, res) => {
 
         if (!question) return;
 
-        // Check if answer is correct using our smart matching function
-        const isCorrect = isAnswerCorrect(
-          answer.userAnswer,
-          question.correctAnswer,
-          question.alternativeAnswers,
-        );
+        // Calculate points
+        const { scored, total } = calculatePoints(answer.userAnswer, question);
 
-        if (isCorrect) {
-          correctAnswers++;
-        } else if (answer.userAnswer) {
-          incorrectAnswers++;
-        } else {
-          unanswered++;
-        }
+        // Update Totals
+        // Note: totalQuestionsCalc will be summed from ALL questions later,
+        // but for covered questions we track here?
+        // Better to iterate ALL questions to get accurate Total.
+        // Here we just track correct/incorrect.
+
+        correctAnswers += scored;
+
+        // Incorrect logic is tricky with partial points.
+        // Let's say: incorrect = total - scored.
+        incorrectAnswers += total - scored;
 
         // Track by question type
         if (!questionTypeBreakdown[question.questionType]) {
@@ -180,34 +228,63 @@ exports.submitTest = async (req, res) => {
             correct: 0,
           };
         }
-        questionTypeBreakdown[question.questionType].total++;
-        if (isCorrect) {
-          questionTypeBreakdown[question.questionType].correct++;
-        }
+        questionTypeBreakdown[question.questionType].total += total;
+        questionTypeBreakdown[question.questionType].correct += scored;
       });
 
-      // Count unanswered questions
-      const answeredQuestionIds = new Set(
-        session.answers.map((a) => a.questionId.toString()),
-      );
-      allQuestions.forEach((q) => {
-        if (!answeredQuestionIds.has(q._id.toString())) {
-          unanswered++;
+      // Handle Unanswered & Calculate Total Questions accurately
+      // Iterate over ALL questions to ensure full coverage
+      correctAnswers = 0;
+      incorrectAnswers = 0;
+      unanswered = 0;
+      totalQuestionsCalc = 0;
 
-          // Add to question type breakdown
-          if (!questionTypeBreakdown[q.questionType]) {
-            questionTypeBreakdown[q.questionType] = {
-              type: q.questionType,
-              total: 0,
-              correct: 0,
-            };
-          }
-          questionTypeBreakdown[q.questionType].total++;
+      // Reset breakdown
+      for (const key in questionTypeBreakdown)
+        delete questionTypeBreakdown[key];
+
+      allQuestions.forEach((q) => {
+        const answerEntry = session.answers.find(
+          (a) => a.questionId.toString() === q._id.toString(),
+        );
+        const userAnswer = answerEntry ? answerEntry.userAnswer : null;
+
+        const { scored, total } = calculatePoints(userAnswer, q);
+
+        totalQuestionsCalc += total;
+        correctAnswers += scored;
+
+        // Determine if unanswered
+        // Partial answer (some map items filled) is treated as attempted.
+        // Totally empty userAnswer is unanswered.
+        const isAttempted =
+          userAnswer &&
+          ((typeof userAnswer === "string" && userAnswer.trim()) ||
+            (Array.isArray(userAnswer) && userAnswer.length > 0) ||
+            (typeof userAnswer === "object" &&
+              Object.keys(userAnswer).length > 0));
+
+        if (!isAttempted) {
+          unanswered += total; // Count all potential points as unanswered
+        } else {
+          incorrectAnswers += total - scored;
         }
+
+        // Breakdown
+        if (!questionTypeBreakdown[q.questionType]) {
+          questionTypeBreakdown[q.questionType] = {
+            type: q.questionType,
+            total: 0,
+            correct: 0,
+          };
+        }
+        questionTypeBreakdown[q.questionType].total += total;
+        questionTypeBreakdown[q.questionType].correct += scored;
       });
     } else {
       // MANUAL GRADING: Just record that answers were submitted
       console.log(`Test requires manual grading (module: ${module})`);
+      totalQuestionsCalc = allQuestions.length; // Fallback
     }
 
     // Calculate percentages for question types
@@ -226,42 +303,34 @@ exports.submitTest = async (req, res) => {
       );
 
       let sectionCorrect = 0;
-      let sectionAttempted = 0;
+      let sectionTotal = 0;
 
       sectionQuestions.forEach((q) => {
         const answer = session.answers.find(
           (a) => a.questionId.toString() === q._id.toString(),
         );
-
-        if (answer && answer.userAnswer) {
-          sectionAttempted++;
-          if (
-            isAnswerCorrect(
-              answer.userAnswer,
-              q.correctAnswer,
-              q.alternativeAnswers,
-            )
-          ) {
-            sectionCorrect++;
-          }
-        }
+        const { scored, total } = calculatePoints(
+          answer ? answer.userAnswer : null,
+          q,
+        );
+        sectionCorrect += scored;
+        sectionTotal += total;
       });
 
       sectionPerformance.push({
         sectionNumber: section.sectionNumber,
         sectionTitle: section.title,
-        questionsAttempted: sectionAttempted,
+        questionsAttempted: sectionTotal, // Assuming all "available" points
         correctAnswers: sectionCorrect,
         percentage:
-          sectionAttempted > 0
-            ? Math.round((sectionCorrect / sectionAttempted) * 100)
+          sectionTotal > 0
+            ? Math.round((sectionCorrect / sectionTotal) * 100)
             : 0,
       });
     }
 
     // Calculate band score
-    // Calculate band score (only for auto-graded modules)
-    const totalQuestions = allQuestions.length;
+    const totalQuestions = totalQuestionsCalc; // Use calculated total
     let percentage, bandScore;
 
     if (!needsManualGrading) {

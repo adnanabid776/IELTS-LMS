@@ -213,7 +213,6 @@ exports.saveAnswer = async (req, res) => {
 // SAVE SPEAKING ANSWER
 // ==========================================
 
-
 exports.saveSpeakingAnswer = async (req, res) => {
   try {
     const { sessionId, sectionId, audioUrl } = req.body;
@@ -542,6 +541,45 @@ exports.trackTabSwitch = async (req, res) => {
     });
   } catch (error) {
     console.error("Track tab switch error:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+// ==========================================
+// MARK AUDIO PLAYED
+// ==========================================
+exports.markAudioPlayed = async (req, res) => {
+  try {
+    const { sessionId, sectionId } = req.body;
+    const userId = req.user.userId;
+
+    const session = await Session.findById(sessionId);
+
+    if (!session) {
+      return res.status(404).json({ error: "Session not found" });
+    }
+
+    if (session.userId.toString() !== userId) {
+      return res.status(403).json({ error: "Unauthorized" });
+    }
+
+    // Add sectionId to audioPlayedSections if not already present
+    // Ensure array exists (schema default should handle this but safety check)
+    if (!session.audioPlayedSections) {
+      session.audioPlayedSections = [];
+    }
+
+    if (!session.audioPlayedSections.includes(sectionId)) {
+      session.audioPlayedSections.push(sectionId);
+      await session.save();
+    }
+
+    res.json({
+      message: "Audio marked as played",
+      audioPlayedSections: session.audioPlayedSections,
+    });
+  } catch (error) {
+    console.error("Mark audio played error:", error);
     res.status(500).json({ error: "Server error" });
   }
 };

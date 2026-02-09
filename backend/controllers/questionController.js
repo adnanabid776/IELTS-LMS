@@ -16,7 +16,9 @@ exports.createQuestion = async (req, res) => {
       points,
       imageUrl,
       explanation,
-      items, // ✅ ADDED
+      items,
+      wordLimit,
+      allowNumber,
     } = req.body;
 
     // Validate required fields
@@ -60,7 +62,9 @@ exports.createQuestion = async (req, res) => {
       points: points || 1,
       imageUrl,
       explanation,
-      items, // ✅ ADDED
+      items,
+      wordLimit,
+      allowNumber,
     });
 
     //update the section's total questions
@@ -149,7 +153,9 @@ exports.updateQuestion = async (req, res) => {
       points,
       imageUrl,
       explanation,
-      items, // ✅ ADDED
+      items,
+      wordLimit,
+      allowNumber,
     } = req.body;
 
     const question = await Question.findByIdAndUpdate(
@@ -163,7 +169,9 @@ exports.updateQuestion = async (req, res) => {
         points,
         imageUrl,
         explanation,
-        items, // ✅ ADDED
+        items,
+        wordLimit,
+        allowNumber,
       },
       { new: true, runValidators: true },
     );
