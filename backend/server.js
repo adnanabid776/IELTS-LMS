@@ -11,10 +11,13 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => console.log("✅ MongoDB Connected"))
-  .catch((err) => console.error("❌ MongoDB Error:", err));
+// MongoDB Connection
+if (process.env.NODE_ENV !== "test") {
+  mongoose
+    .connect(process.env.MONGODB_URI)
+    .then(() => console.log("✅ MongoDB Connected"))
+    .catch((err) => console.error("❌ MongoDB Error:", err));
+}
 
 // Routes
 const authRoutes = require("./routes/authRoutes");
@@ -48,10 +51,16 @@ app.get("/api/test", (req, res) => {
 app.use(errorHandler);
 
 // Start Server
+// Start Server
 const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+
+if (require.main === module) {
+  const server = app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
+}
+
+module.exports = app;
 
 // ==========================================
 // CRASH PREVENTION (Global Error Handlers)

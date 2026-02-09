@@ -751,7 +751,7 @@ exports.getStudentAnalytics = async (req, res) => {
     })
       .sort({ createdAt: -1 }) // Latest first for line chart
       .select("bandScore module createdAt")
-      .limit(10); // Limit to latest 10 tests
+      .limit(15); // Limit to latest 10 tests
 
     const trendData = trendResults.reverse().map((r) => {
       const date = new Date(r.createdAt);
