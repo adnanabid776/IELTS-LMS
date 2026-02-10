@@ -226,43 +226,54 @@ exports.deleteQuestion = async (req, res) => {
   }
 };
 
-// Bulk create questions
-// exports.bulkCreateQuestions = async (req, res) => {
-//   try {
-//     const { questions } = req.body;  // Array of question objects
+exports.bulkDeleteQuestions = async (req, res) => {
+  try {
+    const { questionIds } = req.body;
 
-//     if (!Array.isArray(questions) || questions.length === 0) {
-//       return res.status(400).json({ error: 'Questions array is required' });
-//     }
+    if (!Array.isArray(questionIds) || questionIds.length === 0) {
+      return res
+        .status(400)
+        .json({ error: "No questions selected for deletion" });
+    }
 
-//     // Insert all questions
-//     const createdQuestions = await Question.insertMany(questions);
+    // 1. Get all questions to be deleted to find their sections
+    const questions = await Question.find({ _id: { $in: questionIds } });
 
-//     // Update section and test counts
-//     const sectionId = questions[0].sectionId;
-//     const section = await Section.findById(sectionId);
+    if (questions.length === 0) {
+      return res.status(404).json({ error: "Questions not found" });
+    }
 
-//     await Section.findByIdAndUpdate(sectionId, {
-//       $inc: { totalQuestions: questions.length }
-//     });
+    // 2. Delete questions
+    await Question.deleteMany({ _id: { $in: questionIds } });
 
-//     if (section) {
-//       await Test.findByIdAndUpdate(section.testId, {
-//         $inc: { totalQuestions: questions.length }
-//       });
-//     }
+    // 3. Update section counts
+    const sectionCounts = {};
+    questions.forEach((q) => {
+      if (q.sectionId) {
+        sectionCounts[q.sectionId] = (sectionCounts[q.sectionId] || 0) + 1;
+      }
+    });
 
-//     res.status(201).json({
-//       message: `${createdQuestions.length} questions created successfully`,
-//       count: createdQuestions.length,
-//       questions: createdQuestions
-//     });
+    for (const [sectionId, count] of Object.entries(sectionCounts)) {
+      const section = await Section.findByIdAndUpdate(sectionId, {
+        $inc: { totalQuestions: -count },
+      });
 
-//   } catch (error) {
-//     console.error('Bulk create questions error:', error);
-//     res.status(500).json({ error: 'Server error' });
-//   }
-// };
+      if (section && section.testId) {
+        await Test.findByIdAndUpdate(section.testId, {
+          $inc: { totalQuestions: -count },
+        });
+      }
+    }
+
+    res.json({
+      message: `${questions.length} questions deleted successfully`,
+    });
+  } catch (error) {
+    console.error("Bulk delete questions error:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
 
 exports.bulkCreateQuestions = async (req, res) => {
   try {

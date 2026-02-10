@@ -12,35 +12,69 @@ const TestList = () => {
   const [tests, setTests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedModule, setSelectedModule] = useState("all");
+  const [testTypeFilter, setTestTypeFilter] = useState("all"); // ✅ New state
 
   //fetching tests on component mount
   useEffect(() => {
+    const fetchTests = async () => {
+      try {
+        setLoading(true);
+        const module = selectedModule === "all" ? null : selectedModule;
+        const response = await getAllTests(module);
+        let loadedTests = response.tests || [];
+        // DISABLE SPEAKING MODULE UI: Filter out speaking tests
+        loadedTests = loadedTests.filter((t) => t.module !== "speaking");
+        setTests(loadedTests);
+      } catch (error) {
+        console.error("Fetch test error: ", error);
+        toast.error("Failed to load tests!");
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchTests();
   }, [selectedModule]);
 
-  const fetchTests = async () => {
-    try {
-      setLoading(true);
-      const module = selectedModule === "all" ? null : selectedModule;
-      const response = await getAllTests(module);
-      let loadedTests = response.tests || [];
-      // DISABLE SPEAKING MODULE UI: Filter out speaking tests
-      loadedTests = loadedTests.filter((t) => t.module !== "speaking");
-      setTests(loadedTests);
-    } catch (error) {
-      console.error("Fetch test error: ", error);
-      toast.error("Failed to load tests!");
-    } finally {
-      setLoading(false);
-    }
-  };
+  // ✅ Updated Module Filter Handler
   const handleModuleFilter = (module) => {
     setSelectedModule(module);
+    // Logic: If specific module selected, default to "Full Tests". If "All Modules", default to "All Types".
+    if (module === "all") {
+      setTestTypeFilter("all");
+    } else {
+      setTestTypeFilter("full");
+    }
+  };
+
+  // ✅ New Type Filter Handler
+  const handleTypeFilter = (type) => {
+    setTestTypeFilter(type);
   };
 
   const handleViewTest = (testId) => {
     navigate(`/test-detail/${testId}`);
   };
+
+  // ✅ Item-wise Detection Logic
+  const isItemWise = (test) => {
+    // Condition: Less than 3 sections OR Less than 40 minutes
+    return test.totalSections < 3 || test.duration < 40;
+  };
+
+  // ✅ Filtered Tests Calculation
+  const getFilteredTests = () => {
+    let filtered = tests;
+
+    if (testTypeFilter === "full") {
+      filtered = filtered.filter((test) => !isItemWise(test));
+    } else if (testTypeFilter === "item-wise") {
+      filtered = filtered.filter((test) => isItemWise(test));
+    }
+
+    return filtered;
+  };
+
+  const filteredTests = getFilteredTests();
 
   return (
     <DashboardLayout title="Online Tests">
@@ -53,48 +87,87 @@ const TestList = () => {
       </div>
 
       {/* Filter Buttons */}
-      <div className="flex flex-wrap gap-3 mb-6">
-        <button
-          onClick={() => handleModuleFilter("all")}
-          className={`px-4 py-2 rounded-lg font-medium transition ${
-            selectedModule === "all"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-          }`}
-        >
-          All Tests
-        </button>
-        <button
-          onClick={() => handleModuleFilter("reading")}
-          className={`px-4 py-2 rounded-lg font-medium transition ${
-            selectedModule === "reading"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-          }`}
-        >
-          📖 Reading
-        </button>
-        <button
-          onClick={() => handleModuleFilter("listening")}
-          className={`px-4 py-2 rounded-lg font-medium transition ${
-            selectedModule === "listening"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-          }`}
-        >
-          🎧 Listening
-        </button>
-        <button
-          onClick={() => handleModuleFilter("writing")}
-          className={`px-4 py-2 rounded-lg font-medium transition ${
-            selectedModule === "writing"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-          }`}
-        >
-          ✍️ Writing
-        </button>
-        {/* Speaking Button Disabled */}
+      <div className="flex flex-col gap-4 mb-6">
+        {/* Module Filters */}
+        <div className="flex flex-wrap gap-3">
+          <button
+            onClick={() => handleModuleFilter("all")}
+            className={`px-4 py-2 rounded-lg font-medium transition ${
+              selectedModule === "all"
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            }`}
+          >
+            All Tests
+          </button>
+          <button
+            onClick={() => handleModuleFilter("reading")}
+            className={`px-4 py-2 rounded-lg font-medium transition ${
+              selectedModule === "reading"
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            }`}
+          >
+            📖 Reading
+          </button>
+          <button
+            onClick={() => handleModuleFilter("listening")}
+            className={`px-4 py-2 rounded-lg font-medium transition ${
+              selectedModule === "listening"
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            }`}
+          >
+            🎧 Listening
+          </button>
+          <button
+            onClick={() => handleModuleFilter("writing")}
+            className={`px-4 py-2 rounded-lg font-medium transition ${
+              selectedModule === "writing"
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            }`}
+          >
+            ✍️ Writing
+          </button>
+        </div>
+
+        {/* ✅ Sub-Filters (Test Type) */}
+        <div className="flex flex-wrap gap-2 items-center">
+          <span className="text-sm font-semibold text-gray-500 mr-2">
+            Filter by:
+          </span>
+          <button
+            onClick={() => handleTypeFilter("all")}
+            className={`px-3 py-1 rounded-full text-sm font-medium transition border ${
+              testTypeFilter === "all"
+                ? "bg-gray-800 text-white border-gray-800"
+                : "bg-white text-gray-600 border-gray-300 hover:bg-gray-50"
+            }`}
+          >
+            All Types
+          </button>
+          <button
+            onClick={() => handleTypeFilter("full")}
+            className={`px-3 py-1 rounded-full text-sm font-medium transition border ${
+              testTypeFilter === "full"
+                ? "bg-blue-600 text-white border-blue-600"
+                : "bg-white text-gray-600 border-gray-300 hover:bg-blue-50"
+            }`}
+          >
+            Full Tests {selectedModule !== "all" && "(Default)"}
+          </button>
+          <button
+            onClick={() => handleTypeFilter("item-wise")}
+            className={`px-3 py-1 rounded-full text-sm font-medium transition border ${
+              testTypeFilter === "item-wise"
+                ? "bg-purple-600 text-white border-purple-600"
+                : "bg-white text-gray-600 border-gray-300 hover:bg-purple-50"
+            }`}
+          >
+            Item-wise Practice
+          </button>
+        </div>
       </div>
 
       {/* Loading State */}
@@ -105,15 +178,22 @@ const TestList = () => {
       )}
 
       {/* Tests Grid */}
-      {!loading && tests.length > 0 && (
+      {!loading && filteredTests.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tests.map((test) => (
+          {filteredTests.map((test) => (
             <div
               key={test._id}
-              className="bg-white rounded-lg shadow hover:shadow-xl transition-shadow p-6"
+              className="bg-white rounded-lg shadow hover:shadow-xl transition-shadow p-6 relative overflow-hidden"
             >
+              {/* Item-wise Badge */}
+              {isItemWise(test) && (
+                <div className="absolute top-0 right-0 bg-purple-500 text-white text-xs font-bold px-2 py-1 rounded-bl-lg">
+                  Item-wise
+                </div>
+              )}
+
               {/* Module Badge */}
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 mt-2">
                 <span
                   className={`px-3 py-1 rounded-full text-sm font-semibold ${
                     test.module === "reading"
@@ -183,7 +263,7 @@ const TestList = () => {
       )}
 
       {/* Empty State */}
-      {!loading && tests.length === 0 && (
+      {!loading && filteredTests.length === 0 && (
         <div className="bg-white rounded-lg shadow p-12 text-center">
           <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <span className="text-5xl">📝</span>
@@ -193,14 +273,17 @@ const TestList = () => {
           </h3>
           <p className="text-gray-600 mb-6">
             {selectedModule === "all"
-              ? "No tests have been created yet."
-              : `No ${selectedModule} tests available.`}
+              ? "No tests match your filters."
+              : `No ${selectedModule} tests available with current filters.`}
           </p>
           <button
-            onClick={() => handleModuleFilter("all")}
+            onClick={() => {
+              handleModuleFilter("all");
+              handleTypeFilter("all");
+            }}
             className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
           >
-            View All Tests
+            Reset Filters
           </button>
         </div>
       )}

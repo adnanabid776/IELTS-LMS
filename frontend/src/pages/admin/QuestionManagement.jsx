@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {
   getAllQuestions,
   deleteQuestion,
+  bulkDeleteQuestions, // ✅ Added import
   getQuestionStats,
   getSectionsForDropdown,
 } from "../../services/api";
@@ -37,12 +38,16 @@ const QuestionManagement = () => {
   const [showBulkModal, setShowBulkModal] = useState(false);
   const [selectedQuestion, setSelectedQuestion] = useState(null);
 
+  // Bulk Selection
+  const [selectedQuestions, setSelectedQuestions] = useState([]); // ✅ Added state
+
   useEffect(() => {
     fetchData();
   }, []);
 
   useEffect(() => {
     applyFilters();
+    setSelectedQuestions([]); // Clear selection on filter change
   }, [questions, moduleFilter, typeFilter, sectionFilter, searchTerm]);
 
   const fetchData = async () => {
@@ -90,6 +95,55 @@ const QuestionManagement = () => {
 
     setFilteredQuestions(filtered);
     setCurrentPage(1); // Reset to first page when filtering
+  };
+
+  // ✅ New Handler: Select All
+  const handleSelectAll = (e) => {
+    if (e.target.checked) {
+      // Select all visible questions (across all pages or just current page?
+      // Usually users expect "Select All" to select everything in the filtered list, not just the page.
+      // But for safety let's select all FILTERED questions.
+      const allIds = filteredQuestions.map((q) => q._id);
+      setSelectedQuestions(allIds);
+    } else {
+      setSelectedQuestions([]);
+    }
+  };
+
+  // ✅ New Handler: Toggle Single Selection
+  const handleSelectQuestion = (questionId) => {
+    setSelectedQuestions((prev) => {
+      if (prev.includes(questionId)) {
+        return prev.filter((id) => id !== questionId);
+      } else {
+        return [...prev, questionId];
+      }
+    });
+  };
+
+  // ✅ New Handler: Bulk Delete
+  const handleBulkDelete = async () => {
+    if (selectedQuestions.length === 0) return;
+
+    const confirmed = window.confirm(
+      `Are you sure you want to delete ${selectedQuestions.length} questions? This action cannot be undone.`,
+    );
+
+    if (!confirmed) return;
+
+    try {
+      setLoading(true);
+      await bulkDeleteQuestions(selectedQuestions);
+      toast.success(
+        `${selectedQuestions.length} questions deleted successfully`,
+      );
+      setSelectedQuestions([]);
+      fetchData(); // Reload data
+    } catch (error) {
+      console.error("Bulk delete error:", error);
+      toast.error("Failed to delete selected questions");
+      setLoading(false);
+    }
   };
 
   const handleDelete = async (questionId, questionText) => {
@@ -164,6 +218,17 @@ const QuestionManagement = () => {
           </p>
         </div>
         <div className="flex gap-3">
+          {/* ✅ Delete Selected Button */}
+          {selectedQuestions.length > 0 && (
+            <button
+              onClick={handleBulkDelete}
+              className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 font-semibold flex items-center gap-2 shadow-lg transform hover:scale-105 transition"
+            >
+              <span className="text-xl">🗑️</span>
+              Delete ({selectedQuestions.length})
+            </button>
+          )}
+
           <button
             onClick={() => setShowBulkModal(true)}
             className="px-6 py-3 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-lg hover:from-green-700 hover:to-teal-700 font-semibold flex items-center gap-2 shadow-lg transform hover:scale-105 transition"
@@ -306,6 +371,18 @@ const QuestionManagement = () => {
             <table className="w-full text-sm">
               <thead className="bg-gradient-to-r from-blue-50 to-purple-50">
                 <tr>
+                  {/* ✅ Checkbox Header */}
+                  <th className="px-3 py-3 text-left w-10">
+                    <input
+                      type="checkbox"
+                      className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 h-4 w-4"
+                      onChange={handleSelectAll}
+                      checked={
+                        filteredQuestions.length > 0 &&
+                        selectedQuestions.length === filteredQuestions.length
+                      }
+                    />
+                  </th>
                   <th className="px-3 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wide">
                     Q#
                   </th>
@@ -338,8 +415,21 @@ const QuestionManagement = () => {
                   .map((question) => (
                     <tr
                       key={question._id}
-                      className="hover:bg-blue-50 transition"
+                      className={`hover:bg-blue-50 transition ${
+                        selectedQuestions.includes(question._id)
+                          ? "bg-blue-50"
+                          : ""
+                      }`}
                     >
+                      {/* ✅ Checkbox Cell */}
+                      <td className="px-3 py-3">
+                        <input
+                          type="checkbox"
+                          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 h-4 w-4"
+                          checked={selectedQuestions.includes(question._id)}
+                          onChange={() => handleSelectQuestion(question._id)}
+                        />
+                      </td>
                       <td className="px-3 py-3 font-bold text-gray-900">
                         {question.questionNumber}
                       </td>

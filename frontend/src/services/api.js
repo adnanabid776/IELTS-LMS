@@ -754,6 +754,25 @@ export const deleteQuestion = async (questionId) => {
   }
 };
 
+// Bulk delete questions
+export const bulkDeleteQuestions = async (questionIds) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/questions/bulk-delete`,
+      { questionIds },
+      {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      },
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Bulk delete questions error:", error);
+    throw error;
+  }
+};
+
 // Bulk create questions
 export const bulkCreateQuestions = async (questionsData) => {
   try {

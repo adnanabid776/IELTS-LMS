@@ -171,13 +171,13 @@ const TestTaking = () => {
     //preventing to submit test multiple times
     if (isSubmitting || !session) return;
 
-    setIsSubmitting(true);
-
     const confirmed = window.confirm(
       "Are you sure to submit this test? You cannot change the answers after submission.",
     );
 
     if (!confirmed) return;
+
+    setIsSubmitting(true);
 
     try {
       // Save any pending answers
