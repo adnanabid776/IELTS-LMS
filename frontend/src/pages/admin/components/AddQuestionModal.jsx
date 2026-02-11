@@ -18,13 +18,29 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
 
     explanation: "",
     items: [], // For matching questions
+    features: [], // For matching features options
+    tableStructure: {
+      headers: ["", ""],
+      rows: [
+        ["", ""],
+        ["", ""],
+      ],
+    }, // ✅ ADDED
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
   const questionTypes = [
-    { value: "multiple-choice", label: "Multiple Choice (Single)", needsOptions: true },
-    { value: "multiple-choice-multi", label: "Multiple Choice (Multi-Select)", needsOptions: true },
+    {
+      value: "multiple-choice",
+      label: "Multiple Choice (Single)",
+      needsOptions: true,
+    },
+    {
+      value: "multiple-choice-multi",
+      label: "Multiple Choice (Multi-Select)",
+      needsOptions: true,
+    },
     {
       value: "true-false-not-given",
       label: "True/False/Not Given",
@@ -48,7 +64,7 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
     {
       value: "matching-features",
       label: "Matching Features",
-      needsOptions: true,
+      needsOptions: false,
     },
     {
       value: "sentence-completion",
@@ -172,15 +188,24 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
   };
 
   const removeItem = (index) => {
-    if (formData.items.length > 1) {
-      const newItems = formData.items.filter((_, i) => i !== index);
-      // Re-label items
-      const relabeled = newItems.map((item, idx) => ({
-        ...item,
-        label: String.fromCharCode(65 + idx),
-      }));
-      setFormData((prev) => ({ ...prev, items: relabeled }));
+    if (
+      formData.questionType !== "table-completion" &&
+      formData.items.length <= 2
+    ) {
+      return;
     }
+
+    const newItems = formData.items.filter((_, i) => i !== index);
+
+    // Re-label items
+    const relabeled = newItems.map((item, idx) => ({
+      ...item,
+      label:
+        formData.questionType === "table-completion"
+          ? String(idx + 1)
+          : String.fromCharCode(65 + idx),
+    }));
+    setFormData((prev) => ({ ...prev, items: relabeled }));
   };
 
   const validate = () => {
@@ -204,10 +229,21 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
       }
     }
 
+    if (formData.questionType === "matching-features") {
+      const filledFeatures = formData.features.filter((f) =>
+        typeof f === "string" ? f.trim() : f.text?.trim(),
+      );
+      if (filledFeatures.length < 2) {
+        // Use options error key to display in specific UI block if reusing that key, or add new one
+        newErrors.options = "At least 2 features are required";
+      }
+    }
+
     if (
       formData.questionType === "matching-headings" ||
       formData.questionType === "matching-information" ||
-      formData.questionType === "map-labeling"
+      formData.questionType === "map-labeling" ||
+      formData.questionType === "matching-features"
     ) {
       const validItems = formData.items.filter(
         (item) => item.text.trim() && item.correctAnswer,
@@ -217,6 +253,12 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
           "At least one item with text and selected option is required";
       }
       // We don't need main correctAnswer for matching
+      delete newErrors.correctAnswer;
+    } else if (formData.questionType === "table-completion") {
+      const validItems = formData.items.filter((item) => item.correctAnswer);
+      if (validItems.length < 1) {
+        newErrors.items = "At least 1 answer is required";
+      }
       delete newErrors.correctAnswer;
     }
 
@@ -236,6 +278,7 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
         ...formData,
         questionNumber: parseInt(formData.questionNumber),
         points: parseInt(formData.points),
+        tableStructure: formData.tableStructure, // ✅ ADDED
       };
 
       // Handle Subjective Types (Writing)
@@ -247,7 +290,9 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
       if (
         formData.questionType === "matching-headings" ||
         formData.questionType === "matching-information" ||
-        formData.questionType === "map-labeling"
+        formData.questionType === "map-labeling" ||
+        formData.questionType === "matching-features" ||
+        formData.questionType === "table-completion"
       ) {
         submitData.items = formData.items.filter((i) => i.text.trim());
         // Allow empty correctAnswer at root level if backend requires it, or set a dummy one
@@ -376,42 +421,44 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
             </div>
 
             {/* Validation & Constraints (Word Limit, etc.) */}
-            {!currentType?.needsOptions && !currentType?.isSubjective && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-3 rounded-lg border">
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">
-                    Word Limit (Optional)
-                  </label>
-                  <input
-                    type="number"
-                    name="wordLimit"
-                    value={formData.wordLimit}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border rounded-lg"
-                    placeholder="e.g. 2 (No more than 2 words)"
-                  />
-                </div>
-                <div className="flex items-center pt-8">
-                  <label className="flex items-center gap-2 cursor-pointer">
+            {!currentType?.needsOptions &&
+              !currentType?.isSubjective &&
+              formData.questionType !== "matching-features" && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-3 rounded-lg border">
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                      Word Limit (Optional)
+                    </label>
                     <input
-                      type="checkbox"
-                      name="allowNumber"
-                      checked={formData.allowNumber}
-                      onChange={(e) =>
-                        setFormData((prev) => ({
-                          ...prev,
-                          allowNumber: e.target.checked,
-                        }))
-                      }
-                      className="w-5 h-5 text-blue-600"
+                      type="number"
+                      name="wordLimit"
+                      value={formData.wordLimit}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 border rounded-lg"
+                      placeholder="e.g. 2 (No more than 2 words)"
                     />
-                    <span className="text-sm font-bold text-gray-700">
-                      Allow Numbers?
-                    </span>
-                  </label>
+                  </div>
+                  <div className="flex items-center pt-8">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        name="allowNumber"
+                        checked={formData.allowNumber}
+                        onChange={(e) =>
+                          setFormData((prev) => ({
+                            ...prev,
+                            allowNumber: e.target.checked,
+                          }))
+                        }
+                        className="w-5 h-5 text-blue-600"
+                      />
+                      <span className="text-sm font-bold text-gray-700">
+                        Allow Numbers?
+                      </span>
+                    </label>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
             {/* Image URL (For Map Labeling or Visual Questions) */}
             <div>
@@ -502,6 +549,604 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
                   )}
                 </div>
               )}
+
+            {/* TABLE COMPLETION SPECIFIC UI */}
+            {formData.questionType === "table-completion" && (
+              <div className="space-y-6">
+                <div className="bg-blue-50 p-4 rounded-lg border-2 border-blue-200">
+                  <label className="block text-sm font-bold text-gray-700 mb-3">
+                    Table Structure <span className="text-red-500">*</span>
+                  </label>
+
+                  {/* Grid Controls */}
+                  <div className="flex gap-4 mb-4">
+                    <div>
+                      <label className="block text-xs font-bold text-gray-500 mb-1">
+                        Columns
+                      </label>
+                      <input
+                        type="number"
+                        min="1"
+                        max="10"
+                        value={formData.tableStructure?.headers?.length || 2}
+                        onChange={(e) => {
+                          const cols = parseInt(e.target.value) || 1;
+                          const currentHeaders =
+                            formData.tableStructure?.headers || [];
+                          const currentRows =
+                            formData.tableStructure?.rows || [];
+
+                          // Resize headers
+                          const newHeaders = [...currentHeaders];
+                          if (cols > newHeaders.length) {
+                            // Add columns
+                            for (let i = newHeaders.length; i < cols; i++)
+                              newHeaders.push("");
+                          } else {
+                            // Remove columns
+                            newHeaders.length = cols;
+                          }
+
+                          // Resize rows
+                          const newRows = currentRows.map((row) => {
+                            const newRow = [...row];
+                            if (cols > newRow.length) {
+                              for (let i = newRow.length; i < cols; i++)
+                                newRow.push("");
+                            } else {
+                              newRow.length = cols;
+                            }
+                            return newRow;
+                          });
+
+                          setFormData((prev) => ({
+                            ...prev,
+                            tableStructure: {
+                              ...prev.tableStructure,
+                              headers: newHeaders,
+                              rows: newRows,
+                            },
+                          }));
+                        }}
+                        className="w-20 px-2 py-1 border rounded"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* MATCHING FEATURES SPECIFIC UI */}
+            {formData.questionType === "matching-features" && (
+              <div className="space-y-6">
+                {/* 1. Define Features (The Options A, B, C...) */}
+                <div className="bg-purple-50 p-4 rounded-lg border-2 border-purple-200">
+                  <label className="block text-sm font-bold text-gray-700 mb-3">
+                    List of Features (Options){" "}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <p className="text-xs text-gray-500 mb-2">
+                    Add the list of items to match against (e.g., Researchers,
+                    Cities, Dates). Labels (A, B, C...) are auto-generated.
+                  </p>
+
+                  <div className="space-y-3">
+                    {(formData.features || []).map((feature, index) => (
+                      <div key={index} className="flex items-center gap-2">
+                        <div className="w-8 h-8 flex items-center justify-center bg-purple-200 text-purple-800 font-bold rounded">
+                          {String.fromCharCode(65 + index)}
+                        </div>
+                        <input
+                          type="text"
+                          value={feature.text || ""}
+                          onChange={(e) => {
+                            const newFeatures = [...(formData.features || [])];
+                            newFeatures[index] = {
+                              ...newFeatures[index],
+                              label: String.fromCharCode(65 + index),
+                              text: e.target.value,
+                            };
+                            setFormData({ ...formData, features: newFeatures });
+                          }}
+                          className="flex-1 px-4 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-purple-500"
+                          placeholder={`Feature ${String.fromCharCode(65 + index)}`}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newFeatures = (
+                              formData.features || []
+                            ).filter((_, i) => i !== index);
+                            setFormData({ ...formData, features: newFeatures });
+                          }}
+                          className="text-red-500 hover:text-red-700 font-bold px-2"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setFormData({
+                        ...formData,
+                        features: [
+                          ...(formData.features || []),
+                          {
+                            label: String.fromCharCode(
+                              65 + (formData.features || []).length,
+                            ),
+                            text: "",
+                          },
+                        ],
+                      })
+                    }
+                    className="mt-3 px-4 py-2 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 text-sm font-semibold"
+                  >
+                    + Add Feature
+                  </button>
+                </div>
+
+                {/* 2. Define Items (The Questions) */}
+                <div className="bg-gray-50 p-4 rounded-lg border-2 border-gray-200">
+                  <label className="block text-sm font-bold text-gray-700 mb-3">
+                    Questions to Match <span className="text-red-500">*</span>
+                  </label>
+
+                  <div className="space-y-4">
+                    {(formData.items || []).map((item, index) => (
+                      <div
+                        key={index}
+                        className="p-3 bg-white border rounded shadow-sm"
+                      >
+                        <div className="flex justify-between mb-2">
+                          <span className="font-bold text-gray-600">
+                            Question {index + 1}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newItems = (formData.items || []).filter(
+                                (_, i) => i !== index,
+                              );
+                              setFormData({ ...formData, items: newItems });
+                            }}
+                            className="text-red-500 hover:text-red-700 text-xs"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <div className="md:col-span-2">
+                            <label className="block text-xs font-bold text-gray-500 mb-1">
+                              Question Prompt
+                            </label>
+                            <input
+                              type="text"
+                              value={item.text || ""}
+                              onChange={(e) => {
+                                const newItems = [...(formData.items || [])];
+                                newItems[index] = {
+                                  ...newItems[index],
+                                  text: e.target.value,
+                                };
+                                setFormData({ ...formData, items: newItems });
+                              }}
+                              className="w-full px-3 py-2 border rounded"
+                              placeholder="e.g., The importance of adults..."
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-xs font-bold text-gray-500 mb-1">
+                              Correct Answer
+                            </label>
+                            <select
+                              value={item.correctAnswer || ""}
+                              onChange={(e) => {
+                                const newItems = [...(formData.items || [])];
+                                newItems[index] = {
+                                  ...newItems[index],
+                                  correctAnswer: e.target.value,
+                                };
+                                setFormData({ ...formData, items: newItems });
+                              }}
+                              className="w-full px-3 py-2 border rounded"
+                            >
+                              <option value="">Select...</option>
+                              {(formData.features || []).map((feat, i) => (
+                                <option
+                                  key={i}
+                                  value={String.fromCharCode(65 + i)}
+                                >
+                                  {String.fromCharCode(65 + i)}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setFormData({
+                        ...formData,
+                        items: [
+                          ...(formData.items || []),
+                          {
+                            label: String((formData.items || []).length + 1),
+                            text: "",
+                            correctAnswer: "",
+                          },
+                        ],
+                      })
+                    }
+                    className="mt-3 px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 text-sm font-semibold"
+                  >
+                    + Add Question Item
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* TABLE COMPLETION SPECIFIC UI */}
+            {formData.questionType === "table-completion" && (
+              <div className="space-y-6">
+                {/* Table Structure Editor */}
+                <div className="bg-blue-50 p-4 rounded-lg border-2 border-blue-200">
+                  <label className="block text-sm font-bold text-gray-700 mb-3">
+                    Table Structure <span className="text-red-500">*</span>
+                  </label>
+                  <div className="flex gap-4 mb-4">
+                    {/* Columns Input */}
+                    <div className="flex items-center gap-2">
+                      <label className="text-sm font-medium text-gray-700">
+                        Cols
+                      </label>
+                      <input
+                        type="number"
+                        min="1"
+                        max="10"
+                        value={formData.tableStructure?.headers?.length || 2}
+                        onChange={(e) => {
+                          const cols = parseInt(e.target.value) || 1;
+                          const currentHeaders =
+                            formData.tableStructure?.headers || [];
+                          const currentRows =
+                            formData.tableStructure?.rows || [];
+
+                          // Resize headers
+                          const newHeaders = [...currentHeaders];
+                          if (cols > newHeaders.length) {
+                            for (let i = newHeaders.length; i < cols; i++)
+                              newHeaders.push(`Header ${i + 1}`);
+                          } else {
+                            newHeaders.length = cols;
+                          }
+
+                          // Resize rows
+                          const newRows = currentRows.map((row) => {
+                            const newRow = [...row];
+                            if (cols > newRow.length) {
+                              for (let i = newRow.length; i < cols; i++)
+                                newRow.push("");
+                            } else {
+                              newRow.length = cols;
+                            }
+                            return newRow;
+                          });
+
+                          setFormData((prev) => ({
+                            ...prev,
+                            tableStructure: {
+                              ...prev.tableStructure,
+                              headers: newHeaders,
+                              rows: newRows,
+                            },
+                          }));
+                        }}
+                        className="w-20 px-2 py-1 border rounded"
+                      />
+                    </div>
+                    {/* Rows Input */}
+                    <div className="flex items-center gap-2">
+                      <label className="text-sm font-medium text-gray-700">
+                        Rows
+                      </label>
+                      <input
+                        type="number"
+                        min="1"
+                        max="10"
+                        value={formData.tableStructure?.rows?.length || 4}
+                        onChange={(e) => {
+                          const rows = parseInt(e.target.value) || 1;
+                          const currentHeaders =
+                            formData.tableStructure?.headers || [];
+                          const currentRows =
+                            formData.tableStructure?.rows || [];
+                          const newRows = [...currentRows];
+                          if (rows > newRows.length) {
+                            for (let i = newRows.length; i < rows; i++) {
+                              newRows.push(
+                                new Array(currentHeaders.length).fill(""),
+                              );
+                            }
+                          } else {
+                            newRows.length = rows;
+                          }
+                          setFormData((prev) => ({
+                            ...prev,
+                            tableStructure: {
+                              ...prev.tableStructure,
+                              rows: newRows,
+                            },
+                          }));
+                        }}
+                        className="w-20 px-2 py-1 border rounded"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Header Editor */}
+                  <div className="mb-4 overflow-x-auto">
+                    <div className="flex gap-2 min-w-max">
+                      {formData.tableStructure?.headers?.map((header, idx) => (
+                        <input
+                          key={`h-${idx}`}
+                          type="text"
+                          value={header}
+                          onChange={(e) => {
+                            const newHeaders = [
+                              ...formData.tableStructure.headers,
+                            ];
+                            newHeaders[idx] = e.target.value;
+                            setFormData((prev) => ({
+                              ...prev,
+                              tableStructure: {
+                                ...prev.tableStructure,
+                                headers: newHeaders,
+                              },
+                            }));
+                          }}
+                          placeholder={`Header ${idx + 1}`}
+                          className="w-40 px-2 py-1 bg-gray-200 font-bold border rounded text-sm"
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Body Editor */}
+                  <div className="overflow-x-auto">
+                    <div
+                      className="grid gap-2 min-w-max"
+                      style={{
+                        gridTemplateColumns: `repeat(${formData.tableStructure?.headers?.length || 1}, 10rem)`,
+                      }}
+                    >
+                      {formData.tableStructure?.rows?.map((row, rIdx) =>
+                        row.map((cell, cIdx) => (
+                          <textarea
+                            key={`c-${rIdx}-${cIdx}`}
+                            value={cell}
+                            onChange={(e) => {
+                              const newRows = [...formData.tableStructure.rows];
+                              newRows[rIdx][cIdx] = e.target.value;
+                              setFormData((prev) => ({
+                                ...prev,
+                                tableStructure: {
+                                  ...prev.tableStructure,
+                                  rows: newRows,
+                                },
+                              }));
+                            }}
+                            rows={3}
+                            className="w-full px-2 py-1 border rounded text-sm resize-y"
+                            placeholder="Content..."
+                          />
+                        )),
+                      )}
+                    </div>
+                  </div>
+
+                  <p className="text-xs text-gray-500 mt-2">
+                    Tip: Use <b>{`{{1}}`}</b>, <b>{`{{2}}`}</b> etc. in cells to
+                    create blanks corresponding to Question 1, 2... Make sure
+                    these match your correct answers below.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* TABLE COMPLETION ANSWER KEY */}
+            {formData.questionType === "table-completion" && (
+              <div className="bg-green-50 p-4 rounded-lg border-2 border-green-200 space-y-4">
+                <div className="flex justify-between items-center">
+                  <label className="block text-sm font-bold text-gray-700">
+                    Answer Key <span className="text-red-500">*</span>
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      // Auto-detect placeholders
+                      const placeholders = new Set();
+                      const regex = /\{\{(\d+)\}\}/g;
+                      formData.tableStructure.rows.forEach((row) => {
+                        row.forEach((cell) => {
+                          let match;
+                          while ((match = regex.exec(cell)) !== null) {
+                            placeholders.add(match[1]);
+                          }
+                        });
+                      });
+
+                      const existingLabels = new Set(
+                        formData.items.map((i) => i.label),
+                      );
+                      const newItems = [...formData.items];
+
+                      Array.from(placeholders)
+                        .sort((a, b) => parseInt(a) - parseInt(b))
+                        .forEach((p) => {
+                          if (!existingLabels.has(p)) {
+                            newItems.push({
+                              label: p,
+                              text: `Answer for {{${p}}}`,
+                              correctAnswer: "",
+                            });
+                          }
+                        });
+
+                      setFormData((prev) => ({ ...prev, items: newItems }));
+                    }}
+                    className="text-xs bg-green-600 text-white px-2 py-1 rounded hover:bg-green-700 transition"
+                  >
+                    Auto-Generate from Table
+                  </button>
+                </div>
+
+                <div className="space-y-3">
+                  {formData.items.length === 0 && (
+                    <p className="text-sm text-gray-500 italic">
+                      No answers defined. Click "Auto-Generate" after adding
+                      placeholders like {"{{1}}"} to the table.
+                    </p>
+                  )}
+                  {formData.items
+                    .sort((a, b) => parseInt(a.label) - parseInt(b.label))
+                    .map((item, index) => (
+                      <div key={index} className="flex gap-3 items-center">
+                        <div className="flex-shrink-0 w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
+                          {item.label}
+                        </div>
+                        <div className="flex-1">
+                          <input
+                            type="text"
+                            value={item.correctAnswer}
+                            onChange={(e) =>
+                              handleItemChange(
+                                index,
+                                "correctAnswer",
+                                e.target.value,
+                              )
+                            }
+                            className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 ${
+                              !item.correctAnswer
+                                ? "border-red-300"
+                                : "border-gray-300"
+                            }`}
+                            placeholder={`Correct Answer for {{${item.label}}}...`}
+                          />
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => removeItem(index)}
+                          className="text-red-500 hover:text-red-700 font-bold px-2"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const nextLabel = String(formData.items.length + 1);
+                    setFormData((prev) => ({
+                      ...prev,
+                      items: [
+                        ...prev.items,
+                        {
+                          label: nextLabel,
+                          text: `Answer for {{${nextLabel}}}`,
+                          correctAnswer: "",
+                        },
+                      ],
+                    }));
+                  }}
+                  className="mt-2 px-3 py-1 bg-green-100 text-green-700 rounded hover:bg-green-200 text-sm font-semibold"
+                >
+                  + Add Manual Answer
+                </button>
+                {errors.items && (
+                  <p className="text-red-500 text-xs mt-2 font-semibold">
+                    {errors.items}
+                  </p>
+                )}
+              </div>
+            )}
+
+            {/* MATCHING FEATURES SPECIFIC UI (List of Features) */}
+            {formData.questionType === "matching-features" && (
+              <div className="bg-purple-50 p-4 rounded-lg border-2 border-purple-200 mb-6">
+                <label className="block text-sm font-bold text-gray-700 mb-3">
+                  List of Features (Options){" "}
+                  <span className="text-red-500">*</span>
+                </label>
+                <div className="space-y-2">
+                  <p className="text-xs text-gray-500 mb-2">
+                    Add the list of items to match against (e.g., Researchers,
+                    Cities, Dates). Labels (A, B, C...) are auto-generated.
+                  </p>
+                  {formData.features.map((feature, index) => (
+                    <div key={index} className="flex gap-2 items-center">
+                      <span className="text-sm font-bold w-6 text-gray-500">
+                        {String.fromCharCode(65 + index)}.
+                      </span>
+                      <input
+                        type="text"
+                        value={feature.text || feature} // Handle object or string
+                        onChange={(e) => {
+                          const newFeatures = [...formData.features];
+                          newFeatures[index] = e.target.value;
+                          setFormData((prev) => ({
+                            ...prev,
+                            features: newFeatures,
+                          }));
+                        }}
+                        className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                        placeholder="Enter feature text..."
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const newFeatures = formData.features.filter(
+                            (_, i) => i !== index,
+                          );
+                          setFormData((prev) => ({
+                            ...prev,
+                            features: newFeatures,
+                          }));
+                        }}
+                        className="text-red-500 hover:text-red-700 font-bold px-2"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setFormData((prev) => ({
+                      ...prev,
+                      features: [...prev.features, ""],
+                    }));
+                  }}
+                  className="mt-3 px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 font-semibold text-sm"
+                >
+                  + Add Feature
+                </button>
+                {/* Validation Error for Features */}
+                {errors.options && ( // Reusing options error key or need new one?
+                  <p className="text-red-500 text-xs mt-2 font-semibold">
+                    At least 2 features are required
+                  </p>
+                )}
+              </div>
+            )}
 
             {/* MATCHING HEADINGS / INFORMATION / MAP LABELING SPECIFIC UI */}
             {(formData.questionType === "matching-headings" ||
@@ -658,10 +1303,12 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
             )}
 
             {/* Correct Answer */}
-            {/* Correct Answer (Hidden for Matching types and Subjective types) */}
+            {/* Correct Answer (Hidden for Matching types, Table Completion and Subjective types) */}
             {formData.questionType !== "matching-headings" &&
               formData.questionType !== "matching-information" &&
-              formData.questionType !== "map-labeling" && // ✅ ADDED
+              formData.questionType !== "map-labeling" &&
+              formData.questionType !== "table-completion" &&
+              formData.questionType !== "matching-features" &&
               !currentType?.isSubjective && (
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2">

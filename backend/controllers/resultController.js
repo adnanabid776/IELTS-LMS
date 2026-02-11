@@ -99,7 +99,9 @@ const calculatePoints = (userAnswer, question) => {
   if (
     question.questionType === "map-labeling" ||
     question.questionType === "matching-headings" ||
-    question.questionType === "matching-information"
+    question.questionType === "matching-information" ||
+    question.questionType === "matching-features" ||
+    question.questionType === "table-completion"
   ) {
     const items = question.items || [];
     let scored = 0;
@@ -619,7 +621,10 @@ exports.getDetailedResult = async (req, res) => {
         questionText: question.questionText,
         questionType: question.questionType,
         options: question.options,
-        studentAnswer: studentAnswer?.userAnswer || "Not answered",
+        items: question.items, // Add items for matching/table types
+        features: question.features, // Add features for Matching Features
+        tableStructure: question.tableStructure, // Add table structure
+        studentAnswer: studentAnswer?.userAnswer, // RAW answer (object or string)
         correctAnswer: question.correctAnswer,
         alternativeAnswers: question.alternativeAnswers,
         isCorrect,

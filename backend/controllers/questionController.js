@@ -19,6 +19,8 @@ exports.createQuestion = async (req, res) => {
       items,
       wordLimit,
       allowNumber,
+      tableStructure,
+      features,
     } = req.body;
 
     // Validate required fields
@@ -65,6 +67,8 @@ exports.createQuestion = async (req, res) => {
       items,
       wordLimit,
       allowNumber,
+      tableStructure,
+      features, // ✅ ADDED
     });
 
     //update the section's total questions
@@ -156,6 +160,8 @@ exports.updateQuestion = async (req, res) => {
       items,
       wordLimit,
       allowNumber,
+      tableStructure,
+      features, // ✅ ADDED
     } = req.body;
 
     const question = await Question.findByIdAndUpdate(
@@ -172,6 +178,8 @@ exports.updateQuestion = async (req, res) => {
         items,
         wordLimit,
         allowNumber,
+        tableStructure,
+        features, // ✅ ADDED
       },
       { new: true, runValidators: true },
     );

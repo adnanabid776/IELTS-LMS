@@ -164,6 +164,7 @@ const TestTaking = () => {
       await bulkSaveAnswers(session._id, answersArray);
     } catch (error) {
       // Silent fail for auto-save to avoid console clutter
+      console.error(error);
     }
   };
   //  handleSubmitTest
@@ -660,54 +661,68 @@ const TestTaking = () => {
                   </div>
                 )}
 
-                {/* Answer Input - Matching Headings / Information - NEW */}
+                {/* Answer Input - Matching Headings / Information / Features - NEW */}
                 {(question.questionType === "matching-headings" ||
-                  question.questionType === "matching-information") &&
-                  question.items && (
+                  question.questionType === "matching-information" ||
+                  question.questionType === "matching-features") &&
+                  (question.items || question.features) && (
                     <div className="ml-14 space-y-4">
-                      {/* Display Headings List for Reference */}
+                      {/* Display Headings / Features List for Reference */}
                       <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
                         <h5 className="font-bold text-gray-700 mb-2">
                           {question.questionType === "matching-headings"
                             ? "Options (Headings):"
-                            : "Options (Paragraphs):"}
+                            : question.questionType === "matching-features"
+                              ? "List of Features:"
+                              : "Options (Paragraphs):"}
                         </h5>
                         <ul className="space-y-1">
-                          {question.options.map((opt, idx) => (
-                            <li key={idx} className="text-sm text-gray-600">
-                              <span className="font-bold mr-2 text-gray-800">
-                                {question.questionType === "matching-headings"
-                                  ? [
-                                      "i",
-                                      "ii",
-                                      "iii",
-                                      "iv",
-                                      "v",
-                                      "vi",
-                                      "vii",
-                                      "viii",
-                                      "ix",
-                                      "x",
-                                    ][idx] || idx + 1
-                                  : String.fromCharCode(65 + idx)}
-                                .
-                              </span>
-                              {opt}
-                            </li>
-                          ))}
+                          {/* Handle Features (Objects) or Options (Strings) */}
+                          {question.features
+                            ? question.features.map((feat, idx) => (
+                                <li key={idx} className="text-sm text-gray-600">
+                                  <span className="font-bold mr-2 text-gray-800">
+                                    {feat.label}.
+                                  </span>
+                                  {feat.text}
+                                </li>
+                              ))
+                            : question.options.map((opt, idx) => (
+                                <li key={idx} className="text-sm text-gray-600">
+                                  <span className="font-bold mr-2 text-gray-800">
+                                    {question.questionType ===
+                                    "matching-headings"
+                                      ? [
+                                          "i",
+                                          "ii",
+                                          "iii",
+                                          "iv",
+                                          "v",
+                                          "vi",
+                                          "vii",
+                                          "viii",
+                                          "ix",
+                                          "x",
+                                        ][idx] || idx + 1
+                                      : String.fromCharCode(65 + idx)}
+                                    .
+                                  </span>
+                                  {opt}
+                                </li>
+                              ))}
                         </ul>
                       </div>
 
-                      {/* Display Paragraphs and Inputs */}
+                      {/* Display Items (Questions) and Inputs */}
                       <div className="space-y-4">
-                        {question.items.map((item, idx) => (
+                        {(question.items || []).map((item, idx) => (
                           <div
                             key={idx}
                             className="p-4 border rounded-xl bg-white hover:shadow-sm transition-shadow"
                           >
                             <div className="flex gap-4">
                               <div className="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-700 rounded-lg flex items-center justify-center font-bold">
-                                {item.label}
+                                {item.label || idx + 1}
                               </div>
                               <div className="flex-1 space-y-3">
                                 <p className="text-gray-800 leading-relaxed">
@@ -718,41 +733,76 @@ const TestTaking = () => {
                                     {question.questionType ===
                                     "matching-headings"
                                       ? "Select Heading:"
-                                      : "Select Paragraph:"}
+                                      : "Select Option:"}
                                   </label>
                                   <select
-                                    value={answers[question._id]?.[idx] || ""}
+                                    value={
+                                      (answers[question._id] &&
+                                        answers[question._id][
+                                          item.label || idx + 1
+                                        ]) ||
+                                      ""
+                                    }
                                     onChange={(e) => {
                                       const currentAnswers =
                                         answers[question._id] || {};
-                                      // Store as object {0: "i", 1: "v"} under the main questionId
+                                      // Store as object { "14": "B", "15": "C" }
                                       handleAnswerChange(question._id, {
                                         ...currentAnswers,
-                                        [idx]: e.target.value,
+                                        [item.label || idx + 1]: e.target.value,
                                       });
                                     }}
                                     className="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                   >
                                     <option value="">Choose...</option>
-                                    {question.options.map((opt, optIdx) => (
-                                      <option key={optIdx} value={opt}>
-                                        {question.questionType ===
-                                        "matching-headings"
-                                          ? [
-                                              "i",
-                                              "ii",
-                                              "iii",
-                                              "iv",
-                                              "v",
-                                              "vi",
-                                              "vii",
-                                              "viii",
-                                              "ix",
-                                              "x",
-                                            ][optIdx] || optIdx + 1
-                                          : String.fromCharCode(65 + optIdx)}
-                                      </option>
-                                    ))}
+                                    {question.features
+                                      ? question.features.map((feat, fIdx) => (
+                                          <option key={fIdx} value={feat.label}>
+                                            {feat.label}
+                                          </option>
+                                        ))
+                                      : question.options.map((opt, optIdx) => (
+                                          <option
+                                            key={optIdx}
+                                            value={
+                                              question.questionType ===
+                                              "matching-headings"
+                                                ? [
+                                                    "i",
+                                                    "ii",
+                                                    "iii",
+                                                    "iv",
+                                                    "v",
+                                                    "vi",
+                                                    "vii",
+                                                    "viii",
+                                                    "ix",
+                                                    "x",
+                                                  ][optIdx] || optIdx + 1
+                                                : String.fromCharCode(
+                                                    65 + optIdx,
+                                                  )
+                                            }
+                                          >
+                                            {question.questionType ===
+                                            "matching-headings"
+                                              ? [
+                                                  "i",
+                                                  "ii",
+                                                  "iii",
+                                                  "iv",
+                                                  "v",
+                                                  "vi",
+                                                  "vii",
+                                                  "viii",
+                                                  "ix",
+                                                  "x",
+                                                ][optIdx] || optIdx + 1
+                                              : String.fromCharCode(
+                                                  65 + optIdx,
+                                                )}
+                                          </option>
+                                        ))}
                                   </select>
                                 </div>
                               </div>
@@ -760,6 +810,93 @@ const TestTaking = () => {
                           </div>
                         ))}
                       </div>
+                    </div>
+                  )}
+
+                {/* Answer Input - Table Completion - NEW */}
+                {question.questionType === "table-completion" &&
+                  question.tableStructure && (
+                    <div className="ml-14 mt-4 overflow-x-auto">
+                      <table className="min-w-full border-collapse border border-gray-300 bg-white text-sm rounded-lg overflow-hidden shadow-sm">
+                        <thead className="bg-gray-100">
+                          <tr>
+                            {question.tableStructure.headers.map(
+                              (header, idx) => (
+                                <th
+                                  key={idx}
+                                  className="border border-gray-300 px-4 py-3 text-left font-bold text-gray-700 uppercase tracking-wider"
+                                >
+                                  {header}
+                                </th>
+                              ),
+                            )}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {question.tableStructure.rows.map((row, rIdx) => (
+                            <tr
+                              key={rIdx}
+                              className={
+                                rIdx % 2 === 0 ? "bg-white" : "bg-gray-50"
+                              }
+                            >
+                              {row.map((cell, cIdx) => (
+                                <td
+                                  key={cIdx}
+                                  className="border border-gray-300 px-4 py-2"
+                                >
+                                  {cell
+                                    .split(/(\{\{\d+\}\})/g)
+                                    .map((part, pIdx) => {
+                                      const match = part.match(/\{\{(\d+)\}\}/);
+                                      if (match) {
+                                        const answerIndex = match[1]; // "1", "2"...
+                                        return (
+                                          <span
+                                            key={pIdx}
+                                            className="inline-flex items-center gap-1"
+                                          >
+                                            <span className="text-xs font-bold text-gray-500 select-none">
+                                              ({answerIndex})
+                                            </span>
+                                            <input
+                                              type="text"
+                                              className={`w-32 px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                                                answers[question._id]?.[
+                                                  answerIndex
+                                                ]
+                                                  ? "bg-blue-50 border-blue-400 font-medium text-blue-800"
+                                                  : "border-gray-300"
+                                              }`}
+                                              value={
+                                                answers[question._id]?.[
+                                                  answerIndex
+                                                ] || ""
+                                              }
+                                              onChange={(e) => {
+                                                const currentAnswers =
+                                                  answers[question._id] || {};
+                                                handleAnswerChange(
+                                                  question._id,
+                                                  {
+                                                    ...currentAnswers,
+                                                    [answerIndex]:
+                                                      e.target.value,
+                                                  },
+                                                );
+                                              }}
+                                            />
+                                          </span>
+                                        );
+                                      }
+                                      return <span key={pIdx}>{part}</span>;
+                                    })}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                   )}
               </div>

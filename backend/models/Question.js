@@ -84,14 +84,31 @@ const questionSchema = new mongoose.Schema(
       default: true,
     },
 
-    // For matching questions (Headings, Information, Features)
+    // For matching questions (Headings,    // For Table Completion / Matching
     items: [
       {
-        label: { type: String, trim: true }, // e.g., 'A', 'B', '1'
-        text: { type: String, trim: true }, // The content/paragraph
-        correctAnswer: { type: String, trim: true }, // The matching option
+        label: String, // e.g., "1", "2" or "A", "B"
+        text: String, // The text/prompt for the sub-question
+        correctAnswer: String,
+        options: [String], // For dropdowns in table/matching
+        row: Number, // For table layout
+        col: Number, // For table layout
       },
     ],
+
+    // For Matching Features (User requested specific structure)
+    features: [
+      {
+        label: String, // "A", "B", "C"
+        text: String, // "Mark VanDam"
+      },
+    ],
+
+    // For Table Completion
+    tableStructure: {
+      headers: [String],
+      rows: [[String]], // 2D array representing the grid
+    },
 
     // Alternative correct answers (for spelling variations)
     alternativeAnswers: [
@@ -117,6 +134,12 @@ const questionSchema = new mongoose.Schema(
     explanation: {
       type: String,
       trim: true,
+    },
+
+    // Table Structure for Table Completion
+    tableStructure: {
+      headers: [String],
+      rows: [[String]],
     },
   },
   {
