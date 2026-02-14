@@ -4,6 +4,7 @@ const Session = require("../models/Session");
 const Test = require("../models/Test");
 const Section = require("../models/Section");
 const Question = require("../models/Question");
+const gradingEngine = require("../utils/gradingEngine"); // Shadow Grader
 
 // Normalize answer for comparison
 const normalizeAnswer = (answer) => {
@@ -554,6 +555,37 @@ exports.submitTest = async (req, res) => {
       teacherGradedAt: null,
       gradingNotes: null,
     });
+
+    // ============================================
+    // SHADOW GRADING CHECK (Safe Mode)
+    // ============================================
+    if (!needsManualGrading) {
+      try {
+        const shadowResult = gradingEngine.calculateResult(
+          session,
+          allQuestions,
+        );
+
+        // Compare Shadow vs Live
+        if (
+          shadowResult.correctAnswers !== correctAnswers ||
+          shadowResult.totalQuestions !== totalQuestions ||
+          shadowResult.incorrectAnswers !== incorrectAnswers
+        ) {
+          console.warn(`⚠️ [SHADOW GRADER MISMATCH] Session ID: ${sessionId}`);
+          console.warn(
+            `   Live:   Correct=${correctAnswers}, Total=${totalQuestions}, Incorrect=${incorrectAnswers}`,
+          );
+          console.warn(
+            `   Shadow: Correct=${shadowResult.correctAnswers}, Total=${shadowResult.totalQuestions}, Incorrect=${shadowResult.incorrectAnswers}`,
+          );
+        } else {
+          console.log(`✅ [SHADOW GRADER MATCH] Session ID: ${sessionId}`);
+        }
+      } catch (shadowError) {
+        console.error("⚠️ [SHADOW GRADER ERROR]", shadowError);
+      }
+    }
 
     res.status(201).json({
       message: "Test submitted successfully",
