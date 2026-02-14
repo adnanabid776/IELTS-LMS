@@ -131,7 +131,11 @@ const AnswerReview = () => {
           <div
             key={index}
             className={`bg-white rounded-lg shadow p-6 border-l-4 ${
-              item.isCorrect ? "border-green-500" : "border-red-500"
+              item.isCorrect
+                ? "border-green-500"
+                : item.isPartial
+                  ? "border-yellow-500"
+                  : "border-red-500"
             }`}
           >
             {/* Question */}
@@ -140,10 +144,17 @@ const AnswerReview = () => {
                 className={`px-3 py-1 rounded-full text-sm font-bold ${
                   item.isCorrect
                     ? "bg-green-100 text-green-800"
-                    : "bg-red-100 text-red-800"
+                    : item.isPartial
+                      ? "bg-yellow-100 text-yellow-800"
+                      : "bg-red-100 text-red-800"
                 }`}
               >
-                {item.isCorrect ? "✓" : "✗"}
+                {item.isCorrect ? "✓" : item.isPartial ? "⚠" : "✗"}
+                {item.maxScore > 1 && (
+                  <span className="ml-2 text-xs opacity-75">
+                    {item.score}/{item.maxScore}
+                  </span>
+                )}
               </span>
               <div className="flex-1">
                 <p className="text-gray-600 text-sm mb-1">
@@ -228,10 +239,20 @@ const AnswerReview = () => {
                               ? item.studentAnswer?.[subLabel]
                               : "";
                           const correctVal = subItem.correctAnswer;
-                          // Simple check (backend does more complex normalization)
-                          const isSubCorrect =
-                            normalizeAnswer(userVal) ===
-                            normalizeAnswer(correctVal);
+
+                          // Use backend grading result if available, fallback to simple check (legacy support)
+                          let isSubCorrect = false;
+                          if (
+                            item.itemDetails &&
+                            item.itemDetails[subLabel] !== undefined
+                          ) {
+                            isSubCorrect = item.itemDetails[subLabel];
+                          } else {
+                            // Fallback
+                            isSubCorrect =
+                              normalizeAnswer(userVal) ===
+                              normalizeAnswer(correctVal);
+                          }
 
                           return (
                             <tr

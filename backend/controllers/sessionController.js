@@ -89,7 +89,31 @@ exports.startTest = async (req, res) => {
         console.log("Previous session expired, creating new one");
         // Fall through to create new session below
       } else {
-        // Session is still valid - return existing session
+        // Check if session is paused - if so, resume it
+        if (existingSession.status === "paused") {
+          console.log("Resuming paused session");
+
+          // Update session to in-progress
+          existingSession.status = "in-progress";
+          existingSession.startedAt = new Date(); // Reset start time for new interval
+          // existingSession.timeRemaining is already correct from pause
+          await existingSession.save();
+
+          return res.json({
+            message: "Resuming paused session",
+            session: {
+              _id: existingSession._id,
+              status: "in-progress",
+              startedAt: existingSession.startedAt,
+              timeRemaining: existingSession.timeRemaining,
+              currentQuestionIndex: existingSession.currentQuestionIndex,
+              answeredCount: existingSession.answers.length,
+            },
+            isResuming: true,
+          });
+        }
+
+        // Session is still active - return existing session
         return res.json({
           message: "Resuming active session",
           session: {
@@ -580,6 +604,42 @@ exports.markAudioPlayed = async (req, res) => {
     });
   } catch (error) {
     console.error("Mark audio played error:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+// ==========================================
+// PAUSE SESSION (When user navigates away)
+// ==========================================
+exports.pauseSession = async (req, res) => {
+  try {
+    const { sessionId, timeRemaining } = req.body;
+    const userId = req.user.userId;
+
+    const session = await Session.findById(sessionId);
+
+    if (!session) {
+      return res.status(404).json({ error: "Session not found" });
+    }
+
+    if (session.userId.toString() !== userId) {
+      return res.status(403).json({ error: "Unauthorized" });
+    }
+
+    // Only pause if currently in-progress
+    if (session.status === "in-progress") {
+      session.status = "paused";
+      session.timeRemaining = timeRemaining; // Save exact remaining time
+      session.lastActivityAt = new Date();
+      await session.save();
+    }
+
+    res.json({
+      message: "Session paused",
+      status: session.status,
+      timeRemaining: session.timeRemaining,
+    });
+  } catch (error) {
+    console.error("Pause session error:", error);
     res.status(500).json({ error: "Server error" });
   }
 };

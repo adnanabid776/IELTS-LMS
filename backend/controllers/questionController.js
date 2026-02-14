@@ -108,7 +108,8 @@ exports.getQuestionsBySectionId = async (req, res) => {
     // Determine fields to select based on role
     let selectFields = "";
     if (userRole !== "admin" && userRole !== "teacher") {
-      selectFields = "-correctAnswer -explanation -alternativeAnswers";
+      selectFields =
+        "-correctAnswer -explanation -alternativeAnswers -items.correctAnswer -gradingRubric";
     }
 
     const questions = await Question.find({ sectionId })
@@ -122,7 +123,7 @@ exports.getQuestionsBySectionId = async (req, res) => {
       questions,
     });
   } catch (error) {
-    console.error("Get questions error: ", error);
+    console.error("Get questions error: ", error.message);
     res.status(500).json({ error: "Server error" });
   }
 };

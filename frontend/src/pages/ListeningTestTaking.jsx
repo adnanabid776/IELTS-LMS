@@ -641,7 +641,7 @@ const ListeningTestTaking = () => {
                     : "Options"}
                 </h5>
                 <ul className="space-y-1">
-                  {question.features
+                  {question.features && question.features.length > 0
                     ? question.features.map((feat, idx) => (
                         <li key={idx} className="text-sm text-gray-600">
                           <span className="font-bold mr-2 text-gray-800">
@@ -706,7 +706,7 @@ const ListeningTestTaking = () => {
                       className="w-full sm:w-40 p-2 border border-gray-300 rounded-lg focus:border-blue-500 outline-none"
                     >
                       <option value="">Select...</option>
-                      {question.features
+                      {question.features && question.features.length > 0
                         ? question.features.map((feat, fIdx) => (
                             <option key={fIdx} value={feat.label}>
                               {feat.label}

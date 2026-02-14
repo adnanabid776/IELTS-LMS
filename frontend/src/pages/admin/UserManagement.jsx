@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getAllUsersAdmin, deleteUserAdmin } from '../../services/api';
-import { toast } from 'react-toastify';
-import DashboardLayout from '../../components/Layout/DashboardLayout';
-import CreateUserModal from './components/CreateUserModal';
-import EditUserModal from './components/EditUserModal';
+import React, { useEffect, useState } from "react";
+// import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import DashboardLayout from "../../components/Layout/DashboardLayout";
+import CreateUserModal from "./components/CreateUserModal";
+import EditUserModal from "./components/EditUserModal";
+import { deleteUserAdmin, getAllUsersAdmin } from "../../services/api";
 
 const UserManagement = () => {
-  const navigate = useNavigate();
-  
+  // const navigate = useNavigate();
+
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   // Filters
-  const [roleFilter, setRoleFilter] = useState('all');
-  const [statusFilter, setStatusFilter] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
-  
+  const [roleFilter, setRoleFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
+
   // Modals
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -34,12 +34,12 @@ const UserManagement = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const response = await getAllUsersAdmin();
+      const response = await getAllUsersAdmin(); //admin getting all users
       setUsers(response.users);
       setFilteredUsers(response.users);
     } catch (error) {
-      console.error('Fetch users error:', error);
-      toast.error('Failed to load users');
+      console.error("Fetch users error:", error);
+      toast.error("Failed to load users");
     } finally {
       setLoading(false);
     }
@@ -49,22 +49,23 @@ const UserManagement = () => {
     let filtered = [...users];
 
     // Role filter
-    if (roleFilter !== 'all') {
-      filtered = filtered.filter(user => user.role === roleFilter);
+    if (roleFilter !== "all") {
+      filtered = filtered.filter((user) => user.role === roleFilter);
     }
 
     // Status filter
-    if (statusFilter !== 'all') {
-      const isActive = statusFilter === 'active';
-      filtered = filtered.filter(user => user.isActive === isActive);
+    if (statusFilter !== "all") {
+      const isActive = statusFilter === "active";
+      filtered = filtered.filter((user) => user.isActive === isActive);
     }
 
     // Search filter
     if (searchTerm) {
-      filtered = filtered.filter(user =>
-        user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.email.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter(
+        (user) =>
+          user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          user.email.toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
 
@@ -73,18 +74,18 @@ const UserManagement = () => {
 
   const handleDelete = async (userId, userName) => {
     const confirmed = window.confirm(
-      `Are you sure you want to deactivate ${userName}? This user will no longer be able to log in.`
+      `Are you sure you want to permanently delete ${userName}? This action cannot be undone.`,
     );
 
     if (!confirmed) return;
 
     try {
       await deleteUserAdmin(userId);
-      toast.success('User deactivated successfully');
+      toast.success("User deleted successfully");
       fetchUsers(); // Refresh list
     } catch (error) {
-      console.error('Delete user error:', error);
-      const errorMsg = error.response?.data?.error || 'Failed to deactivate user';
+      console.error("Delete user error:", error);
+      const errorMsg = error.response?.data?.error || "Failed to delete user";
       toast.error(errorMsg);
     }
   };
@@ -95,33 +96,33 @@ const UserManagement = () => {
   };
 
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     });
   };
 
   const getRoleBadgeColor = (role) => {
-    switch(role) {
-      case 'admin':
-        return 'bg-purple-100 text-purple-800';
-      case 'teacher':
-        return 'bg-green-100 text-green-800';
-      case 'student':
-        return 'bg-blue-100 text-blue-800';
+    switch (role) {
+      case "admin":
+        return "bg-purple-100 text-purple-800";
+      case "teacher":
+        return "bg-green-100 text-green-800";
+      case "student":
+        return "bg-blue-100 text-blue-800";
       default:
-        return 'bg-gray-100 text-gray-800';
+        return "bg-gray-100 text-gray-800";
     }
   };
 
   const stats = {
     total: users.length,
-    students: users.filter(u => u.role === 'student').length,
-    teachers: users.filter(u => u.role === 'teacher').length,
-    admins: users.filter(u => u.role === 'admin').length,
-    active: users.filter(u => u.isActive).length,
-    inactive: users.filter(u => !u.isActive).length
+    students: users.filter((u) => u.role === "student").length,
+    teachers: users.filter((u) => u.role === "teacher").length,
+    admins: users.filter((u) => u.role === "admin").length,
+    active: users.filter((u) => u.isActive).length,
+    inactive: users.filter((u) => !u.isActive).length,
   };
 
   return (
@@ -132,9 +133,7 @@ const UserManagement = () => {
           <h2 className="text-2xl font-bold text-gray-800 mb-2">
             User Management
           </h2>
-          <p className="text-gray-600">
-            Manage all system users
-          </p>
+          <p className="text-gray-600">Manage all system users</p>
         </div>
         <button
           onClick={() => setShowCreateModal(true)}
@@ -284,17 +283,21 @@ const UserManagement = () => {
                       {user.email}
                     </td>
                     <td className="px-6 py-4">
-                      <span className={`px-2 py-1 rounded-full text-xs font-semibold ${getRoleBadgeColor(user.role)}`}>
+                      <span
+                        className={`px-2 py-1 rounded-full text-xs font-semibold ${getRoleBadgeColor(user.role)}`}
+                      >
                         {user.role.toUpperCase()}
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                        user.isActive 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-red-100 text-red-800'
-                      }`}>
-                        {user.isActive ? 'ACTIVE' : 'INACTIVE'}
+                      <span
+                        className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                          user.isActive
+                            ? "bg-green-100 text-green-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
+                      >
+                        {user.isActive ? "ACTIVE" : "INACTIVE"}
                       </span>
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-600">
@@ -308,14 +311,17 @@ const UserManagement = () => {
                         >
                           Edit
                         </button>
-                        {user.isActive && (
-                          <button
-                            onClick={() => handleDelete(user._id, `${user.firstName} ${user.lastName}`)}
-                            className="px-3 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700 font-semibold"
-                          >
-                            Deactivate
-                          </button>
-                        )}
+                        <button
+                          onClick={() =>
+                            handleDelete(
+                              user._id,
+                              `${user.firstName} ${user.lastName}`,
+                            )
+                          }
+                          className="px-3 py-1 bg-red-600 text-white rounded text-xs hover:bg-red-700 font-semibold"
+                        >
+                          Delete
+                        </button>
                       </div>
                     </td>
                   </tr>
@@ -336,16 +342,16 @@ const UserManagement = () => {
             No users found
           </h3>
           <p className="text-gray-600 mb-6">
-            {searchTerm || roleFilter !== 'all' || statusFilter !== 'all'
-              ? 'Try adjusting your filters'
-              : 'Create your first user to get started'}
+            {searchTerm || roleFilter !== "all" || statusFilter !== "all"
+              ? "Try adjusting your filters"
+              : "Create your first user to get started"}
           </p>
-          {(searchTerm || roleFilter !== 'all' || statusFilter !== 'all') && (
+          {(searchTerm || roleFilter !== "all" || statusFilter !== "all") && (
             <button
               onClick={() => {
-                setSearchTerm('');
-                setRoleFilter('all');
-                setStatusFilter('all');
+                setSearchTerm("");
+                setRoleFilter("all");
+                setStatusFilter("all");
               }}
               className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
             >

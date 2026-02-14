@@ -90,7 +90,7 @@ exports.getSectionsByTestId = async (req, res) => {
       sections,
     });
   } catch (error) {
-    console.error("Get sections error:", error);
+    console.error("Get sections error:", error.message);
     res.status(500).json({ error: "Server error" });
   }
 };

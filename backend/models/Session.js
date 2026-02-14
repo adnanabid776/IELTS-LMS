@@ -19,7 +19,7 @@ const sessionSchema = new mongoose.Schema(
     // Session status
     status: {
       type: String,
-      enum: ["in-progress", "completed", "abandoned", "expired"],
+      enum: ["in-progress", "paused", "completed", "abandoned", "expired"],
       default: "in-progress",
     },
 
@@ -148,8 +148,14 @@ sessionSchema.methods.isExpired = function () {
 
 // Method to calculate remaining time
 sessionSchema.methods.getRemainingTime = function () {
+  // If paused, return stored timeRemaining directly
+  if (this.status === "paused") {
+    return this.timeRemaining;
+  }
+
+  // If in-progress, calculate based on elapsed time since startedAt (really lastResumedAt)
   const elapsed = (Date.now() - this.startedAt.getTime()) / 1000;
-  const remaining = this.timeRemaining - elapsed; // Use actual test duration
+  const remaining = this.timeRemaining - elapsed;
   return Math.max(0, Math.floor(remaining));
 };
 
@@ -158,7 +164,7 @@ sessionSchema.statics.findActiveSession = function (userId, testId) {
   return this.findOne({
     userId,
     testId,
-    status: "in-progress",
+    status: { $in: ["in-progress", "paused"] }, // Include paused sessions
   });
 };
 

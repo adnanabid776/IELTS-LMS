@@ -61,7 +61,7 @@ const questionSchema = new mongoose.Schema(
       required: function () {
         return (
           this.questionType !== "essay" &&
-          this.questionType !== "speaking-prompt" &&
+          // this.questionType !== "speaking-prompt" &&
           this.questionType !== "writing-task"
         );
       },

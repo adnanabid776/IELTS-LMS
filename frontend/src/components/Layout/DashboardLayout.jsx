@@ -61,7 +61,12 @@ const DashboardLayout = ({ children, title, hideHeader = false }) => {
         {!hideHeader && <Header user={user} title={title} />}
 
         {/* Page Content */}
-        <main className="flex-1 overflow-y-auto p-6">{children}</main>
+        <main
+          id="dashboard-main-content"
+          className="flex-1 overflow-y-auto p-6"
+        >
+          {children}
+        </main>
       </div>
     </div>
   );

@@ -12,21 +12,21 @@ const Results = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const fetchResult = async () => {
+      try {
+        setLoading(true);
+        const response = await getResultById(resultId);
+        setResult(response.result);
+      } catch (error) {
+        console.error("Fetch result error:", error);
+        toast.error("Failed to load results");
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchResult();
   }, [resultId]);
-
-  const fetchResult = async () => {
-    try {
-      setLoading(true);
-      const response = await getResultById(resultId);
-      setResult(response.result);
-    } catch (error) {
-      console.error("Fetch result error:", error);
-      toast.error("Failed to load results");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const getBandColor = (band) => {
     if (!band) return "text-gray-600"; // ← FIX: Handle null
@@ -107,7 +107,9 @@ const Results = () => {
           <h2 className="text-3xl font-bold text-gray-800 mb-2">
             🎉 Test Completed!
           </h2>
-          <p className="text-gray-600 mb-6">Great job on completing the test!</p>
+          <p className="text-gray-600 mb-6">
+            Great job on completing the test!
+          </p>
 
           <div className="inline-block">
             <p className="text-sm text-gray-600 mb-2">Your Band Score</p>
@@ -137,7 +139,7 @@ const Results = () => {
 
       {/* Performance Overview - Only show if auto-graded OR graded by teacher */}
       {!isPendingGrading && (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
           <div className="bg-white rounded-lg shadow p-6">
             <p className="text-gray-500 text-sm mb-1">Total Questions</p>
             <p className="text-3xl font-bold text-gray-800">
@@ -168,6 +170,33 @@ const Results = () => {
                   {result.percentage || 0}%
                 </p>
               </div>
+              <div className="bg-white rounded-lg shadow p-6">
+                <p className="text-gray-500 text-sm mb-1">Unanswered</p>
+                <p className="text-3xl font-bold text-orange-600">
+                  {result.unanswered || 0}
+                </p>
+              </div>
+
+              <div className="bg-white rounded-lg shadow p-6">
+                <p className="text-gray-500 text-sm mb-1">Time Taken</p>
+                <p className="text-3xl font-bold text-purple-600">
+                  {result.timeTaken
+                    ? `${Math.floor(result.timeTaken / 60)}m ${
+                        result.timeTaken % 60
+                      }s`
+                    : "N/A"}
+                </p>
+              </div>
+
+              <div className="bg-white rounded-lg shadow p-6 relative group">
+                <p className="text-gray-500 text-sm mb-1">Submitted At</p>
+                <p className="text-xl font-bold text-gray-700 truncate">
+                  {new Date(result.createdAt).toLocaleDateString()}
+                </p>
+                <span className="text-xs text-gray-500">
+                  {new Date(result.createdAt).toLocaleTimeString()}
+                </span>
+              </div>
             </>
           )}
 
@@ -181,7 +210,9 @@ const Results = () => {
                 </p>
               </div>
               <div className="bg-white rounded-lg shadow p-6">
-                <p className="text-gray-500 text-xs mb-1">Coherence & Cohesion</p>
+                <p className="text-gray-500 text-xs mb-1">
+                  Coherence & Cohesion
+                </p>
                 <p className="text-2xl font-bold text-blue-600">
                   {result.writingScores.coherenceCohesion}
                 </p>
@@ -198,7 +229,9 @@ const Results = () => {
           {result.isManuallyGraded && result.speakingScores && (
             <>
               <div className="bg-white rounded-lg shadow p-6">
-                <p className="text-gray-500 text-xs mb-1">Fluency & Coherence</p>
+                <p className="text-gray-500 text-xs mb-1">
+                  Fluency & Coherence
+                </p>
                 <p className="text-2xl font-bold text-blue-600">
                   {result.speakingScores.fluencyCoherence}
                 </p>

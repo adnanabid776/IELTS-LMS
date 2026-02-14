@@ -34,7 +34,7 @@ axios.interceptors.response.use(
 const getToken = () => localStorage.getItem("token");
 
 const handleApiError = (error, customMessage) => {
-  console.error("API Error:", error);
+  // console.error("API Error:", error); // Security: Avoid logging full error objects
 
   if (error.response) {
     const message =
@@ -192,6 +192,20 @@ export const bulkSaveAnswers = async (sessionId, answers) => {
   const response = await axios.post(
     `${API_URL}/sessions/bulk-save`,
     { sessionId, answers },
+    {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    },
+  );
+  return response.data;
+};
+
+// Pause test session (save time remaining)
+export const pauseTestSession = async (sessionId, timeRemaining) => {
+  const response = await axios.post(
+    `${API_URL}/sessions/pause`,
+    { sessionId, timeRemaining },
     {
       headers: {
         Authorization: `Bearer ${getToken()}`,

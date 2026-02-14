@@ -594,7 +594,10 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg shadow-lg p-6 text-white transform hover:scale-105 transition-transform">
+            <div
+              onClick={() => navigate("/admin/questions")}
+              className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg shadow-lg p-6 text-white cursor-pointer transform hover:scale-105 transition-transform"
+            >
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-green-100 text-sm">Question Bank</p>
@@ -609,7 +612,10 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg shadow-lg p-6 text-white transform hover:scale-105 transition-transform">
+            <div
+              onClick={() => navigate("/admin/tests")}
+              className="bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg shadow-lg p-6 text-white cursor-pointer transform hover:scale-105 transition-transform"
+            >
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-purple-100 text-sm">Tests Created</p>
@@ -626,7 +632,10 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-orange-500 to-red-600 rounded-lg shadow-lg p-6 text-white transform hover:scale-105 transition-transform">
+            <div
+              onClick={() => navigate("/admin/tests")}
+              className="bg-gradient-to-br from-orange-500 to-red-600 rounded-lg shadow-lg p-6 text-white cursor-pointer transform hover:scale-105 transition-transform"
+            >
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-orange-100 text-sm">Test Attempts</p>
@@ -687,10 +696,12 @@ const Dashboard = () => {
               >
                 👥 Manage Users
               </button>
-              <button className="p-4 border-2 border-green-600 text-green-600 rounded-lg hover:bg-linear-to-r hover:from-green-600 hover:to-emerald-600 hover:text-white font-semibold transition-all">
+              <button className="p-4 border-2 border-green-600 text-green-600 rounded-lg hover:bg-linear-to-r hover:from-green-600 hover:to-emerald-600 hover:text-white font-semibold transition-all"
+              onClick={()=> navigate('/admin/questions')}>
                 ❓ Question Bank
               </button>
-              <button className="p-4 border-2 border-purple-600 text-purple-600 rounded-lg hover:bg-linear-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white font-semibold transition-all">
+              <button className="p-4 border-2 border-purple-600 text-purple-600 rounded-lg hover:bg-linear-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white font-semibold transition-all"
+              onClick={()=> navigate('/admin/tests')}>
                 📝 Manage Tests
               </button>
             </div>

@@ -627,12 +627,11 @@ exports.deleteUser = async (req, res) => {
       return res.status(400).json({ error: "Cannot delete your own account" });
     }
 
-    // Soft delete (deactivate instead of removing from DB)
-    user.isActive = false;
-    await user.save();
+    // Hard delete (remove from DB entirely as requested)
+    await User.findByIdAndDelete(userId);
 
     res.json({
-      message: "User deactivated successfully",
+      message: "User deleted successfully",
     });
   } catch (error) {
     console.error("Delete user error:", error);

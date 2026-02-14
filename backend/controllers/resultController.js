@@ -10,59 +10,68 @@ const normalizeAnswer = (answer) => {
   if (!answer) return "";
   return answer
     .toString()
+    .replace(/<[^>]*>/g, "") // Strip HTML tags
     .toLowerCase()
     .trim()
     .replace(/^(the|a|an)\s+/i, "") // Remove leading articles
     .replace(/\s+/g, " ") // Normalize spaces
     .replace(/[.,;!?]/g, ""); // Remove punctuation
 };
-
-// Check if answer is correct (handles fuzzy matching)
+// Check if answer is correct (handles fuzzy matching based on type)
 const isAnswerCorrect = (
   userAnswer,
   correctAnswer,
   alternativeAnswers = [],
+  questionType = "short-answer", // Default to lenient
 ) => {
   if (!userAnswer) return false;
-
-  // Handle array answers (multiple choice with multiple selections)
-  if (Array.isArray(userAnswer)) {
-    const normalizedUserAnswers = userAnswer.map((a) => normalizeAnswer(a));
-    const normalizedCorrectAnswer = normalizeAnswer(correctAnswer);
-
-    // Check if any user answer matches
-    return normalizedUserAnswers.some(
-      (ua) =>
-        ua === normalizedCorrectAnswer ||
-        ua.includes(normalizedCorrectAnswer) ||
-        normalizedCorrectAnswer.includes(ua),
-    );
-  }
-
-  const normalizedUserAnswer = normalizeAnswer(userAnswer);
-  const normalizedCorrectAnswer = normalizeAnswer(correctAnswer);
-
-  // Check exact match with correct answer
-  if (normalizedUserAnswer === normalizedCorrectAnswer) return true;
-
-  // Check if user answer contains correct answer or vice versa
   if (
-    normalizedUserAnswer.includes(normalizedCorrectAnswer) ||
-    normalizedCorrectAnswer.includes(normalizedUserAnswer)
-  ) {
-    return true;
+    !correctAnswer &&
+    (!alternativeAnswers || alternativeAnswers.length === 0)
+  )
+    return false; // No correct answer defined = cannot be correct
+
+  // Normalize
+  const normUser = normalizeAnswer(userAnswer);
+  const normCorrect = normalizeAnswer(correctAnswer);
+
+  // 1. Strict Matching Types
+  const strictTypes = [
+    "multiple-choice",
+    "multiple-choice-multi",
+    "true-false-not-given",
+    "yes-no-not-given",
+    "matching-headings",
+    "matching-information",
+    "matching-features",
+    "map-labeling",
+    "table-completion", // Table completion usually expects specific words/numbers
+  ];
+
+  if (strictTypes.includes(questionType)) {
+    // Check main correct answer
+    if (normUser === normCorrect) return true;
+
+    // Check alternatives (keywords) strict match
+    for (let alt of alternativeAnswers) {
+      if (normUser === normalizeAnswer(alt)) return true;
+    }
+
+    return false;
   }
+
+  // 2. Lenient Matching (Fill in the blanks / Short Answer)
+  // Even for short-answer, we usually want EXACT match of the keyword.
+  // "includes" logic leads to false positives like "ropesodk" matches "ropes".
+  // Normalization handles capitalization, punctuation, and articles.
+
+  // Check exact match first
+  if (normUser === normCorrect) return true;
 
   // Check alternative answers
   for (let alt of alternativeAnswers) {
-    const normalizedAlt = normalizeAnswer(alt);
-    if (normalizedUserAnswer === normalizedAlt) return true;
-    if (
-      normalizedUserAnswer.includes(normalizedAlt) ||
-      normalizedAlt.includes(normalizedUserAnswer)
-    ) {
-      return true;
-    }
+    const normAlt = normalizeAnswer(alt);
+    if (normUser === normAlt) return true;
   }
 
   return false;
@@ -70,10 +79,10 @@ const isAnswerCorrect = (
 
 // Calculate band score from correct answers
 const calculateBandScore = (correctAnswers, totalQuestions, module) => {
+  if (totalQuestions === 0) return 0;
   const percentage = (correctAnswers / totalQuestions) * 100;
 
   // IELTS band score conversion (simplified)
-  // In real implementation, use official IELTS conversion tables
   if (percentage >= 90) return 9;
   if (percentage >= 82) return 8.5;
   if (percentage >= 75) return 8;
@@ -95,7 +104,7 @@ const calculateBandScore = (correctAnswers, totalQuestions, module) => {
 // ==========================================
 // Helper to calculate points for a question
 const calculatePoints = (userAnswer, question) => {
-  // 1. Composite Types (Map Labeling, Matching)
+  // 1. Composite Types (Map Labeling, Matching, Table Completion)
   if (
     question.questionType === "map-labeling" ||
     question.questionType === "matching-headings" ||
@@ -105,39 +114,186 @@ const calculatePoints = (userAnswer, question) => {
   ) {
     const items = question.items || [];
     let scored = 0;
-    const total = items.length; // Each item counts as one question/point
+    let attempted = 0;
+    const total = items.length;
+    const itemDetails = {}; // Map label -> boolean (isCorrect)
 
     if (!userAnswer || typeof userAnswer !== "object") {
-      return { scored: 0, total };
+      // Mark all as incorrect
+      items.forEach((item) => {
+        itemDetails[item.label] = false;
+      });
+      return { scored: 0, total, attempted: 0, itemDetails };
     }
 
     items.forEach((item) => {
-      // userAnswer is expected to be { "A": "Option X", "B": "Option Y" }
-      const userVal = userAnswer[item.label];
-      if (isAnswerCorrect(userVal, item.correctAnswer)) {
-        scored++;
+      const userVal = userAnswer[item.label] || userAnswer[String(item.label)];
+      let isItemCorrect = false;
+
+      // Check if this specific item was attempted
+      if (userVal && userVal.trim() !== "") {
+        attempted++;
+
+        // SPECIAL HANDLING FOR MATCHING TYPES (Headings, Information, Features)
+        // Correct answer is usually a single letter (A, B, C...)
+        // User answer might be "Paragraph A" or "Section B" or just "A"
+        let normalizedUserVal = userVal;
+
+        if (
+          question.questionType === "matching-headings" ||
+          question.questionType === "matching-information" ||
+          question.questionType === "matching-features"
+        ) {
+          // Extract just the letter if it looks like "Paragraph X"
+          // Regex to find a lone letter or "Paragraph X"
+          // But simpler: just take the last word if it's a single letter?
+          // Or safer: specific replace.
+          const match = userVal.match(/\b([A-Z])\b/i); // Find a single letter boundary
+          if (match) {
+            normalizedUserVal = match[0].toUpperCase();
+          }
+        }
+
+        // Check correctness using the normalized value for matching types
+        // For others (Map/Table), use original userVal
+        const valToCheck =
+          question.questionType === "matching-headings" ||
+          question.questionType === "matching-information" ||
+          question.questionType === "matching-features"
+            ? normalizedUserVal
+            : userVal;
+
+        // Use question options or item options for resolution
+        const targetOptions =
+          question.options && question.options.length > 0
+            ? question.options
+            : item.options && item.options.length > 0
+              ? item.options
+              : [];
+
+        // 2. Resolve Correct Answer to Label if it's a long string found in options
+        // If correctAnswer is NOT a single letter, try to find it in options.
+        let resolvedCorrectAnswer = item.correctAnswer;
+
+        if (
+          item.correctAnswer &&
+          item.correctAnswer.length > 1 &&
+          targetOptions.length > 0
+        ) {
+          const normCorrect = normalizeAnswer(item.correctAnswer);
+
+          // Strategy 1: Exact Match (Normalized)
+          let optionIndex = targetOptions.findIndex(
+            (opt) => normalizeAnswer(opt) === normCorrect,
+          );
+
+          // Strategy 2: Inclusion (if exact match fails)
+          if (optionIndex === -1) {
+            optionIndex = targetOptions.findIndex((opt) => {
+              const normOpt = normalizeAnswer(opt);
+              if (normCorrect.length < 15 || normOpt.length < 15) return false;
+              return (
+                normOpt.includes(normCorrect) || normCorrect.includes(normOpt)
+              );
+            });
+          }
+
+          // Strategy 3: Token Overlap (Best effort for messy text)
+          if (optionIndex === -1 && normCorrect.length > 20) {
+            optionIndex = targetOptions.findIndex((opt) => {
+              const normOpt = normalizeAnswer(opt);
+              const tokensCorrect = new Set(
+                normCorrect.split(" ").filter((t) => t.length > 3),
+              );
+              const tokensOpt = new Set(
+                normOpt.split(" ").filter((t) => t.length > 3),
+              );
+
+              if (tokensCorrect.size < 5) return false;
+
+              let shared = 0;
+              tokensCorrect.forEach((t) => {
+                if (tokensOpt.has(t)) shared++;
+              });
+
+              const overlap = shared / tokensCorrect.size;
+              return overlap > 0.6;
+            });
+          }
+
+          if (optionIndex !== -1) {
+            // Convert Index to Letter (0->A, 1->B)
+            resolvedCorrectAnswer = String.fromCharCode(65 + optionIndex);
+            // console.log(`[Grading] Resolved long answer to ${resolvedCorrectAnswer} for item ${item.label}`);
+          } else {
+            console.warn(
+              `[Grading Warning] Could not resolve correct answer text to any option for Item ${item.label}. DB Mismatch likely.`,
+            );
+            console.warn(
+              `Correct Text: ${item.correctAnswer.substring(0, 50)}...`,
+            );
+          }
+        }
+
+        if (
+          isAnswerCorrect(
+            valToCheck,
+            resolvedCorrectAnswer,
+            item.options || [],
+            [],
+            question.questionType,
+          )
+        ) {
+          scored++;
+          isItemCorrect = true;
+        }
       }
+      itemDetails[item.label] = isItemCorrect;
     });
 
-    return { scored, total };
+    return { scored, total, attempted, itemDetails };
   }
 
+  // 2. Multiple Choice Multi
   if (question.questionType === "multiple-choice-multi") {
+    // For multi-choice, we need to check how many were selected vs total allowed?
+    // IF items exist (unlikely for MC-Multi in this schema), handle like composite.
+
+    // Attempted logic:
+    const isAttempted = userAnswer && userAnswer.length > 0;
+
     const isCorrect = isAnswerCorrect(
       userAnswer,
       question.correctAnswer,
       question.alternativeAnswers,
+      question.questionType,
     );
-    return { scored: isCorrect ? 1 : 0, total: 1 };
+    return {
+      scored: isCorrect ? 1 : 0,
+      total: 1,
+      attempted: isAttempted ? 1 : 0,
+    };
   }
 
-  // 3. Standard Types
+  // 3. Standard Types (Short Answer, MC-Std, etc)
   const isCorrect = isAnswerCorrect(
     userAnswer,
     question.correctAnswer,
     question.alternativeAnswers,
+    question.questionType,
   );
-  return { scored: isCorrect ? 1 : 0, total: 1 };
+
+  const isAttempted =
+    userAnswer &&
+    (typeof userAnswer === "string"
+      ? userAnswer.trim().length > 0
+      : !!userAnswer);
+
+  return {
+    scored: isCorrect ? 1 : 0,
+    total: 1,
+    attempted: isAttempted ? 1 : 0,
+  };
 };
 
 // ==========================================
@@ -210,12 +366,6 @@ exports.submitTest = async (req, res) => {
         // Calculate points
         const { scored, total } = calculatePoints(answer.userAnswer, question);
 
-        // Update Totals
-        // Note: totalQuestionsCalc will be summed from ALL questions later,
-        // but for covered questions we track here?
-        // Better to iterate ALL questions to get accurate Total.
-        // Here we just track correct/incorrect.
-
         correctAnswers += scored;
 
         // Incorrect logic is tricky with partial points.
@@ -251,26 +401,19 @@ exports.submitTest = async (req, res) => {
         );
         const userAnswer = answerEntry ? answerEntry.userAnswer : null;
 
-        const { scored, total } = calculatePoints(userAnswer, q);
+        const { scored, total, attempted } = calculatePoints(userAnswer, q);
 
         totalQuestionsCalc += total;
         correctAnswers += scored;
 
-        // Determine if unanswered
-        // Partial answer (some map items filled) is treated as attempted.
-        // Totally empty userAnswer is unanswered.
-        const isAttempted =
-          userAnswer &&
-          ((typeof userAnswer === "string" && userAnswer.trim()) ||
-            (Array.isArray(userAnswer) && userAnswer.length > 0) ||
-            (typeof userAnswer === "object" &&
-              Object.keys(userAnswer).length > 0));
+        // Unanswered = Total Items - Attempted Items
+        const qUnanswered = total - attempted;
+        unanswered += qUnanswered;
 
-        if (!isAttempted) {
-          unanswered += total; // Count all potential points as unanswered
-        } else {
-          incorrectAnswers += total - scored;
-        }
+        // Incorrect = Attempted Items - Scored (Correct) Items
+        // (If I attempted 3, and got 1 right, then 2 were wrong)
+        const qIncorrect = attempted - scored;
+        incorrectAnswers += qIncorrect;
 
         // Breakdown
         if (!questionTypeBreakdown[q.questionType]) {
@@ -411,15 +554,6 @@ exports.submitTest = async (req, res) => {
       teacherGradedAt: null,
       gradingNotes: null,
     });
-
-    // Update session status if not already completed
-    // if (session.status !== 'completed') {
-    //   session.status = "completed";
-    //   session.completedAt = new Date();
-    //   session.score = correctAnswers;
-    //   session.bandScore = bandScore;
-    //   await session.save();
-    // }
 
     res.status(201).json({
       message: "Test submitted successfully",
@@ -568,38 +702,8 @@ exports.getDetailedResult = async (req, res) => {
         .replace(/[.,;!?]/g, "");
     };
 
-    const isAnswerCorrect = (
-      userAnswer,
-      correctAnswer,
-      alternativeAnswers = [],
-    ) => {
-      if (!userAnswer) return false;
-
-      const normalizedUserAnswer = normalizeAnswer(userAnswer);
-      const normalizedCorrectAnswer = normalizeAnswer(correctAnswer);
-
-      if (normalizedUserAnswer === normalizedCorrectAnswer) return true;
-
-      if (
-        normalizedUserAnswer.includes(normalizedCorrectAnswer) ||
-        normalizedCorrectAnswer.includes(normalizedUserAnswer)
-      ) {
-        return true;
-      }
-
-      for (let alt of alternativeAnswers) {
-        const normalizedAlt = normalizeAnswer(alt);
-        if (normalizedUserAnswer === normalizedAlt) return true;
-        if (
-          normalizedUserAnswer.includes(normalizedAlt) ||
-          normalizedAlt.includes(normalizedUserAnswer)
-        ) {
-          return true;
-        }
-      }
-
-      return false;
-    };
+    // NOTE: isAnswerCorrect logic is now handled by calculatePoints (shared)
+    // We don't need a local definition here anymore.
 
     // Build answer comparison
     const answerReview = allQuestions.map((question) => {
@@ -610,11 +714,9 @@ exports.getDetailedResult = async (req, res) => {
           a.questionId._id.toString() === question._id.toString(),
       );
 
-      const isCorrect = isAnswerCorrect(
-        studentAnswer?.userAnswer,
-        question.correctAnswer,
-        question.alternativeAnswers,
-      );
+      const userVal = studentAnswer?.userAnswer;
+      // Use the shared calculatePoints logic to get accurate score/status
+      const { scored, total, itemDetails } = calculatePoints(userVal, question);
 
       return {
         questionNumber: question.questionNumber,
@@ -624,10 +726,14 @@ exports.getDetailedResult = async (req, res) => {
         items: question.items, // Add items for matching/table types
         features: question.features, // Add features for Matching Features
         tableStructure: question.tableStructure, // Add table structure
-        studentAnswer: studentAnswer?.userAnswer, // RAW answer (object or string)
+        studentAnswer: userVal, // RAW answer (object or string)
         correctAnswer: question.correctAnswer,
         alternativeAnswers: question.alternativeAnswers,
-        isCorrect,
+        isCorrect: scored === total, // Fully correct (Green)
+        score: scored, // Partial score
+        maxScore: total, // Total possible
+        isPartial: scored > 0 && scored < total, // Partial flag
+        itemDetails, // Per-item correctness for composite questions
         explanation: question.explanation,
       };
     });
@@ -667,13 +773,6 @@ exports.teacherGradeResult = async (req, res) => {
     if (!result) {
       return res.status(404).json({ error: "Result not found" });
     }
-
-    // Check if this is a manual grading module
-    // if (result.module !== "writing" && result.module !== "speaking") {
-    //   return res.status(400).json({
-    //     error: "This result is auto-graded. Manual grading not needed.",
-    //   });
-    // }
 
     // Update result with teacher's grades
     result.bandScore = bandScore;

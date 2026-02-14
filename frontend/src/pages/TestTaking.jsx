@@ -9,6 +9,7 @@ import {
   submitTestSession,
   submitTestResult,
   updateSubmissionStatus,
+  pauseTestSession,
 } from "../services/api";
 import { toast } from "react-toastify";
 import DashboardLayout from "../components/Layout/DashboardLayout";
@@ -73,12 +74,77 @@ const TestTaking = () => {
   useEffect(() => {
     if (!session || loading) return;
 
+    // Auto-save answers every 30 seconds
     autoSaveInterval.current = setInterval(() => {
       saveBulkAnswers();
-    }, 30000); // 30 seconds
+    }, 30000);
 
-    return () => clearInterval(autoSaveInterval.current);
+    return () => {
+      // Clear auto-save interval
+      if (autoSaveInterval.current) {
+        clearInterval(autoSaveInterval.current);
+      }
+    };
   }, [answers, session, loading]);
+
+  // Handle Pause on Unmount / Navigation
+  useEffect(() => {
+    const handleUnmount = async () => {
+      if (session && !isSubmitting && session.status !== "completed") {
+        try {
+          // Use sendBeacon for reliable unmount requests if supported, fallback to API
+          const isPageHide = true; // Flag to indicate this is happening on hide/unload
+
+          // We can't use async await reliably in unload, so we use sendBeacon or synchronous XHR if needed
+          // But for React Router navigation (component unmount), standard async works fine.
+
+          // NOTE: We rely on the timeRemaining state which is closure-captured.
+          // To get fresh state we might need a ref, but here we can trust timeRemaining from render scope
+          // strictly if this effect dependency includes timeRemaining or if we use a ref.
+
+          // BETTER APPROACH: Use a Ref for timeRemaining to always get latest value in cleanup
+        } catch (error) {
+          console.error("Pause session error:", error);
+        }
+      }
+    };
+
+    return () => {
+      // Logic moved to a separate ref-based cleanup to access latest state
+    };
+  }, []); // Only run once to setup? No, we need dependencies.
+
+  // Ref to hold latest time for cleanup
+  const timeRemainingRef = useRef(timeRemaining);
+  const sessionRef = useRef(session);
+  const isSubmittingRef = useRef(isSubmitting);
+
+  useEffect(() => {
+    timeRemainingRef.current = timeRemaining;
+    sessionRef.current = session;
+    isSubmittingRef.current = isSubmitting;
+  }, [timeRemaining, session, isSubmitting]);
+
+  // Actual Cleanup Effect
+  useEffect(() => {
+    return () => {
+      const currentSession = sessionRef.current;
+      const currentTime = timeRemainingRef.current;
+      const submitting = isSubmittingRef.current;
+
+      if (
+        currentSession &&
+        !submitting &&
+        currentSession.status === "in-progress"
+      ) {
+        console.log("Pausing session...", currentTime);
+        // Call pause API
+        pauseTestSession(currentSession._id, currentTime).catch((err) =>
+          console.error("Failed to pause session:", err),
+        );
+      }
+    };
+  }, []);
 
   //warning for Remaining 5 mins
   useEffect(() => {
@@ -244,13 +310,13 @@ const TestTaking = () => {
   const handleNextSection = () => {
     if (currentSectionIndex < sections.length - 1) {
       setCurrentSectionIndex((prev) => prev + 1);
-      window.scrollTo(0, 0);
+      document.getElementById("dashboard-main-content")?.scrollTo(0, 0);
     }
   };
   const handlePreviousSection = () => {
     if (currentSectionIndex > 0) {
       setCurrentSectionIndex((prev) => prev - 1);
-      window.scrollTo(0, 0);
+      document.getElementById("dashboard-main-content")?.scrollTo(0, 0);
     }
   };
 
@@ -678,7 +744,7 @@ const TestTaking = () => {
                         </h5>
                         <ul className="space-y-1">
                           {/* Handle Features (Objects) or Options (Strings) */}
-                          {question.features
+                          {question.features && question.features.length > 0
                             ? question.features.map((feat, idx) => (
                                 <li key={idx} className="text-sm text-gray-600">
                                   <span className="font-bold mr-2 text-gray-800">
@@ -755,7 +821,8 @@ const TestTaking = () => {
                                     className="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                   >
                                     <option value="">Choose...</option>
-                                    {question.features
+                                    {question.features &&
+                                    question.features.length > 0
                                       ? question.features.map((feat, fIdx) => (
                                           <option key={fIdx} value={feat.label}>
                                             {feat.label}
