@@ -11,9 +11,6 @@ exports.configureCloudinary = () => {
 
   if (!cloudName || !apiKey || !apiSecret) {
     console.error("❌ CLOUDINARY ERROR: Missing credentials!");
-    console.error("  CLOUDINARY_CLOUD_NAME:", cloudName ? "✅" : "❌ MISSING");
-    console.error("  CLOUDINARY_API_KEY:", apiKey ? "✅" : "❌ MISSING");
-    console.error("  CLOUDINARY_API_SECRET:", apiSecret ? "✅" : "❌ MISSING");
     return;
   }
 
@@ -23,7 +20,7 @@ exports.configureCloudinary = () => {
     api_secret: apiSecret,
   });
 
-  console.log("✅ Cloudinary configured for cloud:", cloudName);
+  // console.log("✅ Cloudinary configured for cloud:", cloudName);
 };
 
 // ============================================
@@ -36,7 +33,7 @@ exports.uploadImage = async (req, res) => {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
-    console.log("📤 Uploading image:", req.file.originalname);
+    // console.log("📤 Uploading image:", req.file.originalname);
 
     // Upload to Cloudinary
     const result = await cloudinary.uploader.upload(req.file.path, {
@@ -50,9 +47,11 @@ exports.uploadImage = async (req, res) => {
     });
 
     // Delete temporary file
-    fs.unlinkSync(req.file.path);
+    if (fs.existsSync(req.file.path)) {
+      fs.unlinkSync(req.file.path);
+    }
 
-    console.log("✅ Image uploaded:", result.secure_url);
+    // console.log("✅ Image uploaded:", result.secure_url);
 
     // Return URL
     res.json({
@@ -85,7 +84,7 @@ exports.uploadAudio = async (req, res) => {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
-    console.log("📤 Uploading audio:", req.file.originalname);
+    // console.log("📤 Uploading audio:", req.file.originalname);
 
     // Upload to Cloudinary (audio counts as 'video' resource_type)
     const result = await cloudinary.uploader.upload(req.file.path, {
@@ -95,9 +94,11 @@ exports.uploadAudio = async (req, res) => {
     });
 
     // Delete temporary file
-    fs.unlinkSync(req.file.path);
+    if (fs.existsSync(req.file.path)) {
+      fs.unlinkSync(req.file.path);
+    }
 
-    console.log("✅ Audio uploaded:", result.secure_url);
+    // console.log("✅ Audio uploaded:", result.secure_url);
 
     // Return URL
     res.json({
@@ -135,7 +136,7 @@ exports.deleteFile = async (req, res) => {
     // Delete from Cloudinary
     await cloudinary.uploader.destroy(publicId);
 
-    console.log("🗑️ File deleted:", publicId);
+    // console.log("🗑️ File deleted:", publicId);
 
     res.json({ message: "File deleted successfully" });
   } catch (error) {

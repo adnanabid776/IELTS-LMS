@@ -25,7 +25,15 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
         ["", ""],
         ["", ""],
       ],
-    }, // ✅ ADDED
+    },
+    // ✅ ADDED: Summary Config Initial State
+    summaryConfig: {
+      answerMode: "typed",
+      wordLimitType: "no-more-than",
+      maxWords: 1,
+      customInstruction: "",
+      options: ["", "", "", ""],
+    },
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
@@ -155,7 +163,6 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
   };
 
   // --- Items Management for Matching Headings ---
-  // Initialize items when switching to matching type
   React.useEffect(() => {
     if (
       (formData.questionType === "matching-headings" ||
@@ -260,6 +267,20 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
         newErrors.items = "At least 1 answer is required";
       }
       delete newErrors.correctAnswer;
+    } else if (formData.questionType === "summary-completion") {
+      // Summary Completion Validation
+      if (formData.summaryConfig.answerMode === "select") {
+        const filledOptions = formData.summaryConfig.options.filter((o) =>
+          o.trim(),
+        );
+        if (filledOptions.length < 2) {
+          newErrors.summaryOptions =
+            "At least 2 options are required for Select mode";
+        }
+      }
+      if (formData.summaryConfig.maxWords < 1) {
+        newErrors.maxWords = "Max words must be at least 1";
+      }
     }
 
     setErrors(newErrors);
@@ -278,7 +299,8 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
         ...formData,
         questionNumber: parseInt(formData.questionNumber),
         points: parseInt(formData.points),
-        tableStructure: formData.tableStructure, // ✅ ADDED
+        tableStructure: formData.tableStructure,
+        summaryConfig: formData.summaryConfig, // ✅ ADDED
       };
 
       // Handle Subjective Types (Writing)
@@ -304,6 +326,16 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
         submitData.options = formData.options.filter((opt) => opt.trim());
       } else {
         delete submitData.options;
+      }
+
+      // Handle Summary Config Options Cleanup
+      if (formData.questionType === "summary-completion") {
+        if (formData.summaryConfig.answerMode === "typed") {
+          submitData.summaryConfig.options = [];
+        } else {
+          submitData.summaryConfig.options =
+            formData.summaryConfig.options.filter((o) => o.trim());
+        }
       }
 
       // Remove empty alternative answers
@@ -789,6 +821,219 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
                     + Add Question Item
                   </button>
                 </div>
+              </div>
+            )}
+
+            {/* SUMMARY COMPLETION SPECIFIC UI */}
+            {formData.questionType === "summary-completion" && (
+              <div className="bg-orange-50 p-4 rounded-lg border-2 border-orange-200 space-y-4">
+                <h4 className="font-bold text-orange-800 flex items-center gap-2">
+                  <span>📝</span> Summary Configuration (Optional)
+                </h4>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Answer Mode */}
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-1">
+                      Answer Mode
+                    </label>
+                    <div className="flex bg-white rounded-lg border p-1">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setFormData({
+                            ...formData,
+                            summaryConfig: {
+                              ...formData.summaryConfig,
+                              answerMode: "typed",
+                            },
+                          })
+                        }
+                        className={`flex-1 py-1.5 rounded-md text-sm font-semibold transition ${
+                          formData.summaryConfig.answerMode === "typed"
+                            ? "bg-orange-500 text-white shadow"
+                            : "text-gray-600 hover:bg-gray-100"
+                        }`}
+                      >
+                        Only Typed
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setFormData({
+                            ...formData,
+                            summaryConfig: {
+                              ...formData.summaryConfig,
+                              answerMode: "select",
+                            },
+                          })
+                        }
+                        className={`flex-1 py-1.5 rounded-md text-sm font-semibold transition ${
+                          formData.summaryConfig.answerMode === "select"
+                            ? "bg-orange-500 text-white shadow"
+                            : "text-gray-600 hover:bg-gray-100"
+                        }`}
+                      >
+                        Select from List
+                      </button>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1">
+                      "Select" mode requires providing options below.
+                    </p>
+                  </div>
+
+                  {/* Word Limit Type */}
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-1">
+                      Word Restriction
+                    </label>
+                    <select
+                      value={formData.summaryConfig.wordLimitType}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          summaryConfig: {
+                            ...formData.summaryConfig,
+                            wordLimitType: e.target.value,
+                          },
+                        })
+                      }
+                      className="w-full px-3 py-2 border rounded-lg text-sm"
+                    >
+                      <option value="no-more-than">No more than X words</option>
+                      <option value="one-word">One Word Only</option>
+                      <option value="two-words">Two Words Only</option>
+                      <option value="three-words">Three Words Only</option>
+                      <option value="number-only">Number Only</option>
+                      <option value="word-or-number">
+                        One Word and/or A Number
+                      </option>
+                    </select>
+                  </div>
+
+                  {/* Custom Instruction */}
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-bold text-gray-700 mb-1">
+                      Custom Instruction (Overrides default)
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.summaryConfig.customInstruction || ""}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          summaryConfig: {
+                            ...formData.summaryConfig,
+                            customInstruction: e.target.value,
+                          },
+                        })
+                      }
+                      className="w-full px-3 py-2 border rounded-lg text-sm"
+                      placeholder="e.g. Write NO MORE THAN TWO WORDS for each answer"
+                    />
+                  </div>
+
+                  {/* Max Words (only if relevant) */}
+                  {formData.summaryConfig.wordLimitType === "no-more-than" && (
+                    <div>
+                      <label className="block text-sm font-bold text-gray-700 mb-1">
+                        Max Words (X)
+                      </label>
+                      <input
+                        type="number"
+                        min="1"
+                        value={formData.summaryConfig.maxWords}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            summaryConfig: {
+                              ...formData.summaryConfig,
+                              maxWords: parseInt(e.target.value) || 1,
+                            },
+                          })
+                        }
+                        className="w-full px-3 py-2 border rounded-lg text-sm"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {/* Summary Options (Only if Select Mode) */}
+                {formData.summaryConfig.answerMode === "select" && (
+                  <div className="mt-4 border-t pt-4 border-orange-200">
+                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                      Options for Selection{" "}
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <div className="space-y-2">
+                      {formData.summaryConfig.options.map((opt, idx) => (
+                        <div key={idx} className="flex gap-2">
+                          <span className="w-8 h-9 bg-orange-200 text-orange-800 rounded flex items-center justify-center font-bold text-sm">
+                            {String.fromCharCode(65 + idx)}
+                          </span>
+                          <input
+                            type="text"
+                            value={opt}
+                            onChange={(e) => {
+                              const newOptions = [
+                                ...formData.summaryConfig.options,
+                              ];
+                              newOptions[idx] = e.target.value;
+                              setFormData({
+                                ...formData,
+                                summaryConfig: {
+                                  ...formData.summaryConfig,
+                                  options: newOptions,
+                                },
+                              });
+                            }}
+                            className="flex-1 px-3 py-1.5 border rounded focus:ring-2 focus:ring-orange-400"
+                            placeholder={`Option ${String.fromCharCode(65 + idx)}`}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newOptions =
+                                formData.summaryConfig.options.filter(
+                                  (_, i) => i !== idx,
+                                );
+                              setFormData({
+                                ...formData,
+                                summaryConfig: {
+                                  ...formData.summaryConfig,
+                                  options: newOptions,
+                                },
+                              });
+                            }}
+                            className="text-red-500 font-bold px-2 hover:bg-red-50 rounded"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setFormData({
+                          ...formData,
+                          summaryConfig: {
+                            ...formData.summaryConfig,
+                            options: [...formData.summaryConfig.options, ""],
+                          },
+                        })
+                      }
+                      className="mt-2 text-sm text-orange-700 font-bold hover:underline"
+                    >
+                      + Add Option
+                    </button>
+                    {errors.summaryOptions && (
+                      <p className="text-red-500 text-xs mt-2 font-bold">
+                        {errors.summaryOptions}
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
             )}
 

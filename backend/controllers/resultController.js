@@ -24,6 +24,7 @@ const isAnswerCorrect = (
   correctAnswer,
   alternativeAnswers = [],
   questionType = "short-answer", // Default to lenient
+  summaryConfig = null,
 ) => {
   if (!userAnswer) return false;
   if (
@@ -61,11 +62,47 @@ const isAnswerCorrect = (
     return false;
   }
 
-  // 2. Lenient Matching (Fill in the blanks / Short Answer)
-  // Even for short-answer, we usually want EXACT match of the keyword.
-  // "includes" logic leads to false positives like "ropesodk" matches "ropes".
-  // Normalization handles capitalization, punctuation, and articles.
+  // 2. Summary Completion (Dual Check: Label or Text)
+  if (questionType === "summary-completion") {
+    // Check 1: Direct Match (User Answer vs Correct Answer)
+    if (normUser === normCorrect) return true;
 
+    // Check 2: Alternative Answers
+    for (let alt of alternativeAnswers) {
+      if (normUser === normalizeAnswer(alt)) return true;
+    }
+
+    // Check 3: Option-based Resolution (if select mode or manual match)
+    // If strict options exist (A, B, C...)
+    const options = summaryConfig?.options || [];
+    if (options.length > 0) {
+      // Case A: User Answer is a Label ("A"), Correct Answer is Text ("Information")
+      // Resolve User Label to Text
+      if (/^[A-Z]$/i.test(userAnswer)) {
+        const index = userAnswer.toUpperCase().charCodeAt(0) - 65;
+        if (options[index]) {
+          const resolvedUserText = normalizeAnswer(options[index]);
+          if (resolvedUserText === normCorrect) return true;
+          // Check alternatives against resolved text
+          for (let alt of alternativeAnswers) {
+            if (resolvedUserText === normalizeAnswer(alt)) return true;
+          }
+        }
+      }
+
+      // Case B: User Answer is Text ("Information"), Correct Answer is Label ("A")
+      // Resolve Correct Label to Text
+      if (/^[A-Z]$/i.test(correctAnswer)) {
+        const index = correctAnswer.toUpperCase().charCodeAt(0) - 65;
+        if (options[index]) {
+          const resolvedCorrectText = normalizeAnswer(options[index]);
+          if (normUser === resolvedCorrectText) return true;
+        }
+      }
+    }
+    return false;
+  }
+  // 2. Lenient Matching (Fill in the blanks / Short Answer)
   // Check exact match first
   if (normUser === normCorrect) return true;
 
@@ -282,6 +319,7 @@ const calculatePoints = (userAnswer, question) => {
     question.correctAnswer,
     question.alternativeAnswers,
     question.questionType,
+    question.summaryConfig, // Pass config
   );
 
   const isAttempted =
@@ -531,7 +569,13 @@ exports.submitTest = async (req, res) => {
         "Your test is being reviewed by your teacher. Results will be available soon.",
       );
     }
-    // Create result
+    // Calculate total time spent if not already set (for Result creation)
+    if (!session.totalTimeSpent) {
+      session.totalTimeSpent = Math.floor(
+        (Date.now() - session.startedAt.getTime()) / 1000,
+      );
+    }
+
     // Create result
     const result = await Result.create({
       userId,
@@ -539,11 +583,11 @@ exports.submitTest = async (req, res) => {
       sessionId,
       module: test.module,
       totalQuestions,
-      correctAnswers, // Will be null for Writing/Speaking
-      incorrectAnswers, // Will be null for Writing/Speaking
-      unanswered, // Will be null for Writing/Speaking
-      bandScore, // Will be null for Writing/Speaking
-      percentage, // Will be null for Writing/Speaking
+      correctAnswers,
+      incorrectAnswers,
+      unanswered,
+      bandScore,
+      percentage,
       questionTypeBreakdown: needsManualGrading ? [] : questionTypeArray,
       sectionPerformance: needsManualGrading ? [] : sectionPerformance,
       timeTaken: session.totalTimeSpent,
@@ -555,6 +599,13 @@ exports.submitTest = async (req, res) => {
       teacherGradedAt: null,
       gradingNotes: null,
     });
+
+    // Mark session as completed to prevent duplicate submissions
+    if (session.status !== "completed") {
+      session.status = "completed";
+      session.completedAt = new Date();
+      await session.save();
+    }
 
     // ============================================
     // SHADOW GRADING CHECK (Safe Mode)

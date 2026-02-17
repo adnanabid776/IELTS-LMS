@@ -21,6 +21,7 @@ exports.createQuestion = async (req, res) => {
       allowNumber,
       tableStructure,
       features,
+      summaryConfig, // ✅ ADDED
     } = req.body;
 
     // Validate required fields
@@ -69,6 +70,7 @@ exports.createQuestion = async (req, res) => {
       allowNumber,
       tableStructure,
       features, // ✅ ADDED
+      summaryConfig, // ✅ ADDED
     });
 
     //update the section's total questions
@@ -163,6 +165,7 @@ exports.updateQuestion = async (req, res) => {
       allowNumber,
       tableStructure,
       features, // ✅ ADDED
+      summaryConfig, // ✅ ADDED
     } = req.body;
 
     const question = await Question.findByIdAndUpdate(
@@ -181,6 +184,7 @@ exports.updateQuestion = async (req, res) => {
         allowNumber,
         tableStructure,
         features, // ✅ ADDED
+        summaryConfig, // ✅ ADDED
       },
       { new: true, runValidators: true },
     );

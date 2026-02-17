@@ -234,11 +234,57 @@ const AnswerReview = () => {
                       <tbody>
                         {item.items.map((subItem, idx) => {
                           const subLabel = subItem.label || idx + 1;
-                          const userVal =
+                          let userVal =
                             typeof item.studentAnswer === "object"
                               ? item.studentAnswer?.[subLabel]
                               : "";
-                          const correctVal = subItem.correctAnswer;
+                          let correctVal = subItem.correctAnswer;
+
+                          // [FIX] Convert Letter back to Roman Numeral for Matching Headings display
+                          if (item.questionType === "matching-headings") {
+                            const romans = [
+                              "i",
+                              "ii",
+                              "iii",
+                              "iv",
+                              "v",
+                              "vi",
+                              "vii",
+                              "viii",
+                              "ix",
+                              "x",
+                            ];
+                            const toRoman = (char) => {
+                              if (!char || char.length !== 1) return char;
+                              const index =
+                                char.toUpperCase().charCodeAt(0) - 65; // A=0, B=1...
+                              return romans[index] || char;
+                            };
+
+                            // If value is a single letter (A-J), convert it.
+                            if (/^[A-J]$/i.test(userVal))
+                              userVal = toRoman(userVal);
+
+                            // If correctVal is text, try to find it in options to get index
+                            if (
+                              item.options &&
+                              item.options.length > 0 &&
+                              correctVal &&
+                              correctVal.length > 1
+                            ) {
+                              // Try to match text
+                              const matchIdx = item.options.findIndex(
+                                (opt) =>
+                                  normalizeAnswer(opt) ===
+                                  normalizeAnswer(correctVal),
+                              );
+                              if (matchIdx !== -1) {
+                                correctVal = romans[matchIdx] || correctVal;
+                              }
+                            } else if (/^[A-J]$/i.test(correctVal)) {
+                              correctVal = toRoman(correctVal);
+                            }
+                          }
 
                           // Use backend grading result if available, fallback to simple check (legacy support)
                           let isSubCorrect = false;

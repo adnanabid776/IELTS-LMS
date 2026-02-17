@@ -157,7 +157,7 @@ const BulkAddQuestionsModal = ({ sections, onClose, onSuccess }) => {
 
         {/* Questions Table */}
         <div className="flex-1 overflow-y-auto p-6">
-          <div className="space-y-4">
+          <div className="space-y-5">
             {questions.map((question, qIndex) => (
               <div key={qIndex} className="bg-white border-2 border-gray-200 rounded-lg p-4 hover:border-green-500 transition">
                 <div className="flex items-center justify-between mb-3">
@@ -174,7 +174,7 @@ const BulkAddQuestionsModal = ({ sections, onClose, onSuccess }) => {
 
                 <div className="grid grid-cols-12 gap-3">
                   {/* Question Number */}
-                  <div className="col-span-1">
+                  <div className="col-span-2 md:col-span-1">
                     <label className="block text-xs font-bold text-gray-700 mb-1">
                       Q# <span className="text-red-500">*</span>
                     </label>

@@ -19,6 +19,7 @@ const isAnswerCorrect = (
   correctAnswer,
   alternativeAnswers = [],
   questionType = "short-answer", // Default to lenient
+  summaryConfig = null,
 ) => {
   if (!userAnswer) return false;
   if (
@@ -56,10 +57,47 @@ const isAnswerCorrect = (
     return false;
   }
 
-  // 2. Lenient Matching (Fill in the blanks / Short Answer)
-  // Even for short-answer, we usually want EXACT match of the keyword.
-  // "includes" logic leads to false positives like "ropesodk" matches "ropes".
-  // Normalization handles capitalization, punctuation, and articles.
+  // 2. Summary Completion (Dual Check: Label or Text)
+  if (questionType === "summary-completion") {
+    // Check 1: Direct Match (User Answer vs Correct Answer)
+    if (normUser === normCorrect) return true;
+
+    // Check 2: Alternative Answers
+    for (let alt of alternativeAnswers) {
+      if (normUser === normalizeAnswer(alt)) return true;
+    }
+
+    // Check 3: Option-based Resolution (if select mode or manual match)
+    // If strict options exist (A, B, C...)
+    const options = summaryConfig?.options || [];
+    if (options.length > 0) {
+      // Case A: User Answer is a Label ("A"), Correct Answer is Text ("Information")
+      // Resolve User Label to Text
+      if (/^[A-Z]$/i.test(userAnswer)) {
+        const index = userAnswer.toUpperCase().charCodeAt(0) - 65;
+        if (options[index]) {
+          const resolvedUserText = normalizeAnswer(options[index]);
+          if (resolvedUserText === normCorrect) return true;
+          // Check alternatives against resolved text
+          for (let alt of alternativeAnswers) {
+            if (resolvedUserText === normalizeAnswer(alt)) return true;
+          }
+        }
+      }
+
+      // Case B: User Answer is Text ("Information"), Correct Answer is Label ("A")
+      // Resolve Correct Label to Text
+      if (/^[A-Z]$/i.test(correctAnswer)) {
+        const index = correctAnswer.toUpperCase().charCodeAt(0) - 65;
+        if (options[index]) {
+          const resolvedCorrectText = normalizeAnswer(options[index]);
+          if (normUser === resolvedCorrectText) return true;
+        }
+      }
+    }
+    return false;
+  }
+
 
   // Check exact match first
   if (normUser === normCorrect) return true;
@@ -75,6 +113,23 @@ const isAnswerCorrect = (
 
 // Helper to calculate points for a question
 const calculatePoints = (userAnswer, question) => {
+  // Helper to get Roman numeral
+  const toRoman = (num) => {
+    if (num === 1) return "i";
+    if (num === 2) return "ii";
+    if (num === 3) return "iii";
+    if (num === 4) return "iv";
+    if (num === 5) return "v";
+    if (num === 6) return "vi";
+    if (num === 7) return "vii";
+    if (num === 8) return "viii";
+    if (num === 9) return "ix";
+    if (num === 10) return "x";
+    return String.fromCharCode(96 + num); // Fallback to a, b, c
+  };
+
+  // ... existing code
+
   // 1. Composite Types (Map Labeling, Matching, Table Completion)
   if (
     question.questionType === "map-labeling" ||
@@ -105,34 +160,22 @@ const calculatePoints = (userAnswer, question) => {
       if (userVal && userVal.trim() !== "") {
         attempted++;
 
-        // SPECIAL HANDLING FOR MATCHING TYPES (Headings, Information, Features)
-        // Correct answer is usually a single letter (A, B, C...)
-        // User answer might be "Paragraph A" or "Section B" or just "A"
+        // SPECIAL HANDLING FOR MATCHING TYPES
         let normalizedUserVal = userVal;
 
+        // For mathing-headings, userVal is usually "i", "iv", etc.
+        // For matching-information/features, it's usually "A", "B", etc.
+
         if (
-          question.questionType === "matching-headings" ||
           question.questionType === "matching-information" ||
           question.questionType === "matching-features"
         ) {
           // Extract just the letter if it looks like "Paragraph X"
-          // Regex to find a lone letter or "Paragraph X"
-          // But simpler: just take the last word if it's a single letter?
-          // Or safer: specific replace.
-          const match = userVal.match(/\b([A-Z])\b/i); // Find a single letter boundary
+          const match = userVal.match(/\b([A-Z])\b/i);
           if (match) {
             normalizedUserVal = match[0].toUpperCase();
           }
         }
-
-        // Check correctness using the normalized value for matching types
-        // For others (Map/Table), use original userVal
-        const valToCheck =
-          question.questionType === "matching-headings" ||
-          question.questionType === "matching-information" ||
-          question.questionType === "matching-features"
-            ? normalizedUserVal
-            : userVal;
 
         // Use question options or item options for resolution
         const targetOptions =
@@ -143,14 +186,15 @@ const calculatePoints = (userAnswer, question) => {
               : [];
 
         // 2. Resolve Correct Answer to Label if it's a long string found in options
-        // If correctAnswer is NOT a single letter, try to find it in options.
         let resolvedCorrectAnswer = item.correctAnswer;
 
-        if (
+        // If the correct answer is already short (like "iv" or "A"), we don't need to resolve via text matching
+        const needsResolution =
           item.correctAnswer &&
-          item.correctAnswer.length > 1 &&
-          targetOptions.length > 0
-        ) {
+          item.correctAnswer.length > 4 && // threshold for "long string"
+          targetOptions.length > 0;
+
+        if (needsResolution) {
           const normCorrect = normalizeAnswer(item.correctAnswer);
 
           // Strategy 1: Exact Match (Normalized)
@@ -169,7 +213,7 @@ const calculatePoints = (userAnswer, question) => {
             });
           }
 
-          // Strategy 3: Token Overlap (Best effort for messy text)
+          // Strategy 3: Token Overlap
           if (optionIndex === -1 && normCorrect.length > 20) {
             optionIndex = targetOptions.findIndex((opt) => {
               const normOpt = normalizeAnswer(opt);
@@ -193,28 +237,41 @@ const calculatePoints = (userAnswer, question) => {
           }
 
           if (optionIndex !== -1) {
-            // Convert Index to Letter (0->A, 1->B)
-            resolvedCorrectAnswer = String.fromCharCode(65 + optionIndex);
-            // console.log(`[Grading] Resolved long answer to ${resolvedCorrectAnswer} for item ${item.label}`);
+            if (question.questionType === "matching-headings") {
+              // Support BOTH Roman Numerals (frontend display) AND Letters (legacy/standard backend)
+              const roman = toRoman(optionIndex + 1);
+              const letter = String.fromCharCode(97 + optionIndex); // 'a', 'b', 'c' (lowercase)
+
+              // We will compare against both. For standard flow, we set resolvedCorrectAnswer to match the user's format if possible,
+              // or just let isAnswerCorrect handle one.
+              // Hack: We can set resolvedCorrectAnswer to a regex or array?
+              // Easier: Check if userVal matches either.
+
+              // If user sent a letter, correct answer is letter.
+              // If user sent roman, correct answer is roman.
+              if (/^[a-z]$/i.test(normalizedUserVal)) {
+                resolvedCorrectAnswer = letter;
+              } else {
+                resolvedCorrectAnswer = roman;
+              }
+            } else {
+              // Use Letters (0-based index -> A, B, C...)
+              resolvedCorrectAnswer = String.fromCharCode(65 + optionIndex);
+            }
           } else {
-            console.warn(
-              `[Grading Warning] Could not resolve correct answer text to any option for Item ${item.label}. DB Mismatch likely.`,
-            );
-            console.warn(
-              `Correct Text: ${item.correctAnswer.substring(0, 50)}...`,
-            );
+            // Could not resolve correct answer text for Item ${item.label}.
           }
         }
 
-        if (
-          isAnswerCorrect(
-            valToCheck,
-            resolvedCorrectAnswer,
-            item.options || [],
-            [],
-            question.questionType,
-          )
-        ) {
+        // Final check
+        const isMatch = isAnswerCorrect(
+          normalizedUserVal,
+          resolvedCorrectAnswer,
+          item.options || [], // alternatives
+          question.questionType,
+        );
+
+        if (isMatch) {
           scored++;
           isItemCorrect = true;
         }
@@ -252,6 +309,7 @@ const calculatePoints = (userAnswer, question) => {
     question.correctAnswer,
     question.alternativeAnswers,
     question.questionType,
+    question.summaryConfig, // Pass config
   );
 
   const isAttempted =

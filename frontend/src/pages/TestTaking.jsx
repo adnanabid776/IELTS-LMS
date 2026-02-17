@@ -14,7 +14,7 @@ import {
 import { toast } from "react-toastify";
 import DashboardLayout from "../components/Layout/DashboardLayout";
 import WritingTestTaking from "./WritingTestTaking";
-import SpeakingTestTaking from "./SpeakingTestTaking";
+import OfflineQueue from "../utils/OfflineQueue";
 
 const TestTaking = () => {
   const { testId } = useParams();
@@ -37,6 +37,9 @@ const TestTaking = () => {
     loading: true,
     module: null,
   });
+
+  const [isOffline, setIsOffline] = useState(!navigator.onLine);
+  const [isSyncing, setIsSyncing] = useState(false);
 
   useEffect(() => {
     const checkModule = async () => {
@@ -155,6 +158,27 @@ const TestTaking = () => {
       toast.warn("You have only 1 min", { autoClose: 5000 });
     }
   }, [timeRemaining]);
+
+  // NEW: Offline Listeners
+  useEffect(() => {
+    const handleOnline = () => setIsOffline(false);
+    const handleOffline = () => setIsOffline(true);
+    const handleSyncStart = () => setIsSyncing(true);
+    const handleSyncEnd = () => setIsSyncing(false);
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+    window.addEventListener("offline-sync-start", handleSyncStart);
+    window.addEventListener("offline-sync-end", handleSyncEnd);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+      window.removeEventListener("offline-sync-start", handleSyncStart);
+      window.removeEventListener("offline-sync-end", handleSyncEnd);
+    };
+  }, []);
+
   const loadTestData = async () => {
     try {
       setLoading(true);
@@ -226,17 +250,52 @@ const TestTaking = () => {
       }),
     );
 
+    // If offline, add to queue immediately
+    if (!navigator.onLine) {
+      OfflineQueue.add("SAVE_ANSW_BULK", {
+        sessionId: session._id,
+        answers: answersArray,
+      });
+      return;
+    }
+
     try {
       await bulkSaveAnswers(session._id, answersArray);
     } catch (error) {
-      // Silent fail for auto-save to avoid console clutter
-      console.error(error);
+      console.error("Auto-save failed, queuing offline:", error);
+      // Fallback to offline queue on API failure
+      OfflineQueue.add("SAVE_ANSW_BULK", {
+        sessionId: session._id,
+        answers: answersArray,
+      });
     }
   };
-  //  handleSubmitTest
+
+  // Modified handleSubmitTest with Offline Check
   const handleSubmitTest = async () => {
-    //preventing to submit test multiple times
+    // prevent multiple submissions
     if (isSubmitting || !session) return;
+
+    // Check if offline or syncing
+    if (!navigator.onLine || isSyncing) {
+      toast.warn(
+        "⚠️ You are offline or syncing. Please wait for connection to submit.",
+      );
+      // Try to trigger sync if possible (in case event missed)
+      OfflineQueue.process();
+      return;
+    }
+
+    // Check if queue has pending items
+    if (OfflineQueue.getQueue().length > 0) {
+      toast.info("⏳ Additionally syncing pending answers...");
+      await OfflineQueue.process();
+      // Re-check after sync attempt
+      if (OfflineQueue.getQueue().length > 0) {
+        toast.error("Unable to sync all answers. Please check connection.");
+        return;
+      }
+    }
 
     const confirmed = window.confirm(
       "Are you sure to submit this test? You cannot change the answers after submission.",
@@ -247,14 +306,26 @@ const TestTaking = () => {
     setIsSubmitting(true);
 
     try {
-      // Save any pending answers
+      // Save any pending answers (this now uses the robust saveBulkAnswers which queues if needed)
       await saveBulkAnswers();
+
+      // Force one last sync if anything got queued just now
+      if (OfflineQueue.getQueue().length > 0) {
+        await OfflineQueue.process();
+      }
+
+      if (OfflineQueue.getQueue().length > 0) {
+        throw new Error("Cannot submit with unsaved offline changes.");
+      }
 
       // Submit session
       await submitTestSession(session._id);
 
       // Calculate results
       const resultResponse = await submitTestResult(session._id);
+
+      // Clear the queue for this session effectively (it should be empty anyway)
+      OfflineQueue.clear();
 
       // ✅ NEW: If this was an assigned test, update submission status
       if (assignmentId) {
@@ -274,16 +345,14 @@ const TestTaking = () => {
       }, 1500);
     } catch (error) {
       console.error("Submit failed:", error);
-      toast.error("Failed to submit test");
+      toast.error(error.message || "Failed to submit test");
       setIsSubmitting(false);
     }
   };
 
-  // Timer - Countdown (very important!)
+  // ... existing Timer logic
   useEffect(() => {
-    if (loading || !session || isSubmitting) return; // Don't start timer until session loaded
-
-    // Set initial time from session
+    if (loading || !session || isSubmitting) return;
 
     setTimeRemaining(session.timeRemaining || 3600);
 
@@ -291,10 +360,14 @@ const TestTaking = () => {
       setTimeRemaining((prev) => {
         if (prev <= 1) {
           // Time's up! Auto-submit
+          // NOTE: Only auto-submit if online?
+          // If offline, we might want to just stop the test and save locally.
+          // For now, let's try to submit, which will trigger the offline guard above.
+          // Ideally: Force a local save and lock the UI.
           handleSubmitTest();
           return 0;
         }
-        return prev - 1; // Countdown
+        return prev - 1;
       });
     }, 1000);
 
@@ -306,6 +379,43 @@ const TestTaking = () => {
       ...prev,
       [questionId]: answer,
     }));
+  };
+
+  // ✅ NEW: Summary Validation Handler
+  const handleSummaryAnswerChange = (questionId, newValue, config) => {
+    if (!config) {
+      handleAnswerChange(questionId, newValue);
+      return;
+    }
+
+    const { wordLimitType, maxWords } = config;
+
+    // 1. Number Only Check
+    if (wordLimitType === "number-only") {
+      if (newValue === "" || /^\d*$/.test(newValue)) {
+        handleAnswerChange(questionId, newValue);
+      }
+      return;
+    }
+
+    // 2. Word Count Check
+    let allowedWords = 100; // Default high
+    if (wordLimitType === "one-word") allowedWords = 1;
+    else if (wordLimitType === "two-words") allowedWords = 2;
+    else if (wordLimitType === "three-words") allowedWords = 3;
+    else if (wordLimitType === "no-more-than") allowedWords = maxWords || 1;
+    else if (wordLimitType === "word-or-number") allowedWords = 1;
+
+    // Count words (handling multiple spaces correctly)
+    const wordCount =
+      newValue.trim() === "" ? 0 : newValue.trim().split(/\s+/).length;
+    // If we have 'word word' (2 words), and limit is 2.
+    // 'word word' -> count 2. OK.
+    // 'word word ' -> count 2. OK.
+    // 'word word c' -> count 3. BLOCK.
+    if (wordCount <= allowedWords) {
+      handleAnswerChange(questionId, newValue);
+    }
   };
   const handleNextSection = () => {
     if (currentSectionIndex < sections.length - 1) {
@@ -403,9 +513,11 @@ const TestTaking = () => {
       {/* Test Header - Fixed Top with Enhanced Design */}
       <div
         className={`rounded-2xl shadow-lg p-5 mb-6 sticky top-[-10px] z-10 border transition-all duration-300 ${
-          timeRemaining < 300
-            ? "bg-gradient-to-r from-red-50 to-orange-50 border-red-200"
-            : "bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-100"
+          isOffline
+            ? "bg-gradient-to-r from-gray-100 to-gray-200 border-gray-300"
+            : timeRemaining < 300
+              ? "bg-gradient-to-r from-red-50 to-orange-50 border-red-200"
+              : "bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-100"
         }`}
       >
         <div className="flex items-center justify-between">
@@ -413,22 +525,26 @@ const TestTaking = () => {
           <div className="flex items-center gap-4">
             <div
               className={`w-14 h-14 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg ${
-                test.module === "reading"
-                  ? "bg-gradient-to-br from-blue-500 to-blue-700"
-                  : test.module === "listening"
-                    ? "bg-gradient-to-br from-green-500 to-green-700"
-                    : test.module === "writing"
-                      ? "bg-gradient-to-br from-purple-500 to-purple-700"
-                      : "bg-gradient-to-br from-orange-500 to-orange-700"
+                isOffline
+                  ? "bg-gray-500"
+                  : test.module === "reading"
+                    ? "bg-gradient-to-br from-blue-500 to-blue-700"
+                    : test.module === "listening"
+                      ? "bg-gradient-to-br from-green-500 to-green-700"
+                      : test.module === "writing"
+                        ? "bg-gradient-to-br from-purple-500 to-purple-700"
+                        : "bg-gradient-to-br from-orange-500 to-orange-700"
               }`}
             >
-              {test.module === "reading"
-                ? "📖"
-                : test.module === "listening"
-                  ? "🎧"
-                  : test.module === "writing"
-                    ? "✍️"
-                    : "🎤"}
+              {isOffline
+                ? "📡"
+                : test.module === "reading"
+                  ? "📖"
+                  : test.module === "listening"
+                    ? "🎧"
+                    : test.module === "writing"
+                      ? "✍️"
+                      : "🎤"}
             </div>
             <div>
               <h2 className="text-xl font-bold text-gray-800">{test.title}</h2>
@@ -439,6 +555,20 @@ const TestTaking = () => {
                 <span className="px-3 py-1 bg-white/70 rounded-full text-xs font-semibold text-gray-600 shadow-sm">
                   ✅ {answeredInSection}/{questions.length} answered
                 </span>
+                {/* Connection Status Badge */}
+                {isOffline ? (
+                  <span className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold border border-red-200 flex items-center gap-1 animate-pulse">
+                    🚫 Offline - Saving Locally
+                  </span>
+                ) : isSyncing ? (
+                  <span className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold border border-yellow-200 flex items-center gap-1">
+                    🔄 Syncing...
+                  </span>
+                ) : (
+                  <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold border border-green-200 flex items-center gap-1">
+                    ☁️ Saved Online
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -446,18 +576,20 @@ const TestTaking = () => {
           {/* Timer with Enhanced Design */}
           <div
             className={`text-center px-3 py-1 rounded-xl shadow-lg transition-all duration-300 ${
-              timeRemaining < 300
-                ? "bg-gradient-to-br from-red-500 to-red-600 animate-pulse"
-                : timeRemaining < 600
-                  ? "bg-gradient-to-br from-orange-500 to-orange-600"
-                  : "bg-gradient-to-br from-blue-500 to-indigo-600"
+              isOffline
+                ? "bg-gray-400"
+                : timeRemaining < 300
+                  ? "bg-gradient-to-br from-red-500 to-red-600 animate-pulse"
+                  : timeRemaining < 600
+                    ? "bg-gradient-to-br from-orange-500 to-orange-600"
+                    : "bg-gradient-to-br from-blue-500 to-indigo-600"
             }`}
           >
             <p className="text-xs text-white/80 font-medium">⏱️ Time Left</p>
             <p className="text-3xl font-bold text-white tracking-wider">
               {formatTime(timeRemaining)}
             </p>
-            {timeRemaining < 300 && (
+            {timeRemaining < 300 && !isOffline && (
               <p className="text-xs text-white font-semibold mt-1 animate-bounce">
                 ⚠️ Hurry up!
               </p>
@@ -469,7 +601,7 @@ const TestTaking = () => {
         <div className="mt-5">
           <div className="w-full bg-gray-200 rounded-full h-2.5">
             <div
-              className="bg-gradient-to-r from-blue-500 to-indigo-600 h-2.5 rounded-full transition-all duration-500"
+              className={`h-2.5 rounded-full transition-all duration-500 ${isOffline ? "bg-gray-500" : "bg-gradient-to-r from-blue-500 to-indigo-600"}`}
               style={{
                 width: `${questions.length > 0 ? (answeredInSection / questions.length) * 100 : 0}%`,
               }}
@@ -479,7 +611,9 @@ const TestTaking = () => {
             <span>
               Section {currentSectionIndex + 1} of {sections.length}
             </span>
-            <span className="font-medium text-blue-600">
+            <span
+              className={`font-medium ${isOffline ? "text-gray-600" : "text-blue-600"}`}
+            >
               {answeredInSection}/{questions.length} Questions Answered
             </span>
           </div>
@@ -698,19 +832,109 @@ const TestTaking = () => {
                   </div>
                 )}
 
-                {/* Answer Input - Short Answer - Enhanced */}
+                {/* Answer Input - Multiple Choice Multi (Checkboxes) - NEW */}
+                {question.questionType === "multiple-choice-multi" && (
+                  <div className="ml-14 space-y-3">
+                    <p className="text-sm font-semibold text-gray-500 mb-2">
+                      Select all that apply:
+                    </p>
+                    {question.options.map((option, idx) => {
+                      const currentAnswers = answers[question._id] || []; // Should be an array
+                      const isSelected = currentAnswers.includes(
+                        String.fromCharCode(65 + idx),
+                      );
+
+                      return (
+                        <label
+                          key={idx}
+                          className={`flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 group ${
+                            isSelected
+                              ? "border-blue-500 bg-blue-50/50"
+                              : "border-gray-200 hover:border-blue-200 hover:bg-gray-50"
+                          }`}
+                        >
+                          <div
+                            className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-colors ${
+                              isSelected
+                                ? "bg-blue-500 border-blue-500"
+                                : "border-gray-300 group-hover:border-blue-400"
+                            }`}
+                          >
+                            {isSelected && (
+                              <span className="text-white text-sm font-bold">
+                                ✓
+                              </span>
+                            )}
+                          </div>
+                          <input
+                            type="checkbox"
+                            name={`question-${question._id}`}
+                            value={String.fromCharCode(65 + idx)}
+                            checked={isSelected}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              let newAnswers = Array.isArray(currentAnswers)
+                                ? [...currentAnswers]
+                                : [];
+                              if (e.target.checked) {
+                                newAnswers.push(val);
+                              } else {
+                                newAnswers = newAnswers.filter(
+                                  (v) => v !== val,
+                                );
+                              }
+                              // Sort to keep consistent (A, B, C...)
+                              newAnswers.sort();
+                              handleAnswerChange(question._id, newAnswers);
+                            }}
+                            className="hidden"
+                          />
+                          <div className="flex gap-3">
+                            <span
+                              className={`font-bold ${
+                                isSelected ? "text-blue-600" : "text-gray-500"
+                              }`}
+                            >
+                              {String.fromCharCode(65 + idx)}.
+                            </span>
+                            <span className="text-gray-700">{option}</span>
+                          </div>
+                        </label>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* Answer Input - Short Answer / Sentence Completion */}
                 {(question.questionType === "short-answer" ||
                   question.questionType === "sentence-completion" ||
-                  question.questionType === "summary-completion" ||
+                  (question.questionType === "summary-completion" &&
+                    question.summaryConfig?.answerMode !== "select") || // Default to typed if not select
                   question.questionType === "note-completion") && (
-                  <div className="ml-14">
+                  <div className="ml-14 space-y-3">
+                    {/* Custom Instruction for Summary */}
+                    {question.questionType === "summary-completion" &&
+                      question.summaryConfig?.customInstruction && (
+                        <p className="text-sm font-bold text-gray-500 uppercase tracking-wide">
+                          {question.summaryConfig.customInstruction}
+                        </p>
+                      )}
+
                     <div className="relative">
                       <input
                         type="text"
                         value={answers[question._id] || ""}
-                        onChange={(e) =>
-                          handleAnswerChange(question._id, e.target.value)
-                        }
+                        onChange={(e) => {
+                          if (question.questionType === "summary-completion") {
+                            handleSummaryAnswerChange(
+                              question._id,
+                              e.target.value,
+                              question.summaryConfig,
+                            );
+                          } else {
+                            handleAnswerChange(question._id, e.target.value);
+                          }
+                        }}
                         placeholder="Type your answer here..."
                         className={`w-full px-5 py-3 border-2 rounded-xl focus:outline-none transition-all duration-200 ${
                           answers[question._id]
@@ -726,6 +950,68 @@ const TestTaking = () => {
                     </div>
                   </div>
                 )}
+
+                {/* Answer Input - Summary Completion (Select Mode) */}
+                {question.questionType === "summary-completion" &&
+                  question.summaryConfig?.answerMode === "select" && (
+                    <div className="ml-14 space-y-4">
+                      {/* Check if options exist */}
+                      {question.summaryConfig?.options?.length > 0 && (
+                        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-4">
+                          <h5 className="font-bold text-gray-700 mb-2">
+                            Options:
+                          </h5>
+                          <div className="flex flex-wrap gap-2">
+                            {question.summaryConfig.options.map((opt, idx) => (
+                              <span
+                                key={idx}
+                                className="inline-flex items-center px-3 py-1 rounded-full bg-white border border-gray-300 text-sm text-gray-700"
+                              >
+                                <span className="font-bold mr-1.5 text-blue-600">
+                                  {String.fromCharCode(65 + idx)}
+                                </span>
+                                {opt}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Custom Instruction */}
+                      {question.summaryConfig?.customInstruction && (
+                        <p className="text-sm font-bold text-gray-500 uppercase tracking-wide">
+                          {question.summaryConfig.customInstruction}
+                        </p>
+                      )}
+
+                      <div className="relative">
+                        <select
+                          value={answers[question._id] || ""}
+                          onChange={(e) =>
+                            handleAnswerChange(question._id, e.target.value)
+                          }
+                          className={`w-full px-5 py-3 border-2 rounded-xl focus:outline-none transition-all duration-200 appearance-none bg-white ${
+                            answers[question._id]
+                              ? "border-blue-500 bg-blue-50 focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
+                              : "border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                          }`}
+                        >
+                          <option value="">Select an answer...</option>
+                          {question.summaryConfig?.options?.map((opt, idx) => (
+                            <option
+                              key={idx}
+                              value={String.fromCharCode(65 + idx)}
+                            >
+                              {String.fromCharCode(65 + idx)}
+                            </option>
+                          ))}
+                        </select>
+                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                          ▼
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                 {/* Answer Input - Matching Headings / Information / Features - NEW */}
                 {(question.questionType === "matching-headings" ||
@@ -832,23 +1118,9 @@ const TestTaking = () => {
                                           <option
                                             key={optIdx}
                                             value={
-                                              question.questionType ===
-                                              "matching-headings"
-                                                ? [
-                                                    "i",
-                                                    "ii",
-                                                    "iii",
-                                                    "iv",
-                                                    "v",
-                                                    "vi",
-                                                    "vii",
-                                                    "viii",
-                                                    "ix",
-                                                    "x",
-                                                  ][optIdx] || optIdx + 1
-                                                : String.fromCharCode(
-                                                    65 + optIdx,
-                                                  )
+                                              // ALWAYS send value as Letter (A, B, C...) for consistency with grading engine
+                                              // The Display (children) will remain Roman Numerals for UI
+                                              String.fromCharCode(65 + optIdx)
                                             }
                                           >
                                             {question.questionType ===

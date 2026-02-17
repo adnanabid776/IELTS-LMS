@@ -141,6 +141,41 @@ const questionSchema = new mongoose.Schema(
       headers: [String],
       rows: [[String]],
     },
+
+    // Summary Completion Specific Configuration
+    summaryConfig: {
+      answerMode: {
+        type: String,
+        enum: ["typed", "select"],
+        default: "typed",
+      },
+      wordLimitType: {
+        type: String,
+        enum: [
+          "one-word",
+          "two-words",
+          "three-words",
+          "number-only",
+          "word-or-number",
+          "no-more-than",
+        ],
+        default: "no-more-than",
+      },
+      maxWords: {
+        type: Number,
+        default: 1,
+      },
+      customInstruction: {
+        type: String,
+        trim: true,
+      },
+      options: [
+        {
+          type: String,
+          trim: true,
+        },
+      ], // Used only if answerMode === 'select'
+    },
   },
   {
     timestamps: true,
