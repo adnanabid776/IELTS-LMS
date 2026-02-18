@@ -129,16 +129,29 @@ class OfflineQueue {
         await bulkSaveAnswers(sessionId, finalAnswersPayload);
         console.log(`✅ Synced successfully for session ${sessionId}`);
       } catch (error) {
-        console.error(`❌ Sync failed for session ${sessionId}`, error);
+        // CRITICAL FIX: Don't retry client errors (400-499)
+        const status = error.response?.status;
+        if (status && status >= 400 && status < 500) {
+          console.error(
+            `❌ Permanent failure for session ${sessionId} (Status ${status}). Discarding.`,
+            error.response?.data,
+          );
+          // Do NOT add to failedItems -> effectively discards it
+          toast.error(
+            `Sync failed: ${error.response?.data?.error || "Invalid data"}.`,
+          );
+        } else {
+          console.error(`❌ Sync failed for session ${sessionId}`, error);
 
-        // Re-queue the consolidated batch as a new single item
-        failedItems.push({
-          id: Date.now().toString(),
-          type: "SAVE_ANSW_BULK",
-          payload: { sessionId, answers: finalAnswersPayload },
-          timestamp: Date.now(),
-          retryCount: 1,
-        });
+          // Re-queue the consolidated batch as a new single item
+          failedItems.push({
+            id: Date.now().toString(),
+            type: "SAVE_ANSW_BULK",
+            payload: { sessionId, answers: finalAnswersPayload },
+            timestamp: Date.now(),
+            retryCount: 1,
+          });
+        }
       }
     }
 

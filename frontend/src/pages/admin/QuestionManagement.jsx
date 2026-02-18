@@ -492,42 +492,51 @@ const QuestionManagement = () => {
           </div>
 
           {/* Pagination Controls */}
-          <div className="bg-gray-50 px-4 py-3 border-t border-gray-200 flex items-center justify-between sm:px-6">
-            <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-              <div>
-                <p className="text-sm text-gray-700">
-                  Showing{" "}
-                  <span className="font-medium">
-                    {(currentPage - 1) * itemsPerPage + 1}
-                  </span>{" "}
-                  to{" "}
-                  <span className="font-medium">
-                    {Math.min(
-                      currentPage * itemsPerPage,
-                      filteredQuestions.length,
-                    )}
-                  </span>{" "}
-                  of{" "}
-                  <span className="font-medium">
-                    {filteredQuestions.length}
-                  </span>{" "}
-                  results
-                </p>
-              </div>
-              <div>
-                <nav
-                  className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
-                  aria-label="Pagination"
+          {/* Pagination Controls */}
+          <div className="bg-gray-50 px-4 py-3 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-sm text-gray-700">
+              Showing{" "}
+              <span className="font-medium">
+                {(currentPage - 1) * itemsPerPage + 1}
+              </span>{" "}
+              to{" "}
+              <span className="font-medium">
+                {Math.min(currentPage * itemsPerPage, filteredQuestions.length)}
+              </span>{" "}
+              of <span className="font-medium">{filteredQuestions.length}</span>{" "}
+              results
+            </div>
+
+            <div className="flex-1 flex justify-end w-full sm:w-auto">
+              <nav
+                className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px max-w-full overflow-x-auto"
+                aria-label="Pagination"
+              >
+                {/* First Page */}
+                <button
+                  onClick={() => setCurrentPage(1)}
+                  disabled={currentPage === 1}
+                  className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  title="First Page"
                 >
-                  <button
-                    onClick={() =>
-                      setCurrentPage((prev) => Math.max(prev - 1, 1))
-                    }
-                    disabled={currentPage === 1}
-                    className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
-                  >
-                    Previous
-                  </button>
+                  <span className="sr-only">First</span>
+                  &laquo;
+                </button>
+
+                {/* Previous */}
+                <button
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.max(prev - 1, 1))
+                  }
+                  disabled={currentPage === 1}
+                  className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                >
+                  <span className="sr-only">Previous</span>
+                  &lsaquo;
+                </button>
+
+                {/* Page Numbers - Scrollable Container */}
+                <div className="flex overflow-x-auto max-w-[200px] sm:max-w-none scrollbar-hide">
                   {[
                     ...Array(
                       Math.ceil(filteredQuestions.length / itemsPerPage),
@@ -536,34 +545,55 @@ const QuestionManagement = () => {
                     <button
                       key={i}
                       onClick={() => setCurrentPage(i + 1)}
-                      className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
+                      className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium min-w-[40px] justify-center ${
                         currentPage === i + 1
-                          ? "z-10 bg-blue-50 border-blue-500 text-blue-600"
+                          ? "z-10 bg-blue-600 border-blue-600 text-white"
                           : "bg-white border-gray-300 text-gray-500 hover:bg-gray-50"
                       }`}
                     >
                       {i + 1}
                     </button>
                   ))}
-                  <button
-                    onClick={() =>
-                      setCurrentPage((prev) =>
-                        Math.min(
-                          prev + 1,
-                          Math.ceil(filteredQuestions.length / itemsPerPage),
-                        ),
-                      )
-                    }
-                    disabled={
-                      currentPage ===
-                      Math.ceil(filteredQuestions.length / itemsPerPage)
-                    }
-                    className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
-                  >
-                    Next
-                  </button>
-                </nav>
-              </div>
+                </div>
+
+                {/* Next */}
+                <button
+                  onClick={() =>
+                    setCurrentPage((prev) =>
+                      Math.min(
+                        prev + 1,
+                        Math.ceil(filteredQuestions.length / itemsPerPage),
+                      ),
+                    )
+                  }
+                  disabled={
+                    currentPage ===
+                    Math.ceil(filteredQuestions.length / itemsPerPage)
+                  }
+                  className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                >
+                  <span className="sr-only">Next</span>
+                  &rsaquo;
+                </button>
+
+                {/* Last Page */}
+                <button
+                  onClick={() =>
+                    setCurrentPage(
+                      Math.ceil(filteredQuestions.length / itemsPerPage),
+                    )
+                  }
+                  disabled={
+                    currentPage ===
+                    Math.ceil(filteredQuestions.length / itemsPerPage)
+                  }
+                  className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  title="Last Page"
+                >
+                  <span className="sr-only">Last</span>
+                  &raquo;
+                </button>
+              </nav>
             </div>
           </div>
         </div>

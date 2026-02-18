@@ -147,7 +147,8 @@ const CreateTestModal = ({ onClose, onSuccess }) => {
         {/* Scrollable Form */}
         <form
           onSubmit={handleSubmit}
-          className="px-6 py-5 overflow-y-auto flex-1"
+          className="px-6 py-5 overflow-y-auto flex-1 scroll-smooth overscroll-contain"
+          style={{ scrollBehavior: "smooth", scrollbarWidth: "thin" }}
         >
           <div className="space-y-5">
             {/* Title */}

@@ -262,8 +262,18 @@ const TestTaking = () => {
     try {
       await bulkSaveAnswers(session._id, answersArray);
     } catch (error) {
+      // CRITICAL FIX: Don't queue client errors (like 400 Bad Request / Session Expired)
+      const status = error.response?.status;
+      if (status && status >= 400 && status < 500) {
+        console.error("Auto-save failed with permanent error:", error);
+        if (error.response?.data?.error === "Session expired") {
+          toast.error("Session expired. Please submit or refresh.");
+        }
+        return; // Stop here, don't queue
+      }
+
       console.error("Auto-save failed, queuing offline:", error);
-      // Fallback to offline queue on API failure
+      // Fallback to offline queue on API failure (network/server only)
       OfflineQueue.add("SAVE_ANSW_BULK", {
         sessionId: session._id,
         answers: answersArray,
