@@ -800,7 +800,10 @@ const TestTaking = () => {
                 {(question.questionType === "true-false-not-given" ||
                   question.questionType === "yes-no-not-given") && (
                   <div className="ml-14 flex flex-wrap gap-3">
-                    {["True", "False", "Not Given"].map((option, idx) => (
+                    {(question.questionType === "yes-no-not-given"
+                      ? ["Yes", "No", "Not Given"]
+                      : ["True", "False", "Not Given"]
+                    ).map((option, idx) => (
                       <label
                         key={option}
                         className={`flex items-center px-6 py-3 rounded-xl cursor-pointer transition-all duration-200 border-2 ${
@@ -917,7 +920,8 @@ const TestTaking = () => {
 
                 {/* Answer Input - Short Answer / Sentence Completion */}
                 {(question.questionType === "short-answer" ||
-                  question.questionType === "sentence-completion" ||
+                  (question.questionType === "sentence-completion" &&
+                    question.summaryConfig?.answerMode !== "select") ||
                   (question.questionType === "summary-completion" &&
                     question.summaryConfig?.answerMode !== "select") || // Default to typed if not select
                   question.questionType === "note-completion") && (
@@ -935,7 +939,10 @@ const TestTaking = () => {
                         type="text"
                         value={answers[question._id] || ""}
                         onChange={(e) => {
-                          if (question.questionType === "summary-completion") {
+                          if (
+                            question.questionType === "summary-completion" ||
+                            question.questionType === "sentence-completion"
+                          ) {
                             handleSummaryAnswerChange(
                               question._id,
                               e.target.value,
@@ -961,8 +968,9 @@ const TestTaking = () => {
                   </div>
                 )}
 
-                {/* Answer Input - Summary Completion (Select Mode) */}
-                {question.questionType === "summary-completion" &&
+                {/* Answer Input - Summary/Sentence Completion (Select Mode) */}
+                {(question.questionType === "summary-completion" ||
+                  question.questionType === "sentence-completion") &&
                   question.summaryConfig?.answerMode === "select" && (
                     <div className="ml-14 space-y-4">
                       {/* Check if options exist */}

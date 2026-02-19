@@ -327,6 +327,20 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
       if (formData.summaryConfig.maxWords < 1) {
         newErrors.maxWords = "Max words must be at least 1";
       }
+    } else if (formData.questionType === "sentence-completion") {
+      // Sentence Completion Validation (Reusing Summary Config)
+      if (formData.summaryConfig.answerMode === "select") {
+        const filledOptions = formData.summaryConfig.options.filter((o) =>
+          o.trim(),
+        );
+        if (filledOptions.length < 2) {
+          newErrors.summaryOptions =
+            "At least 2 options are required for Select mode";
+        }
+      }
+      if (formData.summaryConfig.maxWords < 1) {
+        newErrors.maxWords = "Max words must be at least 1";
+      }
     }
 
     setErrors(newErrors);
@@ -355,7 +369,10 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
         summaryConfig: formData.summaryConfig, // ✅ ADDED
       };
 
-      if (formData.questionType === "summary-completion") {
+      if (
+        formData.questionType === "summary-completion" ||
+        formData.questionType === "sentence-completion"
+      ) {
         if (formData.summaryConfig.answerMode === "typed") {
           submitData.summaryConfig.options = [];
         } else {
@@ -761,11 +778,12 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
               </div>
             )}
 
-            {/* SUMMARY COMPLETION SPECIFIC UI */}
-            {formData.questionType === "summary-completion" && (
+            {/* SUMMARY/SENTENCE COMPLETION SPECIFIC UI */}
+            {(formData.questionType === "summary-completion" ||
+              formData.questionType === "sentence-completion") && (
               <div className="bg-orange-50 p-4 rounded-lg border-2 border-orange-200 space-y-4 mb-6">
                 <h4 className="font-bold text-orange-800 flex items-center gap-2">
-                  <span>📝</span> Summary Configuration (Optional)
+                  <span>📝</span> Completion Configuration (Optional)
                 </h4>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

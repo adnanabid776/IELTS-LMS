@@ -62,8 +62,11 @@ const isAnswerCorrect = (
     return false;
   }
 
-  // 2. Summary Completion (Dual Check: Label or Text)
-  if (questionType === "summary-completion") {
+  // 2. Summary/Sentence Completion (Dual Check: Label or Text)
+  if (
+    questionType === "summary-completion" ||
+    questionType === "sentence-completion"
+  ) {
     // Check 1: Direct Match (User Answer vs Correct Answer)
     if (normUser === normCorrect) return true;
 
@@ -763,7 +766,7 @@ exports.getDetailedResult = async (req, res) => {
     const session = await Session.findById(result.sessionId).populate({
       path: "answers.questionId",
       select:
-        "questionNumber questionText questionType correctAnswer alternativeAnswers explanation options",
+        "questionNumber questionText questionType correctAnswer alternativeAnswers explanation options summaryConfig",
     });
 
     // Get all questions for this test

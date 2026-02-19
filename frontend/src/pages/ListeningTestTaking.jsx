@@ -486,9 +486,9 @@ const ListeningTestTaking = () => {
       case "true-false-not-given":
       case "yes-no-not-given": {
         const tfOptions =
-          question.questionType === "true-false-not-given"
-            ? ["True", "False", "Not Given"]
-            : ["Yes", "No", "Not Given"];
+          question.questionType === "yes-no-not-given"
+            ? ["Yes", "No", "Not Given"]
+            : ["True", "False", "Not Given"];
 
         return (
           <div
@@ -496,6 +496,10 @@ const ListeningTestTaking = () => {
             className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-4 hover:shadow-md transition"
           >
             <div className="flex items-start gap-3 mb-4">
+              {/* TEMPORARY DEBUG */}
+              <div className="absolute top-0 right-0 text-xs text-red-500 p-1">
+                {question.questionType}
+              </div>
               <span className="text-lg font-bold text-blue-600 bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">
                 {question.questionNumber}
               </span>

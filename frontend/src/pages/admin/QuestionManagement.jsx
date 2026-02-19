@@ -205,6 +205,57 @@ const QuestionManagement = () => {
     "short-answer",
   ];
 
+  // Pagination Logic
+  const paginationRange = () => {
+    const totalPageCount = Math.ceil(filteredQuestions.length / itemsPerPage);
+    const siblingCount = 1;
+    const DOTS = "...";
+
+    // Returns range [start, end]
+    const range = (start, end) => {
+      let length = end - start + 1;
+      return Array.from({ length }, (_, idx) => idx + start);
+    };
+
+    if (totalPageCount <= 7) {
+      return range(1, totalPageCount);
+    }
+
+    const leftSiblingIndex = Math.max(currentPage - siblingCount, 1);
+    const rightSiblingIndex = Math.min(
+      currentPage + siblingCount,
+      totalPageCount,
+    );
+
+    const shouldShowLeftDots = leftSiblingIndex > 2;
+    const shouldShowRightDots = rightSiblingIndex < totalPageCount - 2;
+
+    const firstPageIndex = 1;
+    const lastPageIndex = totalPageCount;
+
+    if (!shouldShowLeftDots && shouldShowRightDots) {
+      let leftItemCount = 3 + 2 * siblingCount;
+      let leftRange = range(1, leftItemCount);
+      return [...leftRange, DOTS, totalPageCount];
+    }
+
+    if (shouldShowLeftDots && !shouldShowRightDots) {
+      let rightItemCount = 3 + 2 * siblingCount;
+      let rightRange = range(
+        totalPageCount - rightItemCount + 1,
+        totalPageCount,
+      );
+      return [firstPageIndex, DOTS, ...rightRange];
+    }
+
+    if (shouldShowLeftDots && shouldShowRightDots) {
+      let middleRange = range(leftSiblingIndex, rightSiblingIndex);
+      return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
+    }
+
+    return range(1, totalPageCount);
+  };
+
   return (
     <DashboardLayout title="Question Management">
       {/* Header */}
@@ -536,24 +587,33 @@ const QuestionManagement = () => {
                 </button>
 
                 {/* Page Numbers - Scrollable Container */}
-                <div className="flex overflow-x-auto max-w-[200px] sm:max-w-none scrollbar-hide">
-                  {[
-                    ...Array(
-                      Math.ceil(filteredQuestions.length / itemsPerPage),
-                    ),
-                  ].map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setCurrentPage(i + 1)}
-                      className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium min-w-[40px] justify-center ${
-                        currentPage === i + 1
-                          ? "z-10 bg-blue-600 border-blue-600 text-white"
-                          : "bg-white border-gray-300 text-gray-500 hover:bg-gray-50"
-                      }`}
-                    >
-                      {i + 1}
-                    </button>
-                  ))}
+                <div className="flex overflow-x-auto max-w-[200px] sm:max-w-none scrollbar-hide gap-1">
+                  {paginationRange().map((pageNumber, index) => {
+                    if (pageNumber === "...") {
+                      return (
+                        <span
+                          key={index}
+                          className="px-4 py-2 text-sm text-gray-500 bg-white border border-gray-300 rounded-md"
+                        >
+                          &#8230;
+                        </span>
+                      );
+                    }
+
+                    return (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentPage(pageNumber)}
+                        className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium min-w-[40px] justify-center rounded-md ${
+                          currentPage === pageNumber
+                            ? "z-10 bg-blue-600 border-blue-600 text-white shadow-sm"
+                            : "bg-white border-gray-300 text-gray-700 hover:bg-gray-50"
+                        }`}
+                      >
+                        {pageNumber}
+                      </button>
+                    );
+                  })}
                 </div>
 
                 {/* Next */}

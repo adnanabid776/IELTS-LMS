@@ -57,8 +57,11 @@ const isAnswerCorrect = (
     return false;
   }
 
-  // 2. Summary Completion (Dual Check: Label or Text)
-  if (questionType === "summary-completion") {
+  // 2. Summary/Sentence Completion (Dual Check: Label or Text)
+  if (
+    questionType === "summary-completion" ||
+    questionType === "sentence-completion"
+  ) {
     // Check 1: Direct Match (User Answer vs Correct Answer)
     if (normUser === normCorrect) return true;
 
@@ -97,7 +100,6 @@ const isAnswerCorrect = (
     }
     return false;
   }
-
 
   // Check exact match first
   if (normUser === normCorrect) return true;
