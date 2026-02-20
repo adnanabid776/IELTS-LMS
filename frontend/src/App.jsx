@@ -37,7 +37,6 @@ import TestManagement from "./pages/admin/TestManagement";
 import PendingReviews from "./pages/PendingReviews";
 import GradeResult from "./pages/GradeResult";
 import ListeningTestTaking from "./pages/ListeningTestTaking";
-import SpeakingTestTaking from "./pages/SpeakingTestTaking";
 
 function App() {
   return (
@@ -254,16 +253,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-          {/* Speaking Module Disabled
-          <Route
-            path="/test/speaking/:testId"
-            element={
-              <ProtectedRoute>
-                <SpeakingTestTaking />
-              </ProtectedRoute>
-            }
-          />
-*/}
 
           {/* ================================================
               404 - PAGE NOT FOUND

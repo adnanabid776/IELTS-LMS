@@ -18,12 +18,6 @@ const EditSectionModal = ({ section, testModule, onClose, onSuccess }) => {
     taskType: "task1",
     taskImageUrl: "",
     wordLimit: 150,
-    // Speaking fields
-    speakingPartNumber: 1,
-    cueCardTopic: "",
-    cueCardBulletPoints: "",
-    cueCardPreparationTime: 60,
-    cueCardSpeakingTime: 120,
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
@@ -46,12 +40,6 @@ const EditSectionModal = ({ section, testModule, onClose, onSuccess }) => {
         taskType: section.taskType || "task1",
         taskImageUrl: section.taskImageUrl || "",
         wordLimit: section.wordLimit || 150,
-        // Speaking fields
-        speakingPartNumber: section.speakingPartNumber || 1,
-        cueCardTopic: section.cueCard?.topic || "",
-        cueCardBulletPoints: section.cueCard?.bulletPoints?.join("\n") || "",
-        cueCardPreparationTime: section.cueCard?.preparationTime || 60,
-        cueCardSpeakingTime: section.cueCard?.speakingTime || 120,
       });
     }
   }, [section]);
@@ -90,24 +78,6 @@ const EditSectionModal = ({ section, testModule, onClose, onSuccess }) => {
         ...formData,
         duration: formData.duration ? parseInt(formData.duration) : null,
       };
-
-      // Format speaking fields for backend
-      if (testModule === "speaking") {
-        submitData.speakingPartNumber = parseInt(formData.speakingPartNumber);
-        submitData.cueCard = {
-          topic: formData.cueCardTopic,
-          bulletPoints: formData.cueCardBulletPoints
-            .split("\n")
-            .filter((bp) => bp.trim()),
-          preparationTime: parseInt(formData.cueCardPreparationTime),
-          speakingTime: parseInt(formData.cueCardSpeakingTime),
-        };
-        // Remove flat cue card fields
-        delete submitData.cueCardTopic;
-        delete submitData.cueCardBulletPoints;
-        delete submitData.cueCardPreparationTime;
-        delete submitData.cueCardSpeakingTime;
-      }
 
       await updateSection(section._id, submitData);
       toast.success("Section updated successfully!");
@@ -383,104 +353,6 @@ const EditSectionModal = ({ section, testModule, onClose, onSuccess }) => {
                     </p>
                   </div>
                 )}
-              </>
-            )}
-
-            {/* Speaking Fields */}
-            {testModule === "speaking" && (
-              <>
-                <div className="border-t-2 border-gray-200 pt-4 mt-4">
-                  <h4 className="text-lg font-bold text-gray-800 mb-4">
-                    🎤 Speaking Section Settings
-                  </h4>
-                </div>
-
-                {/* Speaking Part Number */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">
-                      Speaking Part <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      name="speakingPartNumber"
-                      value={formData.speakingPartNumber}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                      <option value={1}>Part 1 (Interview)</option>
-                      <option value={2}>Part 2 (Long Turn)</option>
-                      <option value={3}>Part 3 (Discussion)</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">
-                      Preparation Time (sec)
-                    </label>
-                    <input
-                      type="number"
-                      name="cueCardPreparationTime"
-                      value={formData.cueCardPreparationTime}
-                      onChange={handleChange}
-                      min="0"
-                      className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">
-                      Speaking Time (sec)
-                    </label>
-                    <input
-                      type="number"
-                      name="cueCardSpeakingTime"
-                      value={formData.cueCardSpeakingTime}
-                      onChange={handleChange}
-                      min="30"
-                      className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                </div>
-
-                {/* Cue Card - mainly for Part 2 */}
-                <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-4 mt-4">
-                  <h5 className="font-bold text-orange-800 mb-3">
-                    📋 Cue Card (For Part 2)
-                  </h5>
-
-                  {/* Topic */}
-                  <div className="mb-4">
-                    <label className="block text-sm font-bold text-gray-700 mb-2">
-                      Topic
-                    </label>
-                    <input
-                      type="text"
-                      name="cueCardTopic"
-                      value={formData.cueCardTopic}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="e.g., Describe a memorable journey you took"
-                    />
-                  </div>
-
-                  {/* Bullet Points */}
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">
-                      Bullet Points (one per line)
-                    </label>
-                    <textarea
-                      name="cueCardBulletPoints"
-                      value={formData.cueCardBulletPoints}
-                      onChange={handleChange}
-                      rows="4"
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="Where you went&#10;Who you went with&#10;What you did there&#10;Why it was memorable"
-                    />
-                    <p className="text-xs text-gray-500 mt-1">
-                      Enter each bullet point on a new line
-                    </p>
-                  </div>
-                </div>
               </>
             )}
           </div>

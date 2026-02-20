@@ -86,8 +86,6 @@ const EditTestModal = ({ isOpen, onClose, test, onUpdated }) => {
         return "🎧";
       case "writing":
         return "✍️";
-      case "speaking":
-        return "🗣️";
       default:
         return "📝";
     }
@@ -204,7 +202,6 @@ const EditTestModal = ({ isOpen, onClose, test, onUpdated }) => {
                   <option value="reading">📖 Reading</option>
                   <option value="listening">🎧 Listening</option>
                   <option value="writing">✍️ Writing</option>
-                  {/* <option value="speaking">🗣️ Speaking (Disabled)</option> */}
                 </select>
                 {errors.module && (
                   <p className="text-xs text-red-500 mt-1.5 flex items-center gap-1">

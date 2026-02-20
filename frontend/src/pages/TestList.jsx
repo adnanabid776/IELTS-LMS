@@ -22,7 +22,7 @@ const TestList = () => {
         const module = selectedModule === "all" ? null : selectedModule;
         const response = await getAllTests(module);
         let loadedTests = response.tests || [];
-        // DISABLE SPEAKING MODULE UI: Filter out speaking tests
+        // Filter out speaking tests (module no longer supported)
         loadedTests = loadedTests.filter((t) => t.module !== "speaking");
         setTests(loadedTests);
       } catch (error) {

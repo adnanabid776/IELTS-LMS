@@ -23,9 +23,8 @@ exports.createSection = async (req, res) => {
       taskType,
       taskImageUrl,
       wordLimit,
-      // Speaking fields
+      // Cue card (for writing prompts)
       cueCard,
-      speakingPartNumber,
     } = req.body;
 
     // Validate required fields
@@ -60,7 +59,6 @@ exports.createSection = async (req, res) => {
       taskImageUrl,
       wordLimit,
       cueCard,
-      speakingPartNumber,
     });
 
     // Update test's totalSections
@@ -143,9 +141,8 @@ exports.updateSection = async (req, res) => {
       taskType,
       taskImageUrl,
       wordLimit,
-      // Speaking fields
+      // Cue card
       cueCard,
-      speakingPartNumber,
     } = req.body;
 
     const section = await Section.findByIdAndUpdate(
@@ -165,7 +162,6 @@ exports.updateSection = async (req, res) => {
         taskImageUrl,
         wordLimit,
         cueCard,
-        speakingPartNumber,
       },
       { new: true, runValidators: true },
     );

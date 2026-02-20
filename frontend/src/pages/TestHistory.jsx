@@ -118,16 +118,6 @@ const TestHistory = () => {
         >
           ✍️ Writing
         </button>
-        {/* <button
-          onClick={() => handleModuleChange("speaking")}
-          className={`px-4 py-2 rounded-lg font-medium transition ${
-            selectedModule === "speaking"
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-          }`}
-        >
-          🎤 Speaking
-        </button> */}
       </div>
       {/* Results Count & Pagination Info */}
       {!loading && results.length > 0 && (
@@ -187,7 +177,7 @@ const TestHistory = () => {
                               ? "bg-green-100 text-green-800"
                               : result.module === "writing"
                                 ? "bg-purple-100 text-purple-800"
-                                : "bg-orange-100 text-orange-800"
+                                : "bg-gray-100 text-gray-800"
                         }`}
                       >
                         {result.module.toUpperCase()}

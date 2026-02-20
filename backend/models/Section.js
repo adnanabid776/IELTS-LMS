@@ -94,13 +94,7 @@ const sectionSchema = new mongoose.Schema(
       topic: String,
       bulletPoints: [String],
       preparationTime: Number, // seconds (usually 60)
-      speakingTime: Number, // seconds (usually 120)
     },
-    // speakingPartNumber: {
-    //   type: Number,
-    //   enum: [1, 2, 3],
-    //   // Part 1: Interview, Part 2: Long turn, Part 3: Discussion
-    // },
   },
   {
     timestamps: true,

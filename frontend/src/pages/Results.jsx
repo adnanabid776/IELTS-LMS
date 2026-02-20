@@ -80,7 +80,7 @@ const Results = () => {
       {/* Hero Section - Band Score OR Pending Message */}
       {isPendingGrading ? (
         // ============================================
-        // PENDING GRADING MESSAGE (Writing/Speaking)
+        // PENDING GRADING MESSAGE (Writing)
         // ============================================
         <div className="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-8 mb-6 text-center">
           <div className="text-6xl mb-4">⏳</div>
@@ -99,7 +99,7 @@ const Results = () => {
         </div>
       ) : (
         // ============================================
-        // GRADED RESULT (Reading/Listening or Graded Writing/Speaking)
+        // GRADED RESULT (Reading/Listening or Graded Writing)
         // ============================================
         <div
           className={`${getBandBgColor(result.bandScore)} rounded-lg p-8 mb-6 text-center`}
@@ -121,7 +121,7 @@ const Results = () => {
             <p className="text-sm text-gray-500 mt-2">out of 9.0</p>
           </div>
 
-          {/* Show grading details for Writing/Speaking if graded */}
+          {/* Show grading details for Writing if graded */}
           {result.isManuallyGraded && result.bandScore && (
             <div className="mt-6 bg-white rounded-lg p-4">
               <p className="text-sm text-gray-600 font-semibold mb-2">
@@ -200,7 +200,7 @@ const Results = () => {
             </>
           )}
 
-          {/* Show module-specific scores for Writing/Speaking if graded */}
+          {/* Show module-specific scores for Writing if graded */}
           {result.isManuallyGraded && result.writingScores && (
             <>
               <div className="bg-white rounded-lg shadow p-6">
@@ -221,25 +221,6 @@ const Results = () => {
                 <p className="text-gray-500 text-xs mb-1">Lexical Resource</p>
                 <p className="text-2xl font-bold text-blue-600">
                   {result.writingScores.lexicalResource}
-                </p>
-              </div>
-            </>
-          )}
-
-          {result.isManuallyGraded && result.speakingScores && (
-            <>
-              <div className="bg-white rounded-lg shadow p-6">
-                <p className="text-gray-500 text-xs mb-1">
-                  Fluency & Coherence
-                </p>
-                <p className="text-2xl font-bold text-blue-600">
-                  {result.speakingScores.fluencyCoherence}
-                </p>
-              </div>
-              <div className="bg-white rounded-lg shadow p-6">
-                <p className="text-gray-500 text-xs mb-1">Pronunciation</p>
-                <p className="text-2xl font-bold text-blue-600">
-                  {result.speakingScores.pronunciation}
                 </p>
               </div>
             </>

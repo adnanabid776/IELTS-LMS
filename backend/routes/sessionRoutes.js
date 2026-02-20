@@ -8,7 +8,6 @@ router.use(authMiddleware);
 // ✅ SPECIFIC ROUTES FIRST
 router.post("/start", sessionController.startTest);
 router.post("/save-answer", sessionController.saveAnswer);
-router.post("/save-speaking-answer", sessionController.saveSpeakingAnswer);
 router.post("/bulk-save", sessionController.bulkSaveAnswers);
 router.post("/submit", sessionController.submitTest);
 router.post("/track-tab-switch", sessionController.trackTabSwitch);

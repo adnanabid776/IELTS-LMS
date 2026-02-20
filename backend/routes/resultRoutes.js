@@ -30,11 +30,7 @@ router.post(
 );
 
 //manual result
-router.post(
-  "/create-manual",
-  authMiddleware,
-  resultController.createManualResult,
-);
+router.post("/create-manual", resultController.createManualResult);
 
 //get all results
 router.get("/", resultController.getAllResults);

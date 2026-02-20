@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import DashboardLayout from '../components/Layout/DashboardLayout';
-import { toast } from 'react-toastify';
-import axios from 'axios';
-
-const API_URL = 'http://localhost:5000/api';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import DashboardLayout from "../components/Layout/DashboardLayout";
+import { getTeacherPendingReviews } from "../services/api";
+import { toast } from "react-toastify";
 
 const PendingReviews = () => {
   const navigate = useNavigate();
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState('all'); // all, writing, speaking
+  const [filter, setFilter] = useState("all"); // all, writing
 
   useEffect(() => {
     fetchPendingReviews();
@@ -19,16 +17,11 @@ const PendingReviews = () => {
   const fetchPendingReviews = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem('token');
-      
-      const response = await axios.get(`${API_URL}/auth/teacher/pending-reviews`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
-      setReviews(response.data.reviews || []);
+      const data = await getTeacherPendingReviews();
+      setReviews(data.reviews || []);
     } catch (error) {
-      console.error('Fetch pending reviews error:', error);
-      toast.error('Failed to load pending reviews');
+      console.error("Fetch pending reviews error:", error);
+      toast.error("Failed to load pending reviews");
     } finally {
       setLoading(false);
     }
@@ -40,36 +33,41 @@ const PendingReviews = () => {
 
   const getModuleIcon = (module) => {
     switch (module) {
-      case 'writing': return '📝';
-      case 'speaking': return '🎤';
-      case 'reading': return '📖';
-      case 'listening': return '🎧';
-      default: return '📄';
+      case "writing":
+        return "📝";
+      case "reading":
+        return "📖";
+      case "listening":
+        return "🎧";
+      default:
+        return "📄";
     }
   };
 
   const getModuleColor = (module) => {
     switch (module) {
-      case 'writing': return 'bg-purple-100 text-purple-800';
-      case 'speaking': return 'bg-orange-100 text-orange-800';
-      case 'reading': return 'bg-blue-100 text-blue-800';
-      case 'listening': return 'bg-green-100 text-green-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case "writing":
+        return "bg-purple-100 text-purple-800";
+      case "reading":
+        return "bg-blue-100 text-blue-800";
+      case "listening":
+        return "bg-green-100 text-green-800";
+      default:
+        return "bg-gray-100 text-gray-800";
     }
   };
 
   const getTimeAgo = (date) => {
     const seconds = Math.floor((new Date() - new Date(date)) / 1000);
-    
-    if (seconds < 60) return 'Just now';
+
+    if (seconds < 60) return "Just now";
     if (seconds < 3600) return `${Math.floor(seconds / 60)} minutes ago`;
     if (seconds < 86400) return `${Math.floor(seconds / 3600)} hours ago`;
     return `${Math.floor(seconds / 86400)} days ago`;
   };
 
-  const filteredReviews = filter === 'all' 
-    ? reviews 
-    : reviews.filter(r => r.testModule === filter);
+  const filteredReviews =
+    filter === "all" ? reviews : reviews.filter((r) => r.testModule === filter);
 
   if (loading) {
     return (
@@ -96,34 +94,25 @@ const PendingReviews = () => {
       {/* Filters */}
       <div className="flex gap-3 mb-6">
         <button
-          onClick={() => setFilter('all')}
+          onClick={() => setFilter("all")}
           className={`px-4 py-2 rounded-lg font-medium transition ${
-            filter === 'all' 
-              ? 'bg-blue-600 text-white' 
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            filter === "all"
+              ? "bg-blue-600 text-white"
+              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
           }`}
         >
           All ({reviews.length})
         </button>
         <button
-          onClick={() => setFilter('writing')}
+          onClick={() => setFilter("writing")}
           className={`px-4 py-2 rounded-lg font-medium transition ${
-            filter === 'writing' 
-              ? 'bg-purple-600 text-white' 
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            filter === "writing"
+              ? "bg-purple-600 text-white"
+              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
           }`}
         >
-          📝 Writing ({reviews.filter(r => r.testModule === 'writing').length})
-        </button>
-        <button
-          onClick={() => setFilter('speaking')}
-          className={`px-4 py-2 rounded-lg font-medium transition ${
-            filter === 'speaking' 
-              ? 'bg-orange-600 text-white' 
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-          }`}
-        >
-          🎤 Speaking ({reviews.filter(r => r.testModule === 'speaking').length})
+          📝 Writing ({reviews.filter((r) => r.testModule === "writing").length}
+          )
         </button>
       </div>
 
@@ -131,7 +120,7 @@ const PendingReviews = () => {
       {filteredReviews.length > 0 ? (
         <div className="space-y-4">
           {filteredReviews.map((review) => (
-            <div 
+            <div
               key={review.resultId}
               className="bg-white rounded-lg shadow hover:shadow-lg transition p-6 border-l-4 border-blue-500"
             >
@@ -140,8 +129,11 @@ const PendingReviews = () => {
                 <div className="flex-1">
                   {/* Module Badge */}
                   <div className="flex items-center gap-3 mb-3">
-                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getModuleColor(review.testModule)}`}>
-                      {getModuleIcon(review.testModule)} {review.testModule.toUpperCase()}
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-semibold ${getModuleColor(review.testModule)}`}
+                    >
+                      {getModuleIcon(review.testModule)}{" "}
+                      {review.testModule.toUpperCase()}
                     </span>
                     <span className="text-sm text-gray-500">
                       {getTimeAgo(review.submittedAt)}
@@ -192,13 +184,13 @@ const PendingReviews = () => {
             All Caught Up!
           </h3>
           <p className="text-gray-600 mb-6">
-            {filter === 'all' 
-              ? 'No pending reviews at the moment.' 
+            {filter === "all"
+              ? "No pending reviews at the moment."
               : `No pending ${filter} reviews.`}
           </p>
-          {filter !== 'all' && (
+          {filter !== "all" && (
             <button
-              onClick={() => setFilter('all')}
+              onClick={() => setFilter("all")}
               className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
             >
               View All Reviews

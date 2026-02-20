@@ -5,7 +5,7 @@ import RubricSlider from "../components/RubricSlider";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 const GradeResult = () => {
   const { resultId } = useParams();
@@ -25,21 +25,12 @@ const GradeResult = () => {
     grammaticalRange: 5,
   });
 
-  // Speaking Scores
-  const [speakingScores, setSpeakingScores] = useState({
-    fluencyCoherence: 5,
-    lexicalResource: 5,
-    grammaticalRange: 5,
-    pronunciation: 5,
-  });
-
   // Manual Band Score (for Reading/Listening overrides)
   const [manualBandScore, setManualBandScore] = useState(0);
 
   const [gradingNotes, setGradingNotes] = useState("");
 
   const isWriting = result?.module === "writing";
-  // const isSpeaking = result?.module === "speaking";
 
   useEffect(() => {
     fetchResultDetails();
@@ -73,9 +64,6 @@ const GradeResult = () => {
       if (resultData.writingScores) {
         setWritingScores(resultData.writingScores);
       }
-      if (resultData.speakingScores) {
-        setSpeakingScores(resultData.speakingScores);
-      }
       if (resultData.gradingNotes) {
         setGradingNotes(resultData.gradingNotes);
       }
@@ -99,7 +87,7 @@ const GradeResult = () => {
           writingScores.grammaticalRange) /
         4;
       return Math.round(avg * 2) / 2; // Round to nearest 0.5
-    } 
+    }
     return manualBandScore;
   };
 
@@ -137,7 +125,7 @@ const GradeResult = () => {
 
       if (isWriting) {
         payload.writingScores = writingScores;
-      } 
+      }
 
       await axios.post(`${API_URL}/results/${resultId}/grade`, payload, {
         headers: { Authorization: `Bearer ${token}` },
@@ -267,36 +255,6 @@ const GradeResult = () => {
                 ))}
               </div>
             )}
-
-            {/* {isSpeaking && (
-              <div className="space-y-4">
-                <p className="text-gray-600 mb-4">
-                  Listen to the student's speaking recording:
-                </p>
-                {answers.length > 0 ? (
-                  answers.map((answer, index) => (
-                    <div key={answer._id || index} className="mb-4">
-                      <h4 className="font-semibold text-gray-700 mb-2">
-                        Part {index + 1}
-                      </h4>
-                      {answer.userAnswer &&
-                      answer.userAnswer.startsWith("http") ? (
-                        <audio controls className="w-full">
-                          <source src={answer.userAnswer} type="audio/mpeg" />
-                          Your browser does not support the audio element.
-                        </audio>
-                      ) : (
-                        <p className="text-gray-500 italic">
-                          No recording available
-                        </p>
-                      )}
-                    </div>
-                  ))
-                ) : (
-                  <p className="text-gray-500 italic">No recordings found</p>
-                )}
-              </div>
-            )} */}
           </div>
         </div>
 
@@ -376,52 +334,6 @@ const GradeResult = () => {
                 />
               </div>
             )}
-
-            {/* {isSpeaking && (
-              <div>
-                <RubricSlider
-                  criterion="Fluency & Coherence"
-                  value={speakingScores.fluencyCoherence}
-                  onChange={(val) =>
-                    setSpeakingScores({
-                      ...speakingScores,
-                      fluencyCoherence: val,
-                    })
-                  }
-                  description="Smoothness and logical flow of speech"
-                />
-                <RubricSlider
-                  criterion="Lexical Resource"
-                  value={speakingScores.lexicalResource}
-                  onChange={(val) =>
-                    setSpeakingScores({
-                      ...speakingScores,
-                      lexicalResource: val,
-                    })
-                  }
-                  description="Range and accuracy of vocabulary"
-                />
-                <RubricSlider
-                  criterion="Grammatical Range & Accuracy"
-                  value={speakingScores.grammaticalRange}
-                  onChange={(val) =>
-                    setSpeakingScores({
-                      ...speakingScores,
-                      grammaticalRange: val,
-                    })
-                  }
-                  description="Variety and accuracy of grammar"
-                />
-                <RubricSlider
-                  criterion="Pronunciation"
-                  value={speakingScores.pronunciation}
-                  onChange={(val) =>
-                    setSpeakingScores({ ...speakingScores, pronunciation: val })
-                  }
-                  description="Clarity and ease of understanding"
-                />
-              </div>
-            )} */}
           </div>
 
           {/* Feedback */}

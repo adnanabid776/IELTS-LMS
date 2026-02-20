@@ -315,9 +315,7 @@ const QuestionManagement = () => {
                     ? "bg-gradient-to-br from-purple-500 to-purple-600"
                     : module._id === "writing"
                       ? "bg-gradient-to-br from-orange-500 to-orange-600"
-                      : module._id === "speaking"
-                        ? "bg-gradient-to-br from-orange-500 to-orange-600"
-                        : "bg-gradient-to-br from-pink-500 to-pink-600"
+                      : "bg-gradient-to-br from-pink-500 to-pink-600"
               }`}
             >
               <p className="text-white opacity-90 text-xs mb-1">
@@ -360,7 +358,6 @@ const QuestionManagement = () => {
               <option value="reading">Reading</option>
               <option value="listening">Listening</option>
               <option value="writing">Writing</option>
-              <option value="speaking">Speaking</option>
             </select>
           </div>
 

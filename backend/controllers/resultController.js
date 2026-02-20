@@ -381,7 +381,7 @@ exports.submitTest = async (req, res) => {
     // ============================================
     // CONDITIONAL LOGIC: Check if manual grading needed
     // ============================================
-    const needsManualGrading = module === "writing" || module === "speaking";
+    const needsManualGrading = module === "writing";
 
     // Calculate results (only for auto-graded modules)
     let correctAnswers = needsManualGrading ? null : 0;
@@ -886,24 +886,6 @@ exports.teacherGradeResult = async (req, res) => {
       result.bandScore = Math.round(avg * 2) / 2; // Round to nearest 0.5
     }
 
-    if (result.module === "speaking" && speakingScores) {
-      result.speakingScores = {
-        fluencyCoherence: speakingScores.fluencyCoherence,
-        lexicalResource: speakingScores.lexicalResource,
-        grammaticalRange: speakingScores.grammaticalRange,
-        pronunciation: speakingScores.pronunciation,
-      };
-
-      // Calculate average
-      const avg =
-        (speakingScores.fluencyCoherence +
-          speakingScores.lexicalResource +
-          speakingScores.grammaticalRange +
-          speakingScores.pronunciation) /
-        4;
-      result.bandScore = Math.round(avg * 2) / 2;
-    }
-
     // Calculate percentage from band score (band 0-9 → 0-100%)
     result.percentage = Math.round((result.bandScore / 9) * 100);
 
@@ -932,9 +914,9 @@ exports.createManualResult = async (req, res) => {
     }
 
     // Validate module is manually graded
-    if (module !== "writing" && module !== "speaking") {
+    if (module !== "writing") {
       return res.status(400).json({
-        error: "This endpoint is only for Writing and Speaking modules",
+        error: "This endpoint is only for Writing module",
       });
     }
 
@@ -983,7 +965,6 @@ exports.createManualResult = async (req, res) => {
       isManuallyGraded: true,
       gradingNotes: null,
       writingScores: module === "writing" ? {} : undefined,
-      speakingScores: module === "speaking" ? {} : undefined,
     });
 
     res.status(201).json({

@@ -8,7 +8,7 @@ const crypto = require("crypto");
 // ============================================
 exports.register = async (req, res) => {
   try {
-    const { firstName, lastName, email, password, role } = req.body;
+    const { firstName, lastName, email, password } = req.body;
     //if user already registered
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -17,13 +17,13 @@ exports.register = async (req, res) => {
 
     //hash passwords
     const hashedPassword = await bcrypt.hash(password, 10);
-    //create user
+    //create user (role is always "student" for public registration)
     const user = await User.create({
       firstName,
       lastName,
       email,
       password: hashedPassword,
-      role: role || "student",
+      role: "student",
     });
 
     const token = jwt.sign(

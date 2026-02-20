@@ -1,17 +1,37 @@
-
 const express = require("express");
 const router = express.Router();
+const rateLimit = require("express-rate-limit");
 const authController = require("../controllers/authController");
 const authMiddleware = require("../middleware/auth");
 const roleCheck = require("../middleware/roleCheck");
 
+// Rate limiters for auth endpoints
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10, // 10 attempts per window
+  message: {
+    error: "Too many login attempts. Please try again after 15 minutes.",
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
+const registerLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 5, // 5 registrations per hour per IP
+  message: {
+    error:
+      "Too many accounts created from this IP. Please try again after an hour.",
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 // Register route
-router.post("/register", authController.register);
+router.post("/register", registerLimiter, authController.register);
 
 // Login Route
-router.post("/login", authController.login);
+router.post("/login", loginLimiter, authController.login);
 
 // ==========================================
 // AUTHENTICATED ROUTES
@@ -110,7 +130,5 @@ router.get(
   roleCheck("admin"),
   authController.getAdminDashboardStats,
 );
-
-
 
 module.exports = router;

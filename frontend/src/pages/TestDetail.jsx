@@ -216,17 +216,10 @@ const TestDetail = () => {
           test.
         </p>
         <button
-          onClick={test.module === "speaking" ? null : handleStartTest}
-          disabled={test.module === "speaking"}
-          className={`px-8 py-3 rounded-lg font-bold text-lg transition ${
-            test.module === "speaking"
-              ? "bg-gray-400 text-white cursor-not-allowed"
-              : "bg-green-600 text-white hover:bg-green-700"
-          }`}
+          onClick={handleStartTest}
+          className="px-8 py-3 rounded-lg font-bold text-lg transition bg-green-600 text-white hover:bg-green-700"
         >
-          {test.module === "speaking"
-            ? "⚠️ Speaking Module Disabled"
-            : "🚀 Start Test"}
+          🚀 Start Test
         </button>
       </div>
     </DashboardLayout>

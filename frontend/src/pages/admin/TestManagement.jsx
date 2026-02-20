@@ -35,7 +35,7 @@ const TestManagement = () => {
     try {
       setLoading(true);
       const response = await getAllTests();
-      // DISABLE SPEAKING UI: Filter out speaking tests
+      // Filter out speaking tests (module no longer supported)
       const allTests = response.tests || [];
       setTests(allTests.filter((t) => t.module !== "speaking"));
     } catch (error) {
@@ -94,7 +94,6 @@ const TestManagement = () => {
       reading: "from-green-500 to-green-600",
       listening: "from-purple-500 to-purple-600",
       writing: "from-orange-500 to-orange-600",
-      speaking: "from-pink-500 to-pink-600",
     };
     return colors[module] || "from-gray-500 to-gray-600";
   };
@@ -104,7 +103,6 @@ const TestManagement = () => {
       reading: "📖",
       listening: "🎧",
       writing: "✍️",
-      speaking: "🗣️",
     };
     return icons[module] || "📝";
   };
@@ -114,7 +112,6 @@ const TestManagement = () => {
     reading: tests.filter((t) => t.module === "reading").length,
     listening: tests.filter((t) => t.module === "listening").length,
     writing: tests.filter((t) => t.module === "writing").length,
-    speaking: tests.filter((t) => t.module === "speaking").length,
   };
 
   return (
@@ -154,7 +151,6 @@ const TestManagement = () => {
           <p className="text-orange-100 text-xs mb-1">Writing</p>
           <p className="text-3xl font-bold">{stats.writing}</p>
         </div>
-        {/* Speaking Stat Card Disabled */}
       </div>
 
       {/* Filters */}
@@ -186,7 +182,6 @@ const TestManagement = () => {
               <option value="reading">Reading</option>
               <option value="listening">Listening</option>
               <option value="writing">Writing</option>
-              {/* <option value="speaking">Speaking</option> */}
             </select>
           </div>
 

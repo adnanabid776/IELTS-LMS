@@ -76,8 +76,6 @@ const CreateTestModal = ({ onClose, onSuccess }) => {
         return "🎧";
       case "writing":
         return "✍️";
-      case "speaking":
-        return "🗣️";
       default:
         return "📝";
     }
@@ -190,7 +188,6 @@ const CreateTestModal = ({ onClose, onSuccess }) => {
                   <option value="reading">📖 Reading</option>
                   <option value="listening">🎧 Listening</option>
                   <option value="writing">✍️ Writing</option>
-                  {/* <option value="speaking">🗣️ Speaking (Disabled)</option> */}
                 </select>
               </div>
 
