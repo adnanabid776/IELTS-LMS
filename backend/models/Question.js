@@ -136,12 +136,6 @@ const questionSchema = new mongoose.Schema(
       trim: true,
     },
 
-    // Table Structure for Table Completion
-    tableStructure: {
-      headers: [String],
-      rows: [[String]],
-    },
-
     // Summary Completion Specific Configuration
     summaryConfig: {
       answerMode: {

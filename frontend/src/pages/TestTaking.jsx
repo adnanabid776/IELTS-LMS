@@ -96,14 +96,6 @@ const TestTaking = () => {
         try {
           // Use sendBeacon for reliable unmount requests if supported, fallback to API
           const isPageHide = true; // Flag to indicate this is happening on hide/unload
-
-          // We can't use async await reliably in unload, so we use sendBeacon or synchronous XHR if needed
-          // But for React Router navigation (component unmount), standard async works fine.
-
-          // NOTE: We rely on the timeRemaining state which is closure-captured.
-          // To get fresh state we might need a ref, but here we can trust timeRemaining from render scope
-          // strictly if this effect dependency includes timeRemaining or if we use a ref.
-
           // BETTER APPROACH: Use a Ref for timeRemaining to always get latest value in cleanup
         } catch (error) {
           console.error("Pause session error:", error);

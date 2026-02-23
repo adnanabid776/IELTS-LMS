@@ -84,5 +84,5 @@ process.on("unhandledRejection", (err) => {
 process.on("uncaughtException", (err) => {
   console.error(`❌ Uncaught Exception: ${err.message}`);
   console.error(err);
-  // process.exit(1); // Optional: Restart via process manager (PM2) in prod
+  process.exit(1); // Restart via process manager (PM2) in production
 });

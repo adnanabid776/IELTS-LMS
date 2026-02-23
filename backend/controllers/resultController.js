@@ -121,23 +121,26 @@ const isAnswerCorrect = (
 // Calculate band score from correct answers
 const calculateBandScore = (correctAnswers, totalQuestions, module) => {
   if (totalQuestions === 0) return 0;
+  if (correctAnswers === 0) return 0;
   const percentage = (correctAnswers / totalQuestions) * 100;
 
-  // IELTS band score conversion (simplified)
-  if (percentage >= 90) return 9;
-  if (percentage >= 82) return 8.5;
-  if (percentage >= 75) return 8;
-  if (percentage >= 67) return 7.5;
-  if (percentage >= 60) return 7;
-  if (percentage >= 52) return 6.5;
-  if (percentage >= 45) return 6;
-  if (percentage >= 37) return 5.5;
-  if (percentage >= 30) return 5;
-  if (percentage >= 22) return 4.5;
-  if (percentage >= 15) return 4;
-  if (percentage >= 10) return 3.5;
-  if (percentage >= 5) return 3;
-  return 2.5;
+  // IELTS band score conversion (based on official conversion table)
+  if (percentage >= 97.5) return 9;
+  if (percentage >= 92.5) return 8.5;
+  if (percentage >= 87.5) return 8;
+  if (percentage >= 82.5) return 7.5;
+  if (percentage >= 75) return 7;
+  if (percentage >= 65) return 6.5;
+  if (percentage >= 57.5) return 6;
+  if (percentage >= 50) return 5.5;
+  if (percentage >= 40) return 5;
+  if (percentage >= 32.5) return 4.5;
+  if (percentage >= 25) return 4;
+  if (percentage >= 17.5) return 3.5;
+  if (percentage >= 10) return 3;
+  if (percentage >= 5) return 2.5;
+  if (percentage >= 2.5) return 2;
+  return 1;
 };
 
 // ==========================================
