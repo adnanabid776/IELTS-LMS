@@ -705,9 +705,95 @@ const TestTaking = () => {
                       {question.questionNumber}
                     </span>
                     <div className="flex-1">
-                      <p className="text-gray-800 font-medium text-base leading-relaxed">
-                        {question.questionText}
-                      </p>
+                      {/* Inline input for typed summary/sentence/note completion */}
+                      {(question.questionType === "sentence-completion" ||
+                        question.questionType === "note-completion" ||
+                        (question.questionType === "summary-completion" &&
+                          question.summaryConfig?.answerMode !== "select")) &&
+                      question.questionText.includes("________") ? (
+                        <p className="text-gray-800 font-medium text-base leading-relaxed">
+                          {(() => {
+                            const parts =
+                              question.questionText.split(/________+/);
+                            return parts.map((part, idx) => (
+                              <span key={idx}>
+                                {part}
+                                {idx < parts.length - 1 && (
+                                  <input
+                                    type="text"
+                                    value={answers[question._id] || ""}
+                                    onChange={(e) => {
+                                      if (
+                                        question.questionType ===
+                                          "summary-completion" ||
+                                        question.questionType ===
+                                          "sentence-completion"
+                                      ) {
+                                        handleSummaryAnswerChange(
+                                          question._id,
+                                          e.target.value,
+                                          question.summaryConfig,
+                                        );
+                                      } else {
+                                        handleAnswerChange(
+                                          question._id,
+                                          e.target.value,
+                                        );
+                                      }
+                                    }}
+                                    placeholder="..."
+                                    className={`inline-block w-40 sm:w-48 mx-1 px-3 py-1 border-b-2 rounded-md text-sm focus:outline-none transition-all duration-200 align-baseline ${
+                                      answers[question._id]
+                                        ? "border-green-500 bg-green-50 text-green-800"
+                                        : "border-blue-400 bg-blue-50/50 text-gray-800 focus:border-blue-600"
+                                    }`}
+                                  />
+                                )}
+                              </span>
+                            ));
+                          })()}
+                        </p>
+                      ) : (question.questionType === "sentence-completion" ||
+                          question.questionType === "note-completion" ||
+                          (question.questionType === "summary-completion" &&
+                            question.summaryConfig?.answerMode !== "select")) &&
+                        !question.questionText.includes("________") ? (
+                        <p className="text-gray-800 font-medium text-base leading-relaxed">
+                          {question.questionText}{" "}
+                          <input
+                            type="text"
+                            value={answers[question._id] || ""}
+                            onChange={(e) => {
+                              if (
+                                question.questionType ===
+                                  "summary-completion" ||
+                                question.questionType === "sentence-completion"
+                              ) {
+                                handleSummaryAnswerChange(
+                                  question._id,
+                                  e.target.value,
+                                  question.summaryConfig,
+                                );
+                              } else {
+                                handleAnswerChange(
+                                  question._id,
+                                  e.target.value,
+                                );
+                              }
+                            }}
+                            placeholder="..."
+                            className={`inline-block w-40 sm:w-48 mx-1 px-3 py-1 border-b-2 rounded-md text-sm focus:outline-none transition-all duration-200 align-baseline ${
+                              answers[question._id]
+                                ? "border-green-500 bg-green-50 text-green-800"
+                                : "border-blue-400 bg-blue-50/50 text-gray-800 focus:border-blue-600"
+                            }`}
+                          />
+                        </p>
+                      ) : (
+                        <p className="text-gray-800 font-medium text-base leading-relaxed">
+                          {question.questionText}
+                        </p>
+                      )}
                       <span className="inline-block mt-2 px-3 py-1 bg-gray-100 text-gray-500 text-xs rounded-full font-medium">
                         {question.questionType.replace(/-/g, " ").toUpperCase()}
                       </span>
@@ -886,40 +972,16 @@ const TestTaking = () => {
                   </div>
                 )}
 
-                {/* Answer Input - Short Answer / Sentence Completion */}
-                {(question.questionType === "short-answer" ||
-                  (question.questionType === "sentence-completion" &&
-                    question.summaryConfig?.answerMode !== "select") ||
-                  (question.questionType === "summary-completion" &&
-                    question.summaryConfig?.answerMode !== "select") || // Default to typed if not select
-                  question.questionType === "note-completion") && (
+                {/* Answer Input - Short Answer ONLY (completion types now have inline inputs above) */}
+                {question.questionType === "short-answer" && (
                   <div className="ml-14 space-y-3">
-                    {/* Custom Instruction for Summary */}
-                    {question.questionType === "summary-completion" &&
-                      question.summaryConfig?.customInstruction && (
-                        <p className="text-sm font-bold text-gray-500 uppercase tracking-wide">
-                          {question.summaryConfig.customInstruction}
-                        </p>
-                      )}
-
                     <div className="relative">
                       <input
                         type="text"
                         value={answers[question._id] || ""}
-                        onChange={(e) => {
-                          if (
-                            question.questionType === "summary-completion" ||
-                            question.questionType === "sentence-completion"
-                          ) {
-                            handleSummaryAnswerChange(
-                              question._id,
-                              e.target.value,
-                              question.summaryConfig,
-                            );
-                          } else {
-                            handleAnswerChange(question._id, e.target.value);
-                          }
-                        }}
+                        onChange={(e) =>
+                          handleAnswerChange(question._id, e.target.value)
+                        }
                         placeholder="Type your answer here..."
                         className={`w-full px-5 py-3 border-2 rounded-xl focus:outline-none transition-all duration-200 ${
                           answers[question._id]

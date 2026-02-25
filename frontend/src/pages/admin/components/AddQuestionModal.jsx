@@ -560,31 +560,76 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
                     Options <span className="text-red-500">*</span>
                   </label>
                   <div className="space-y-2">
-                    {formData.options.map((option, index) => (
-                      <div key={index} className="flex gap-2">
-                        <div className="flex-shrink-0 w-8 h-10 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg flex items-center justify-center font-bold">
-                          {String.fromCharCode(65 + index)}
+                    {formData.options.map((option, index) => {
+                      const letter = String.fromCharCode(65 + index);
+                      const isCorrectOption =
+                        formData.questionType === "multiple-choice-multi" &&
+                        formData.correctAnswer
+                          .split(",")
+                          .map((l) => l.trim())
+                          .includes(letter);
+
+                      return (
+                        <div key={index} className="flex gap-2 items-center">
+                          {/* Correct answer checkbox for MC-multi */}
+                          {formData.questionType ===
+                            "multiple-choice-multi" && (
+                            <input
+                              type="checkbox"
+                              checked={isCorrectOption}
+                              onChange={(e) => {
+                                const currentLetters = formData.correctAnswer
+                                  ? formData.correctAnswer
+                                      .split(",")
+                                      .map((l) => l.trim())
+                                      .filter((l) => l)
+                                  : [];
+                                let newLetters;
+                                if (e.target.checked) {
+                                  newLetters = [...currentLetters, letter];
+                                } else {
+                                  newLetters = currentLetters.filter(
+                                    (l) => l !== letter,
+                                  );
+                                }
+                                newLetters.sort();
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  correctAnswer: newLetters.join(","),
+                                }));
+                              }}
+                              className="w-5 h-5 text-green-600 rounded border-gray-300 focus:ring-green-500 cursor-pointer flex-shrink-0"
+                              title={`Mark ${letter} as correct`}
+                            />
+                          )}
+                          <div className="flex-shrink-0 w-8 h-10 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg flex items-center justify-center font-bold">
+                            {letter}
+                          </div>
+                          <input
+                            type="text"
+                            value={option}
+                            onChange={(e) =>
+                              handleOptionChange(index, e.target.value)
+                            }
+                            className={`flex-1 px-4 py-2 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                              isCorrectOption
+                                ? "border-green-400 bg-green-50"
+                                : "border-gray-300"
+                            }`}
+                            placeholder={`Option ${letter}`}
+                          />
+                          {formData.options.length > 2 && (
+                            <button
+                              type="button"
+                              onClick={() => removeOption(index)}
+                              className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 font-semibold transition"
+                            >
+                              ✕
+                            </button>
+                          )}
                         </div>
-                        <input
-                          type="text"
-                          value={option}
-                          onChange={(e) =>
-                            handleOptionChange(index, e.target.value)
-                          }
-                          className="flex-1 px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                          placeholder={`Option ${String.fromCharCode(65 + index)}`}
-                        />
-                        {formData.options.length > 2 && (
-                          <button
-                            type="button"
-                            onClick={() => removeOption(index)}
-                            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 font-semibold transition"
-                          >
-                            ✕
-                          </button>
-                        )}
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                   <button
                     type="button"
@@ -1568,12 +1613,13 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
             )}
 
             {/* Correct Answer */}
-            {/* Correct Answer (Hidden for Matching types, Table Completion and Subjective types) */}
+            {/* Correct Answer (Hidden for Matching types, Table Completion, Subjective types, and MC-Multi which uses checkboxes) */}
             {formData.questionType !== "matching-headings" &&
               formData.questionType !== "matching-information" &&
               formData.questionType !== "map-labeling" &&
               formData.questionType !== "table-completion" &&
               formData.questionType !== "matching-features" &&
+              formData.questionType !== "multiple-choice-multi" &&
               !currentType?.isSubjective && (
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2">
@@ -1598,6 +1644,23 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
                   )}
                 </div>
               )}
+
+            {/* MC-Multi: Show selected correct answers (auto-set by checkboxes above) */}
+            {formData.questionType === "multiple-choice-multi" && (
+              <div className="bg-green-50 border-2 border-green-200 rounded-lg p-3">
+                <p className="text-sm font-bold text-green-800">
+                  ✅ Correct Answers:{" "}
+                  {formData.correctAnswer
+                    ? formData.correctAnswer.split(",").join(", ")
+                    : <span className="text-red-500 font-normal">None selected — check the correct options above</span>}
+                </p>
+                {errors.correctAnswer && (
+                  <p className="text-red-500 text-xs mt-1 font-semibold">
+                    {errors.correctAnswer}
+                  </p>
+                )}
+              </div>
+            )}
 
             {/* Alternative Answers (Optional) */}
             <div>

@@ -412,10 +412,6 @@ const ListeningTestTaking = () => {
       }
 
       case "short-answer":
-      case "sentence-completion":
-      case "summary-completion":
-      case "note-completion":
-      case "form-completion": // ✅ Added form-completion
         return (
           <div
             key={questionId}
@@ -445,36 +441,14 @@ const ListeningTestTaking = () => {
               value={userAnswer}
               onChange={(e) => {
                 const val = e.target.value;
-
-                // Validate Number Constraint
-                if (question.allowNumber === false && /\d/.test(val)) {
-                  // If number not allowed, don't update (or could show toast)
-                  return;
-                }
-
-                // Validate Word Limit
+                if (question.allowNumber === false && /\d/.test(val)) return;
                 if (question.wordLimit) {
                   const words = val
                     .trim()
                     .split(/\s+/)
                     .filter((w) => w.length > 0);
-                  // Allow typing if under limit, or if just added a space (to start next word)
-                  // But if valid word count > limit, block.
-                  // A simple check: if current words > limit and user is typing meaningful char (not deleting), block.
-                  // Actually, safer is: if val has more words than limit, don't update.
-                  // Exception: if user is deleting, always allow.
-                  // But identifying delete is hard here.
-                  // Let's just check word count of NEW value.
-                  if (words.length > question.wordLimit) {
-                    // check if we are just adding spaces at the end?
-                    // If existing is "A B" (2 words, limit 2) and user types " " -> "A B " (still 2 words).
-                    // "A B C" -> 3 words -> block.
-                    // But val.trim() handles the trailing space.
-                    // So "A B " is 2 words. "A B c" is 3 words.
-                    return;
-                  }
+                  if (words.length > question.wordLimit) return;
                 }
-
                 handleAnswerChange(questionId, val);
               }}
               placeholder="Type your answer here..."
@@ -482,6 +456,88 @@ const ListeningTestTaking = () => {
             />
           </div>
         );
+
+      case "sentence-completion":
+      case "summary-completion":
+      case "note-completion":
+      case "form-completion": {
+        // Build inline input handler
+        const completionHandler = (val) => {
+          if (question.allowNumber === false && /\d/.test(val)) return;
+          if (question.wordLimit) {
+            const words = val
+              .trim()
+              .split(/\s+/)
+              .filter((w) => w.length > 0);
+            if (words.length > question.wordLimit) return;
+          }
+          handleAnswerChange(questionId, val);
+        };
+
+        const hasBlank = question.questionText.includes("__________");
+        const inputClasses = `inline-block w-36 sm:w-44 mx-1 px-3 py-1 border-b-2 rounded-md text-sm focus:outline-none transition-all duration-200 align-baseline ${
+          userAnswer
+            ? "border-green-500 bg-green-50 text-green-800"
+            : "border-blue-400 bg-blue-50/50 text-gray-800 focus:border-blue-600"
+        }`;
+
+        return (
+          <div
+            key={questionId}
+            className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-4 hover:shadow-md transition"
+          >
+            <div className="flex items-start gap-3">
+              <span className="text-lg font-bold text-blue-600 bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">
+                {question.questionNumber}
+              </span>
+              <div className="flex-1">
+                {hasBlank ? (
+                  <p className="text-gray-800 font-medium mb-2 leading-relaxed">
+                    {(() => {
+                      const parts = question.questionText.split(/________+/);
+                      return parts.map((part, idx) => (
+                        <span key={idx}>
+                          {part}
+                          {idx < parts.length - 1 && (
+                            <input
+                              type="text"
+                              value={userAnswer}
+                              onChange={(e) =>
+                                completionHandler(e.target.value)
+                              }
+                              placeholder="..."
+                              className={inputClasses}
+                            />
+                          )}
+                        </span>
+                      ));
+                    })()}
+                  </p>
+                ) : (
+                  <p className="text-gray-800 font-medium mb-2 leading-relaxed">
+                    {question.questionText}{" "}
+                    <input
+                      type="text"
+                      value={userAnswer}
+                      onChange={(e) => completionHandler(e.target.value)}
+                      placeholder="..."
+                      className={inputClasses}
+                    />
+                  </p>
+                )}
+                {question.wordLimit && (
+                  <p className="text-xs text-gray-500 font-semibold">
+                    Word Limit: {question.wordLimit} words{" "}
+                    {question.allowNumber
+                      ? "(Numbers allowed)"
+                      : "(No numbers)"}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      }
 
       case "true-false-not-given":
       case "yes-no-not-given": {

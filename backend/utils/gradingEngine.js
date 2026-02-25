@@ -284,20 +284,60 @@ const calculatePoints = (userAnswer, question) => {
     return { scored, total, attempted, itemDetails };
   }
 
-  // 2. Multiple Choice Multi
+  // 2. Multiple Choice Multi (Set-based comparison)
   if (question.questionType === "multiple-choice-multi") {
-    // For multi-choice, we need to check how many were selected vs total allowed?
-    // IF items exist (unlikely for MC-Multi in this schema), handle like composite.
+    const isAttempted =
+      userAnswer &&
+      (Array.isArray(userAnswer) ? userAnswer.length > 0 : !!userAnswer);
 
-    // Attempted logic:
-    const isAttempted = userAnswer && userAnswer.length > 0;
+    // Normalize user answer to a sorted set of uppercase letters
+    let userLetters = [];
+    if (Array.isArray(userAnswer)) {
+      userLetters = userAnswer.map((v) => v.toString().trim().toUpperCase());
+    } else if (typeof userAnswer === "string" && userAnswer.trim()) {
+      // Handle comma-separated or space-separated: "A, C" or "A,C" or "AC"
+      userLetters = userAnswer
+        .toUpperCase()
+        .split(/[\s,]+/)
+        .map((v) => v.trim())
+        .filter((v) => v.length > 0);
+    }
 
-    const isCorrect = isAnswerCorrect(
-      userAnswer,
-      question.correctAnswer,
-      question.alternativeAnswers,
-      question.questionType,
-    );
+    // Normalize correct answer to a sorted set of uppercase letters
+    let correctLetters = [];
+    if (question.correctAnswer && typeof question.correctAnswer === "string") {
+      correctLetters = question.correctAnswer
+        .toUpperCase()
+        .split(/[\s,]+/)
+        .map((v) => v.trim())
+        .filter((v) => v.length > 0);
+    }
+
+    // If correctAnswer has single letters concatenated like "AC", split them
+    if (
+      correctLetters.length === 1 &&
+      correctLetters[0].length > 1 &&
+      /^[A-Z]+$/.test(correctLetters[0])
+    ) {
+      correctLetters = correctLetters[0].split("");
+    }
+    // Same for user answer (unlikely from frontend, but handle bulk/edge cases)
+    if (
+      userLetters.length === 1 &&
+      userLetters[0].length > 1 &&
+      /^[A-Z]+$/.test(userLetters[0])
+    ) {
+      userLetters = userLetters[0].split("");
+    }
+
+    // Sort both for order-independent comparison
+    userLetters.sort();
+    correctLetters.sort();
+
+    const isCorrect =
+      userLetters.length === correctLetters.length &&
+      userLetters.every((val, idx) => val === correctLetters[idx]);
+
     return {
       scored: isCorrect ? 1 : 0,
       total: 1,
