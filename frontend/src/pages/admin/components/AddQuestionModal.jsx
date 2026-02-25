@@ -75,6 +75,11 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
       needsOptions: false,
     },
     {
+      value: "matching-endings",
+      label: "Matching Sentence Endings",
+      needsOptions: true,
+    },
+    {
       value: "sentence-completion",
       label: "Sentence Completion",
       needsOptions: false,
@@ -167,7 +172,7 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
     if (
       (formData.questionType === "matching-headings" ||
         formData.questionType === "matching-information" ||
-        formData.questionType === "map-labeling") && // ✅ ADDED
+        formData.questionType === "map-labeling") &&
       formData.items.length === 0
     ) {
       setFormData((prev) => ({
@@ -241,7 +246,6 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
         typeof f === "string" ? f.trim() : f.text?.trim(),
       );
       if (filledFeatures.length < 2) {
-        // Use options error key to display in specific UI block if reusing that key, or add new one
         newErrors.options = "At least 2 features are required";
       }
     }
@@ -470,44 +474,42 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
             </div>
 
             {/* Validation & Constraints (Word Limit, etc.) */}
-            {!currentType?.needsOptions &&
-              !currentType?.isSubjective &&
-              formData.questionType !== "matching-features" && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-3 rounded-lg border">
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">
-                      Word Limit (Optional)
-                    </label>
-                    <input
-                      type="number"
-                      name="wordLimit"
-                      value={formData.wordLimit}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 border rounded-lg"
-                      placeholder="e.g. 2 (No more than 2 words)"
-                    />
-                  </div>
-                  <div className="flex items-center pt-8">
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        name="allowNumber"
-                        checked={formData.allowNumber}
-                        onChange={(e) =>
-                          setFormData((prev) => ({
-                            ...prev,
-                            allowNumber: e.target.checked,
-                          }))
-                        }
-                        className="w-5 h-5 text-blue-600"
-                      />
-                      <span className="text-sm font-bold text-gray-700">
-                        Allow Numbers?
-                      </span>
-                    </label>
-                  </div>
+            {!currentType?.needsOptions && !currentType?.isSubjective && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-3 rounded-lg border">
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">
+                    Word Limit (Optional)
+                  </label>
+                  <input
+                    type="number"
+                    name="wordLimit"
+                    value={formData.wordLimit}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border rounded-lg"
+                    placeholder="e.g. 2 (No more than 2 words)"
+                  />
                 </div>
-              )}
+                <div className="flex items-center pt-8">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      name="allowNumber"
+                      checked={formData.allowNumber}
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          allowNumber: e.target.checked,
+                        }))
+                      }
+                      className="w-5 h-5 text-blue-600"
+                    />
+                    <span className="text-sm font-bold text-gray-700">
+                      Allow Numbers?
+                    </span>
+                  </label>
+                </div>
+              </div>
+            )}
 
             {/* Image URL (For Map Labeling or Visual Questions) */}
             <div>

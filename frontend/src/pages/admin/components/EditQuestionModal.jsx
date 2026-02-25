@@ -67,6 +67,11 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
       needsOptions: false,
     },
     {
+      value: "matching-endings",
+      label: "Matching Sentence Endings",
+      needsOptions: true,
+    },
+    {
       value: "sentence-completion",
       label: "Sentence Completion",
       needsOptions: false,
@@ -211,7 +216,7 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
     if (
       (formData.questionType === "matching-headings" ||
         formData.questionType === "matching-information" ||
-        formData.questionType === "map-labeling") && // ✅ ADDED
+        formData.questionType === "map-labeling") &&
       (!formData.items || formData.items.length === 0)
     ) {
       // Only if we truly have no items (e.g. converting a question type??)

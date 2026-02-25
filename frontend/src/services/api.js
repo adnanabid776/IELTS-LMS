@@ -870,6 +870,26 @@ export const deleteTest = async (testId) => {
   }
 };
 
+// Bulk upload test (Admin/Teacher)
+export const bulkUploadTest = async (testData) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/tests/bulk-upload`,
+      testData,
+      {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    return response.data;
+  } catch (error) {
+    handleApiError(error, "Failed to upload test");
+    throw error;
+  }
+};
+
 // Get all sections for a test
 
 // Get single section by ID

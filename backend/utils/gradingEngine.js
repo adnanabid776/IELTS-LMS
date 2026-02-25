@@ -305,7 +305,71 @@ const calculatePoints = (userAnswer, question) => {
     };
   }
 
-  // 3. Standard Types (Short Answer, MC-Std, etc)
+  // 3. Standard Types (Short Answer, MC-Std, Matching-Endings, etc)
+  // For multiple-choice and matching-endings: resolve letter <-> option text mismatch
+  // Bulk uploads store correctAnswer as "D", frontend stores full option text, or vice versa
+  if (
+    (question.questionType === "multiple-choice" ||
+      question.questionType === "matching-endings") &&
+    question.options &&
+    question.options.length > 0
+  ) {
+    const normUser = normalizeAnswer(userAnswer);
+    const normCorrect = normalizeAnswer(question.correctAnswer);
+
+    // Direct match
+    if (normUser === normCorrect) {
+      return { scored: 1, total: 1, attempted: 1 };
+    }
+
+    // Case A: correctAnswer is a letter ("D"), userAnswer is full text
+    if (/^[a-z]$/i.test(question.correctAnswer)) {
+      const idx = question.correctAnswer.toUpperCase().charCodeAt(0) - 65;
+      if (idx >= 0 && idx < question.options.length) {
+        const resolvedCorrectText = normalizeAnswer(question.options[idx]);
+        if (normUser === resolvedCorrectText) {
+          return { scored: 1, total: 1, attempted: 1 };
+        }
+      }
+    }
+
+    // Case B: correctAnswer is full text, userAnswer is a letter
+    if (/^[a-z]$/i.test(userAnswer)) {
+      const idx = userAnswer.toUpperCase().charCodeAt(0) - 65;
+      if (idx >= 0 && idx < question.options.length) {
+        const resolvedUserText = normalizeAnswer(question.options[idx]);
+        if (resolvedUserText === normCorrect) {
+          return { scored: 1, total: 1, attempted: 1 };
+        }
+      }
+    }
+
+    // Check alternativeAnswers with the same resolution
+    for (const alt of question.alternativeAnswers || []) {
+      const normAlt = normalizeAnswer(alt);
+      if (normUser === normAlt) {
+        return { scored: 1, total: 1, attempted: 1 };
+      }
+      // If alt is a letter, resolve it
+      if (/^[a-z]$/i.test(alt)) {
+        const idx = alt.toUpperCase().charCodeAt(0) - 65;
+        if (idx >= 0 && idx < question.options.length) {
+          if (normUser === normalizeAnswer(question.options[idx])) {
+            return { scored: 1, total: 1, attempted: 1 };
+          }
+        }
+      }
+    }
+
+    // If none matched, it's incorrect
+    const isAttempted =
+      userAnswer &&
+      (typeof userAnswer === "string"
+        ? userAnswer.trim().length > 0
+        : !!userAnswer);
+    return { scored: 0, total: 1, attempted: isAttempted ? 1 : 0 };
+  }
+
   const isCorrect = isAnswerCorrect(
     userAnswer,
     question.correctAnswer,

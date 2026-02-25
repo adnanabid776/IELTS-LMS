@@ -1,5 +1,6 @@
 const Test = require("../models/Test");
 const Section = require("../models/Section");
+const Question = require("../models/Question");
 
 exports.createTest = async (req, res) => {
   try {
@@ -152,5 +153,231 @@ exports.getTestsByModule = async (req, res) => {
   } catch (error) {
     console.error("Get tests by module error:", error);
     res.status(500).json({ error: "Server error" });
+  }
+};
+
+// ==========================================
+// BULK UPLOAD TEST (Test + Sections + Questions)
+// ==========================================
+exports.bulkUploadTest = async (req, res) => {
+  const createdIds = { testId: null, sectionIds: [], questionIds: [] };
+
+  try {
+    const {
+      title,
+      module,
+      duration,
+      difficulty,
+      description,
+      instructions,
+      sections,
+    } = req.body;
+    const userId = req.user.userId;
+
+    // --- Validate top-level fields ---
+    const errors = [];
+    if (!title || !title.trim()) errors.push("Test title is required");
+    if (!module || !["reading", "listening", "writing"].includes(module)) {
+      errors.push("Module must be one of: reading, listening, writing");
+    }
+    if (!duration || duration < 1)
+      errors.push("Duration is required and must be at least 1 minute");
+    if (!sections || !Array.isArray(sections) || sections.length === 0) {
+      errors.push("At least one section is required");
+    }
+
+    if (errors.length > 0) {
+      return res
+        .status(400)
+        .json({ error: "Validation failed", details: errors });
+    }
+
+    // --- Validate sections and questions ---
+    const validQuestionTypes = [
+      "multiple-choice",
+      "true-false-not-given",
+      "yes-no-not-given",
+      "matching-headings",
+      "matching-information",
+      "matching-features",
+      "matching-endings",
+      "sentence-completion",
+      "summary-completion",
+      "note-completion",
+      "table-completion",
+      "flow-chart-completion",
+      "diagram-labeling",
+      "short-answer",
+      "writing-task",
+      "form-completion",
+      "multiple-choice-multi",
+      "map-labeling",
+    ];
+
+    let totalQuestionCount = 0;
+
+    for (let si = 0; si < sections.length; si++) {
+      const sec = sections[si];
+      if (!sec.title || !sec.title.trim()) {
+        errors.push(`Section ${si + 1}: title is required`);
+      }
+      if (!sec.sectionNumber) {
+        sec.sectionNumber = si + 1;
+      }
+      if (
+        !sec.questions ||
+        !Array.isArray(sec.questions) ||
+        sec.questions.length === 0
+      ) {
+        errors.push(
+          `Section ${si + 1} ("${sec.title || "Untitled"}"): must have at least one question`,
+        );
+        continue;
+      }
+
+      for (let qi = 0; qi < sec.questions.length; qi++) {
+        const q = sec.questions[qi];
+        const qLabel = `Section ${si + 1}, Question ${qi + 1}`;
+
+        if (!q.questionText || !q.questionText.trim()) {
+          errors.push(`${qLabel}: questionText is required`);
+        }
+        if (!q.questionType || !validQuestionTypes.includes(q.questionType)) {
+          errors.push(`${qLabel}: invalid questionType "${q.questionType}"`);
+        }
+        if (
+          q.questionType !== "writing-task" &&
+          !q.correctAnswer &&
+          (!q.items || q.items.length === 0)
+        ) {
+          errors.push(
+            `${qLabel}: correctAnswer or items required for type "${q.questionType}"`,
+          );
+        }
+        if (!q.questionNumber) {
+          q.questionNumber = totalQuestionCount + qi + 1;
+        }
+      }
+
+      // --- Propagate shared options for matching-endings ---
+      // In IELTS format, only the first matching-endings question has the options array.
+      // Copy it to all subsequent matching-endings questions in this section.
+      const matchingEndingsQuestions = sec.questions.filter(
+        (q) => q.questionType === "matching-endings",
+      );
+      if (matchingEndingsQuestions.length > 0) {
+        const sharedOptions = matchingEndingsQuestions.find(
+          (q) => q.options && q.options.length > 0,
+        );
+        if (sharedOptions) {
+          matchingEndingsQuestions.forEach((q) => {
+            if (!q.options || q.options.length === 0) {
+              q.options = [...sharedOptions.options];
+            }
+          });
+        }
+      }
+
+      totalQuestionCount += sec.questions.length;
+    }
+
+    if (errors.length > 0) {
+      return res
+        .status(400)
+        .json({ error: "Validation failed", details: errors });
+    }
+
+    // --- Create Test ---
+    const test = await Test.create({
+      title: title.trim(),
+      module,
+      description: description || "",
+      duration,
+      difficulty: difficulty || "medium",
+      instructions: instructions || "",
+      createdBy: userId,
+      totalQuestions: totalQuestionCount,
+      totalSections: sections.length,
+    });
+    createdIds.testId = test._id;
+
+    // --- Create Sections and Questions ---
+    for (const sec of sections) {
+      const section = await Section.create({
+        testId: test._id,
+        sectionNumber: sec.sectionNumber,
+        title: sec.title,
+        passageText: sec.passageText || "",
+        audioUrl: sec.audioUrl || "",
+        audioScript: sec.audioScript || "",
+        playOnceOnly: sec.playOnceOnly || false,
+        disableReplay:
+          sec.disableReplay !== undefined ? sec.disableReplay : true,
+        lockNavigationDuringAudio: sec.lockNavigationDuringAudio || false,
+        instructions: sec.instructions || "",
+        questionRange: sec.questionRange || "",
+        totalQuestions: sec.questions.length,
+        duration: sec.duration || null,
+        taskType: sec.taskType || undefined,
+        taskImageUrl: sec.taskImageUrl || undefined,
+        wordLimit: sec.wordLimit || undefined,
+      });
+      createdIds.sectionIds.push(section._id);
+
+      const questionDocs = sec.questions.map((q) => ({
+        sectionId: section._id,
+        questionNumber: q.questionNumber,
+        questionText: q.questionText,
+        questionType: q.questionType,
+        options: q.options || [],
+        correctAnswer: q.correctAnswer || undefined,
+        alternativeAnswers: q.alternativeAnswers || [],
+        items: q.items || [],
+        features: q.features || [],
+        tableStructure: q.tableStructure || undefined,
+        summaryConfig: q.summaryConfig || undefined,
+        points: q.points || 1,
+        imageUrl: q.imageUrl || undefined,
+        explanation: q.explanation || undefined,
+        gradingRubric: q.gradingRubric || undefined,
+        wordLimit: q.wordLimit || undefined,
+        allowNumber: q.allowNumber !== undefined ? q.allowNumber : true,
+      }));
+
+      const createdQuestions = await Question.insertMany(questionDocs);
+      createdIds.questionIds.push(...createdQuestions.map((q) => q._id));
+    }
+
+    res.status(201).json({
+      message: "Test uploaded successfully",
+      test: {
+        _id: test._id,
+        title: test.title,
+        module: test.module,
+        totalSections: sections.length,
+        totalQuestions: totalQuestionCount,
+      },
+    });
+  } catch (error) {
+    console.error("Bulk upload error:", error);
+
+    // Cleanup on failure
+    try {
+      if (createdIds.questionIds.length > 0) {
+        await Question.deleteMany({ _id: { $in: createdIds.questionIds } });
+      }
+      if (createdIds.sectionIds.length > 0) {
+        await Section.deleteMany({ _id: { $in: createdIds.sectionIds } });
+      }
+      if (createdIds.testId) {
+        await Test.findByIdAndDelete(createdIds.testId);
+      }
+    } catch (cleanupError) {
+      console.error("Cleanup error:", cleanupError);
+    }
+
+    res.status(500).json({
+      error: "Failed to upload test. All changes have been rolled back.",
+    });
   }
 };

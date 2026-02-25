@@ -33,6 +33,7 @@ const questionSchema = new mongoose.Schema(
         "matching-headings",
         "matching-information",
         "matching-features",
+        "matching-endings",
         "sentence-completion",
         "summary-completion",
         "note-completion",
@@ -59,11 +60,20 @@ const questionSchema = new mongoose.Schema(
     correctAnswer: {
       type: String,
       required: function () {
-        return (
-          this.questionType !== "essay" &&
-          // this.questionType !== "speaking-prompt" &&
-          this.questionType !== "writing-task"
-        );
+        // Types that don't use top-level correctAnswer:
+        // - writing-task: manually graded
+        // - matching types & table/diagram/map: answers are in items array
+        const typesWithoutCorrectAnswer = [
+          "essay",
+          "writing-task",
+          "matching-headings",
+          "matching-information",
+          "matching-features",
+          "table-completion",
+          "diagram-labeling",
+          "map-labeling",
+        ];
+        return !typesWithoutCorrectAnswer.includes(this.questionType);
       },
       trim: true,
     },

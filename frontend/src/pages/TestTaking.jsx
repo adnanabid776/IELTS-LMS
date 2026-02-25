@@ -411,9 +411,6 @@ const TestTaking = () => {
     const wordCount =
       newValue.trim() === "" ? 0 : newValue.trim().split(/\s+/).length;
     // If we have 'word word' (2 words), and limit is 2.
-    // 'word word' -> count 2. OK.
-    // 'word word ' -> count 2. OK.
-    // 'word word c' -> count 3. BLOCK.
     if (wordCount <= allowedWords) {
       handleAnswerChange(questionId, newValue);
     }
@@ -488,7 +485,7 @@ const TestTaking = () => {
     <DashboardLayout title={test.title} hideHeader={true}>
       {/* Test Header - Fixed Top with Enhanced Design */}
       <div
-        className={`rounded-2xl shadow-lg p-5 mb-6 sticky top-[-10px] z-10 border transition-all duration-300 ${
+        className={`rounded-2xl shadow-lg p-3 sm:p-5 mb-4 sm:mb-6 sticky top-[-10px] z-10 border transition-all duration-300 ${
           isOffline
             ? "bg-gradient-to-r from-gray-100 to-gray-200 border-gray-300"
             : timeRemaining < 300
@@ -496,11 +493,12 @@ const TestTaking = () => {
               : "bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-100"
         }`}
       >
-        <div className="flex items-center justify-between">
+        {/* Mobile Layout: stacked | Desktop: side-by-side */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           {/* Test Info */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4 min-w-0">
             <div
-              className={`w-14 h-14 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg ${
+              className={`w-10 h-10 sm:w-14 sm:h-14 flex-shrink-0 rounded-xl flex items-center justify-center text-white font-bold text-sm sm:text-lg shadow-lg ${
                 isOffline
                   ? "bg-gray-500"
                   : test.module === "reading"
@@ -522,27 +520,29 @@ const TestTaking = () => {
                       ? "✍️"
                       : "🎤"}
             </div>
-            <div>
-              <h2 className="text-xl font-bold text-gray-800">{test.title}</h2>
-              <div className="flex items-center gap-2 mt-1">
-                <span className="px-3 py-1 bg-white/70 rounded-full text-xs font-semibold text-gray-600 shadow-sm">
-                  📑 Section {currentSectionIndex + 1} of {sections.length}
+            <div className="min-w-0 flex-1">
+              <h2 className="text-base sm:text-xl font-bold text-gray-800 truncate">
+                {test.title}
+              </h2>
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mt-1">
+                <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-white/70 rounded-full text-[10px] sm:text-xs font-semibold text-gray-600 shadow-sm whitespace-nowrap">
+                  📑 Section {currentSectionIndex + 1}/{sections.length}
                 </span>
-                <span className="px-3 py-1 bg-white/70 rounded-full text-xs font-semibold text-gray-600 shadow-sm">
+                <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-white/70 rounded-full text-[10px] sm:text-xs font-semibold text-gray-600 shadow-sm whitespace-nowrap">
                   ✅ {answeredInSection}/{questions.length} answered
                 </span>
                 {/* Connection Status Badge */}
                 {isOffline ? (
-                  <span className="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold border border-red-200 flex items-center gap-1 animate-pulse">
-                    🚫 Offline - Saving Locally
+                  <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-red-100 text-red-700 rounded-full text-[10px] sm:text-xs font-bold border border-red-200 flex items-center gap-1 animate-pulse whitespace-nowrap">
+                    🚫 Offline
                   </span>
                 ) : isSyncing ? (
-                  <span className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold border border-yellow-200 flex items-center gap-1">
+                  <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-yellow-100 text-yellow-700 rounded-full text-[10px] sm:text-xs font-bold border border-yellow-200 flex items-center gap-1 whitespace-nowrap">
                     🔄 Syncing...
                   </span>
                 ) : (
-                  <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold border border-green-200 flex items-center gap-1">
-                    ☁️ Saved Online
+                  <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-green-100 text-green-700 rounded-full text-[10px] sm:text-xs font-bold border border-green-200 flex items-center gap-1 whitespace-nowrap">
+                    ☁️ Saved
                   </span>
                 )}
               </div>
@@ -551,7 +551,7 @@ const TestTaking = () => {
 
           {/* Timer with Enhanced Design */}
           <div
-            className={`text-center px-3 py-1 rounded-xl shadow-lg transition-all duration-300 ${
+            className={`text-center px-4 py-1.5 sm:px-5 sm:py-2 rounded-xl shadow-lg transition-all duration-300 flex-shrink-0 self-end sm:self-center ${
               isOffline
                 ? "bg-gray-400"
                 : timeRemaining < 300
@@ -561,12 +561,14 @@ const TestTaking = () => {
                     : "bg-gradient-to-br from-blue-500 to-indigo-600"
             }`}
           >
-            <p className="text-xs text-white/80 font-medium">⏱️ Time Left</p>
-            <p className="text-3xl font-bold text-white tracking-wider">
+            <p className="text-[10px] sm:text-xs text-white/80 font-medium">
+              ⏱️ Time Left
+            </p>
+            <p className="text-2xl sm:text-3xl font-bold text-white tracking-wider">
               {formatTime(timeRemaining)}
             </p>
             {timeRemaining < 300 && !isOffline && (
-              <p className="text-xs text-white font-semibold mt-1 animate-bounce">
+              <p className="text-[10px] sm:text-xs text-white font-semibold mt-0.5 animate-bounce">
                 ⚠️ Hurry up!
               </p>
             )}
@@ -574,23 +576,23 @@ const TestTaking = () => {
         </div>
 
         {/* Progress Bar - Based on Questions Answered */}
-        <div className="mt-5">
-          <div className="w-full bg-gray-200 rounded-full h-2.5">
+        <div className="mt-3 sm:mt-5">
+          <div className="w-full bg-gray-200 rounded-full h-2">
             <div
-              className={`h-2.5 rounded-full transition-all duration-500 ${isOffline ? "bg-gray-500" : "bg-gradient-to-r from-blue-500 to-indigo-600"}`}
+              className={`h-2 rounded-full transition-all duration-500 ${isOffline ? "bg-gray-500" : "bg-gradient-to-r from-blue-500 to-indigo-600"}`}
               style={{
                 width: `${questions.length > 0 ? (answeredInSection / questions.length) * 100 : 0}%`,
               }}
             />
           </div>
-          <div className="flex justify-between text-xs text-gray-500 mt-2">
+          <div className="flex justify-between text-[10px] sm:text-xs text-gray-500 mt-1.5 sm:mt-2">
             <span>
               Section {currentSectionIndex + 1} of {sections.length}
             </span>
             <span
               className={`font-medium ${isOffline ? "text-gray-600" : "text-blue-600"}`}
             >
-              {answeredInSection}/{questions.length} Questions Answered
+              {answeredInSection}/{questions.length} Answered
             </span>
           </div>
         </div>
@@ -1132,6 +1134,61 @@ const TestTaking = () => {
                             </div>
                           </div>
                         ))}
+                      </div>
+                    </div>
+                  )}
+
+                {/* Answer Input - Matching Sentence Endings */}
+                {question.questionType === "matching-endings" &&
+                  question.options &&
+                  question.options.length > 0 && (
+                    <div className="ml-14 space-y-4">
+                      {/* Display Sentence Endings (Options) */}
+                      <div className="bg-amber-50 p-4 rounded-lg border border-amber-200">
+                        <h5 className="font-bold text-gray-700 mb-2">
+                          Sentence Endings:
+                        </h5>
+                        <ul className="space-y-1">
+                          {question.options.map((opt, idx) => (
+                            <li key={idx} className="text-sm text-gray-600">
+                              <span className="font-bold mr-2 text-amber-700">
+                                {String.fromCharCode(65 + idx)}.
+                              </span>
+                              {opt}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Select Answer */}
+                      <div className="flex items-center gap-3">
+                        <label className="text-sm font-semibold text-gray-600">
+                          Select ending:
+                        </label>
+                        <select
+                          value={answers[question._id] || ""}
+                          onChange={(e) =>
+                            handleAnswerChange(question._id, e.target.value)
+                          }
+                          className={`px-4 py-2 border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all ${
+                            answers[question._id]
+                              ? "border-green-400 bg-green-50"
+                              : "border-gray-300"
+                          }`}
+                        >
+                          <option value="">Choose...</option>
+                          {question.options.map((opt, idx) => (
+                            <option
+                              key={idx}
+                              value={String.fromCharCode(65 + idx)}
+                            >
+                              {String.fromCharCode(65 + idx)}
+                            </option>
+                          ))}
+                        </select>
+                        {answers[question._id] && (
+                          <span className="text-green-500 text-lg">✓</span>
+                        )}
                       </div>
                     </div>
                   )}

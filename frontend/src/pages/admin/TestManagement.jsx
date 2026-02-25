@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import DashboardLayout from "../../components/Layout/DashboardLayout";
 import CreateTestModal from "./components/CreateTestModal";
 import EditTestModal from "./components/EditTestModal";
+import BulkUploadModal from "./components/BulkUploadModal";
 
 const TestManagement = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const TestManagement = () => {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedTest, setSelectedTest] = useState(null);
+  const [showBulkUpload, setShowBulkUpload] = useState(false);
 
   useEffect(() => {
     fetchTests();
@@ -124,13 +126,22 @@ const TestManagement = () => {
           </h2>
           <p className="text-gray-600 text-sm">Manage all IELTS tests</p>
         </div>
-        <button
-          onClick={() => setShowCreateModal(true)}
-          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 font-semibold flex items-center gap-2 shadow-lg transform hover:scale-105 transition"
-        >
-          <span className="text-xl">➕</span>
-          Create Test
-        </button>
+        <div className="flex gap-3">
+          <button
+            onClick={() => setShowBulkUpload(true)}
+            className="px-5 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 font-semibold flex items-center gap-2 shadow-lg transform hover:scale-105 transition"
+          >
+            <span className="text-xl">📤</span>
+            Upload Test
+          </button>
+          <button
+            onClick={() => setShowCreateModal(true)}
+            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 font-semibold flex items-center gap-2 shadow-lg transform hover:scale-105 transition"
+          >
+            <span className="text-xl">➕</span>
+            Create Test
+          </button>
+        </div>
       </div>
 
       {/* Stats Cards */}
@@ -361,6 +372,16 @@ const TestManagement = () => {
           onUpdated={() => {
             setShowEditModal(false);
             setSelectedTest(null);
+            fetchTests();
+          }}
+        />
+      )}
+
+      {showBulkUpload && (
+        <BulkUploadModal
+          onClose={() => setShowBulkUpload(false)}
+          onSuccess={() => {
+            setShowBulkUpload(false);
             fetchTests();
           }}
         />
