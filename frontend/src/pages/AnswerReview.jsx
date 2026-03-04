@@ -169,35 +169,65 @@ const AnswerReview = () => {
               </div>
             </div>
 
-            {/* Options (if multiple choice) */}
+            {/* Options (if multiple choice or matching-endings) */}
             {item.options && item.options.length > 0 && (
               <div className="mb-4 ml-12">
-                <p className="text-sm text-gray-600 mb-2">Options:</p>
+                <p className="text-sm text-gray-600 mb-2">
+                  {item.questionType === "matching-endings" ? "Sentence Endings:" : "Options:"}
+                </p>
                 <div className="space-y-1">
-                  {item.options.map((option, idx) => (
-                    <div
-                      key={idx}
-                      className={`p-2 rounded ${
-                        option === item.correctAnswer
-                          ? "bg-green-50 border border-green-300"
-                          : option === item.studentAnswer
-                            ? "bg-red-50 border border-red-300"
-                            : "bg-gray-50"
-                      }`}
-                    >
-                      <span className="text-sm">{option}</span>
-                      {option === item.correctAnswer && (
-                        <span className="ml-2 text-green-600 text-xs font-semibold">
-                          ✓ Correct
+                  {item.options.map((option, idx) => {
+                    const optionLetter = String.fromCharCode(65 + idx); // A, B, C...
+
+                    // For matching-endings: correctAnswer & studentAnswer are letters like "B"
+                    // For MC: they could be the full text or letters
+                    const correctStr = typeof item.correctAnswer === "string" ? item.correctAnswer : String(item.correctAnswer || "");
+                    const studentStr = typeof item.studentAnswer === "string" ? item.studentAnswer : String(item.studentAnswer || "");
+
+                    const isCorrectOption =
+                      item.questionType === "matching-endings"
+                        ? (correctStr && optionLetter === correctStr.toUpperCase())
+                        : (option === item.correctAnswer || (correctStr && optionLetter === correctStr.toUpperCase()));
+
+                    const isUserAnswer =
+                      item.questionType === "matching-endings"
+                        ? (studentStr && optionLetter === studentStr.toUpperCase())
+                        : (option === item.studentAnswer || (studentStr && optionLetter === studentStr.toUpperCase()));
+
+                    return (
+                      <div
+                        key={idx}
+                        className={`p-2 rounded flex items-center gap-2 ${
+                          isCorrectOption
+                            ? "bg-green-50 border border-green-300"
+                            : isUserAnswer && !item.isCorrect
+                              ? "bg-red-50 border border-red-300"
+                              : "bg-gray-50"
+                        }`}
+                      >
+                        <span className={`font-bold text-sm min-w-[20px] ${
+                          isCorrectOption
+                            ? "text-green-700"
+                            : isUserAnswer && !item.isCorrect
+                              ? "text-red-700"
+                              : "text-gray-500"
+                        }`}>
+                          {optionLetter}.
                         </span>
-                      )}
-                      {option === item.studentAnswer && !item.isCorrect && (
-                        <span className="ml-2 text-red-600 text-xs font-semibold">
-                          Your answer
-                        </span>
-                      )}
-                    </div>
-                  ))}
+                        <span className="text-sm flex-1">{option}</span>
+                        {isCorrectOption && (
+                          <span className="text-green-600 text-xs font-semibold whitespace-nowrap">
+                            ✓ Correct
+                          </span>
+                        )}
+                        {isUserAnswer && !item.isCorrect && (
+                          <span className="text-red-600 text-xs font-semibold whitespace-nowrap">
+                            ✗ Your answer
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}

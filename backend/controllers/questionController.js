@@ -409,22 +409,39 @@ exports.bulkCreateQuestions = async (req, res) => {
 };
 
 // ==========================================
-// ADMIN - GET ALL QUESTIONS WITH FILTERS
+// ADMIN - GET ALL QUESTIONS WITH FILTERS + PAGINATION
 // ==========================================
 exports.getAllQuestions = async (req, res) => {
   try {
     const {
-      module, // reading, listening, writing, speaking
+      module, // reading, listening, writing
       questionType, // multiple-choice, true-false-not-given, etc.
       search, // search in questionText
       sectionId, // specific section
       testId, // specific test
+      page = 1,
+      limit = 10,
     } = req.query;
+
+    const pageNum = Math.max(1, parseInt(page));
+    const limitNum = Math.max(1, Math.min(100, parseInt(limit)));
+    const skip = (pageNum - 1) * limitNum;
 
     // Build filter query
     const filter = {};
 
-    // Filter by test/section
+    // Filter by module — resolve to section IDs at DB level
+    if (module) {
+      const Test = require("../models/Test");
+      const matchingTests = await Test.find({ module }).select("_id");
+      const testIds = matchingTests.map((t) => t._id);
+      const matchingSections = await Section.find({
+        testId: { $in: testIds },
+      }).select("_id");
+      filter.sectionId = { $in: matchingSections.map((s) => s._id) };
+    }
+
+    // Filter by test/section (overrides module filter if both given)
     if (testId) {
       const sections = await Section.find({ testId });
       const sectionIds = sections.map((s) => s._id);
@@ -443,7 +460,11 @@ exports.getAllQuestions = async (req, res) => {
       filter.questionText = { $regex: search, $options: "i" };
     }
 
-    // Get questions with populated data
+    // Get total count for pagination
+    const totalCount = await Question.countDocuments(filter);
+    const totalPages = Math.ceil(totalCount / limitNum);
+
+    // Get paginated questions with populated data
     const questions = await Question.find(filter)
       .populate({
         path: "sectionId",
@@ -452,19 +473,16 @@ exports.getAllQuestions = async (req, res) => {
           select: "title module",
         },
       })
-      .sort({ createdAt: -1 });
-
-    // Filter by module if specified
-    let filteredQuestions = questions;
-    if (module) {
-      filteredQuestions = questions.filter(
-        (q) => q.sectionId?.testId?.module === module,
-      );
-    }
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limitNum);
 
     res.json({
-      count: filteredQuestions.length,
-      questions: filteredQuestions,
+      count: questions.length,
+      totalCount,
+      totalPages,
+      page: pageNum,
+      questions,
     });
   } catch (error) {
     console.error("Get all questions error:", error);

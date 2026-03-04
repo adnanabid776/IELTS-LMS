@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {
   getAllQuestions,
   deleteQuestion,
-  bulkDeleteQuestions, // ✅ Added import
+  bulkDeleteQuestions, 
   getQuestionStats,
   getSectionsForDropdown,
 } from "../../services/api";
@@ -17,7 +17,6 @@ const QuestionManagement = () => {
   const navigate = useNavigate();
 
   const [questions, setQuestions] = useState([]);
-  const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [stats, setStats] = useState(null);
   const [sections, setSections] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,9 +27,14 @@ const QuestionManagement = () => {
   const [sectionFilter, setSectionFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Pagination
+  // Pagination (server-side)
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 10;
+
+  // Debounce timer for search
+  const [searchTimer, setSearchTimer] = useState(null);
 
   // Modals
   const [showAddModal, setShowAddModal] = useState(false);
@@ -41,69 +45,76 @@ const QuestionManagement = () => {
   // Bulk Selection
   const [selectedQuestions, setSelectedQuestions] = useState([]); // ✅ Added state
 
+  // Load stats and sections once on mount
   useEffect(() => {
-    fetchData();
+    const loadInitial = async () => {
+      try {
+        const [statsRes, sectionsRes] = await Promise.all([
+          getQuestionStats(),
+          getSectionsForDropdown(),
+        ]);
+        setStats(statsRes);
+        setSections(sectionsRes.sections);
+      } catch (error) {
+        console.error("Initial load error:", error);
+      }
+    };
+    loadInitial();
   }, []);
 
+  // Fetch questions whenever page or filters change
   useEffect(() => {
-    applyFilters();
-    setSelectedQuestions([]); // Clear selection on filter change
-  }, [questions, moduleFilter, typeFilter, sectionFilter, searchTerm]);
+    fetchQuestions();
+    setSelectedQuestions([]);
+  }, [currentPage, moduleFilter, typeFilter, sectionFilter]);
 
-  const fetchData = async () => {
+  // Debounced search — waits 400ms after user stops typing
+  useEffect(() => {
+    if (searchTimer) clearTimeout(searchTimer);
+    const timer = setTimeout(() => {
+      setCurrentPage(1);
+      fetchQuestions();
+    }, 400);
+    setSearchTimer(timer);
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+
+  const fetchQuestions = async () => {
     try {
       setLoading(true);
-      const [questionsRes, statsRes, sectionsRes] = await Promise.all([
-        getAllQuestions(),
-        getQuestionStats(),
-        getSectionsForDropdown(),
-      ]);
+      const filters = { page: currentPage, limit: itemsPerPage };
+      if (moduleFilter !== "all") filters.module = moduleFilter;
+      if (typeFilter !== "all") filters.questionType = typeFilter;
+      if (sectionFilter !== "all") filters.sectionId = sectionFilter;
+      if (searchTerm.trim()) filters.search = searchTerm.trim();
 
-      setQuestions(questionsRes.questions);
-      setStats(statsRes);
-      setSections(sectionsRes.sections);
+      const res = await getAllQuestions(filters);
+      setQuestions(res.questions);
+      setTotalCount(res.totalCount);
+      setTotalPages(res.totalPages);
     } catch (error) {
-      console.error("Fetch data error:", error);
-      toast.error("Failed to load data");
+      console.error("Fetch questions error:", error);
+      toast.error("Failed to load questions");
     } finally {
       setLoading(false);
     }
   };
 
-  const applyFilters = () => {
-    let filtered = [...questions];
-
-    if (moduleFilter !== "all") {
-      filtered = filtered.filter(
-        (q) => q.sectionId?.testId?.module === moduleFilter,
-      );
+  // Refresh data after add/edit/delete
+  const refreshData = async () => {
+    fetchQuestions();
+    try {
+      const statsRes = await getQuestionStats();
+      setStats(statsRes);
+    } catch (e) {
+      console.error("Stats refresh error:", e);
     }
-
-    if (typeFilter !== "all") {
-      filtered = filtered.filter((q) => q.questionType === typeFilter);
-    }
-
-    if (sectionFilter !== "all") {
-      filtered = filtered.filter((q) => q.sectionId?._id === sectionFilter);
-    }
-
-    if (searchTerm) {
-      filtered = filtered.filter((q) =>
-        q.questionText.toLowerCase().includes(searchTerm.toLowerCase()),
-      );
-    }
-
-    setFilteredQuestions(filtered);
-    setCurrentPage(1); // Reset to first page when filtering
   };
 
-  // ✅ New Handler: Select All
+  // ✅ Handler: Select All (current page)
   const handleSelectAll = (e) => {
     if (e.target.checked) {
-      // Select all visible questions (across all pages or just current page?
-      // Usually users expect "Select All" to select everything in the filtered list, not just the page.
-      // But for safety let's select all FILTERED questions.
-      const allIds = filteredQuestions.map((q) => q._id);
+      const allIds = questions.map((q) => q._id);
       setSelectedQuestions(allIds);
     } else {
       setSelectedQuestions([]);
@@ -138,7 +149,7 @@ const QuestionManagement = () => {
         `${selectedQuestions.length} questions deleted successfully`,
       );
       setSelectedQuestions([]);
-      fetchData(); // Reload data
+      refreshData();
     } catch (error) {
       console.error("Bulk delete error:", error);
       toast.error("Failed to delete selected questions");
@@ -156,7 +167,7 @@ const QuestionManagement = () => {
     try {
       await deleteQuestion(questionId);
       toast.success("Question deleted successfully");
-      fetchData();
+      refreshData();
     } catch (error) {
       console.error("Delete question error:", error);
       const errorMsg =
@@ -205,9 +216,9 @@ const QuestionManagement = () => {
     "short-answer",
   ];
 
-  // Pagination Logic
+  // Pagination range logic (uses totalPages from server)
   const paginationRange = () => {
-    const totalPageCount = Math.ceil(filteredQuestions.length / itemsPerPage);
+    const totalPageCount = totalPages;
     const siblingCount = 1;
     const DOTS = "...";
 
@@ -401,7 +412,7 @@ const QuestionManagement = () => {
         </div>
 
         <div className="mt-4 text-xs text-gray-600 font-semibold">
-          Showing {filteredQuestions.length} of {questions.length} questions
+          Showing {questions.length} of {totalCount} questions
         </div>
       </div>
 
@@ -413,7 +424,7 @@ const QuestionManagement = () => {
       )}
 
       {/* Questions Table - IMPROVED */}
-      {!loading && filteredQuestions.length > 0 && (
+      {!loading && questions.length > 0 && (
         <div className="bg-white rounded-lg shadow overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -426,8 +437,8 @@ const QuestionManagement = () => {
                       className="rounded border-gray-300 text-blue-600 focus:ring-blue-500 h-4 w-4"
                       onChange={handleSelectAll}
                       checked={
-                        filteredQuestions.length > 0 &&
-                        selectedQuestions.length === filteredQuestions.length
+                        questions.length > 0 &&
+                        selectedQuestions.length === questions.length
                       }
                     />
                   </th>
@@ -455,12 +466,7 @@ const QuestionManagement = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {filteredQuestions
-                  .slice(
-                    (currentPage - 1) * itemsPerPage,
-                    currentPage * itemsPerPage,
-                  )
-                  .map((question) => (
+                {questions.map((question) => (
                     <tr
                       key={question._id}
                       className={`hover:bg-blue-50 transition ${
@@ -549,9 +555,9 @@ const QuestionManagement = () => {
               </span>{" "}
               to{" "}
               <span className="font-medium">
-                {Math.min(currentPage * itemsPerPage, filteredQuestions.length)}
+                {Math.min(currentPage * itemsPerPage, totalCount)}
               </span>{" "}
-              of <span className="font-medium">{filteredQuestions.length}</span>{" "}
+              of <span className="font-medium">{totalCount}</span>{" "}
               results
             </div>
 
@@ -617,16 +623,10 @@ const QuestionManagement = () => {
                 <button
                   onClick={() =>
                     setCurrentPage((prev) =>
-                      Math.min(
-                        prev + 1,
-                        Math.ceil(filteredQuestions.length / itemsPerPage),
-                      ),
+                      Math.min(prev + 1, totalPages),
                     )
                   }
-                  disabled={
-                    currentPage ===
-                    Math.ceil(filteredQuestions.length / itemsPerPage)
-                  }
+                  disabled={currentPage === totalPages}
                   className="relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 >
                   <span className="sr-only">Next</span>
@@ -635,15 +635,8 @@ const QuestionManagement = () => {
 
                 {/* Last Page */}
                 <button
-                  onClick={() =>
-                    setCurrentPage(
-                      Math.ceil(filteredQuestions.length / itemsPerPage),
-                    )
-                  }
-                  disabled={
-                    currentPage ===
-                    Math.ceil(filteredQuestions.length / itemsPerPage)
-                  }
+                  onClick={() => setCurrentPage(totalPages)}
+                  disabled={currentPage === totalPages}
                   className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
                   title="Last Page"
                 >
@@ -657,7 +650,7 @@ const QuestionManagement = () => {
       )}
 
       {/* Empty State */}
-      {!loading && filteredQuestions.length === 0 && (
+      {!loading && questions.length === 0 && (
         <div className="bg-white rounded-lg shadow p-12 text-center">
           <div className="w-24 h-24 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <span className="text-5xl">❓</span>
@@ -693,7 +686,7 @@ const QuestionManagement = () => {
           onClose={() => setShowAddModal(false)}
           onSuccess={() => {
             setShowAddModal(false);
-            fetchData();
+            refreshData();
           }}
         />
       )}
@@ -704,7 +697,7 @@ const QuestionManagement = () => {
           onClose={() => setShowBulkModal(false)}
           onSuccess={() => {
             setShowBulkModal(false);
-            fetchData();
+            refreshData();
           }}
         />
       )}
@@ -720,7 +713,7 @@ const QuestionManagement = () => {
           onSuccess={() => {
             setShowEditModal(false);
             setSelectedQuestion(null);
-            fetchData();
+            refreshData();
           }}
         />
       )}
