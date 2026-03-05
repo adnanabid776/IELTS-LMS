@@ -418,8 +418,33 @@ const QuestionManagement = () => {
 
       {/* Loading State */}
       {loading && (
-        <div className="flex justify-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="space-y-4">
+          <div className="bg-white rounded-lg shadow overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="bg-gray-50">
+                  <tr>
+                    {["", "Question", "Type", "Section", "Module", "Actions"].map((h, i) => (
+                      <th key={i} className="px-6 py-3 text-left">
+                        <div className="skeleton h-3 rounded" style={{ width: h ? `${h.length * 8}px` : "20px" }}>&nbsp;</div>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {Array.from({ length: 8 }).map((_, rIdx) => (
+                    <tr key={rIdx}>
+                      {Array.from({ length: 6 }).map((_, cIdx) => (
+                        <td key={cIdx} className="px-6 py-4">
+                          <div className="skeleton h-4 rounded" style={{ width: `${50 + Math.random() * 50}%` }}>&nbsp;</div>
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       )}
 

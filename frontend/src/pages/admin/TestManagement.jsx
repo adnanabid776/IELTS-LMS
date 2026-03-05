@@ -220,8 +220,25 @@ const TestManagement = () => {
 
       {/* Loading State */}
       {loading && (
-        <div className="flex justify-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={i} className="bg-white rounded-lg shadow-lg p-6 animate-pulse">
+              <div className="space-y-3">
+                <div className="skeleton h-5 w-3/4 rounded">&nbsp;</div>
+                <div className="skeleton h-3 w-1/2 rounded">&nbsp;</div>
+                <div className="flex gap-2 mt-4">
+                  <div className="skeleton h-6 w-16 rounded-full">&nbsp;</div>
+                  <div className="skeleton h-6 w-20 rounded-full">&nbsp;</div>
+                </div>
+                <div className="skeleton h-3 w-full rounded mt-2">&nbsp;</div>
+                <div className="skeleton h-3 w-2/3 rounded">&nbsp;</div>
+                <div className="flex gap-2 mt-4">
+                  <div className="skeleton h-8 w-20 rounded">&nbsp;</div>
+                  <div className="skeleton h-8 w-20 rounded">&nbsp;</div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       )}
 

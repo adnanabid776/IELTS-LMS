@@ -135,11 +135,26 @@ const SideBar = ({ user }) => {
   };
 
   return (
-    <aside
-      className={`${
-        !isOpen ? "w-18" : "w-64"
-      } bg-gray-800 text-white transition-all duration-300 flex flex-col h-screen`}
-    >
+    <>
+      {/* Mobile backdrop overlay */}
+      {isOpen && window.innerWidth < 1024 && (
+        <div
+          className="sidebar-backdrop"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      <aside
+        className={`${
+          !isOpen && window.innerWidth >= 1024 ? "w-18" : isOpen ? "w-64" : "w-0"
+        } bg-gray-800 text-white transition-all duration-300 flex flex-col h-screen ${
+          window.innerWidth < 1024
+            ? "fixed top-0 left-0 z-50 shadow-2xl"
+            : "relative"
+        } ${
+          !isOpen && window.innerWidth < 1024 ? "overflow-hidden" : ""
+        }`}
+      >
       {/* Logo and Toggle */}
       <div className="p-4 border-b border-gray-700">
         <div className="flex items-center justify-between">
@@ -151,7 +166,7 @@ const SideBar = ({ user }) => {
             className="text-gray-200 cursor-pointer hover:text-white text-2xl font-bold"
             title={isOpen ? "Collapse sidebar" : "Expand sidebar"}
           >
-            ☰
+            {isOpen && window.innerWidth < 1024 ? "✕" : "☰"}
           </button>
         </div>
         {isOpen && (
@@ -219,6 +234,7 @@ const SideBar = ({ user }) => {
         )}
       </div>
     </aside>
+    </>
   );
 };
 

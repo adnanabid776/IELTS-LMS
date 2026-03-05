@@ -231,8 +231,37 @@ const UserManagement = () => {
 
       {/* Loading State */}
       {loading && (
-        <div className="flex justify-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="bg-white rounded-lg shadow overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-gray-50">
+                <tr>
+                  {["User", "Email", "Role", "Status", "Joined", "Actions"].map((h, i) => (
+                    <th key={i} className="px-6 py-3 text-left">
+                      <div className="skeleton h-3 rounded" style={{ width: `${h.length * 8}px` }}>&nbsp;</div>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {Array.from({ length: 6 }).map((_, rIdx) => (
+                  <tr key={rIdx}>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center">
+                        <div className="skeleton w-10 h-10 rounded-full mr-3">&nbsp;</div>
+                        <div className="skeleton h-4 w-24 rounded">&nbsp;</div>
+                      </div>
+                    </td>
+                    {Array.from({ length: 5 }).map((_, cIdx) => (
+                      <td key={cIdx} className="px-6 py-4">
+                        <div className="skeleton h-4 rounded" style={{ width: `${50 + Math.random() * 40}%` }}>&nbsp;</div>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
 

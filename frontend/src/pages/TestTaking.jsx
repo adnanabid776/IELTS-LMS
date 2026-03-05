@@ -564,7 +564,9 @@ const TestTaking = () => {
             <p className="text-[10px] sm:text-xs text-white/80 font-medium">
               ⏱️ Time Left
             </p>
-            <p className="text-2xl sm:text-3xl font-bold text-white tracking-wider">
+            <p className={`text-2xl sm:text-3xl font-bold tracking-wider ${
+              timeRemaining < 300 && !isOffline ? "timer-warning" : "text-white"
+            }`}>
               {formatTime(timeRemaining)}
             </p>
             {timeRemaining < 300 && !isOffline && (

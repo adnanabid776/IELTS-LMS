@@ -279,7 +279,7 @@ const ListeningTestTaking = () => {
   const getTimerColor = () => {
     if (timeRemaining > 600) return "text-blue-600"; // > 10 mins
     if (timeRemaining > 300) return "text-orange-600"; // > 5 mins
-    return "text-red-600"; // < 5 mins
+    return "timer-warning"; // < 5 mins - flashing red
   };
 
   const handleAudioEnded = async () => {
