@@ -4,13 +4,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 const SideBar = ({ user }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  // Initialize based on screen width
   const [isOpen, setIsOpen] = useState(window.innerWidth >= 1024);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
 
   // Handle window resize
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 1024) {
+      const mobile = window.innerWidth < 1024;
+      setIsMobile(mobile);
+      if (mobile) {
         setIsOpen(false);
       } else {
         setIsOpen(true);
@@ -119,8 +121,7 @@ const SideBar = ({ user }) => {
   // Handle menu item click
   const handleMenuClick = (path) => {
     navigate(path);
-    // Auto-collapse on mobile/tablet
-    if (window.innerWidth < 1024) {
+    if (isMobile) {
       setIsOpen(false);
     }
   };
@@ -136,8 +137,19 @@ const SideBar = ({ user }) => {
 
   return (
     <>
+      {/* Floating hamburger button — visible on mobile when sidebar is closed */}
+      {isMobile && !isOpen && (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="fixed top-4 left-4 z-50 bg-gray-800 text-white w-10 h-10 rounded-lg shadow-lg flex items-center justify-center text-xl hover:bg-gray-700 transition"
+          title="Open menu"
+        >
+          ☰
+        </button>
+      )}
+
       {/* Mobile backdrop overlay */}
-      {isOpen && window.innerWidth < 1024 && (
+      {isOpen && isMobile && (
         <div
           className="sidebar-backdrop"
           onClick={() => setIsOpen(false)}
@@ -146,96 +158,91 @@ const SideBar = ({ user }) => {
 
       <aside
         className={`${
-          !isOpen && window.innerWidth >= 1024 ? "w-18" : isOpen ? "w-64" : "w-0"
+          !isOpen && !isMobile ? "w-18" : isOpen ? "w-64" : "w-0"
         } bg-gray-800 text-white transition-all duration-300 flex flex-col h-screen ${
-          window.innerWidth < 1024
-            ? "fixed top-0 left-0 z-50 shadow-2xl"
-            : "relative"
+          isMobile ? "fixed top-0 left-0 z-50 shadow-2xl" : "relative"
         } ${
-          !isOpen && window.innerWidth < 1024 ? "overflow-hidden" : ""
+          !isOpen && isMobile ? "overflow-hidden" : ""
         }`}
       >
-      {/* Logo and Toggle */}
-      <div className="p-4 border-b border-gray-700">
-        <div className="flex items-center justify-between">
-          <h1 className={`font-bold text-xl ${!isOpen && "hidden"}`}>
-            IELTS LMS
-          </h1>
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="text-gray-200 cursor-pointer hover:text-white text-2xl font-bold"
-            title={isOpen ? "Collapse sidebar" : "Expand sidebar"}
-          >
-            {isOpen && window.innerWidth < 1024 ? "✕" : "☰"}
-          </button>
-        </div>
-        {isOpen && (
-          <p className="text-xs text-gray-400 mt-1">
-            {user.role.charAt(0).toUpperCase() + user.role.slice(1)} Portal
-          </p>
-        )}
-      </div>
-
-      {/* Menu Items */}
-      <nav className="mt-4 flex-1 overflow-y-auto">
-        {menuItems.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => handleMenuClick(item.path)}
-            className={`flex items-center w-full px-4 py-3 hover:bg-gray-700 transition ${
-              isActive(item.path) ? "bg-blue-600" : ""
-            }`}
-            title={item.label}
-          >
-            <span className="text-xl">{item.icon}</span>
-            {isOpen && <span className="ml-3">{item.label}</span>}
-          </button>
-        ))}
-      </nav>
-
-      {/* User Profile Section at Bottom */}
-      <div className="border-t border-gray-700 p-4">
-        <div className="flex items-center mb-3">
-          {/* Avatar with initials */}
-          <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm shrink-0">
-            {user.firstName[0].toUpperCase()}
-            {user.lastName[0].toUpperCase()}
+        {/* Logo and Toggle */}
+        <div className="p-4 border-b border-gray-700">
+          <div className="flex items-center justify-between">
+            <h1 className={`font-bold text-xl ${!isOpen && "hidden"}`}>
+              IELTS LMS
+            </h1>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-gray-200 cursor-pointer hover:text-white text-2xl font-bold"
+              title={isOpen ? "Collapse sidebar" : "Expand sidebar"}
+            >
+              {isOpen && isMobile ? "✕" : "☰"}
+            </button>
           </div>
-
-          {/* User info (only show when sidebar is open) */}
           {isOpen && (
-            <div className="ml-3 overflow-hidden">
-              <p className="text-sm font-semibold truncate">
-                {user.firstName} {user.lastName}
-              </p>
-              <p className="text-xs text-gray-400 truncate">{user.email}</p>
-            </div>
+            <p className="text-xs text-gray-400 mt-1">
+              {user.role.charAt(0).toUpperCase() + user.role.slice(1)} Portal
+            </p>
           )}
         </div>
 
-        {/* Logout Button */}
-        {isOpen && (
-          <button
-            onClick={handleLogout}
-            className="w-full px-4 py-2 bg-red-700 hover:bg-red-900 rounded-lg text-white text-sm font-semibold transition flex items-center justify-center"
-          >
-            <span className="mr-2">🚪</span>
-            Logout
-          </button>
-        )}
-        {!isOpen && (
-          <button
-            onClick={handleLogout}
-            className="w-full px-2 py-2 bg-red-700 hover:bg-red-900 rounded-lg text-white text-sm font-semibold transition flex items-center justify-center"
-            title="Logout"
-          >
-            🚪
-          </button>
-        )}
-      </div>
-    </aside>
+        {/* Menu Items */}
+        <nav className="mt-4 flex-1 overflow-y-auto">
+          {menuItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => handleMenuClick(item.path)}
+              className={`flex items-center w-full px-4 py-3 hover:bg-gray-700 transition ${
+                isActive(item.path) ? "bg-blue-600" : ""
+              }`}
+              title={item.label}
+            >
+              <span className="text-xl">{item.icon}</span>
+              {isOpen && <span className="ml-3">{item.label}</span>}
+            </button>
+          ))}
+        </nav>
+
+        {/* User Profile Section at Bottom */}
+        <div className="border-t border-gray-700 p-4">
+          <div className="flex items-center mb-3">
+            <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm shrink-0">
+              {user.firstName[0].toUpperCase()}
+              {user.lastName[0].toUpperCase()}
+            </div>
+            {isOpen && (
+              <div className="ml-3 overflow-hidden">
+                <p className="text-sm font-semibold truncate">
+                  {user.firstName} {user.lastName}
+                </p>
+                <p className="text-xs text-gray-400 truncate">{user.email}</p>
+              </div>
+            )}
+          </div>
+
+          {isOpen && (
+            <button
+              onClick={handleLogout}
+              className="w-full px-4 py-2 bg-red-700 hover:bg-red-900 rounded-lg text-white text-sm font-semibold transition flex items-center justify-center"
+            >
+              <span className="mr-2">🚪</span>
+              Logout
+            </button>
+          )}
+          {!isOpen && (
+            <button
+              onClick={handleLogout}
+              className="w-full px-2 py-2 bg-red-700 hover:bg-red-900 rounded-lg text-white text-sm font-semibold transition flex items-center justify-center"
+              title="Logout"
+            >
+              🚪
+            </button>
+          )}
+        </div>
+      </aside>
     </>
   );
 };
 
 export default SideBar;
+

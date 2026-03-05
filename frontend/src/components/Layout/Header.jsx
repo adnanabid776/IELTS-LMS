@@ -5,9 +5,9 @@ const Header = ({user, title}) => {
 
   return (
     <header className="bg-white shadow-sm">
-      <div className="flex items-center justify-between px-6 py-4">
+      <div className="flex max-sm:flex-col items-center justify-between max-sm:justify-center max-sm:gap-2 px-6 py-2">
         {/* Left side - Title */}
-        <div>
+        <div className='max-sm:flex-col max-sm:text-center items-center justify-center'>
           <h2 className="text-2xl font-semibold text-gray-800">
             {title || 'Dashboard'}
           </h2>
