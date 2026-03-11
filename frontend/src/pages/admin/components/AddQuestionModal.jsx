@@ -1388,75 +1388,7 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
               </div>
             )}
 
-            {/* MATCHING FEATURES SPECIFIC UI (List of Features) */}
-            {formData.questionType === "matching-features" && (
-              <div className="bg-purple-50 p-4 rounded-lg border-2 border-purple-200 mb-6">
-                <label className="block text-sm font-bold text-gray-700 mb-3">
-                  List of Features (Options){" "}
-                  <span className="text-red-500">*</span>
-                </label>
-                <div className="space-y-2">
-                  <p className="text-xs text-gray-500 mb-2">
-                    Add the list of items to match against (e.g., Researchers,
-                    Cities, Dates). Labels (A, B, C...) are auto-generated.
-                  </p>
-                  {formData.features.map((feature, index) => (
-                    <div key={index} className="flex gap-2 items-center">
-                      <span className="text-sm font-bold w-6 text-gray-500">
-                        {String.fromCharCode(65 + index)}.
-                      </span>
-                      <input
-                        type="text"
-                        value={feature.text || feature} // Handle object or string
-                        onChange={(e) => {
-                          const newFeatures = [...formData.features];
-                          newFeatures[index] = e.target.value;
-                          setFormData((prev) => ({
-                            ...prev,
-                            features: newFeatures,
-                          }));
-                        }}
-                        className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-                        placeholder="Enter feature text..."
-                      />
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const newFeatures = formData.features.filter(
-                            (_, i) => i !== index,
-                          );
-                          setFormData((prev) => ({
-                            ...prev,
-                            features: newFeatures,
-                          }));
-                        }}
-                        className="text-red-500 hover:text-red-700 font-bold px-2"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  ))}
-                </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setFormData((prev) => ({
-                      ...prev,
-                      features: [...prev.features, ""],
-                    }));
-                  }}
-                  className="mt-3 px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 font-semibold text-sm"
-                >
-                  + Add Feature
-                </button>
-                {/* Validation Error for Features */}
-                {errors.options && ( // Reusing options error key or need new one?
-                  <p className="text-red-500 text-xs mt-2 font-semibold">
-                    At least 2 features are required
-                  </p>
-                )}
-              </div>
-            )}
+
 
             {/* MATCHING HEADINGS / INFORMATION / MAP LABELING SPECIFIC UI */}
             {(formData.questionType === "matching-headings" ||
