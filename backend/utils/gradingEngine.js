@@ -284,7 +284,7 @@ const calculatePoints = (userAnswer, question) => {
     return { scored, total, attempted, itemDetails };
   }
 
-  // 2. Multiple Choice Multi (Set-based comparison)
+  // 2. Multiple Choice Multi (Per-answer scoring)
   if (question.questionType === "multiple-choice-multi") {
     const isAttempted =
       userAnswer &&
@@ -295,7 +295,6 @@ const calculatePoints = (userAnswer, question) => {
     if (Array.isArray(userAnswer)) {
       userLetters = userAnswer.map((v) => v.toString().trim().toUpperCase());
     } else if (typeof userAnswer === "string" && userAnswer.trim()) {
-      // Handle comma-separated or space-separated: "A, C" or "A,C" or "AC"
       userLetters = userAnswer
         .toUpperCase()
         .split(/[\s,]+/)
@@ -321,7 +320,7 @@ const calculatePoints = (userAnswer, question) => {
     ) {
       correctLetters = correctLetters[0].split("");
     }
-    // Same for user answer (unlikely from frontend, but handle bulk/edge cases)
+    // Same for user answer
     if (
       userLetters.length === 1 &&
       userLetters[0].length > 1 &&
@@ -330,17 +329,25 @@ const calculatePoints = (userAnswer, question) => {
       userLetters = userLetters[0].split("");
     }
 
-    // Sort both for order-independent comparison
-    userLetters.sort();
-    correctLetters.sort();
+    // Total points = number of correct answers expected
+    const totalPoints = correctLetters.length;
 
-    const isCorrect =
-      userLetters.length === correctLetters.length &&
-      userLetters.every((val, idx) => val === correctLetters[idx]);
+    // Count how many correct letters the user selected
+    const correctPicks = userLetters.filter((l) =>
+      correctLetters.includes(l)
+    ).length;
+
+    // Count wrong picks (user selected but not in correct)
+    const wrongPicks = userLetters.filter(
+      (l) => !correctLetters.includes(l)
+    ).length;
+
+    // Score: correct picks minus wrong picks, minimum 0
+    const scored = Math.max(0, correctPicks - wrongPicks);
 
     return {
-      scored: isCorrect ? 1 : 0,
-      total: 1,
+      scored: scored,
+      total: totalPoints,
       attempted: isAttempted ? 1 : 0,
     };
   }

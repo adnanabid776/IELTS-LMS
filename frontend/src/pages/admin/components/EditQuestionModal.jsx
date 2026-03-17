@@ -1362,6 +1362,11 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
                                 "viii",
                                 "ix",
                                 "x",
+                                "xi",
+                                "xii",
+                                "xiii",
+                                "xiv",
+                                "xv",
                               ][index] || index + 1
                             : String.fromCharCode(65 + index)}
                           .
@@ -1454,6 +1459,11 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
                                       "viii",
                                       "ix",
                                       "x",
+                                      "xi",
+                                      "xii",
+                                      "xiii",
+                                      "xiv",
+                                      "xv",
                                     ][idx] || idx + 1) + ". "
                                   : String.fromCharCode(65 + idx) + ". "}
                                 {opt.substring(0, 50)}

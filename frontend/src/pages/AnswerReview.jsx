@@ -73,8 +73,13 @@ const AnswerReview = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const formatAnswer = (answer) => {
+  const formatAnswer = (answer, questionType) => {
     if (!answer) return "Not answered";
+    // MC-multi: array of letters like ["B", "D"] → show as "B, D"
+    if (Array.isArray(answer)) {
+      if (answer.length === 0) return "Not answered";
+      return answer.map(a => typeof a === "string" ? a.toUpperCase() : a).join(", ");
+    }
     if (typeof answer === "object") {
       try {
         return Object.entries(answer)
@@ -179,50 +184,83 @@ const AnswerReview = () => {
                   {item.options.map((option, idx) => {
                     const optionLetter = String.fromCharCode(65 + idx); // A, B, C...
 
-                    // For matching-endings: correctAnswer & studentAnswer are letters like "B"
-                    // For MC: they could be the full text or letters
-                    const correctStr = typeof item.correctAnswer === "string" ? item.correctAnswer : String(item.correctAnswer || "");
-                    const studentStr = typeof item.studentAnswer === "string" ? item.studentAnswer : String(item.studentAnswer || "");
+                    // Handle MC-multi: correctAnswer & studentAnswer can be arrays
+                    const isMCMulti = item.questionType === "multiple-choice-multi";
+
+                    // Normalize correct answers to array of uppercase letters
+                    let correctLetters = [];
+                    if (Array.isArray(item.correctAnswer)) {
+                      correctLetters = item.correctAnswer.map(a => String(a).toUpperCase().trim());
+                    } else if (typeof item.correctAnswer === "string") {
+                      // For MC-multi: "B,D" → ["B", "D"]. For others: "B" → ["B"]
+                      correctLetters = item.correctAnswer.toUpperCase().split(/[\s,]+/).map(v => v.trim()).filter(v => v.length > 0);
+                    }
+
+                    // Normalize student answers to array of uppercase letters
+                    let studentLetters = [];
+                    if (Array.isArray(item.studentAnswer)) {
+                      studentLetters = item.studentAnswer.map(a => String(a).toUpperCase().trim());
+                    } else if (typeof item.studentAnswer === "string" && item.studentAnswer) {
+                      studentLetters = item.studentAnswer.toUpperCase().split(/[\s,]+/).map(v => v.trim()).filter(v => v.length > 0);
+                    }
 
                     const isCorrectOption =
                       item.questionType === "matching-endings"
-                        ? (correctStr && optionLetter === correctStr.toUpperCase())
-                        : (option === item.correctAnswer || (correctStr && optionLetter === correctStr.toUpperCase()));
+                        ? correctLetters.includes(optionLetter)
+                        : isMCMulti
+                          ? correctLetters.includes(optionLetter)
+                          : (option === item.correctAnswer || correctLetters.includes(optionLetter));
 
                     const isUserAnswer =
                       item.questionType === "matching-endings"
-                        ? (studentStr && optionLetter === studentStr.toUpperCase())
-                        : (option === item.studentAnswer || (studentStr && optionLetter === studentStr.toUpperCase()));
+                        ? studentLetters.includes(optionLetter)
+                        : isMCMulti
+                          ? studentLetters.includes(optionLetter)
+                          : (option === item.studentAnswer || studentLetters.includes(optionLetter));
+
+                    // For MC-multi: user may have some correct and some wrong
+                    const isUserCorrectPick = isCorrectOption && isUserAnswer;
+                    const isUserWrongPick = isUserAnswer && !isCorrectOption;
+                    const isMissedCorrect = isCorrectOption && !isUserAnswer;
 
                     return (
                       <div
                         key={idx}
                         className={`p-2 rounded flex items-center gap-2 ${
-                          isCorrectOption
+                          isUserCorrectPick
                             ? "bg-green-50 border border-green-300"
-                            : isUserAnswer && !item.isCorrect
+                            : isUserWrongPick
                               ? "bg-red-50 border border-red-300"
-                              : "bg-gray-50"
+                              : isMissedCorrect
+                                ? "bg-yellow-50 border border-yellow-300"
+                                : "bg-gray-50"
                         }`}
                       >
                         <span className={`font-bold text-sm min-w-[20px] ${
-                          isCorrectOption
+                          isUserCorrectPick
                             ? "text-green-700"
-                            : isUserAnswer && !item.isCorrect
+                            : isUserWrongPick
                               ? "text-red-700"
-                              : "text-gray-500"
+                              : isMissedCorrect
+                                ? "text-yellow-700"
+                                : "text-gray-500"
                         }`}>
                           {optionLetter}.
                         </span>
                         <span className="text-sm flex-1">{option}</span>
-                        {isCorrectOption && (
+                        {isUserCorrectPick && (
                           <span className="text-green-600 text-xs font-semibold whitespace-nowrap">
                             ✓ Correct
                           </span>
                         )}
-                        {isUserAnswer && !item.isCorrect && (
+                        {isUserWrongPick && (
                           <span className="text-red-600 text-xs font-semibold whitespace-nowrap">
                             ✗ Your answer
+                          </span>
+                        )}
+                        {isMissedCorrect && (
+                          <span className="text-yellow-600 text-xs font-semibold whitespace-nowrap">
+                            ⚠ Missed
                           </span>
                         )}
                       </div>

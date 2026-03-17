@@ -59,7 +59,7 @@ const TestList = () => {
     return test.totalSections < 3 || test.duration < 40;
   };
 
-  // ✅ Filtered Tests Calculation
+  // ✅ Filtered + Sorted Tests Calculation
   const getFilteredTests = () => {
     let filtered = tests;
 
@@ -68,6 +68,15 @@ const TestList = () => {
     } else if (testTypeFilter === "item-wise") {
       filtered = filtered.filter((test) => isItemWise(test));
     }
+
+    // Sort: Full tests first, then item-wise. Within each group, newest first.
+    filtered = [...filtered].sort((a, b) => {
+      const aIsItem = isItemWise(a);
+      const bIsItem = isItemWise(b);
+      if (!aIsItem && bIsItem) return -1; // full test first
+      if (aIsItem && !bIsItem) return 1;  // item-wise last
+      return new Date(b.createdAt) - new Date(a.createdAt); // newest first within group
+    });
 
     return filtered;
   };

@@ -1105,6 +1105,11 @@ const TestTaking = () => {
                                           "viii",
                                           "ix",
                                           "x",
+                                          "xi",
+                                          "xii",
+                                          "xiii",
+                                          "xiv",
+                                          "xv",
                                         ][idx] || idx + 1
                                       : String.fromCharCode(65 + idx)}
                                     .
