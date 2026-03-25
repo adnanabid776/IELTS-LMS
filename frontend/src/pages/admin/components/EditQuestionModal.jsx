@@ -1275,8 +1275,16 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
                     .sort((a, b) => parseInt(a.label) - parseInt(b.label))
                     .map((item, index) => (
                       <div key={index} className="flex gap-3 items-center">
-                        <div className="flex-shrink-0 w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
-                          {item.label}
+                        <div className="flex-shrink-0">
+                          <input
+                            type="text"
+                            value={item.label}
+                            onChange={(e) =>
+                              handleItemChange(index, "label", e.target.value)
+                            }
+                            className="w-12 h-8 bg-green-600 text-white rounded-full text-center font-bold text-sm focus:outline-none focus:ring-2 focus:ring-green-400"
+                            title="Edit label"
+                          />
                         </div>
                         <div className="flex-1">
                           <input
@@ -1416,8 +1424,16 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
                   <div className="space-y-4">
                     {formData.items.map((item, index) => (
                       <div key={index} className="flex gap-3 items-start">
-                        <div className="flex-shrink-0 w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center font-bold text-lg">
-                          {item.label}
+                        <div className="flex-shrink-0">
+                          <input
+                            type="text"
+                            value={item.label}
+                            onChange={(e) =>
+                              handleItemChange(index, "label", e.target.value)
+                            }
+                            className="w-14 h-10 bg-blue-600 text-white rounded-lg text-center font-bold text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            title="Edit label"
+                          />
                         </div>
                         <div className="flex-1 space-y-2">
                           <input

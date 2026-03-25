@@ -18,7 +18,6 @@ app.use(
 app.use(express.json({ limit: "1mb" }));
 
 // MongoDB Connection
-// MongoDB Connection
 if (process.env.NODE_ENV !== "test") {
   mongoose
     .connect(process.env.MONGODB_URI)
@@ -57,7 +56,6 @@ app.get("/api/test", (req, res) => {
 // Global Error Handler (MUST be last middleware)
 app.use(errorHandler);
 
-// Start Server
 // Start Server
 const PORT = process.env.PORT || 5000;
 
