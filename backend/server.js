@@ -45,6 +45,7 @@ app.use("/api/results", resultRoutes);
 app.use("/api/sessions", sessionRoutes);
 app.use("/api/assignments", assignmentRoutes);
 app.use("/api/upload", uploadRoutes);
+app.use("/uploads", express.static("uploads"));
 
 uploadController.configureCloudinary();
 

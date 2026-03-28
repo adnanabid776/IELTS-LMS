@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { updateSection } from "../../../services/api";
 import { toast } from "react-toastify";
+import { uploadAudio } from "../../../services/uploadApi";
 
 const EditSectionModal = ({ section, testModule, onClose, onSuccess }) => {
   const [formData, setFormData] = useState({
@@ -21,6 +22,24 @@ const EditSectionModal = ({ section, testModule, onClose, onSuccess }) => {
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const [uploadingAudio, setUploadingAudio] = useState(false);
+
+  const handleAudioUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    try {
+      setUploadingAudio(true);
+      const data = await uploadAudio(file);
+      setFormData((prev) => ({ ...prev, audioUrl: data.url }));
+      toast.success("Audio uploaded successfully!");
+    } catch (error) {
+      console.error("Audio upload error:", error);
+      toast.error("Failed to upload audio file.");
+    } finally {
+      setUploadingAudio(false);
+    }
+  };
 
   useEffect(() => {
     if (section) {
@@ -205,14 +224,22 @@ const EditSectionModal = ({ section, testModule, onClose, onSuccess }) => {
               <label className="block text-sm font-bold text-gray-700 mb-2">
                 Audio URL (For Listening)
               </label>
-              <input
-                type="url"
-                name="audioUrl"
-                value={formData.audioUrl}
-                onChange={handleChange}
-                className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="https://example.com/audio.mp3"
-              />
+              <div className="flex flex-col md:flex-row gap-3">
+                <input
+                  type="url"
+                  name="audioUrl"
+                  value={formData.audioUrl}
+                  onChange={handleChange}
+                  className="flex-1 px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="https://example.com/audio.mp3"
+                />
+                <label className={`md:w-48 flex items-center justify-center px-4 py-2.5 rounded-lg font-semibold cursor-pointer transition ${
+                  uploadingAudio ? "bg-gray-400 text-gray-200" : "bg-blue-600 text-white hover:bg-blue-700 shadow-md"
+                }`}>
+                  {uploadingAudio ? "Uploading..." : "📁 Upload Audio"}
+                  <input type="file" accept="audio/*" onChange={handleAudioUpload} className="hidden" disabled={uploadingAudio} />
+                </label>
+              </div>
             </div>
 
             {/* Listening Fields */}

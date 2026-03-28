@@ -86,27 +86,37 @@ exports.uploadAudio = async (req, res) => {
 
     // console.log("📤 Uploading audio:", req.file.originalname);
 
-    // Upload to Cloudinary (audio counts as 'video' resource_type)
-    const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: "ielts-lms/audio",
-      resource_type: "video", // Audio files use 'video' type
-      format: "mp3", // Convert to mp3
-    });
+    // Check if Cloudinary credentials exist in environment
+    const hasCloudinary = process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET;
 
-    // Delete temporary file
-    if (fs.existsSync(req.file.path)) {
-      fs.unlinkSync(req.file.path);
+    if (hasCloudinary) {
+      // Upload to Cloudinary (audio counts as 'video' resource_type)
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "ielts-lms/audio",
+        resource_type: "video", // Audio files use 'video' type
+        format: "mp3", // Convert to mp3
+      });
+
+      // Keep the local file as a backup! (Removed fs.unlinkSync)
+
+      // Return Cloudinary URL
+      return res.json({
+        message: "Audio uploaded successfully to Cloud",
+        url: result.secure_url,
+        publicId: result.public_id,
+        duration: result.duration, // Audio length in seconds
+      });
+    } else {
+      // Fallback: Local Storage
+      // Multer already saved the file to uploads/, we just return the URL
+      const localUrl = `/${req.file.path.replace(/\\/g, '/')}`;
+      
+      return res.json({
+        message: "Audio uploaded locally (Hybrid Mode)",
+        url: localUrl,
+        publicId: null,
+      });
     }
-
-    // console.log("✅ Audio uploaded:", result.secure_url);
-
-    // Return URL
-    res.json({
-      message: "Audio uploaded successfully",
-      url: result.secure_url,
-      publicId: result.public_id,
-      duration: result.duration, // Audio length in seconds
-    });
   } catch (error) {
     console.error("❌ Upload audio error:", error);
 
