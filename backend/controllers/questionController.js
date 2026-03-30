@@ -325,9 +325,21 @@ exports.bulkCreateQuestions = async (req, res) => {
         });
       }
 
-      if (!q.correctAnswer) {
+      // Types that store answers in items[], not top-level correctAnswer
+      const typesWithoutTopLevelAnswer = [
+        "writing-task",
+        "matching-headings",
+        "matching-information",
+        "matching-features",
+        "matching-endings",
+        "table-completion",
+        "diagram-labeling",
+        "map-labeling",
+      ];
+
+      if (!q.correctAnswer && !typesWithoutTopLevelAnswer.includes(q.questionType)) {
         return res.status(400).json({
-          error: `Question ${i + 1}: correctAnswer is required`,
+          error: `Question ${i + 1}: correctAnswer is required for type "${q.questionType}"`,
         });
       }
     }

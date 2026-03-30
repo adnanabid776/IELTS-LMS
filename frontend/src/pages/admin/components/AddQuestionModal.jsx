@@ -107,6 +107,11 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
     },
     { value: "short-answer", label: "Short Answer", needsOptions: false },
     {
+      value: "form-completion",
+      label: "Form Completion",
+      needsOptions: false,
+    },
+    {
       value: "writing-task",
       label: "Writing Task / Essay",
       needsOptions: false,

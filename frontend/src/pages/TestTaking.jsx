@@ -658,7 +658,7 @@ const TestTaking = () => {
                   Listen to the Audio
                 </h4>
               </div>
-              <audio controls className="w-full rounded-lg">
+              <audio key={currentSection.audioUrl} controls className="w-full rounded-lg">
                 <source src={currentSection.audioUrl} type="audio/mpeg" />
                 Your browser does not support the audio element.
               </audio>
