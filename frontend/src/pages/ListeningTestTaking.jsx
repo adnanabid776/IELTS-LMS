@@ -459,8 +459,7 @@ const ListeningTestTaking = () => {
 
       case "sentence-completion":
       case "summary-completion":
-      case "note-completion":
-      case "form-completion": {
+      case "note-completion": {
         // Build inline input handler
         const completionHandler = (val) => {
           if (question.allowNumber === false && /\d/.test(val)) return;
@@ -579,6 +578,91 @@ const ListeningTestTaking = () => {
                 </button>
               ))}
             </div>
+          </div>
+        );
+      }
+
+      case "form-completion": {
+        const formImage = question.imageUrl;
+        return (
+          <div
+            key={questionId}
+            className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-4 hover:shadow-md transition"
+          >
+             <div className="mb-6">
+               <span className="text-lg font-bold text-blue-600 bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mb-3">
+                 {question.questionNumber}
+               </span>
+               <p className="text-gray-800 font-medium whitespace-pre-line leading-relaxed">
+                 {question.questionText}
+               </p>
+               {question.wordLimit && (
+                 <p className="text-sm font-semibold text-gray-500 mt-2">
+                   Word Limit: {question.wordLimit} words {question.allowNumber ? "(Numbers allowed)" : "(No numbers)"}
+                 </p>
+               )}
+             </div>
+             
+             {formImage && (
+                <div className="mb-6 object-contain overflow-hidden rounded border border-gray-200 flex justify-center">
+                    <img src={formImage} alt="Form Diagram" className="max-w-full h-auto max-h-96" />
+                </div>
+             )}
+
+             <div className="border-2 border-gray-800 rounded bg-white max-w-4xl overflow-hidden shadow-sm">
+               <table className="w-full border-collapse">
+                 <tbody>
+                    {(question.items || []).map((item, index) => {
+                       const hasBlank = item.text && item.text.includes("__________");
+                       const isSubheading = !item.text && item.label;
+                       
+                       return (
+                          <tr key={index} className="border-b border-gray-300 last:border-0 hover:bg-gray-50 transition-colors">
+                            {isSubheading ? (
+                                <td colSpan={2} className="bg-gray-100 px-5 py-4 text-center border-b border-gray-400">
+                                   <span className="font-extrabold text-gray-800 uppercase tracking-widest">{item.label}</span>
+                                </td>
+                            ) : (
+                                <>
+                                  <td className="px-5 py-3 text-gray-700 font-bold border-r border-gray-300 w-1/3 align-top">
+                                     {item.label}
+                                  </td>
+                                  <td className="px-5 py-3 text-gray-800 font-medium align-top leading-relaxed">
+                                     {hasBlank ? (
+                                         item.text.split(/________+/).map((part, pIdx, parts) => {
+                                            const itemSubKey = String(index + 1);
+                                            const currentVal = userAnswer && typeof userAnswer === 'object' ? userAnswer[itemSubKey] : "";
+                                            
+                                            return (
+                                               <span key={pIdx}>
+                                                 {part}
+                                                 {pIdx < parts.length - 1 && (
+                                                   <span className="whitespace-nowrap inline-flex items-center gap-1 mx-2">
+                                                     <strong className="text-gray-900 border border-gray-900 bg-gray-100 rounded-full w-5 h-5 flex items-center justify-center text-xs mr-1 shadow-sm font-bold">{itemSubKey}</strong>
+                                                     <input
+                                                       type="text"
+                                                       value={currentVal || ""}
+                                                       onChange={(e) => handleAnswerChange(questionId, { ...userAnswer, [itemSubKey]: e.target.value })}
+                                                       className="w-32 sm:w-48 px-2 py-1 border-b-2 border-gray-400 focus:border-blue-600 focus:outline-none bg-transparent transition-colors text-blue-900 font-bold"
+                                                       placeholder="..."
+                                                     />
+                                                   </span>
+                                                 )}
+                                               </span>
+                                            );
+                                         })
+                                     ) : (
+                                         item.text
+                                     )}
+                                  </td>
+                                </>
+                            )}
+                          </tr>
+                       );
+                    })}
+                 </tbody>
+               </table>
+             </div>
           </div>
         );
       }

@@ -657,6 +657,87 @@ const QuestionRenderer = ({ question, answers, handleAnswerChange, handleSummary
                       </table>
                     </div>
                   )}
+
+                {/* Answer Input - Form Completion - NEW */}
+                {question.questionType === "form-completion" && (
+                  <div className="ml-14 mt-4 overflow-x-auto">
+                    {question.imageUrl && (
+                      <div className="mb-6 object-contain overflow-hidden rounded border border-gray-200 flex justify-center bg-white p-2">
+                        <img src={question.imageUrl} alt="Form Diagram" className="max-w-full h-auto max-h-96" />
+                      </div>
+                    )}
+                    <div className="border-2 border-gray-800 rounded bg-white max-w-4xl overflow-hidden shadow-sm">
+                      <table className="w-full border-collapse">
+                        <tbody>
+                          {(() => {
+                            let blankCounter = 1;
+                            return (question.items || []).map((item, index) => {
+                              const hasBlank = item.text && item.text.includes("__________");
+                              const isSubheading = !item.text && item.label;
+                              
+                              let rowInputKey = null;
+                              if (hasBlank) {
+                                rowInputKey = String(blankCounter++);
+                              }
+                              
+                              return (
+                                <tr key={index} className="border-b border-gray-300 last:border-0 hover:bg-gray-50 transition-colors">
+                                  {isSubheading ? (
+                                      <td colSpan={2} className="bg-gray-100 px-5 py-4 text-center border-b border-gray-400">
+                                        <span className="font-extrabold text-gray-800 uppercase tracking-widest">{item.label}</span>
+                                      </td>
+                                  ) : (
+                                      <>
+                                        <td className="px-5 py-3 text-gray-700 font-bold border-r border-gray-300 w-1/3 align-top">
+                                          {item.label}
+                                        </td>
+                                        <td className="px-5 py-3 text-gray-800 font-medium align-top leading-relaxed">
+                                          {hasBlank ? (
+                                              item.text.split(/________+/).map((part, pIdx, parts) => {
+                                                  const isBlank = pIdx < parts.length - 1;
+                                                  const currentAnswers = answers[question._id] || {};
+                                                  const currentVal = isBlank ? (currentAnswers[rowInputKey] || "") : "";
+                                                  
+                                                  return (
+                                                    <span key={pIdx}>
+                                                      {part}
+                                                      {isBlank && (
+                                                        <span className="whitespace-nowrap inline-flex items-center gap-1 mx-2">
+                                                          <strong className="text-gray-900 border border-gray-900 bg-gray-100 rounded-full w-5 h-5 flex items-center justify-center text-xs mr-1 shadow-sm font-bold select-none">{rowInputKey}</strong>
+                                                          <input
+                                                            type="text"
+                                                            value={currentVal}
+                                                            onChange={(e) => {
+                                                              handleAnswerChange(question._id, {
+                                                                ...currentAnswers,
+                                                                [rowInputKey]: e.target.value
+                                                              });
+                                                            }}
+                                                            className={`w-32 sm:w-48 px-2 py-1 border-b-2 focus:outline-none bg-transparent transition-colors font-bold ${
+                                                              currentVal ? "border-green-500 text-green-700" : "border-gray-400 focus:border-blue-600 text-blue-900"
+                                                            }`}
+                                                            placeholder="..."
+                                                          />
+                                                        </span>
+                                                      )}
+                                                    </span>
+                                                  );
+                                              })
+                                          ) : (
+                                              item.text
+                                          )}
+                                        </td>
+                                      </>
+                                  )}
+                                </tr>
+                              );
+                            });
+                          })()}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
     </>
   );
 };

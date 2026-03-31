@@ -216,7 +216,8 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
     if (
       (formData.questionType === "matching-headings" ||
         formData.questionType === "matching-information" ||
-        formData.questionType === "map-labeling") &&
+        formData.questionType === "map-labeling" ||
+        formData.questionType === "form-completion") &&
       (!formData.items || formData.items.length === 0)
     ) {
       // Only if we truly have no items (e.g. converting a question type??)
@@ -300,15 +301,16 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
       formData.questionType === "matching-headings" ||
       formData.questionType === "matching-information" ||
       formData.questionType === "map-labeling" ||
-      formData.questionType === "matching-features"
+      formData.questionType === "matching-features" ||
+      formData.questionType === "form-completion"
     ) {
       const validItems = formData.items.filter(
-        (item) => item.text.trim() && item.correctAnswer,
+        (item) => item.text.trim() || item.correctAnswer,
       );
       if (validItems.length < 1) {
         // Changed to 1 to match AddModal logic, or keep 2? matching usually needs pairs but 1 is min tech requirement
         newErrors.items =
-          "At least one item with text and selected option is required";
+          "At least one item is required";
       }
       delete newErrors.correctAnswer;
     } else if (formData.questionType === "table-completion") {
@@ -397,9 +399,14 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
         formData.questionType === "matching-information" ||
         formData.questionType === "map-labeling" ||
         formData.questionType === "matching-features" ||
-        formData.questionType === "table-completion"
+        formData.questionType === "table-completion" ||
+        formData.questionType === "form-completion"
       ) {
-        submitData.items = formData.items.filter((i) => i.text.trim());
+        if (formData.questionType === "form-completion") {
+            submitData.items = formData.items.filter((i) => i.label.trim() || i.text.trim() || i.correctAnswer.trim());
+        } else {
+            submitData.items = formData.items.filter((i) => i.text.trim());
+        }
         submitData.features = formData.features.filter((f) =>
           typeof f === "string" ? f.trim() : f.text?.trim(),
         ); // ✅ ADDED
@@ -525,7 +532,7 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
             {/* Image URL (For Map Labeling or Visual Questions) */}
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-2">
-                Image URL (Optional - for Maps/Diagrams)
+                Image URL (Optional - for Maps/Diagrams/Forms)
               </label>
               <input
                 type="url"
@@ -533,7 +540,7 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
                 value={formData.imageUrl}
                 onChange={handleChange}
                 className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="https://example.com/map.png"
+                placeholder="https://example.com/image.png"
               />
             </div>
 
@@ -655,6 +662,81 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
                   )}
                 </div>
               )}
+
+            {/* FORM COMPLETION SPECIFIC UI */}
+            {formData.questionType === "form-completion" && (
+              <div className="space-y-6">
+                <div className="bg-green-50 p-4 rounded-lg border-2 border-green-200">
+                  <label className="block text-sm font-bold text-gray-700 mb-3">
+                    Form Builder <span className="text-red-500">*</span>
+                  </label>
+                  <p className="text-xs text-gray-500 mb-4">
+                    Create the visual rows for the form. Use the <strong>Label</strong> column for the left side (e.g. "Name:") and the <strong>Value</strong> column for the right side. Include <code className="bg-gray-200 px-1 rounded">__________</code> (10 underscores) in the Value if it requires a student answer. If the row is just a sub-heading, only fill the Label.
+                  </p>
+
+                  <div className="space-y-4">
+                    {(formData.items || []).map((item, index) => (
+                      <div key={index} className="flex flex-col md:flex-row gap-3 items-start bg-white p-3 rounded shadow-sm border border-gray-100">
+                        <div className="flex bg-green-100 text-green-800 font-bold rounded px-3 py-2 items-center justify-center">
+                          {index + 1}
+                        </div>
+                        <div className="flex-1 space-y-2">
+                          <input
+                            type="text"
+                            value={item.label || ""}
+                            onChange={(e) => handleItemChange(index, "label", e.target.value)}
+                            className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-500 font-semibold"
+                            placeholder="Label (e.g. 'Type of crime:')"
+                          />
+                          <input
+                            type="text"
+                            value={item.text || ""}
+                            onChange={(e) => handleItemChange(index, "text", e.target.value)}
+                            className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-500"
+                            placeholder="Value (e.g. 'theft' or '__________')"
+                          />
+                          {/* If the value contains the 10 underscores blank, show the correct answer field */}
+                          {item.text && item.text.includes("__________") && (
+                            <input
+                              type="text"
+                              value={item.correctAnswer || ""}
+                              onChange={(e) => handleItemChange(index, "correctAnswer", e.target.value)}
+                              className="w-full px-3 py-2 border-2 border-blue-400 bg-blue-50 rounded focus:ring-2 focus:ring-blue-500 font-mono"
+                              placeholder="Correct Answer (e.g. 'Taylor')"
+                            />
+                          )}
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newItems = formData.items.filter((_, i) => i !== index);
+                            setFormData({ ...formData, items: newItems });
+                          }}
+                          className="text-red-500 hover:text-red-700 bg-red-50 px-3 py-2 rounded h-full"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                        setFormData((prev) => ({
+                            ...prev,
+                            items: [...prev.items, { label: "", text: "", correctAnswer: "" }]
+                        }));
+                    }}
+                    className="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 font-semibold text-sm transition"
+                  >
+                    + Add Form Row
+                  </button>
+                  {errors.items && (
+                    <p className="text-red-500 text-xs mt-2 font-semibold">{errors.items}</p>
+                  )}
+                </div>
+              </div>
+            )}
 
             {/* MATCHING FEATURES SPECIFIC UI */}
             {formData.questionType === "matching-features" && (

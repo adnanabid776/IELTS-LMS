@@ -148,15 +148,20 @@ const calculateBandScore = (correctAnswers, totalQuestions, module) => {
 // ==========================================
 // Helper to calculate points for a question
 const calculatePoints = (userAnswer, question) => {
-  // 1. Composite Types (Map Labeling, Matching, Table Completion)
+  // 1. Composite Types (Map Labeling, Matching, Table Completion, Form Completion)
   if (
     question.questionType === "map-labeling" ||
     question.questionType === "matching-headings" ||
     question.questionType === "matching-information" ||
     question.questionType === "matching-features" ||
-    question.questionType === "table-completion"
+    question.questionType === "table-completion" ||
+    question.questionType === "form-completion"
   ) {
-    const items = question.items || [];
+    let items = question.items || [];
+    if (question.questionType === "form-completion") {
+      items = items.filter(item => item.text && item.text.includes("__________"));
+    }
+    
     let scored = 0;
     let attempted = 0;
     const total = items.length;
@@ -170,8 +175,10 @@ const calculatePoints = (userAnswer, question) => {
       return { scored: 0, total, attempted: 0, itemDetails };
     }
 
-    items.forEach((item) => {
-      const userVal = userAnswer[item.label] || userAnswer[String(item.label)];
+    items.forEach((item, index) => {
+      // For form-completion, item.label is visual text, so we use its row index as the key
+      const itemKey = question.questionType === "form-completion" ? String(index + 1) : item.label;
+      const userVal = userAnswer[itemKey] || userAnswer[String(itemKey)];
       let isItemCorrect = false;
 
       // Check if this specific item was attempted

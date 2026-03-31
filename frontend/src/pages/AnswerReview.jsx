@@ -277,7 +277,8 @@ const AnswerReview = () => {
                 item.questionType === "matching-headings" ||
                 item.questionType === "matching-information" ||
                 item.questionType === "matching-features" ||
-                item.questionType === "map-labeling") &&
+                item.questionType === "map-labeling" ||
+                item.questionType === "form-completion") &&
               item.items ? (
                 <div className="mt-4">
                   <p className="text-sm font-semibold text-gray-700 mb-2">
@@ -300,104 +301,116 @@ const AnswerReview = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {item.items.map((subItem, idx) => {
-                          const subLabel = subItem.label || idx + 1;
-                          let userVal =
-                            typeof item.studentAnswer === "object"
-                              ? item.studentAnswer?.[subLabel]
-                              : "";
-                          let correctVal = subItem.correctAnswer;
+                        {(() => {
+                          let displayItems = item.items;
+                          if (item.questionType === "form-completion") {
+                            displayItems = displayItems.filter(subItem => subItem.text && subItem.text.includes("__________"));
+                          }
+                          return displayItems.map((subItem, idx) => {
+                            // Form completion uses sequence strings "1", "2" for keys. Other composites use label.
+                            const itemKey = item.questionType === "form-completion" 
+                                ? String(idx + 1) 
+                                : (subItem.label || String(idx + 1));
+                            
+                            const displayLabel = subItem.label || subItem.text;
 
-                          // [FIX] Convert Letter back to Roman Numeral for Matching Headings display
-                          if (item.questionType === "matching-headings") {
-                            const romans = [
-                              "i",
-                              "ii",
-                              "iii",
-                              "iv",
-                              "v",
-                              "vi",
-                              "vii",
-                              "viii",
-                              "ix",
-                              "x",
-                            ];
-                            const toRoman = (char) => {
-                              if (!char || char.length !== 1) return char;
-                              const index =
-                                char.toUpperCase().charCodeAt(0) - 65; // A=0, B=1...
-                              return romans[index] || char;
-                            };
+                            let userVal =
+                              typeof item.studentAnswer === "object"
+                                ? item.studentAnswer?.[itemKey]
+                                : "";
+                            let correctVal = subItem.correctAnswer;
 
-                            // If value is a single letter (A-J), convert it.
-                            if (/^[A-J]$/i.test(userVal))
-                              userVal = toRoman(userVal);
+                            // [FIX] Convert Letter back to Roman Numeral for Matching Headings display
+                            if (item.questionType === "matching-headings") {
+                              const romans = [
+                                "i",
+                                "ii",
+                                "iii",
+                                "iv",
+                                "v",
+                                "vi",
+                                "vii",
+                                "viii",
+                                "ix",
+                                "x",
+                              ];
+                              const toRoman = (char) => {
+                                if (!char || char.length !== 1) return char;
+                                const index =
+                                  char.toUpperCase().charCodeAt(0) - 65; // A=0, B=1...
+                                return romans[index] || char;
+                              };
 
-                            // If correctVal is text, try to find it in options to get index
-                            if (
-                              item.options &&
-                              item.options.length > 0 &&
-                              correctVal &&
-                              correctVal.length > 1
-                            ) {
-                              // Try to match text
-                              const matchIdx = item.options.findIndex(
-                                (opt) =>
-                                  normalizeAnswer(opt) ===
-                                  normalizeAnswer(correctVal),
-                              );
-                              if (matchIdx !== -1) {
-                                correctVal = romans[matchIdx] || correctVal;
+                              // If value is a single letter (A-J), convert it.
+                              if (/^[A-J]$/i.test(userVal))
+                                userVal = toRoman(userVal);
+
+                              // If correctVal is text, try to find it in options to get index
+                              if (
+                                item.options &&
+                                item.options.length > 0 &&
+                                correctVal &&
+                                correctVal.length > 1
+                              ) {
+                                // Try to match text
+                                const matchIdx = item.options.findIndex(
+                                  (opt) =>
+                                    normalizeAnswer(opt) ===
+                                    normalizeAnswer(correctVal),
+                                );
+                                if (matchIdx !== -1) {
+                                  correctVal = romans[matchIdx] || correctVal;
+                                }
+                              } else if (/^[A-J]$/i.test(correctVal)) {
+                                correctVal = toRoman(correctVal);
                               }
-                            } else if (/^[A-J]$/i.test(correctVal)) {
-                              correctVal = toRoman(correctVal);
                             }
-                          }
 
-                          // Use backend grading result if available, fallback to simple check (legacy support)
-                          let isSubCorrect = false;
-                          if (
-                            item.itemDetails &&
-                            item.itemDetails[subLabel] !== undefined
-                          ) {
-                            isSubCorrect = item.itemDetails[subLabel];
-                          } else {
-                            // Fallback
-                            isSubCorrect =
-                              normalizeAnswer(userVal) ===
-                              normalizeAnswer(correctVal);
-                          }
+                            // Use backend grading result if available, fallback to simple check (legacy support)
+                            let isSubCorrect = false;
+                            if (
+                              item.itemDetails &&
+                              item.itemDetails[itemKey] !== undefined
+                            ) {
+                              isSubCorrect = item.itemDetails[itemKey];
+                            } else {
+                              // Fallback
+                              isSubCorrect =
+                                normalizeAnswer(userVal) ===
+                                normalizeAnswer(correctVal);
+                            }
 
-                          return (
-                            <tr
-                              key={idx}
-                              className={`border-b last:border-0 ${
-                                isSubCorrect ? "bg-green-50" : "bg-red-50"
-                              }`}
-                            >
-                              <td className="px-3 py-2 font-medium">
-                                {subItem.label || subItem.text}
-                              </td>
-                              <td className="px-3 py-2 text-gray-700">
-                                {userVal || (
-                                  <span className="text-gray-400 italic">
-                                    Empty
-                                  </span>
-                                )}
-                              </td>
-                              <td className="px-3 py-2 text-gray-700 font-medium">
-                                {correctVal}
-                              </td>
-                              <td className="px-3 py-2 text-center">
-                                {isSubCorrect ? (
-                                  <span className="text-green-600">✓</span>
-                                ) : (
-                                  <span className="text-red-600">✗</span>
-                                )}
-                              </td>
-                            </tr>
-                          );
-                        })}
+                            return (
+                              <tr
+                                key={idx}
+                                className={`border-b last:border-0 ${
+                                  isSubCorrect ? "bg-green-50" : "bg-red-50"
+                                }`}
+                              >
+                                <td className="px-3 py-2 font-medium">
+                                  {displayLabel}
+                                </td>
+                                <td className="px-3 py-2 text-gray-700">
+                                  {userVal || (
+                                    <span className="text-gray-400 italic">
+                                      Empty
+                                    </span>
+                                  )}
+                                </td>
+                                <td className="px-3 py-2 text-gray-700 font-medium">
+                                  {correctVal}
+                                </td>
+                                <td className="px-3 py-2 text-center">
+                                  {isSubCorrect ? (
+                                    <span className="text-green-600">✓</span>
+                                  ) : (
+                                    <span className="text-red-600">✗</span>
+                                  )}
+                                </td>
+                              </tr>
+                            );
+                          });
+                        })()}
                       </tbody>
                     </table>
                   </div>
