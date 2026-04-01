@@ -135,24 +135,22 @@ const AnswerReview = () => {
         {currentItems.map((item, index) => (
           <div
             key={index}
-            className={`bg-white rounded-lg shadow p-6 border-l-4 ${
-              item.isCorrect
+            className={`bg-white rounded-lg shadow p-6 border-l-4 ${item.isCorrect
                 ? "border-green-500"
                 : item.isPartial
                   ? "border-yellow-500"
                   : "border-red-500"
-            }`}
+              }`}
           >
             {/* Question */}
             <div className="flex items-start gap-3 mb-4">
               <span
-                className={`px-3 py-1 rounded-full text-sm font-bold ${
-                  item.isCorrect
+                className={`px-3 py-1 rounded-full text-sm font-bold ${item.isCorrect
                     ? "bg-green-100 text-green-800"
                     : item.isPartial
                       ? "bg-yellow-100 text-yellow-800"
                       : "bg-red-100 text-red-800"
-                }`}
+                  }`}
               >
                 {item.isCorrect ? "✓" : item.isPartial ? "⚠" : "✗"}
                 {item.maxScore > 1 && (
@@ -226,25 +224,23 @@ const AnswerReview = () => {
                     return (
                       <div
                         key={idx}
-                        className={`p-2 rounded flex items-center gap-2 ${
-                          isUserCorrectPick
+                        className={`p-2 rounded flex items-center gap-2 ${isUserCorrectPick
                             ? "bg-green-50 border border-green-300"
                             : isUserWrongPick
                               ? "bg-red-50 border border-red-300"
                               : isMissedCorrect
                                 ? "bg-yellow-50 border border-yellow-300"
                                 : "bg-gray-50"
-                        }`}
+                          }`}
                       >
-                        <span className={`font-bold text-sm min-w-[20px] ${
-                          isUserCorrectPick
+                        <span className={`font-bold text-sm min-w-[20px] ${isUserCorrectPick
                             ? "text-green-700"
                             : isUserWrongPick
                               ? "text-red-700"
                               : isMissedCorrect
                                 ? "text-yellow-700"
                                 : "text-gray-500"
-                        }`}>
+                          }`}>
                           {optionLetter}.
                         </span>
                         <span className="text-sm flex-1">{option}</span>
@@ -279,7 +275,7 @@ const AnswerReview = () => {
                 item.questionType === "matching-features" ||
                 item.questionType === "map-labeling" ||
                 item.questionType === "form-completion") &&
-              item.items ? (
+                item.items ? (
                 <div className="mt-4">
                   <p className="text-sm font-semibold text-gray-700 mb-2">
                     Detailed Answers:
@@ -308,10 +304,10 @@ const AnswerReview = () => {
                           }
                           return displayItems.map((subItem, idx) => {
                             // Form completion uses sequence strings "1", "2" for keys. Other composites use label.
-                            const itemKey = item.questionType === "form-completion" 
-                                ? String(idx + 1) 
-                                : (subItem.label || String(idx + 1));
-                            
+                            const itemKey = item.questionType === "form-completion"
+                              ? String(idx + 1)
+                              : (subItem.label || String(idx + 1));
+
                             const displayLabel = subItem.label || subItem.text;
 
                             let userVal =
@@ -383,9 +379,8 @@ const AnswerReview = () => {
                             return (
                               <tr
                                 key={idx}
-                                className={`border-b last:border-0 ${
-                                  isSubCorrect ? "bg-green-50" : "bg-red-50"
-                                }`}
+                                className={`border-b last:border-0 ${isSubCorrect ? "bg-green-50" : "bg-red-50"
+                                  }`}
                               >
                                 <td className="px-3 py-2 font-medium">
                                   {displayLabel}
@@ -424,11 +419,10 @@ const AnswerReview = () => {
                       Your Answer:
                     </p>
                     <p
-                      className={`text-sm px-3 py-2 rounded ${
-                        item.isCorrect
+                      className={`text-sm px-3 py-2 rounded ${item.isCorrect
                           ? "bg-green-50 text-green-800 border border-green-200"
                           : "bg-red-50 text-red-800 border border-red-200"
-                      }`}
+                        }`}
                     >
                       {formatAnswer(item.studentAnswer)}
                     </p>
@@ -474,11 +468,10 @@ const AnswerReview = () => {
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className={`px-4 py-2 rounded-lg border ${
-              currentPage === 1
+            className={`px-4 py-2 rounded-lg border ${currentPage === 1
                 ? "bg-gray-100 text-gray-400 cursor-not-allowed"
                 : "bg-white text-blue-600 hover:bg-blue-50 border-blue-600"
-            }`}
+              }`}
           >
             ← Previous
           </button>
@@ -490,11 +483,10 @@ const AnswerReview = () => {
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className={`px-4 py-2 rounded-lg border ${
-              currentPage === totalPages
+            className={`px-4 py-2 rounded-lg border ${currentPage === totalPages
                 ? "bg-gray-100 text-gray-400 cursor-not-allowed"
                 : "bg-white text-blue-600 hover:bg-blue-50 border-blue-600"
-            }`}
+              }`}
           >
             Next →
           </button>
