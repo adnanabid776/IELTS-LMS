@@ -35,30 +35,40 @@ exports.uploadImage = async (req, res) => {
 
     // console.log("📤 Uploading image:", req.file.originalname);
 
-    // Upload to Cloudinary
-    const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: "ielts-lms/writing-tasks",
-      resource_type: "image",
-      transformation: [
-        { width: 1200, height: 800, crop: "limit" }, // Max size
-        { quality: "auto" }, // Auto optimize
-        { fetch_format: "auto" }, // Auto format (webp if supported)
-      ],
-    });
+    // Check if Cloudinary credentials exist in environment
+    const hasCloudinary = process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET;
 
-    // Delete temporary file
-    if (fs.existsSync(req.file.path)) {
-      fs.unlinkSync(req.file.path);
+    if (hasCloudinary) {
+      // Upload to Cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "ielts-lms/writing-tasks",
+        resource_type: "image",
+        transformation: [
+          { width: 1200, height: 800, crop: "limit" }, // Max size
+          { quality: "auto" }, // Auto optimize
+          { fetch_format: "auto" }, // Auto format (webp if supported)
+        ],
+      });
+
+      // Keep the local file as a backup! (Removed fs.unlinkSync)
+
+      // Return URL
+      return res.json({
+        message: "Image uploaded successfully to Cloud",
+        url: result.secure_url,
+        publicId: result.public_id,
+      });
+    } else {
+      // Fallback: Local Storage
+      // Multer already saved the file to uploads/, we just return the URL
+      const localUrl = `/${req.file.path.replace(/\\/g, '/')}`;
+      
+      return res.json({
+        message: "Image uploaded locally (Hybrid Mode)",
+        url: localUrl,
+        publicId: null,
+      });
     }
-
-    // console.log("✅ Image uploaded:", result.secure_url);
-
-    // Return URL
-    res.json({
-      message: "Image uploaded successfully",
-      url: result.secure_url,
-      publicId: result.public_id,
-    });
   } catch (error) {
     console.error("❌ Upload image error:", error);
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createSection } from "../../../services/api";
 import { toast } from "react-toastify";
-import { uploadAudio } from "../../../services/uploadApi";
+import { uploadAudio, uploadImage } from "../../../services/uploadApi";
 
 const AddSectionModal = ({
   testId,
@@ -30,6 +30,7 @@ const AddSectionModal = ({
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [uploadingAudio, setUploadingAudio] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const handleAudioUpload = async (e) => {
     const file = e.target.files[0];
@@ -45,6 +46,23 @@ const AddSectionModal = ({
       toast.error("Failed to upload audio file.");
     } finally {
       setUploadingAudio(false);
+    }
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    try {
+      setUploadingImage(true);
+      const data = await uploadImage(file);
+      setFormData((prev) => ({ ...prev, taskImageUrl: data.url }));
+      toast.success("Image uploaded successfully!");
+    } catch (error) {
+      console.error("Image upload error:", error);
+      toast.error("Failed to upload image file.");
+    } finally {
+      setUploadingImage(false);
     }
   };
 
@@ -385,14 +403,22 @@ const AddSectionModal = ({
                     <label className="block text-sm font-bold text-gray-700 mb-2">
                       Task Image URL (For Task 1 - Chart/Diagram)
                     </label>
-                    <input
-                      type="url"
-                      name="taskImageUrl"
-                      value={formData.taskImageUrl}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      placeholder="https://example.com/chart.png"
-                    />
+                    <div className="flex flex-col md:flex-row gap-3">
+                      <input
+                        type="url"
+                        name="taskImageUrl"
+                        value={formData.taskImageUrl}
+                        onChange={handleChange}
+                        className="flex-1 px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="https://example.com/chart.png"
+                      />
+                      <label className={`md:w-48 flex items-center justify-center px-4 py-2.5 rounded-lg font-semibold cursor-pointer transition ${
+                        uploadingImage ? "bg-gray-400 text-gray-200" : "bg-blue-600 text-white hover:bg-blue-700 shadow-md"
+                      }`}>
+                        {uploadingImage ? "Uploading..." : "📁 Upload Image"}
+                        <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" disabled={uploadingImage} />
+                      </label>
+                    </div>
                     <p className="text-xs text-gray-500 mt-1">
                       Provide the URL of the chart, graph, or diagram for Task 1
                     </p>
