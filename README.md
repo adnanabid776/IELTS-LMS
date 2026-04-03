@@ -14,22 +14,25 @@ A full-featured Learning Management System designed specifically for IELTS prepa
 ### 🎓 Student Portal
 
 - **Full Mock Tests**: Simulates real exam conditions for Reading, Listening, Writing, and Speaking modules.
-- **Instant Feedback**: Auto-grading for objective tests (Reading/Listening) with immediate score calculation.
+- **Advanced Interactive UI**: Custom interactive question components natively mimicking IELTS types (e.g., dynamic *Form-Completion* with interactive table blanks, *Multiple-Choice Multi* scaling).
+- **Subjective Essay Editor**: Dedicated Writing Module interface with enforced character counting and embedded rich graphic prompts.
+- **Instant Feedback**: Highly complex backend grading engine automatically filters and recursively scales multi-point objective arrays.
 - **Progress Tracking**: Detailed analytics charts showing band score trends and module-wise performance.
-- **Test History**: Access to past attempts and teacher feedback.
+- **Optimized Experience**: Fast React Suspense rendering mapped to paginated grid layouts.
 
 ### 👩‍🏫 Teacher Portal
 
-- **Pending Reviews Dashboard**: Centralized hub to manage ungraded submissions.
-- **Manual Grading Support**: Dedicated interface for grading Writing essays and Speaking recordings with rubric-based scoring.
-- **Assignment Management**: Create and assign practice tests to specific students or groups.
-- **Student Monitoring**: View individual student progress and performance statistics.
+- **Pending Reviews Dashboard**: Centralized hub to manage ungraded subjective submissions (Writing/Speaking).
+- **Manual Grading Support**: Dedicated interface for grading essays directly against official analytical rubrics.
+- **Assignment Management**: Push curated practice tests directly to specified student dashboards.
+- **Student Monitoring**: Deep-dive analytics on individual student progress and historical bottlenecks.
 
 ### 🛠 Admin Portal
 
-- **User Management**: Manage student and teacher accounts, roles, and permissions.
-- **Question Bank**: Create and edit questions for all IELTS modules.
-- **System Analytics**: Overview of platform usage, total tests taken, and active users.
+- **Bulk JSON Imports**: Ultra-fast test generation via structured JSON bulk-uploads allowing 40+ questions to be imported instantly.
+- **Advanced Question Bank**: Create and edit up to 18 distinct complex question structures dynamically.
+- **Hybrid Local Storage**: Robust localized API bypasses cloud requirements, safely injecting audio files and prompt imagery directly into a secure `/uploads` root. 
+- **System Analytics**: Live overview of platform usage, total tests taken, and active users globally.
 
 ## 🛠 Tech Stack
 

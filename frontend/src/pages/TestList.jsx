@@ -13,6 +13,8 @@ const TestList = () => {
   const [loading, setLoading] = useState(true);
   const [selectedModule, setSelectedModule] = useState("all");
   const [testTypeFilter, setTestTypeFilter] = useState("all"); // ✅ New state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
 
   //fetching tests on component mount
   useEffect(() => {
@@ -36,6 +38,7 @@ const TestList = () => {
   // ✅ Updated Module Filter Handler
   const handleModuleFilter = (module) => {
     setSelectedModule(module);
+    setCurrentPage(1);
     // Logic: If specific module selected, default to "Full Tests". If "All Modules", default to "All Types".
     if (module === "all") {
       setTestTypeFilter("all");
@@ -47,6 +50,7 @@ const TestList = () => {
   // ✅ New Type Filter Handler
   const handleTypeFilter = (type) => {
     setTestTypeFilter(type);
+    setCurrentPage(1);
   };
 
   const handleViewTest = (testId) => {
@@ -82,6 +86,13 @@ const TestList = () => {
   };
 
   const filteredTests = getFilteredTests();
+  
+  // Pagination Calculations
+  const totalPages = Math.ceil(filteredTests.length / itemsPerPage);
+  const currentTests = filteredTests.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
     <DashboardLayout title="Online Tests">
@@ -199,7 +210,7 @@ const TestList = () => {
       {/* Tests Grid */}
       {!loading && filteredTests.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredTests.map((test) => (
+          {currentTests.map((test) => (
             <div
               key={test._id}
               className="bg-white rounded-lg shadow hover:shadow-xl transition-shadow p-6 relative overflow-hidden"
@@ -255,16 +266,20 @@ const TestList = () => {
 
               {/* Test Info */}
               <div className="space-y-2 mb-4 text-sm text-gray-600">
-                <div className="flex items-center">
-                  <span className="font-medium mr-2">📝 Questions:</span>
-                  <span>{test.totalQuestions}</span>
-                </div>
+                {test.module !== "writing" && (
+                  <div className="flex items-center">
+                    <span className="font-medium mr-2">📝 Questions:</span>
+                    <span>{test.totalQuestions}</span>
+                  </div>
+                )}
                 <div className="flex items-center">
                   <span className="font-medium mr-2">⏱️ Duration:</span>
                   <span>{test.duration} minutes</span>
                 </div>
                 <div className="flex items-center">
-                  <span className="font-medium mr-2">📑 Sections:</span>
+                  <span className="font-medium mr-2">
+                    {test.module === "writing" ? "📑 Tasks:" : "📑 Sections:"}
+                  </span>
                   <span>{test.totalSections}</span>
                 </div>
               </div>
@@ -278,6 +293,51 @@ const TestList = () => {
               </button>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Pagination Controls */}
+      {!loading && totalPages > 1 && (
+        <div className="flex justify-center items-center flex-wrap gap-3 mt-10 mb-4">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className={`px-4 py-2 rounded-lg font-medium transition flex items-center shadow-sm ${
+              currentPage === 1
+                ? "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200"
+                : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:shadow"
+            }`}
+          >
+            ← Previous
+          </button>
+          
+          <div className="flex gap-1.5 overflow-x-auto max-w-[50vw] sm:max-w-full px-1 py-2 slim-scrollbar">
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentPage(i + 1)}
+                className={`w-10 h-10 flex flex-shrink-0 items-center justify-center rounded-lg font-medium transition cursor-pointer ${
+                  currentPage === i + 1
+                    ? "bg-blue-600 text-white shadow-md ring-2 ring-blue-600 ring-offset-1"
+                    : "bg-white text-gray-700 border border-gray-300 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-300"
+                }`}
+              >
+                {i + 1}
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className={`px-4 py-2 rounded-lg font-medium transition flex items-center shadow-sm ${
+              currentPage === totalPages
+                ? "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200"
+                : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 hover:shadow"
+            }`}
+          >
+            Next →
+          </button>
         </div>
       )}
 
