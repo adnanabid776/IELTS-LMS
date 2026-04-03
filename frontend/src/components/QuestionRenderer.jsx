@@ -643,8 +643,11 @@ const QuestionRenderer = ({ question, answers, handleAnswerChange, handleSummary
           </div>
         )}
 
-      {/* Answer Input - Form Completion - NEW */}
-      {question.questionType === "form-completion" && (
+      {/* Answer Input - Form / Diagram / Map / Flow Chart Completion - NEW */}
+      {(question.questionType === "form-completion" ||
+        question.questionType === "diagram-labeling" ||
+        question.questionType === "map-labeling" ||
+        question.questionType === "flow-chart-completion") && (
         <div className="ml-14 mt-4 overflow-x-auto">
           {question.imageUrl && (
             <div className="mb-6 object-contain overflow-hidden rounded border border-gray-200 flex justify-center bg-white p-2">

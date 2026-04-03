@@ -138,7 +138,12 @@ const calculatePoints = (userAnswer, question) => {
     question.questionType === "matching-information" ||
     question.questionType === "matching-features" ||
     question.questionType === "table-completion" ||
-    question.questionType === "form-completion"
+    question.questionType === "form-completion" ||
+    question.questionType === "note-completion" ||
+    question.questionType === "sentence-completion" ||
+    question.questionType === "summary-completion" ||
+    question.questionType === "flow-chart-completion" ||
+    question.questionType === "diagram-labeling"
   ) {
     let items = question.items || [];
     if (question.questionType === "form-completion") {
