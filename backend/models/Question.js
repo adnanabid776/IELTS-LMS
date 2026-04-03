@@ -72,6 +72,11 @@ const questionSchema = new mongoose.Schema(
           "table-completion",
           "diagram-labeling",
           "map-labeling",
+          "note-completion",
+          "form-completion",
+          "sentence-completion",
+          "summary-completion",
+          "flow-chart-completion",
         ];
         return !typesWithoutCorrectAnswer.includes(this.questionType);
       },

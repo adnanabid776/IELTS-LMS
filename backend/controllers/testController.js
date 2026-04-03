@@ -235,6 +235,7 @@ exports.bulkUploadTest = async (req, res) => {
         continue;
       }
 
+      let sectionRealQuestionCount = 0;
       for (let qi = 0; qi < sec.questions.length; qi++) {
         const q = sec.questions[qi];
         const qLabel = `Section ${si + 1}, Question ${qi + 1}`;
@@ -254,10 +255,22 @@ exports.bulkUploadTest = async (req, res) => {
             `${qLabel}: correctAnswer or items required for type "${q.questionType}"`,
           );
         }
-        if (!q.questionNumber) {
-          q.questionNumber = totalQuestionCount + qi + 1;
+
+        // Calculate True Question Weight
+        let questionWeight = 1;
+        if (q.items && q.items.length > 0) {
+          questionWeight = q.items.length;
+        } else if (q.questionType === "multiple-choice-multi" && q.correctAnswer) {
+          questionWeight = q.correctAnswer.split(",").length;
         }
+
+        if (!q.questionNumber) {
+          q.questionNumber = totalQuestionCount + sectionRealQuestionCount + 1;
+        }
+
+        sectionRealQuestionCount += questionWeight;
       }
+      sec.calculatedTotalQuestions = sectionRealQuestionCount;
 
       // --- Propagate shared options for matching-endings ---
       // In IELTS format, only the first matching-endings question has the options array.
@@ -278,7 +291,7 @@ exports.bulkUploadTest = async (req, res) => {
         }
       }
 
-      totalQuestionCount += sec.questions.length;
+      totalQuestionCount += sec.calculatedTotalQuestions;
     }
 
     if (errors.length > 0) {
@@ -316,7 +329,7 @@ exports.bulkUploadTest = async (req, res) => {
         lockNavigationDuringAudio: sec.lockNavigationDuringAudio || false,
         instructions: sec.instructions || "",
         questionRange: sec.questionRange || "",
-        totalQuestions: sec.questions.length,
+        totalQuestions: sec.calculatedTotalQuestions || sec.questions.length,
         duration: sec.duration || null,
         taskType: sec.taskType || undefined,
         taskImageUrl: sec.taskImageUrl || undefined,

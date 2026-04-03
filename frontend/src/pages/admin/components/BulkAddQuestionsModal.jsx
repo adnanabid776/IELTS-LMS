@@ -13,12 +13,22 @@ const BulkAddQuestionsModal = ({ sections, onClose, onSuccess }) => {
   const [loading, setLoading] = useState(false);
 
   const questionTypes = [
-    { value: 'multiple-choice', label: 'Multiple Choice', needsOptions: true },
+    { value: 'multiple-choice', label: 'Multiple Choice (Single)', needsOptions: true },
+    { value: 'multiple-choice-multi', label: 'Multiple Choice (Multi-Select)', needsOptions: true },
     { value: 'true-false-not-given', label: 'True/False/Not Given', needsOptions: false },
     { value: 'yes-no-not-given', label: 'Yes/No/Not Given', needsOptions: false },
-    { value: 'short-answer', label: 'Short Answer', needsOptions: false },
-    { value: 'sentence-completion', label: 'Sentence Completion', needsOptions: false },
     { value: 'matching-headings', label: 'Matching Headings', needsOptions: true },
+    { value: 'matching-information', label: 'Matching Information', needsOptions: true },
+    { value: 'matching-features', label: 'Matching Features', needsOptions: false },
+    { value: 'matching-endings', label: 'Matching Sentence Endings', needsOptions: true },
+    { value: 'sentence-completion', label: 'Sentence Completion', needsOptions: false },
+    { value: 'summary-completion', label: 'Summary Completion', needsOptions: false },
+    { value: 'note-completion', label: 'Note Completion', needsOptions: false },
+    { value: 'table-completion', label: 'Table Completion', needsOptions: false },
+    { value: 'flow-chart-completion', label: 'Flow Chart Completion', needsOptions: false },
+    { value: 'diagram-labeling', label: 'Diagram Labeling', needsOptions: false },
+    { value: 'short-answer', label: 'Short Answer', needsOptions: false },
+    { value: 'form-completion', label: 'Form Completion', needsOptions: false },
   ];
 
   const currentType = questionTypes.find(t => t.value === questionType);
