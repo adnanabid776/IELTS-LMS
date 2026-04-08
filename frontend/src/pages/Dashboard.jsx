@@ -93,9 +93,9 @@ const Dashboard = () => {
       const averageBand =
         gradedResults.length > 0
           ? (
-              gradedResults.reduce((sum, r) => sum + r.bandScore, 0) /
-              gradedResults.length
-            ).toFixed(1)
+            gradedResults.reduce((sum, r) => sum + r.bandScore, 0) /
+            gradedResults.length
+          ).toFixed(1)
           : 0;
 
       const highestBand =
@@ -316,15 +316,14 @@ const Dashboard = () => {
                         </td>
                         <td className="px-6 py-4 text-sm">
                           <span
-                            className={`px-2 py-1 rounded text-xs font-semibold ${
-                              result.module === "reading"
+                            className={`px-2 py-1 rounded text-xs font-semibold ${result.module === "reading"
                                 ? "bg-blue-100 text-blue-800"
                                 : result.module === "listening"
                                   ? "bg-green-100 text-green-800"
                                   : result.module === "writing"
                                     ? "bg-purple-100 text-purple-800"
                                     : "bg-orange-100 text-orange-800"
-                            }`}
+                              }`}
                           >
                             {result.module.toUpperCase()}
                           </span>
@@ -655,63 +654,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-
-          {/* Test Format Breakdown Row */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div
-              onClick={() => navigate("/admin/tests")}
-              className="bg-gradient-to-br from-teal-500 to-cyan-600 rounded-lg shadow-lg p-6 text-white cursor-pointer transform hover:scale-105 transition-transform"
-            >
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-teal-100 text-sm">Full Tests</p>
-                  <h3 className="text-4xl font-bold mt-2">
-                    {loading ? "..." : adminStats.fullTests}
-                  </h3>
-                  <p className="text-xs text-teal-100 mt-2">Complete test papers</p>
-                </div>
-                <div className="bg-white bg-opacity-20 p-3 rounded-full">
-                  <span className="text-3xl">📄</span>
-                </div>
-              </div>
-            </div>
-
-            <div
-              onClick={() => navigate("/admin/tests")}
-              className="bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg shadow-lg p-6 text-white cursor-pointer transform hover:scale-105 transition-transform"
-            >
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-violet-100 text-sm">Item-Wise Tests</p>
-                  <h3 className="text-4xl font-bold mt-2">
-                    {loading ? "..." : adminStats.itemWiseTests}
-                  </h3>
-                  <p className="text-xs text-violet-100 mt-2">Short practice tests</p>
-                </div>
-                <div className="bg-white bg-opacity-20 p-3 rounded-full">
-                  <span className="text-3xl">🎯</span>
-                </div>
-              </div>
-            </div>
-
-            <div
-              onClick={() => navigate("/admin/tests")}
-              className="bg-gradient-to-br from-rose-500 to-pink-600 rounded-lg shadow-lg p-6 text-white cursor-pointer transform hover:scale-105 transition-transform"
-            >
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-rose-100 text-sm">Mock Tests</p>
-                  <h3 className="text-4xl font-bold mt-2">
-                    {loading ? "..." : adminStats.mockTests}
-                  </h3>
-                  <p className="text-xs text-rose-100 mt-2">Simulated exam tests</p>
-                </div>
-                <div className="bg-white bg-opacity-20 p-3 rounded-full">
-                  <span className="text-3xl">🏆</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* System Overview */}
           <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
             <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 mb-4">
               <h3 className="text-xl font-semibold text-gray-800">
@@ -755,11 +698,11 @@ const Dashboard = () => {
                 👥 Manage Users
               </button>
               <button className="p-4 border-2 border-green-600 text-green-600 rounded-lg hover:bg-linear-to-r hover:from-green-600 hover:to-emerald-600 hover:text-white font-semibold transition-all"
-              onClick={()=> navigate('/admin/questions')}>
+                onClick={() => navigate('/admin/questions')}>
                 ❓ Question Bank
               </button>
               <button className="p-4 border-2 border-purple-600 text-purple-600 rounded-lg hover:bg-linear-to-r hover:from-purple-600 hover:to-pink-600 hover:text-white font-semibold transition-all"
-              onClick={()=> navigate('/admin/tests')}>
+                onClick={() => navigate('/admin/tests')}>
                 📝 Manage Tests
               </button>
             </div>

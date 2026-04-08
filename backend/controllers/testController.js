@@ -4,8 +4,15 @@ const Question = require("../models/Question");
 
 exports.createTest = async (req, res) => {
   try {
-    const { title, module, description, duration, difficulty, instructions } =
-      req.body;
+    const {
+      title,
+      module,
+      description,
+      duration,
+      difficulty,
+      instructions,
+      testType,
+    } = req.body;
     const userId = req.user.userId;
     //validate the required fields
     if (!title || !module || !duration) {
@@ -21,6 +28,7 @@ exports.createTest = async (req, res) => {
       duration,
       difficulty: difficulty || "medium",
       instructions,
+      testType: testType || "academic",
       createdBy: userId,
       totalQuestions: 0,
       totalSections: 0,
@@ -43,6 +51,11 @@ exports.getAllTests = async (req, res) => {
     if (module) filter.module = module;
     if (difficulty) filter.difficulty = difficulty;
     if (isActive !== undefined) filter.isActive = isActive;
+
+    // Filter by studentType for students
+    if (req.user.role === "student") {
+      filter.testType = req.userDoc.studentType || "academic";
+    }
 
     const tests = await Test.find(filter)
       .populate("createdBy", "firstName lastName email")
@@ -72,6 +85,16 @@ exports.getTestById = async (req, res) => {
       return res.status(404).json({ error: "Test not found" });
     }
 
+    // Security check: If student, ensure testType matches
+    if (req.user.role === "student") {
+      const studentType = req.userDoc?.studentType || "academic";
+      if (test.testType !== studentType) {
+        return res.status(403).json({
+          error: "Unauthorized: This test is not in your current category (Academic/General)",
+        });
+      }
+    }
+
     // Get sections for this test
     const sections = await Section.find({ testId: id }).sort({
       sectionNumber: 1,
@@ -91,12 +114,29 @@ exports.getTestById = async (req, res) => {
 exports.updateTest = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, duration, difficulty, instructions, isActive } =
-      req.body;
+    const {
+      title,
+      description,
+      duration,
+      difficulty,
+      instructions,
+      isActive,
+      testType,
+      testFormat,
+    } = req.body;
 
     const test = await Test.findByIdAndUpdate(
       id,
-      { title, description, duration, difficulty, instructions, isActive },
+      {
+        title,
+        description,
+        duration,
+        difficulty,
+        instructions,
+        isActive,
+        testType,
+        testFormat,
+      },
       { new: true, runValidators: true },
     );
 

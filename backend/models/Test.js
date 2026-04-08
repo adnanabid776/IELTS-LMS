@@ -19,6 +19,12 @@ const testSchema = new mongoose.Schema(
       enum: ["full", "item-wise", "mock"],
       default: "full",
     },
+    // Academic or General IELTS test type
+    testType: {
+      type: String,
+      enum: ["academic", "general"],
+      default: "academic",
+    },
     description: {
       type: String,
       trim: true,

@@ -11,6 +11,7 @@ function LoginSignUp() {
     email: "",
     password: "",
     role: "student",
+    studentType: "academic",
   });
   const [loginRole, setLoginRole] = useState("");
   const [error, setError] = useState("");
@@ -81,18 +82,17 @@ function LoginSignUp() {
       role: "student",
     });
   };
- return (
+  return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-500 to-purple-600 p-4">
-      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden">
-        <div className="flex flex-col md:flex-row h-138">
-          
+      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden my-8">
+        <div className="flex flex-col md:flex-row min-h-[600px] max-h-[90vh]">
+
           {/* LEFT SIDE - Login Form */}
-          <div 
-            className={`absolute md:relative w-full md:w-1/2 h-full p-6 bg-white transition-all duration-500 ease-in-out ${
-              isLogin 
-                ? 'translate-x-0 opacity-100 z-10' 
+          <div
+            className={`absolute md:relative w-full md:w-1/2 h-full p-6 bg-white transition-all duration-500 ease-in-out overflow-y-auto ${isLogin
+                ? 'translate-x-0 opacity-100 z-10'
                 : 'translate-x-full opacity-0 z-0 pointer-events-none'
-            }`}
+              }`}
           >
             <h2 className="text-3xl font-bold text-gray-800 mb-2">
               Welcome Back! 👋
@@ -100,7 +100,7 @@ function LoginSignUp() {
             <p className="text-gray-600 text-base mb-5">
               Login to continue your IELTS preparation
             </p>
-            
+
             <form onSubmit={handleSubmit} className="space-y-3">
               {/* Role Selection */}
               <div>
@@ -199,7 +199,7 @@ function LoginSignUp() {
 
           {/* RIGHT SIDE - Signup Form */}
           <div 
-            className={`absolute md:relative w-full md:w-1/2 h-full p-6 bg-white transition-all duration-500 ease-in-out ${
+            className={`absolute md:relative w-full md:w-1/2 h-full p-6 bg-white transition-all duration-500 ease-in-out overflow-y-auto ${
               !isLogin 
                 ? 'translate-x-0 opacity-100 z-10' 
                 : '-translate-x-full opacity-0 z-0 pointer-events-none'
@@ -212,7 +212,7 @@ function LoginSignUp() {
               Sign up to start your IELTS journey
             </p>
             
-            <form onSubmit={handleSubmit} className="space-y-3">
+            <form onSubmit={handleSubmit} className="space-y-3 pb-4">
               {/* Name Fields */}
               <div className="flex gap-2">
                 <div className="flex-1">
@@ -254,12 +254,30 @@ function LoginSignUp() {
                   name="role"
                   value={formData.role}
                   onChange={handleChange}
-                  className="w-full px-3 py-2.5 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                  className="w-full px-3 py-2.5 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-gray-800"
                 >
                   <option value="student">👨‍🎓 Student</option>
                   <option value="teacher">👨‍🏫 Teacher</option>
                 </select>
               </div>
+
+              {/* IELTS Category - ONLY for students */}
+              {formData.role === "student" && (
+                <div>
+                  <label className="block text-gray-700 text-sm font-semibold mb-1.5">
+                    IELTS Category <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    name="studentType"
+                    value={formData.studentType}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2.5 text-base border-2 border-blue-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition text-gray-800 font-medium"
+                  >
+                    <option value="academic">🎓 Academic IELTS</option>
+                    <option value="general">🌏 General IELTS</option>
+                  </select>
+                </div>
+              )}
 
               {/* Email */}
               <div>

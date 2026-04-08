@@ -9,6 +9,7 @@ const EditUserModal = ({ user, onClose, onSuccess }) => {
     email: "",
     role: "student",
     isActive: true,
+    studentType: "academic",
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
@@ -21,6 +22,7 @@ const EditUserModal = ({ user, onClose, onSuccess }) => {
         email: user.email,
         role: user.role,
         isActive: user.isActive,
+        studentType: user.studentType || "academic",
       });
     }
   }, [user]);
@@ -177,7 +179,7 @@ const EditUserModal = ({ user, onClose, onSuccess }) => {
           </div>
 
           {/* Active Status */}
-          <div className="mb-6">
+          <div className="mb-4">
             <label className="flex items-center cursor-pointer">
               <input
                 type="checkbox"
@@ -194,6 +196,24 @@ const EditUserModal = ({ user, onClose, onSuccess }) => {
               Inactive users cannot log in to the system
             </p>
           </div>
+
+          {/* Student Category (Academic/General) - ONLY for students */}
+          {formData.role === "student" && (
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                IELTS Category <span className="text-red-500">*</span>
+              </label>
+              <select
+                name="studentType"
+                value={formData.studentType}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-blue-300 bg-blue-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="academic">Academic</option>
+                <option value="general">General</option>
+              </select>
+            </div>
+          )}
 
           {/* Action Buttons */}
           <div className="flex gap-3 justify-end pt-4 border-t border-gray-200">

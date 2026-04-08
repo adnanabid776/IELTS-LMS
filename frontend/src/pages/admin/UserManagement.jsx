@@ -16,6 +16,7 @@ const UserManagement = () => {
   // Filters
   const [roleFilter, setRoleFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [studentTypeFilter, setStudentTypeFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
   // Modals
@@ -29,7 +30,7 @@ const UserManagement = () => {
 
   useEffect(() => {
     applyFilters();
-  }, [users, roleFilter, statusFilter, searchTerm]);
+  }, [users, roleFilter, statusFilter, studentTypeFilter, searchTerm]);
 
   const fetchUsers = async () => {
     try {
@@ -57,6 +58,14 @@ const UserManagement = () => {
     if (statusFilter !== "all") {
       const isActive = statusFilter === "active";
       filtered = filtered.filter((user) => user.isActive === isActive);
+    }
+
+    // Student type filter
+    if (studentTypeFilter !== "all" && roleFilter === "student") {
+      filtered = filtered.filter((user) => user.studentType === studentTypeFilter);
+    } else if (studentTypeFilter !== "all") {
+      // If filtering by student type but role isn't student, we only show matching students
+      filtered = filtered.filter((user) => user.role === "student" && user.studentType === studentTypeFilter);
     }
 
     // Search filter
@@ -123,6 +132,8 @@ const UserManagement = () => {
     admins: users.filter((u) => u.role === "admin").length,
     active: users.filter((u) => u.isActive).length,
     inactive: users.filter((u) => !u.isActive).length,
+    academicStudents: users.filter((u) => u.role === "student" && (u.studentType === "academic" || !u.studentType)).length,
+    generalStudents: users.filter((u) => u.role === "student" && u.studentType === "general").length,
   };
 
   return (
@@ -166,15 +177,23 @@ const UserManagement = () => {
           <p className="text-xs text-gray-500 mb-1">Active</p>
           <p className="text-2xl font-bold text-green-600">{stats.active}</p>
         </div>
-        <div className="bg-red-50 rounded-lg shadow p-4">
+        <div className="bg-red-50 rounded-lg shadow p-4 border-l-4 border-red-500">
           <p className="text-xs text-gray-500 mb-1">Inactive</p>
           <p className="text-2xl font-bold text-red-600">{stats.inactive}</p>
+        </div>
+        <div className="bg-indigo-50 rounded-lg shadow p-4 border-l-4 border-indigo-500">
+          <p className="text-xs text-gray-500 mb-1">Academic Students</p>
+          <p className="text-2xl font-bold text-indigo-600">{stats.academicStudents}</p>
+        </div>
+        <div className="bg-teal-50 rounded-lg shadow p-4 border-l-4 border-teal-500">
+          <p className="text-xs text-gray-500 mb-1">General Students</p>
+          <p className="text-2xl font-bold text-teal-600">{stats.generalStudents}</p>
         </div>
       </div>
 
       {/* Filters */}
       <div className="bg-white rounded-lg shadow p-4 mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {/* Search */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -219,6 +238,22 @@ const UserManagement = () => {
               <option value="all">All Status</option>
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
+            </select>
+          </div>
+
+          {/* Student Type Filter */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Student Category
+            </label>
+            <select
+              value={studentTypeFilter}
+              onChange={(e) => setStudentTypeFilter(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="all">All Categories</option>
+              <option value="academic">Academic Only</option>
+              <option value="general">General Only</option>
             </select>
           </div>
         </div>
@@ -282,6 +317,9 @@ const UserManagement = () => {
                     Role
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    Category
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                     Status
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
@@ -317,6 +355,21 @@ const UserManagement = () => {
                       >
                         {user.role.toUpperCase()}
                       </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      {user.role === "student" ? (
+                        <span
+                          className={`px-2 py-1 rounded-full text-[10px] font-bold ${
+                            user.studentType === "general"
+                              ? "bg-teal-100 text-teal-800"
+                              : "bg-indigo-100 text-indigo-800"
+                          }`}
+                        >
+                          {(user.studentType || "academic").toUpperCase()}
+                        </span>
+                      ) : (
+                        <span className="text-gray-400 text-xs">—</span>
+                      )}
                     </td>
                     <td className="px-6 py-4">
                       <span
@@ -381,6 +434,7 @@ const UserManagement = () => {
                 setSearchTerm("");
                 setRoleFilter("all");
                 setStatusFilter("all");
+                setStudentTypeFilter("all");
               }}
               className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
             >

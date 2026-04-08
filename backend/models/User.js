@@ -33,6 +33,12 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    // Academic or General IELTS student type (only applies to students)
+    studentType: {
+      type: String,
+      enum: ["academic", "general"],
+      default: "academic",
+    },
     // ============================================
     // SINGLE SESSION ENFORCEMENT FIELDS
     // ============================================

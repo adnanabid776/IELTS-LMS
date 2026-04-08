@@ -11,6 +11,7 @@ const EditTestModal = ({ isOpen, onClose, test, onUpdated }) => {
     description: "",
     difficulty: "medium",
     instructions: "",
+    testType: "academic",
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
@@ -25,6 +26,7 @@ const EditTestModal = ({ isOpen, onClose, test, onUpdated }) => {
         description: test.description || "",
         difficulty: test.difficulty || "medium",
         instructions: test.instructions || "",
+        testType: test.testType || "academic",
       });
     }
   }, [test]);
@@ -140,6 +142,13 @@ const EditTestModal = ({ isOpen, onClose, test, onUpdated }) => {
                 formData.module?.slice(1)}{" "}
               Module
             </span>
+            <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
+              formData.testType === "academic" 
+                ? "bg-purple-100 text-purple-700" 
+                : "bg-teal-100 text-teal-700"
+            }`}>
+              {formData.testType?.charAt(0).toUpperCase() + formData.testType?.slice(1)}
+            </span>
           </div>
           <div>
             <span
@@ -229,21 +238,38 @@ const EditTestModal = ({ isOpen, onClose, test, onUpdated }) => {
               </div>
             </div>
 
-            {/* Test Format */}
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">
-                Test Format
-              </label>
-              <select
-                name="testFormat"
-                value={formData.testFormat}
-                onChange={handleChange}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 hover:border-gray-300 transition-all"
-              >
-                <option value="full">📄 Full Test (3–4 sections, full audio)</option>
-                <option value="item-wise">🎯 Item-Wise (1 section, short audio)</option>
-                <option value="mock">🏆 Mock Test (simulated exam)</option>
-              </select>
+            {/* Test Format + Type */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-2">
+                  Test Format
+                </label>
+                <select
+                  name="testFormat"
+                  value={formData.testFormat}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 hover:border-gray-300 transition-all font-medium"
+                >
+                  <option value="full">📄 Full Test (3–4 sections)</option>
+                  <option value="item-wise">🎯 Item-Wise (1 section)</option>
+                  <option value="mock">🏆 Mock Test (simulated exam)</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-2">
+                  IELTS Category <span className="text-red-500">*</span>
+                </label>
+                <select
+                  name="testType"
+                  value={formData.testType}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border-2 border-indigo-200 bg-indigo-50 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all font-medium"
+                >
+                  <option value="academic">🎓 Academic</option>
+                  <option value="general">🌏 General</option>
+                </select>
+              </div>
             </div>
 
             {/* Duration */}

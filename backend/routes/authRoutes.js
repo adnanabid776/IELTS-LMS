@@ -43,6 +43,9 @@ router.post("/logout", authMiddleware, authController.logout);
 // Update profile
 router.put("/update", authMiddleware, authController.updateProfile);
 
+// Get current user (me)
+router.get("/me", authMiddleware, authController.getMe);
+
 // ==========================================
 // TEACHER/ADMIN ROUTES
 // ==========================================

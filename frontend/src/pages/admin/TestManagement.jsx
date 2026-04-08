@@ -18,6 +18,7 @@ const TestManagement = () => {
   const [moduleFilter, setModuleFilter] = useState("all");
   const [difficultyFilter, setDifficultyFilter] = useState("all");
   const [formatFilter, setFormatFilter] = useState("all");
+  const [testTypeFilter, setTestTypeFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
   // Modals
@@ -32,7 +33,7 @@ const TestManagement = () => {
 
   useEffect(() => {
     applyFilters();
-  }, [tests, moduleFilter, difficultyFilter, formatFilter, searchTerm]);
+  }, [tests, moduleFilter, difficultyFilter, formatFilter, testTypeFilter, searchTerm]);
 
   const fetchTests = async () => {
     try {
@@ -61,7 +62,11 @@ const TestManagement = () => {
     }
 
     if (formatFilter !== "all") {
-      filtered = filtered.filter((t) => (t.testFormat || "full") === formatFilter);
+      filtered = filtered.filter((t) => getEffectiveFormat(t) === formatFilter);
+    }
+
+    if (testTypeFilter !== "all") {
+      filtered = filtered.filter((t) => (t.testType || "academic") === testTypeFilter);
     }
 
     if (searchTerm) {
@@ -96,6 +101,18 @@ const TestManagement = () => {
     setShowEditModal(true);
   };
 
+  /**
+   * Auto-detect effective format from section count:
+   *   mock  → always "mock" (explicit override)
+   *   1 section → "item-wise"
+   *   2+ sections → "full"
+   */
+  const getEffectiveFormat = (test) => {
+    if (test.testFormat === "mock") return "mock";
+    const sections = test.totalSections || 1;
+    return sections === 1 ? "item-wise" : "full";
+  };
+
   const getModuleColor = (module) => {
     const colors = {
       reading: "from-green-500 to-green-600",
@@ -116,6 +133,9 @@ const TestManagement = () => {
 
   const stats = {
     total: tests.length,
+    full: tests.filter((t) => getEffectiveFormat(t) === "full").length,
+    itemWise: tests.filter((t) => getEffectiveFormat(t) === "item-wise").length,
+    mock: tests.filter((t) => getEffectiveFormat(t) === "mock").length,
     reading: tests.filter((t) => t.module === "reading").length,
     listening: tests.filter((t) => t.module === "listening").length,
     writing: tests.filter((t) => t.module === "writing").length,
@@ -149,22 +169,37 @@ const TestManagement = () => {
         </div>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
-        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg shadow-lg p-4 text-white">
-          <p className="text-blue-100 text-xs mb-1">Total Tests</p>
-          <p className="text-3xl font-bold">{stats.total}</p>
+      {/* Stats — Row 1: By Format */}
+      <div className="grid grid-cols-3 gap-4 mb-3">
+        <div className="bg-gradient-to-br from-teal-500 to-cyan-600 rounded-lg shadow-lg p-4 text-white">
+          <p className="text-teal-100 text-xs mb-1">📄 Full Tests</p>
+          <p className="text-3xl font-bold">{stats.full}</p>
+          <p className="text-teal-100 text-[10px] mt-1">Complete papers</p>
         </div>
+        <div className="bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg shadow-lg p-4 text-white">
+          <p className="text-violet-100 text-xs mb-1">🎯 Item-Wise</p>
+          <p className="text-3xl font-bold">{stats.itemWise}</p>
+          <p className="text-violet-100 text-[10px] mt-1">Short practice</p>
+        </div>
+        <div className="bg-gradient-to-br from-rose-500 to-pink-600 rounded-lg shadow-lg p-4 text-white">
+          <p className="text-rose-100 text-xs mb-1">🏆 Mock Tests</p>
+          <p className="text-3xl font-bold">{stats.mock}</p>
+          <p className="text-rose-100 text-[10px] mt-1">Simulated exam</p>
+        </div>
+      </div>
+
+      {/* Stats — Row 2: By Module */}
+      <div className="grid grid-cols-3 gap-4 mb-6">
         <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-lg shadow-lg p-4 text-white">
-          <p className="text-green-100 text-xs mb-1">Reading</p>
+          <p className="text-green-100 text-xs mb-1">📖 Reading</p>
           <p className="text-3xl font-bold">{stats.reading}</p>
         </div>
-        <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg shadow-lg p-4 text-white">
-          <p className="text-purple-100 text-xs mb-1">Listening</p>
+        <div className="bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg shadow-lg p-4 text-white">
+          <p className="text-indigo-100 text-xs mb-1">🎧 Listening</p>
           <p className="text-3xl font-bold">{stats.listening}</p>
         </div>
         <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg shadow-lg p-4 text-white">
-          <p className="text-orange-100 text-xs mb-1">Writing</p>
+          <p className="text-orange-100 text-xs mb-1">✍️ Writing</p>
           <p className="text-3xl font-bold">{stats.writing}</p>
         </div>
       </div>
@@ -232,6 +267,21 @@ const TestManagement = () => {
               <option value="mock">Mock Test</option>
             </select>
           </div>
+
+          <div>
+            <label className="block text-xs font-semibold text-gray-700 mb-2">
+              Category
+            </label>
+            <select
+              value={testTypeFilter}
+              onChange={(e) => setTestTypeFilter(e.target.value)}
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="all">All Categories</option>
+              <option value="academic">Academic Only</option>
+              <option value="general">General Only</option>
+            </select>
+          </div>
         </div>
 
         <div className="mt-4 text-xs text-gray-600 font-semibold">
@@ -285,16 +335,21 @@ const TestManagement = () => {
                       </span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <span className={`px-2 py-0.5 rounded text-xs font-bold bg-white/20`}>
-                        {(test.testFormat || "full").toUpperCase()}
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-white/30 tracking-tight">
+                        {getEffectiveFormat(test).toUpperCase()}
+                      </span>
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-tight ${
+                        test.testType === "general" ? "bg-teal-400/30" : "bg-indigo-400/30"
+                      }`}>
+                        {(test.testType || "academic").toUpperCase()}
                       </span>
                       <span
-                        className={`px-2 py-1 rounded text-xs font-semibold ${
+                        className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                           test.difficulty === "easy"
-                            ? "bg-green-200 text-green-800"
+                            ? "bg-green-300/80 text-green-900"
                             : test.difficulty === "medium"
-                              ? "bg-yellow-200 text-yellow-800"
-                              : "bg-red-200 text-red-800"
+                              ? "bg-yellow-300/80 text-yellow-900"
+                              : "bg-red-300/80 text-red-900"
                         }`}
                       >
                         {test.difficulty?.toUpperCase()}
@@ -377,6 +432,8 @@ const TestManagement = () => {
                 setSearchTerm("");
                 setModuleFilter("all");
                 setDifficultyFilter("all");
+                setFormatFilter("all");
+                setTestTypeFilter("all");
               }}
               className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 font-semibold"
             >

@@ -8,7 +8,7 @@ const crypto = require("crypto");
 // ============================================
 exports.register = async (req, res) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, studentType } = req.body;
     //if user already registered
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -24,6 +24,7 @@ exports.register = async (req, res) => {
       email,
       password: hashedPassword,
       role: "student",
+      studentType: studentType === "general" ? "general" : "academic",
     });
 
     const token = jwt.sign(
@@ -50,6 +51,7 @@ exports.register = async (req, res) => {
         lastName: user.lastName,
         email: user.email,
         role: user.role,
+        studentType: user.studentType,
       },
     });
   } catch (error) {
@@ -112,6 +114,7 @@ exports.login = async (req, res) => {
         lastName: user.lastName,
         email: user.email,
         role: user.role,
+        studentType: user.studentType || "academic",
       },
     });
   } catch (error) {
@@ -138,6 +141,33 @@ exports.logout = async (req, res) => {
   } catch (error) {
     console.error("Logout error:", error);
     res.status(500).json({ error: "Server error during logout" });
+  }
+};
+
+// ============================================
+// GET CURRENT USER PROFILE (ME)
+// ============================================
+exports.getMe = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const user = await User.findById(userId).select("-password");
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json({
+      user: {
+        _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        role: user.role,
+        studentType: user.studentType || "academic",
+        isActive: user.isActive,
+      },
+    });
+  } catch (error) {
+    console.error("Get me error:", error);
+    res.status(500).json({ error: "Server error" });
   }
 };
 
@@ -173,6 +203,7 @@ exports.updateProfile = async (req, res) => {
         lastName: user.lastName,
         email: user.email,
         role: user.role,
+        studentType: user.studentType,
       },
     });
   } catch (error) {
@@ -505,7 +536,7 @@ exports.getUserById = async (req, res) => {
 // ==========================================
 exports.createUser = async (req, res) => {
   try {
-    const { firstName, lastName, email, password, role } = req.body;
+    const { firstName, lastName, email, password, role, studentType } = req.body;
 
     // Validation
     if (!firstName || !lastName || !email || !password || !role) {
@@ -534,6 +565,7 @@ exports.createUser = async (req, res) => {
       password: hashedPassword,
       role,
       isActive: true,
+      studentType: role === "student" ? (studentType || "academic") : undefined
     });
 
     await user.save();
@@ -547,6 +579,7 @@ exports.createUser = async (req, res) => {
         email: user.email,
         role: user.role,
         isActive: user.isActive,
+        studentType: user.studentType,
       },
     });
   } catch (error) {
@@ -561,7 +594,7 @@ exports.createUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
   try {
     const { userId } = req.params;
-    const { firstName, lastName, email, role, isActive } = req.body;
+    const { firstName, lastName, email, role, isActive, studentType } = req.body;
 
     const user = await User.findById(userId);
 
@@ -589,6 +622,10 @@ exports.updateUser = async (req, res) => {
     if (isActive !== undefined) {
       user.isActive = isActive;
     }
+    // Update studentType only for students
+    if (studentType && ["academic", "general"].includes(studentType)) {
+      user.studentType = studentType;
+    }
 
     await user.save();
 
@@ -601,6 +638,7 @@ exports.updateUser = async (req, res) => {
         email: user.email,
         role: user.role,
         isActive: user.isActive,
+        studentType: user.studentType,
       },
     });
   } catch (error) {

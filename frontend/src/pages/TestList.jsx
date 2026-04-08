@@ -3,11 +3,11 @@ import { useState } from "react";
 import DashboardLayout from "../components/Layout/DashboardLayout";
 import { useNavigate } from "react-router-dom";
 import { getAllTests } from "../services/api";
+import { getCurrUser } from "../services/authApi";
 import { toast } from "react-toastify";
 
 const TestList = () => {
-  // const response = JSON.parse(localStorage.getItem("user"));
-
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
   const navigate = useNavigate();
   const [tests, setTests] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,6 +21,17 @@ const TestList = () => {
     const fetchTests = async () => {
       try {
         setLoading(true);
+        // Also refresh user profile to catch category changes
+        try {
+          const profileData = await getCurrUser();
+          if (profileData && profileData.user) {
+            setUser(profileData.user);
+            localStorage.setItem("user", JSON.stringify(profileData.user));
+          }
+        } catch (profileErr) {
+          console.error("Profile refresh error:", profileErr);
+        }
+
         const module = selectedModule === "all" ? null : selectedModule;
         const response = await getAllTests(module);
         let loadedTests = response.tests || [];
@@ -94,14 +105,37 @@ const TestList = () => {
     currentPage * itemsPerPage
   );
 
+  const studentType = user?.studentType || "academic";
+
   return (
     <DashboardLayout title="Online Tests">
       {/* Page Header */}
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">
-          Available Tests
-        </h2>
-        <p className="text-gray-600">Browse and attempt IELTS practice tests</p>
+      <div className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">
+            Available Tests
+          </h2>
+          <p className="text-gray-600">Browse and attempt IELTS practice tests</p>
+        </div>
+
+        {/* Student Category Banner */}
+        <div className={`flex items-center gap-3 px-4 py-3 rounded-xl border-2 shadow-sm animate-pulse-slow ${
+          studentType === "general" 
+            ? "bg-teal-50 border-teal-200 text-teal-800" 
+            : "bg-indigo-50 border-indigo-200 text-indigo-800"
+        }`}>
+          <div className="text-2xl">
+            {studentType === "general" ? "🌏" : "🎓"}
+          </div>
+          <div>
+            <p className="text-[10px] uppercase font-bold tracking-wider leading-none mb-1 opacity-70">
+              Current Category
+            </p>
+            <p className="text-lg font-black leading-none">
+              {studentType.toUpperCase()}
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Filter Buttons */}
@@ -238,18 +272,26 @@ const TestList = () => {
                   {test.module.toUpperCase()}
                 </span>
 
-                {/* Difficulty Badge */}
-                <span
-                  className={`px-2 py-1 rounded text-xs font-semibold ${
-                    test.difficulty === "easy"
-                      ? "bg-green-100 text-green-700"
-                      : test.difficulty === "medium"
-                        ? "bg-yellow-100 text-yellow-700"
-                        : "bg-red-100 text-red-700"
-                  }`}
-                >
-                  {test.difficulty}
-                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className={`px-2 py-1 rounded text-[10px] font-bold tracking-tight ${
+                    test.testType === "general" ? "bg-teal-100 text-teal-800" : "bg-indigo-100 text-indigo-800"
+                  }`}>
+                    {(test.testType || "academic").toUpperCase()}
+                  </span>
+
+                  {/* Difficulty Badge */}
+                  <span
+                    className={`px-2 py-1 rounded text-[10px] font-bold ${
+                      test.difficulty === "easy"
+                        ? "bg-green-100 text-green-700"
+                        : test.difficulty === "medium"
+                          ? "bg-yellow-100 text-yellow-700"
+                          : "bg-red-100 text-red-700"
+                    }`}
+                  >
+                    {test.difficulty?.toUpperCase()}
+                  </span>
+                </div>
               </div>
 
               {/* Test Title */}
