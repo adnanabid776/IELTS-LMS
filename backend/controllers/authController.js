@@ -664,6 +664,11 @@ exports.getAdminDashboardStats = async (req, res) => {
     const Test = require("../models/Test");
     const totalTests = await Test.countDocuments();
 
+    // Count tests by format
+    const fullTests = await Test.countDocuments({ testFormat: "full" });
+    const itemWiseTests = await Test.countDocuments({ testFormat: "item-wise" });
+    const mockTests = await Test.countDocuments({ testFormat: "mock" });
+
     // Count test sessions
     const Session = require("../models/Session");
     const totalAttempts = await Session.countDocuments({ status: "completed" });
@@ -683,6 +688,9 @@ exports.getAdminDashboardStats = async (req, res) => {
       admins,
       totalQuestions,
       totalTests,
+      fullTests,
+      itemWiseTests,
+      mockTests,
       totalAttempts,
       recentUsers,
     });

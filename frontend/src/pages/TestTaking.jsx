@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import {
   getQuestionsBySectionId,
@@ -41,6 +41,32 @@ const TestTaking = () => {
 
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
   const [isSyncing, setIsSyncing] = useState(false);
+
+  // Exit confirmation modal state
+  const [showExitModal, setShowExitModal] = useState(false);
+
+  // Resizable split pane state
+  const [splitPos, setSplitPos] = useState(50); // percent
+  const isDragging = useRef(false);
+  const containerRef = useRef(null);
+
+  const handleDividerMouseDown = useCallback((e) => {
+    isDragging.current = true;
+    e.preventDefault();
+    const onMouseMove = (ev) => {
+      if (!isDragging.current || !containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const newPos = ((ev.clientX - rect.left) / rect.width) * 100;
+      setSplitPos(Math.min(Math.max(newPos, 20), 80));
+    };
+    const onMouseUp = () => {
+      isDragging.current = false;
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+    };
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+  }, []);
 
   useEffect(() => {
     const checkModule = async () => {
@@ -139,6 +165,38 @@ const TestTaking = () => {
         );
       }
     };
+  }, []);
+
+  // ✅ Block browser close / refresh (native browser dialog)
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (sessionRef.current && !isSubmittingRef.current && sessionRef.current.status === "in-progress") {
+        e.preventDefault();
+        e.returnValue = "";
+        return "";
+      }
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, []);
+
+  // ✅ Block tab switching — show a toast warning
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (
+        document.hidden &&
+        sessionRef.current &&
+        !isSubmittingRef.current &&
+        sessionRef.current.status === "in-progress"
+      ) {
+        toast.warn(
+          "⚠️ You left the test tab! Please return to continue your test.",
+          { autoClose: 4000, toastId: "tab-warning" }
+        );
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
   }, []);
 
   //warning for Remaining 5 mins
@@ -352,6 +410,69 @@ const TestTaking = () => {
     }
   };
 
+  // ✅ Set global test guard — SideBar reads this to intercept clicks
+  useEffect(() => {
+    if (session && session.status === "in-progress" && !isSubmitting) {
+      window.__testGuard = {
+        active: true,
+        onExitRequest: () => setShowExitModal(true),
+      };
+    } else {
+      window.__testGuard = null;
+    }
+    return () => {
+      window.__testGuard = null;
+    };
+  }, [session, isSubmitting]);
+
+  // ✅ Intercept browser back button
+  useEffect(() => {
+    const handlePopState = (e) => {
+      if (sessionRef.current && !isSubmittingRef.current && sessionRef.current.status === "in-progress") {
+        // Push a dummy state to prevent actual navigation
+        window.history.pushState(null, "", window.location.href);
+        setShowExitModal(true);
+      }
+    };
+    // Push a state so we can intercept the first back press
+    window.history.pushState(null, "", window.location.href);
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  // Handler: student confirms leaving — submit with current answers then go to results
+  const handleConfirmExit = async () => {
+    setShowExitModal(false);
+    window.__testGuard = null;
+    setIsSubmitting(true);
+    try {
+      await saveBulkAnswers();
+      await submitTestSession(session._id);
+      const resultResponse = await submitTestResult(session._id);
+      OfflineQueue.clear();
+      if (assignmentId) {
+        await updateSubmissionStatus(
+          assignmentId,
+          session._id,
+          resultResponse.result._id,
+          "completed",
+        );
+      }
+      toast.success("Test submitted. Redirecting to results...");
+      setTimeout(() => {
+        navigate(`/results/${resultResponse.result._id}`);
+      }, 1200);
+    } catch (err) {
+      toast.error("Failed to submit. Please try again.");
+      setIsSubmitting(false);
+    }
+  };
+
+  // Handler: student cancels — stay in test
+  const handleCancelExit = () => {
+    setShowExitModal(false);
+  };
+
   // ... existing Timer logic
   useEffect(() => {
     if (loading || !session || isSubmitting) return;
@@ -483,10 +604,10 @@ const TestTaking = () => {
   const answeredInSection = questions.filter((q) => answers[q._id]).length;
 
   return (
-    <DashboardLayout title={test.title} hideHeader={true}>
-      {/* Test Header - Fixed Top with Enhanced Design */}
+    <DashboardLayout title={test.title} hideHeader={true} collapseSidebar={true}>
+      {/* Test Header - Compact */}
       <div
-        className={`rounded-2xl shadow-lg p-3 sm:p-5 mb-4 sm:mb-6 sticky top-[-10px] z-10 border transition-all duration-300 ${
+        className={`rounded-xl shadow-md px-3 py-2 mb-3 sticky top-0 z-10 border transition-all duration-300 ${
           isOffline
             ? "bg-gradient-to-r from-gray-100 to-gray-200 border-gray-300"
             : timeRemaining < 300
@@ -494,12 +615,11 @@ const TestTaking = () => {
               : "bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-100"
         }`}
       >
-        {/* Mobile Layout: stacked | Desktop: side-by-side */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="flex items-center justify-between gap-3">
           {/* Test Info */}
-          <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+          <div className="flex items-center gap-2 min-w-0">
             <div
-              className={`w-10 h-10 sm:w-14 sm:h-14 flex-shrink-0 rounded-xl flex items-center justify-center text-white font-bold text-sm sm:text-lg shadow-lg ${
+              className={`w-8 h-8 flex-shrink-0 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow ${
                 isOffline
                   ? "bg-gray-500"
                   : test.module === "reading"
@@ -522,37 +642,28 @@ const TestTaking = () => {
                       : "🎤"}
             </div>
             <div className="min-w-0 flex-1">
-              <h2 className="text-base sm:text-xl font-bold text-gray-800 truncate">
-                {test.title}
-              </h2>
-              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mt-1">
-                <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-white/70 rounded-full text-[10px] sm:text-xs font-semibold text-gray-600 shadow-sm whitespace-nowrap">
+              <h2 className="text-sm font-bold text-gray-800 truncate">{test.title}</h2>
+              <div className="flex flex-wrap items-center gap-1.5 mt-0.5">
+                <span className="px-2 py-0.5 bg-white/70 rounded-full text-[10px] font-semibold text-gray-600 shadow-sm whitespace-nowrap">
                   📑 Section {currentSectionIndex + 1}/{sections.length}
                 </span>
-                <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-white/70 rounded-full text-[10px] sm:text-xs font-semibold text-gray-600 shadow-sm whitespace-nowrap">
+                <span className="px-2 py-0.5 bg-white/70 rounded-full text-[10px] font-semibold text-gray-600 shadow-sm whitespace-nowrap">
                   ✅ {answeredInSection}/{questions.length} answered
                 </span>
-                {/* Connection Status Badge */}
                 {isOffline ? (
-                  <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-red-100 text-red-700 rounded-full text-[10px] sm:text-xs font-bold border border-red-200 flex items-center gap-1 animate-pulse whitespace-nowrap">
-                    🚫 Offline
-                  </span>
+                  <span className="px-2 py-0.5 bg-red-100 text-red-700 rounded-full text-[10px] font-bold border border-red-200 animate-pulse whitespace-nowrap">🚫 Offline</span>
                 ) : isSyncing ? (
-                  <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-yellow-100 text-yellow-700 rounded-full text-[10px] sm:text-xs font-bold border border-yellow-200 flex items-center gap-1 whitespace-nowrap">
-                    🔄 Syncing...
-                  </span>
+                  <span className="px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded-full text-[10px] font-bold border border-yellow-200 whitespace-nowrap">🔄 Syncing...</span>
                 ) : (
-                  <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-green-100 text-green-700 rounded-full text-[10px] sm:text-xs font-bold border border-green-200 flex items-center gap-1 whitespace-nowrap">
-                    ☁️ Saved
-                  </span>
+                  <span className="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-[10px] font-bold border border-green-200 whitespace-nowrap">☁️ Saved</span>
                 )}
               </div>
             </div>
           </div>
 
-          {/* Timer with Enhanced Design */}
+          {/* Timer - Compact */}
           <div
-            className={`text-center px-4 py-1.5 sm:px-5 sm:py-2 rounded-xl shadow-lg transition-all duration-300 flex-shrink-0 self-end sm:self-center ${
+            className={`text-center px-3 py-1 rounded-lg shadow-md transition-all duration-300 flex-shrink-0 self-center ${
               isOffline
                 ? "bg-gray-400"
                 : timeRemaining < 300
@@ -562,154 +673,194 @@ const TestTaking = () => {
                     : "bg-gradient-to-br from-blue-500 to-indigo-600"
             }`}
           >
-            <p className="text-[10px] sm:text-xs text-white/80 font-medium">
-              ⏱️ Time Left
-            </p>
-            <p className={`text-2xl sm:text-3xl font-bold tracking-wider ${
-              timeRemaining < 300 && !isOffline ? "timer-warning" : "text-white"
+            <p className="text-[9px] text-white/80 font-medium leading-none mb-0.5">⏱️ Time Left</p>
+            <p className={`text-xl font-bold tracking-wider leading-none ${
+              timeRemaining < 300 && !isOffline ? "text-white animate-pulse" : "text-white"
             }`}>
               {formatTime(timeRemaining)}
             </p>
             {timeRemaining < 300 && !isOffline && (
-              <p className="text-[10px] sm:text-xs text-white font-semibold mt-0.5 animate-bounce">
-                ⚠️ Hurry up!
-              </p>
+              <p className="text-[9px] text-white font-semibold mt-0.5">⚠️ Hurry!</p>
             )}
           </div>
         </div>
 
-        {/* Progress Bar - Based on Questions Answered */}
-        <div className="mt-3 sm:mt-5">
-          <div className="w-full bg-gray-200 rounded-full h-2">
+        {/* Progress Bar */}
+        <div className="mt-2">
+          <div className="w-full bg-gray-200 rounded-full h-1">
             <div
-              className={`h-2 rounded-full transition-all duration-500 ${isOffline ? "bg-gray-500" : "bg-gradient-to-r from-blue-500 to-indigo-600"}`}
+              className={`h-1 rounded-full transition-all duration-500 ${isOffline ? "bg-gray-500" : "bg-gradient-to-r from-blue-500 to-indigo-600"}`}
               style={{
                 width: `${questions.length > 0 ? (answeredInSection / questions.length) * 100 : 0}%`,
               }}
             />
           </div>
-          <div className="flex justify-between text-[10px] sm:text-xs text-gray-500 mt-1.5 sm:mt-2">
-            <span>
-              Section {currentSectionIndex + 1} of {sections.length}
-            </span>
-            <span
-              className={`font-medium ${isOffline ? "text-gray-600" : "text-blue-600"}`}
-            >
+          <div className="flex justify-between text-[10px] text-gray-500 mt-1">
+            <span>Section {currentSectionIndex + 1} of {sections.length}</span>
+            <span className={`font-medium ${isOffline ? "text-gray-600" : "text-blue-600"}`}>
               {answeredInSection}/{questions.length} Answered
             </span>
           </div>
         </div>
       </div>
 
-      {/* Section Content - Enhanced */}
+      {/* Section Content - Side-by-side layout for reading, stacked for others */}
       {currentSection && (
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-gray-100">
-          {/* Section Header */}
-          <div className="mb-6">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+        <div className="mb-6">
+          {/* Section Header above both columns */}
+          <div className="bg-white rounded-2xl shadow-lg p-5 mb-4 border border-gray-100">
+            <div className="flex items-center gap-4 mb-2">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg">
                 {currentSection.sectionNumber}
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-gray-800">
-                  {currentSection.title}
-                </h3>
+                <h3 className="text-xl font-bold text-gray-800">{currentSection.title}</h3>
                 {currentSection.questionRange && (
-                  <p className="text-sm text-gray-500 mt-1">
-                    📋 {currentSection.questionRange}
-                  </p>
+                  <p className="text-sm text-gray-500 mt-0.5">📋 {currentSection.questionRange}</p>
                 )}
               </div>
             </div>
-
             {currentSection.instructions && (
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-500 rounded-r-xl p-4 mb-4">
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-500 rounded-r-xl p-3 mt-2">
                 <div className="flex items-start gap-2">
-                  <span className="text-blue-500 text-lg">💡</span>
-                  <p className="text-blue-900 text-sm leading-relaxed">
-                    {currentSection.instructions}
-                  </p>
+                  <span className="text-blue-500 text-base">💡</span>
+                  <p className="text-blue-900 text-sm leading-relaxed">{currentSection.instructions}</p>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Passage (for reading) - Enhanced */}
-          {currentSection.passageText && (
-            <div className="mb-6 p-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl border border-amber-200 shadow-inner">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl">📖</span>
-                <h4 className="text-lg font-bold text-gray-800">
-                  Reading Passage
-                </h4>
-              </div>
-              <div className="prose max-w-none text-gray-700 whitespace-pre-wrap leading-relaxed text-base">
-                {currentSection.passageText}
-              </div>
-            </div>
-          )}
-
-          {/* Audio Player (for listening) - Enhanced */}
+          {/* Audio Player (for listening) */}
           {currentSection.audioUrl && (
-            <div className="mb-6 p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl animate-pulse">🎧</span>
-                <h4 className="text-lg font-bold text-gray-800">
-                  Listen to the Audio
-                </h4>
+            <div className="mb-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xl animate-pulse">🎧</span>
+                <h4 className="text-base font-bold text-gray-800">Listen to the Audio</h4>
               </div>
               <audio key={currentSection.audioUrl} controls className="w-full rounded-lg">
                 <source src={currentSection.audioUrl} type="audio/mpeg" />
                 Your browser does not support the audio element.
               </audio>
-              <p className="text-sm text-green-700 mt-3 flex items-center gap-1">
+              <p className="text-sm text-green-700 mt-2 flex items-center gap-1">
                 <span>🔄</span> You can replay the audio as needed
               </p>
             </div>
           )}
+
+          {/* Parallel Layout: Passage LEFT | Questions RIGHT (Reading)
+               Stacked Layout: just Questions (Listening / Writing) */}
+          {currentSection.passageText ? (
+            /* Resizable split: passage | divider | questions */
+            <div
+              ref={containerRef}
+              className="flex items-stretch gap-0"
+              style={{ height: "calc(100vh - 220px)", minHeight: "400px" }}
+            >
+              {/* Left: Reading Passage */}
+              <div
+                className="bg-white rounded-2xl shadow-lg border border-amber-200 overflow-hidden flex flex-col"
+                style={{ width: `${splitPos}%`, minWidth: "20%" }}
+              >
+                <div className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-200">
+                  <span className="text-base">📖</span>
+                  <h4 className="text-sm font-bold text-gray-800">Reading Passage</h4>
+                </div>
+                <div className="overflow-y-auto flex-1 p-4">
+                  <div className="prose max-w-none text-gray-700 whitespace-pre-wrap leading-relaxed text-sm">
+                    {currentSection.passageText}
+                  </div>
+                </div>
+              </div>
+
+              {/* Draggable Divider */}
+              <div
+                onMouseDown={handleDividerMouseDown}
+                className="flex-shrink-0 w-2 mx-1 flex items-center justify-center cursor-col-resize group z-10"
+                title="Drag to resize"
+              >
+                <div className="w-1 h-16 rounded-full bg-gray-300 group-hover:bg-blue-400 group-active:bg-blue-500 transition-colors duration-150 shadow-sm" />
+              </div>
+
+              {/* Right: Questions */}
+              <div
+                className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden flex flex-col"
+                style={{ flex: 1, minWidth: "20%" }}
+              >
+                <div className="flex items-center justify-between px-4 py-2.5 bg-gradient-to-r from-indigo-50 to-purple-50 border-b border-indigo-100">
+                  <h4 className="text-sm font-bold text-gray-800 flex items-center gap-1.5">
+                    <span className="w-5 h-5 bg-gradient-to-br from-indigo-500 to-purple-600 rounded flex items-center justify-center text-white text-[10px]">❓</span>
+                    Questions
+                  </h4>
+                  <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">
+                    {answeredInSection}/{questions.length} Answered
+                  </span>
+                </div>
+                <div className="overflow-y-auto flex-1 p-3">
+                  {questions.length > 0 ? (
+                    <div className="space-y-3">
+                      {questions.map((question) => (
+                        <div
+                          key={question._id}
+                          className={`rounded-xl p-4 transition-all duration-300 border-2 ${
+                            answers[question._id]
+                              ? "border-green-300 bg-gradient-to-r from-green-50 to-emerald-50 shadow-md"
+                              : "border-gray-200 hover:border-blue-300 hover:shadow-lg bg-white"
+                          }`}
+                        >
+                          <QuestionRenderer
+                            question={question}
+                            answers={answers}
+                            handleAnswerChange={handleAnswerChange}
+                            handleSummaryAnswerChange={handleSummaryAnswerChange}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-gray-500 text-center py-8">No questions available for this section.</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          ) : (
+            /* Stacked: Questions only (Listening, Writing) */
+            <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+              <div className="flex items-center justify-between mb-5">
+                <h4 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+                  <span className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-white text-sm">❓</span>
+                  Questions
+                </h4>
+                <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
+                  {answeredInSection}/{questions.length} Answered
+                </span>
+              </div>
+              {questions.length > 0 ? (
+                <div className="space-y-5">
+                  {questions.map((question) => (
+                    <div
+                      key={question._id}
+                      className={`rounded-xl p-5 transition-all duration-300 border-2 ${
+                        answers[question._id]
+                          ? "border-green-300 bg-gradient-to-r from-green-50 to-emerald-50 shadow-md"
+                          : "border-gray-200 hover:border-blue-300 hover:shadow-lg hover:-translate-y-0.5 bg-white"
+                      }`}
+                    >
+                      <QuestionRenderer
+                        question={question}
+                        answers={answers}
+                        handleAnswerChange={handleAnswerChange}
+                        handleSummaryAnswerChange={handleSummaryAnswerChange}
+                      />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-500 text-center py-8">No questions available for this section.</p>
+              )}
+            </div>
+          )}
         </div>
       )}
-
-      {/* Questions - Enhanced */}
-      <div className="bg-white rounded-2xl shadow-lg p-6 mb-6 border border-gray-100">
-        <div className="flex items-center justify-between mb-6">
-          <h4 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-            <span className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center text-white text-sm">
-              ❓
-            </span>
-            Questions
-          </h4>
-          <span className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
-            {answeredInSection}/{questions.length} Answered
-          </span>
-        </div>
-
-        {questions.length > 0 ? (
-          <div className="space-y-5">
-            {questions.map((question) => (
-              <div
-                key={question._id}
-                className={`rounded-xl p-5 transition-all duration-300 border-2 ${
-                  answers[question._id]
-                    ? "border-green-300 bg-gradient-to-r from-green-50 to-emerald-50 shadow-md"
-                    : "border-gray-200 hover:border-blue-300 hover:shadow-lg hover:-translate-y-0.5 bg-white"
-                }`}
-              >
-                <QuestionRenderer
-                  question={question}
-                  answers={answers}
-                  handleAnswerChange={handleAnswerChange}
-                  handleSummaryAnswerChange={handleSummaryAnswerChange}
-                />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-gray-500 text-center py-8">
-            No questions available for this section.
-          </p>
-        )}
-      </div>
 
       {/* Navigation Buttons - Enhanced */}
       <div className="bg-gradient-to-r from-gray-50 to-slate-100 rounded-2xl shadow-lg p-6 border border-gray-200">
@@ -768,6 +919,72 @@ const TestTaking = () => {
           )}
         </div>
       </div>
+
+      {/* ✅ Exit Confirmation Modal — fires on sidebar click, back button, any in-app nav */}
+      {showExitModal && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden animate-in fade-in zoom-in duration-200">
+            {/* Modal Header */}
+            <div className="bg-gradient-to-r from-red-500 to-orange-500 px-6 py-5 text-white">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl">
+                  ⚠️
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold">Leave Test?</h3>
+                  <p className="text-sm text-white/80 mt-0.5">Your test is still running</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Body */}
+            <div className="px-6 py-5">
+              <p className="text-gray-700 text-sm leading-relaxed mb-2">
+                Are you sure you want to <strong>leave this test</strong>? If you exit:
+              </p>
+              <ul className="text-sm text-gray-600 space-y-1.5 mb-4 pl-4">
+                <li className="flex items-start gap-2">
+                  <span className="text-orange-500 mt-0.5">•</span>
+                  Your current answers will be <strong>submitted immediately</strong>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-orange-500 mt-0.5">•</span>
+                  Unanswered questions will count as <strong>zero marks</strong>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-orange-500 mt-0.5">•</span>
+                  You <strong>cannot resume</strong> this test attempt
+                </li>
+              </ul>
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-sm text-amber-800 flex items-start gap-2">
+                <span className="text-amber-500 shrink-0">💡</span>
+                <span>If you want to finish later, simply leave this page — your progress is already auto-saved and you can resume, but the timer will keep running.</span>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="px-6 py-4 bg-gray-50 border-t flex flex-col sm:flex-row gap-3 justify-end">
+              <button
+                onClick={handleCancelExit}
+                className="px-6 py-2.5 rounded-xl bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold transition-all text-sm"
+              >
+                ← Continue Test
+              </button>
+              <button
+                onClick={handleConfirmExit}
+                disabled={isSubmitting}
+                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white font-semibold transition-all shadow-lg text-sm disabled:opacity-60 flex items-center gap-2 justify-center"
+              >
+                {isSubmitting ? (
+                  <><span className="animate-spin">⏳</span> Submitting...</>
+                ) : (
+                  <>🚪 End & Submit Test</>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </DashboardLayout>
   );
 };

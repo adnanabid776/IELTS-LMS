@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const SideBar = ({ user }) => {
+const SideBar = ({ user, forceCollapsed = false }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [isOpen, setIsOpen] = useState(window.innerWidth >= 1024);
+  const [isOpen, setIsOpen] = useState(!forceCollapsed && window.innerWidth >= 1024);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
 
   // Handle window resize
@@ -15,13 +15,22 @@ const SideBar = ({ user }) => {
       if (mobile) {
         setIsOpen(false);
       } else {
-        setIsOpen(true);
+        setIsOpen(!forceCollapsed);
       }
     };
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [forceCollapsed]);
+
+  // When forceCollapsed changes (e.g., test starts/ends), react to it
+  useEffect(() => {
+    if (forceCollapsed) {
+      setIsOpen(false);
+    } else if (!isMobile) {
+      setIsOpen(true);
+    }
+  }, [forceCollapsed]);
 
   // Get menu items based on the user's role
   const getMenuItems = () => {
@@ -120,6 +129,11 @@ const SideBar = ({ user }) => {
 
   // Handle menu item click
   const handleMenuClick = (path) => {
+    // If a test is actively in-progress, intercept navigation and show exit modal
+    if (window.__testGuard?.active) {
+      window.__testGuard.onExitRequest();
+      return; // do NOT navigate
+    }
     navigate(path);
     if (isMobile) {
       setIsOpen(false);

@@ -59,8 +59,8 @@ const TestList = () => {
 
   // ✅ Item-wise Detection Logic
   const isItemWise = (test) => {
-    // Condition: Less than 2 sections OR Less than 40 minutes
-    return test.totalSections < 2 || test.duration < 40;
+    // Condition: Less than 2 sections OR Less than 30 minutes
+    return test.totalSections < 2 || test.duration < 30;
   };
 
   // ✅ Filtered + Sorted Tests Calculation

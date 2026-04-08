@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SideBar from "./SideBar";
 import Header from "./Header";
-const DashboardLayout = ({ children, title, hideHeader = false }) => {
+const DashboardLayout = ({ children, title, hideHeader = false, collapseSidebar = false }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -53,7 +53,7 @@ const DashboardLayout = ({ children, title, hideHeader = false }) => {
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <SideBar user={user} />
+      <SideBar user={user} forceCollapsed={collapseSidebar} />
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-hidden">

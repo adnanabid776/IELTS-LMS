@@ -17,6 +17,7 @@ const TestManagement = () => {
   // Filters
   const [moduleFilter, setModuleFilter] = useState("all");
   const [difficultyFilter, setDifficultyFilter] = useState("all");
+  const [formatFilter, setFormatFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
   // Modals
@@ -31,7 +32,7 @@ const TestManagement = () => {
 
   useEffect(() => {
     applyFilters();
-  }, [tests, moduleFilter, difficultyFilter, searchTerm]);
+  }, [tests, moduleFilter, difficultyFilter, formatFilter, searchTerm]);
 
   const fetchTests = async () => {
     try {
@@ -57,6 +58,10 @@ const TestManagement = () => {
 
     if (difficultyFilter !== "all") {
       filtered = filtered.filter((t) => t.difficulty === difficultyFilter);
+    }
+
+    if (formatFilter !== "all") {
+      filtered = filtered.filter((t) => (t.testFormat || "full") === formatFilter);
     }
 
     if (searchTerm) {
@@ -211,6 +216,22 @@ const TestManagement = () => {
               <option value="hard">Hard</option>
             </select>
           </div>
+
+          <div>
+            <label className="block text-xs font-semibold text-gray-700 mb-2">
+              Test Format
+            </label>
+            <select
+              value={formatFilter}
+              onChange={(e) => setFormatFilter(e.target.value)}
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="all">All Formats</option>
+              <option value="full">Full Test</option>
+              <option value="item-wise">Item-Wise</option>
+              <option value="mock">Mock Test</option>
+            </select>
+          </div>
         </div>
 
         <div className="mt-4 text-xs text-gray-600 font-semibold">
@@ -255,26 +276,31 @@ const TestManagement = () => {
                 className={`bg-gradient-to-r ${getModuleColor(test.module)} text-white px-4 py-3`}
               >
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl">
-                      {getModuleIcon(test.module)}
-                    </span>
-                    <span className="font-bold text-sm uppercase">
-                      {test.module}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-2xl">
+                        {getModuleIcon(test.module)}
+                      </span>
+                      <span className="font-bold text-sm uppercase">
+                        {test.module}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className={`px-2 py-0.5 rounded text-xs font-bold bg-white/20`}>
+                        {(test.testFormat || "full").toUpperCase()}
+                      </span>
+                      <span
+                        className={`px-2 py-1 rounded text-xs font-semibold ${
+                          test.difficulty === "easy"
+                            ? "bg-green-200 text-green-800"
+                            : test.difficulty === "medium"
+                              ? "bg-yellow-200 text-yellow-800"
+                              : "bg-red-200 text-red-800"
+                        }`}
+                      >
+                        {test.difficulty?.toUpperCase()}
+                      </span>
+                    </div>
                   </div>
-                  <span
-                    className={`px-2 py-1 rounded text-xs font-semibold ${
-                      test.difficulty === "easy"
-                        ? "bg-green-200 text-green-800"
-                        : test.difficulty === "medium"
-                          ? "bg-yellow-200 text-yellow-800"
-                          : "bg-red-200 text-red-800"
-                    }`}
-                  >
-                    {test.difficulty?.toUpperCase()}
-                  </span>
-                </div>
               </div>
 
               {/* Card Content */}

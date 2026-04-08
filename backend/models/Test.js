@@ -13,6 +13,12 @@ const testSchema = new mongoose.Schema(
       required: true,
       enum: ["listening", "reading", "writing"],
     },
+    // test format type
+    testFormat: {
+      type: String,
+      enum: ["full", "item-wise", "mock"],
+      default: "full",
+    },
     description: {
       type: String,
       trim: true,

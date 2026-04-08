@@ -8,6 +8,7 @@ const CreateTestModal = ({ onClose, onSuccess }) => {
   const [formData, setFormData] = useState({
     title: "",
     module: "reading",
+    testFormat: "full",
     description: "",
     duration: 60,
     difficulty: "medium",
@@ -208,7 +209,23 @@ const CreateTestModal = ({ onClose, onSuccess }) => {
               </div>
             </div>
 
-            {/* Duration */}
+            {/* Test Format */}
+            <div>
+              <label className="block text-sm font-bold text-gray-700 mb-2">
+                Test Format
+              </label>
+              <select
+                name="testFormat"
+                value={formData.testFormat}
+                onChange={handleChange}
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 hover:border-gray-300 transition-all"
+              >
+                <option value="full">📄 Full Test (3–4 sections, full audio)</option>
+                <option value="item-wise">🎯 Item-Wise (1 section, short audio)</option>
+                <option value="mock">🏆 Mock Test (simulated exam)</option>
+              </select>
+            </div>
+
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-2">
                 Duration (minutes) <span className="text-red-500">*</span>
