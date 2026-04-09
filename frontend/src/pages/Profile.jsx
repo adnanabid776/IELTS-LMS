@@ -1,17 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import DashboardLayout from "../components/Layout/DashboardLayout";
 import { updateUserProfile } from "../services/api";
+import { getCurrUser } from "../../src/services/authApi";
 
 const Profile = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const initialUser = JSON.parse(localStorage.getItem("user")) || {};
+  const [user, setUser] = useState(initialUser);
   const [formData, setFormData] = useState({
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-    role: user.role,
+    firstName: initialUser.firstName,
+    lastName: initialUser.lastName,
+    email: initialUser.email,
+    role: initialUser.role,
   });
   const [isEdit, setIsEdit] = useState(false);
+
+  useEffect(() => {
+    // Live reload logic: always fetch the absolute latest user schema from the DB
+    getCurrUser().then((res) => {
+      if (res?.user) {
+        setUser(res.user);
+        setFormData((prev) => ({
+          ...prev,
+          role: res.user.role,
+        }));
+      }
+    }).catch((err) => console.error("Live profile sync failed", err));
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -71,9 +86,18 @@ const Profile = () => {
                   {user.firstName} {user.lastName}
                 </h3>
                 <p className="text-gray-600">{user.email}</p>
-                <span className="inline-block mt-1 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
-                  {user.role.toUpperCase()}
-                </span>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
+                    {user.role.toUpperCase()}
+                  </span>
+                  {user.role === "student" && (
+                    <span className={`inline-block px-3 py-1 rounded-full text-sm font-bold tracking-tight ${
+                      user.studentType === "general" ? "bg-teal-100 text-teal-800" : "bg-indigo-100 text-indigo-800"
+                    }`}>
+                      {(user.studentType || "academic").toUpperCase()}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -158,6 +182,31 @@ const Profile = () => {
                 Role cannot be changed
               </p>
             </div>
+
+            {/* IELTS Category (Read-only, only for students) */}
+            {user.role === "student" && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  IELTS Category
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={(user.studentType || "academic").toUpperCase()}
+                    disabled
+                    className={`w-full px-4 py-2 border rounded-lg font-bold cursor-not-allowed ${
+                      user.studentType === "general" ? "bg-teal-50 text-teal-800 border-teal-200" : "bg-indigo-50 text-indigo-800 border-indigo-200"
+                    }`}
+                  />
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 opacity-50">
+                    {user.studentType === "general" ? "🌏" : "🎓"}
+                  </span>
+                </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  Only an admin can alter your assigned IELTS track.
+                </p>
+              </div>
+            )}
 
             {/* Action Buttons (Only show when editing) */}
             {isEdit && (

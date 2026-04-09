@@ -1,10 +1,12 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SideBar from "./SideBar";
 import Header from "./Header";
+import { getCurrUser } from "../../services/authApi";
 const DashboardLayout = ({ children, title, hideHeader = false, collapseSidebar = false }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -19,9 +21,20 @@ const DashboardLayout = ({ children, title, hideHeader = false, collapseSidebar 
         return;
       }
 
-      // Parse and set user
+      // Parse and set user instantly for UI
       const parsedUser = JSON.parse(userData);
       setUser(parsedUser);
+
+      // Background sync to catch changes (e.g., admin updating student's track)
+      // This runs quietly every time the path changes.
+      getCurrUser().then(profileData => {
+        if (profileData && profileData.user) {
+          // If the profile data differs significantly, state will update globally locally
+          setUser(profileData.user);
+          localStorage.setItem("user", JSON.stringify(profileData.user));
+        }
+      }).catch(err => console.error("Global background sync failed:", err));
+
     } catch (error) {
       console.error("Error loading user:", error);
       // Clear corrupted data
@@ -31,7 +44,7 @@ const DashboardLayout = ({ children, title, hideHeader = false, collapseSidebar 
     } finally {
       setLoading(false);
     }
-  }, [navigate]);
+  }, [navigate, location.pathname]);
 
   // Show loading while checking user
   if (loading) {

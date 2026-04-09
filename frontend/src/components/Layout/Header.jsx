@@ -22,6 +22,14 @@ const Header = ({user, title}) => {
           <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
             {user.role.toUpperCase()}
           </span>
+          {/* Student Category Badge */}
+          {user.role === "student" && (
+            <span className={`px-3 py-1 rounded-full text-sm font-bold tracking-tight ${
+              user.studentType === "general" ? "bg-teal-100 text-teal-800" : "bg-indigo-100 text-indigo-800"
+            }`}>
+              {(user.studentType || "academic").toUpperCase()}
+            </span>
+          )}
         </div>
       </div>
     </header>
