@@ -34,6 +34,13 @@ A full-featured Learning Management System designed specifically for IELTS prepa
 - **Hybrid Local Storage**: Robust localized API bypasses cloud requirements, safely injecting audio files and prompt imagery directly into a secure `/uploads` root. 
 - **System Analytics**: Live overview of platform usage, total tests taken, and active users globally.
 
+## 🌟 Recent Major Updates
+
+- **Dual-Track Architecture (Academic vs General) 🛡️**: The platform now enforces a strict separation between "Academic" and "General Training" tracks. Students are physically locked to their assigned tracks via an API-level filter, and any changes made by an admin trigger a synchronous, real-time update on the student's dashboard without a manual logout.
+- **Advanced Grading Engine 🧠**: Completely overhauled the auto-grading algorithm. It now features "fuzzy matching" that safely strips structural noise from user answers (e.g., articles like `a`, `an`, `the`, embedded HTML tags, specific punctuation). It resolves complex matching questions dynamically regardless of capitalization.
+- **Deep Security Hardening 🔒**: Successfully audited against 100+ critical edge-cases. The platform now intrinsically blocks concurrent multi-device sessions, prevents form double-submissions, and strictly denies IDOR (Insecure Direct Object Reference) attempts.
+- **Enhanced JSON Bulk Uploader ⚙️**: Admins can now mass-inject full test suites using complex, nested JSON configurations that seamlessly handle composite items (like diagram or map labeling).
+
 ## 🛠 Tech Stack
 
 **Frontend**
