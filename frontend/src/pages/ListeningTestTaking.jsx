@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import DashboardLayout from "../components/Layout/DashboardLayout";
 import AudioPlayer from "../components/AudioPlayer";
@@ -21,6 +21,9 @@ const ListeningTestTaking = () => {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(0);
+
+  // Exit confirmation modal state
+  const [showExitModal, setShowExitModal] = useState(false);
 
   // Get current section
   const currentSection = useMemo(
@@ -45,6 +48,87 @@ const ListeningTestTaking = () => {
   useEffect(() => {
     fetchTestData();
   }, [testId]);
+
+  // Anti-Cheat Refs
+  const sessionRef = useRef(session);
+  const isSubmittingRef = useRef(submitting);
+
+  useEffect(() => {
+    sessionRef.current = session;
+    isSubmittingRef.current = submitting;
+  }, [session, submitting]);
+
+  // ✅ Block browser close / refresh
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (sessionRef.current && !isSubmittingRef.current && sessionRef.current.status === "in-progress") {
+        e.preventDefault();
+        e.returnValue = "";
+        return "";
+      }
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, []);
+
+  // ✅ Block tab switching — show a toast warning
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (
+        document.hidden &&
+        sessionRef.current &&
+        !isSubmittingRef.current &&
+        sessionRef.current.status === "in-progress"
+      ) {
+        toast.warn(
+          "⚠️ You left the test tab! Please return to continue your test.",
+          { autoClose: 4000, toastId: "tab-warning" }
+        );
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, []);
+
+  // ✅ Intercept browser back button
+  useEffect(() => {
+    const handlePopState = (e) => {
+      if (sessionRef.current && !isSubmittingRef.current && sessionRef.current.status === "in-progress") {
+        window.history.pushState(null, "", window.location.href);
+        setShowExitModal(true);
+      }
+    };
+    window.history.pushState(null, "", window.location.href);
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  // ✅ Set global test guard
+  useEffect(() => {
+    if (session && session.status === "in-progress" && !submitting) {
+      window.__testGuard = {
+        active: true,
+        onExitRequest: () => {
+          setShowExitModal(true);
+        },
+      };
+    } else {
+      window.__testGuard = null;
+    }
+    return () => {
+      window.__testGuard = null;
+    };
+  }, [session, submitting]);
+
+  const handleConfirmExit = async () => {
+    setShowExitModal(false);
+    window.__testGuard = null;
+    await handleSubmitTest();
+  };
+
+  const handleCancelExit = () => {
+    setShowExitModal(false);
+  };
 
   // Timer countdown
   useEffect(() => {
@@ -229,12 +313,6 @@ const ListeningTestTaking = () => {
 
   const handleSubmitTest = async () => {
     if (submitting) return;
-
-    const confirmed = window.confirm(
-      "Are you sure you want to submit? You cannot change your answers after submission.",
-    );
-
-    if (!confirmed) return;
 
     setSubmitting(true);
 
@@ -1109,7 +1187,7 @@ const ListeningTestTaking = () => {
           </button>
         ) : (
           <button
-            onClick={handleSubmitTest}
+            onClick={() => setShowExitModal(true)}
             disabled={submitting}
             className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
           >
@@ -1117,6 +1195,72 @@ const ListeningTestTaking = () => {
           </button>
         )}
       </div>
+
+      {/* ✅ Exit Confirmation Modal */}
+      {showExitModal && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden animate-in fade-in zoom-in duration-200">
+            {/* Modal Header */}
+            <div className="bg-gradient-to-r from-red-500 to-orange-500 px-6 py-5 text-white">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl">
+                  ⚠️
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold">Leave Test?</h3>
+                  <p className="text-sm text-white/80 mt-0.5">Your test is still running</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Body */}
+            <div className="px-6 py-5">
+              <p className="text-gray-700 text-sm leading-relaxed mb-2">
+                Are you sure you want to <strong>leave this test</strong>? If you exit:
+              </p>
+              <ul className="text-sm text-gray-600 space-y-1.5 mb-4 pl-4">
+                <li className="flex items-start gap-2">
+                  <span className="text-orange-500 mt-0.5">•</span>
+                  Your current answers will be <strong>submitted immediately</strong>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-orange-500 mt-0.5">•</span>
+                  Unanswered questions will count as <strong>zero marks</strong>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-orange-500 mt-0.5">•</span>
+                  You <strong>cannot resume</strong> this test attempt
+                </li>
+              </ul>
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-sm text-amber-800 flex items-start gap-2">
+                <span className="text-amber-500 shrink-0">💡</span>
+                <span>If you want to finish later, simply leave this page — your progress is already auto-saved and you can resume, but the timer will keep running.</span>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="px-6 py-4 bg-gray-50 border-t flex flex-col sm:flex-row gap-3 justify-end">
+              <button
+                onClick={handleCancelExit}
+                className="px-6 py-2.5 rounded-xl bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold transition-all text-sm"
+              >
+                ← Continue Test
+              </button>
+              <button
+                onClick={handleConfirmExit}
+                disabled={submitting}
+                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white font-semibold transition-all shadow-lg text-sm disabled:opacity-60 flex items-center gap-2 justify-center"
+              >
+                {submitting ? (
+                  <><span className="animate-spin">⏳</span> Submitting...</>
+                ) : (
+                  <>🚪 End & Submit Test</>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </DashboardLayout>
   );
 };

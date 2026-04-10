@@ -29,6 +29,7 @@ const WritingTestTaking = () => {
   const [timeRemaining, setTimeRemaining] = useState(3600);
   const [session, setSession] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showExitModal, setShowExitModal] = useState(false);
 
   const autoSaveInterval = useRef(null);
 
@@ -36,6 +37,77 @@ const WritingTestTaking = () => {
   useEffect(() => {
     loadTestData();
   }, [testId]);
+
+  // Anti-Cheat Refs
+  const sessionRef = useRef(session);
+  const isSubmittingRef = useRef(isSubmitting);
+
+  useEffect(() => {
+    sessionRef.current = session;
+    isSubmittingRef.current = isSubmitting;
+  }, [session, isSubmitting]);
+
+  // ✅ Block browser close / refresh
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (sessionRef.current && !isSubmittingRef.current && sessionRef.current.status === "in-progress") {
+        e.preventDefault();
+        e.returnValue = "";
+        return "";
+      }
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, []);
+
+  // ✅ Block tab switching — show a toast warning
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (
+        document.hidden &&
+        sessionRef.current &&
+        !isSubmittingRef.current &&
+        sessionRef.current.status === "in-progress"
+      ) {
+        toast.warn(
+          "⚠️ You left the test tab! Please return to continue your test.",
+          { autoClose: 4000, toastId: "tab-warning" }
+        );
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, []);
+
+  // ✅ Intercept browser back button
+  useEffect(() => {
+    const handlePopState = (e) => {
+      if (sessionRef.current && !isSubmittingRef.current && sessionRef.current.status === "in-progress") {
+        window.history.pushState(null, "", window.location.href);
+        setShowExitModal(true);
+      }
+    };
+    window.history.pushState(null, "", window.location.href);
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  // ✅ Set global test guard
+  useEffect(() => {
+    if (session && session.status === "in-progress" && !isSubmitting) {
+      window.__testGuard = {
+        active: true,
+        onExitRequest: () => {
+          setShowExitModal(true);
+        },
+      };
+    } else {
+      window.__testGuard = null;
+    }
+    return () => {
+      window.__testGuard = null;
+    };
+  }, [session, isSubmitting]);
 
   // Auto-save every 30 seconds
   useEffect(() => {
@@ -155,15 +227,6 @@ const WritingTestTaking = () => {
 
     setIsSubmitting(true);
 
-    const confirmed = window.confirm(
-      "Are you sure you want to submit your essays? You cannot change them after submission.",
-    );
-
-    if (!confirmed) {
-      setIsSubmitting(false);
-      return;
-    }
-
     try {
       // Save any pending essays
       await saveEssays();
@@ -194,6 +257,16 @@ const WritingTestTaking = () => {
       toast.error("Failed to submit essays");
       setIsSubmitting(false);
     }
+  };
+
+  const handleConfirmExit = async () => {
+    setShowExitModal(false);
+    window.__testGuard = null;
+    await handleSubmitTest();
+  };
+
+  const handleCancelExit = () => {
+    setShowExitModal(false);
   };
 
   const handleEssayChange = (sectionId, text) => {
@@ -366,7 +439,7 @@ const WritingTestTaking = () => {
 
         {currentSectionIndex === sections.length - 1 ? (
           <button
-            onClick={handleSubmitTest}
+            onClick={() => setShowExitModal(true)}
             disabled={isSubmitting}
             className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold disabled:opacity-50"
           >
@@ -381,6 +454,72 @@ const WritingTestTaking = () => {
           </button>
         )}
       </div>
+
+      {/* ✅ Exit Confirmation Modal */}
+      {showExitModal && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 overflow-hidden animate-in fade-in zoom-in duration-200">
+            {/* Modal Header */}
+            <div className="bg-gradient-to-r from-red-500 to-orange-500 px-6 py-5 text-white">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl">
+                  ⚠️
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold">Leave Test?</h3>
+                  <p className="text-sm text-white/80 mt-0.5">Your test is still running</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Body */}
+            <div className="px-6 py-5">
+              <p className="text-gray-700 text-sm leading-relaxed mb-2">
+                Are you sure you want to <strong>leave this test</strong>? If you exit:
+              </p>
+              <ul className="text-sm text-gray-600 space-y-1.5 mb-4 pl-4">
+                <li className="flex items-start gap-2">
+                  <span className="text-orange-500 mt-0.5">•</span>
+                  Your current essays will be <strong>submitted immediately</strong>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-orange-500 mt-0.5">•</span>
+                  Unanswered tasks will count as <strong>zero marks</strong>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-orange-500 mt-0.5">•</span>
+                  You <strong>cannot resume</strong> this test attempt
+                </li>
+              </ul>
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-sm text-amber-800 flex items-start gap-2">
+                <span className="text-amber-500 shrink-0">💡</span>
+                <span>If you want to finish later, simply leave this page — your progress is already auto-saved and you can resume, but the timer will keep running.</span>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="px-6 py-4 bg-gray-50 border-t flex flex-col sm:flex-row gap-3 justify-end">
+              <button
+                onClick={handleCancelExit}
+                className="px-6 py-2.5 rounded-xl bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold transition-all text-sm"
+              >
+                ← Continue Test
+              </button>
+              <button
+                onClick={handleConfirmExit}
+                disabled={isSubmitting}
+                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white font-semibold transition-all shadow-lg text-sm disabled:opacity-60 flex items-center gap-2 justify-center"
+              >
+                {isSubmitting ? (
+                  <><span className="animate-spin">⏳</span> Submitting...</>
+                ) : (
+                  <>🚪 End & Submit Test</>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </DashboardLayout>
   );
 };
