@@ -31,6 +31,9 @@ const WritingTestTaking = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showExitModal, setShowExitModal] = useState(false);
 
+  // Fullscreen State
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
   const autoSaveInterval = useRef(null);
 
   // Load test data
@@ -129,6 +132,27 @@ const WritingTestTaking = () => {
       toast.warn("⏰ 1 minute remaining!", { autoClose: 5000 });
     }
   }, [timeRemaining]);
+
+  // --- Fullscreen Toggle logic ---
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
+  }, []);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch((err) => {
+        toast.error(`Error attempting to enable fullscreen: ${err.message}`);
+      });
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  };
 
   // Countdown timer
   useEffect(() => {
@@ -249,6 +273,10 @@ const WritingTestTaking = () => {
 
       toast.success("Essays submitted! Your teacher will grade them soon.");
 
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch((err) => console.error(err));
+      }
+
       setTimeout(() => {
         navigate(`/results/${resultResponse.result._id}`);
       }, 1500);
@@ -355,15 +383,25 @@ const WritingTestTaking = () => {
               {displayTask.title}
             </p>
           </div>
-          <div className="text-right">
-            <p className="text-sm text-gray-600">Time Remaining</p>
-            <p
-              className={`text-3xl font-bold ${
-                timeRemaining < 300 ? "text-red-600" : "text-blue-600"
-              }`}
+          <div className="text-right flex items-center gap-4">
+            <button
+              onClick={toggleFullscreen}
+              className="px-4 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg text-gray-700 font-medium transition-all border border-gray-200 flex flex-col items-center justify-center shrink-0"
+              title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
             >
-              {formatTime(timeRemaining)}
-            </p>
+              <span className="text-xl mb-1 leading-none">{isFullscreen ? "🗗" : "⛶"}</span>
+              <span className="text-[10px] uppercase tracking-wider">{isFullscreen ? "Exit Fullscreen" : "Fullscreen"}</span>
+            </button>
+            <div>
+              <p className="text-sm text-gray-600 mb-1">Time Remaining</p>
+              <p
+                className={`text-3xl font-bold ${
+                  timeRemaining < 300 ? "text-red-600" : "text-blue-600"
+                }`}
+              >
+                {formatTime(timeRemaining)}
+              </p>
+            </div>
           </div>
         </div>
 

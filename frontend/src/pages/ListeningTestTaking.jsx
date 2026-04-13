@@ -22,6 +22,9 @@ const ListeningTestTaking = () => {
   const [submitting, setSubmitting] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(0);
 
+  // Fullscreen State
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
   // Exit confirmation modal state
   const [showExitModal, setShowExitModal] = useState(false);
 
@@ -128,6 +131,27 @@ const ListeningTestTaking = () => {
 
   const handleCancelExit = () => {
     setShowExitModal(false);
+  };
+
+  // --- Fullscreen Toggle logic ---
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
+  }, []);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch((err) => {
+        toast.error(`Error attempting to enable fullscreen: ${err.message}`);
+      });
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
   };
 
   // Timer countdown
@@ -337,6 +361,10 @@ const ListeningTestTaking = () => {
       );
 
       toast.success("✅ Test submitted successfully!");
+
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch((err) => console.error(err));
+      }
 
       setTimeout(() => {
         navigate(`/result/${resultResponse.data.result._id}`);
@@ -1100,13 +1128,23 @@ const ListeningTestTaking = () => {
             </p>
           </div>
 
-          <div className="text-right">
-            <p className="text-sm text-blue-100 mb-1">Time Remaining</p>
-            <p
-              className={`text-4xl font-bold ${getTimerColor()} bg-white px-4 py-2 rounded-lg`}
+          <div className="text-right flex items-center gap-4">
+            <button
+              onClick={toggleFullscreen}
+              className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-white font-medium transition-all border border-white/20 flex flex-col items-center justify-center shrink-0"
+              title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
             >
-              {formatTime(timeRemaining)}
-            </p>
+              <span className="text-xl mb-1 leading-none">{isFullscreen ? "🗗" : "⛶"}</span>
+              <span className="text-[10px] uppercase tracking-wider">{isFullscreen ? "Exit Fullscreen" : "Fullscreen"}</span>
+            </button>
+            <div>
+              <p className="text-sm text-blue-100 mb-1">Time Remaining</p>
+              <p
+                className={`text-4xl font-bold ${getTimerColor()} bg-white px-4 py-2 rounded-lg`}
+              >
+                {formatTime(timeRemaining)}
+              </p>
+            </div>
           </div>
         </div>
 

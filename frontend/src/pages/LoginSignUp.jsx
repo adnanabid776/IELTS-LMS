@@ -85,7 +85,7 @@ function LoginSignUp() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-500 to-purple-600 p-4">
       <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-3xl overflow-hidden my-8">
-        <div className="flex flex-col md:flex-row min-h-[600px] max-h-[90vh]">
+        <div className="flex flex-col md:flex-row min-h-[440px] max-h-[90vh]">
 
           {/* LEFT SIDE - Login Form */}
           <div
@@ -186,6 +186,7 @@ function LoginSignUp() {
               </button>
             </form>
 
+            {/* 
             <p className="text-center text-gray-600 text-sm mt-4">
               Don't have an account?{" "}
               <button
@@ -195,6 +196,7 @@ function LoginSignUp() {
                 Sign Up
               </button>
             </p>
+            */}
           </div>
 
           {/* RIGHT SIDE - Signup Form */}
@@ -334,30 +336,27 @@ function LoginSignUp() {
 
           {/* SLIDING PANEL - Moves smoothly between forms */}
           <div
-            className={`absolute top-0 w-full md:w-1/2 h-full bg-linear-to-br from-blue-600 to-purple-600 text-white flex flex-col justify-center items-center transition-all duration-500 ease-in-out ${
-              isLogin 
-                ? 'left-0 md:left-1/2' 
-                : 'left-0 md:left-0'
-            } hidden md:flex z-20`}
+            className={`absolute top-0 w-full md:w-1/2 h-full bg-linear-to-br from-blue-600 to-purple-600 text-white flex flex-col justify-center items-center transition-all duration-500 ease-in-out left-0 md:left-1/2 hidden md:flex z-20`}
           >
             <div className="text-center px-8">
               <div className="text-5xl mb-4">
-                {isLogin ? '📚' : '🎓'}
+                📚
               </div>
               <h2 className="text-3xl font-bold mb-3">
-                {isLogin ? "New Here?" : "Welcome Back!"}
+                IELTS LMS Portal
               </h2>
-              <p className="text-base mb-6 opacity-90">
-                {isLogin
-                  ? "Sign up and start your journey to IELTS success!"
-                  : "Login to continue your IELTS preparation!"}
+              <p className="text-base mb-6 opacity-90 leading-relaxed">
+                Welcome! This is an exclusive platform.<br/><br/>
+                Please log in with the official credentials provided by your Administrator to access your premium test preparation dashboard.
               </p>
+              {/* Sign up button hidden for Admin-provisioned architecture
               <button
                 onClick={toggleMode}
                 className="px-6 py-2 border-2 border-white rounded-full font-semibold text-base hover:bg-white hover:text-blue-600 transition duration-300 transform hover:scale-110"
               >
                 {isLogin ? "Sign Up" : "Login"}
-              </button>
+              </button> 
+              */}
             </div>
           </div>
         </div>

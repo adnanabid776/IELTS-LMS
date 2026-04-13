@@ -1,0 +1,2443 @@
+[{
+  "_id": {
+    "$oid": "69771fa82a918e0335e7014e"
+  },
+  "sectionId": {
+    "$oid": "69771ce42a918e0335e70122"
+  },
+  "questionNumber": 1,
+  "questionText": "What has mainly enabled the growth of remote work?",
+  "questionType": "multiple-choice",
+  "options": [
+    "Government policies",
+    "Digital technology",
+    "Employee demands",
+    "Economic pressure"
+  ],
+  "correctAnswer": "Digital technology",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-26T08:02:48.298Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T08:02:48.298Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69771fa82a918e0335e7014f"
+  },
+  "sectionId": {
+    "$oid": "69771ce42a918e0335e70122"
+  },
+  "questionNumber": 2,
+  "questionText": "One benefit of remote work mentioned in the passage is:",
+  "questionType": "multiple-choice",
+  "options": [
+    "Higher salaries",
+    "Less responsibility",
+    "Reduced commuting",
+    "Shorter working hours"
+  ],
+  "correctAnswer": "Reduced commuting",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-26T08:02:48.299Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T08:02:48.299Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69771fa82a918e0335e70150"
+  },
+  "sectionId": {
+    "$oid": "69771ce42a918e0335e70122"
+  },
+  "questionNumber": 3,
+  "questionText": "According to the passage, remote workers often show:",
+  "questionType": "multiple-choice",
+  "options": [
+    "Lower motivation",
+    "Higher productivity",
+    "Poor communication skills",
+    "Increased working hours"
+  ],
+  "correctAnswer": "Higher productivity",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-26T08:02:48.299Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T08:02:48.299Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69771fa82a918e0335e70151"
+  },
+  "sectionId": {
+    "$oid": "69771ce42a918e0335e70122"
+  },
+  "questionNumber": 4,
+  "questionText": "What is a possible disadvantage of remote work?",
+  "questionType": "multiple-choice",
+  "options": [
+    "Increased office costs",
+    "Limited access to technology",
+    "Communication problems",
+    "Strict working schedules"
+  ],
+  "correctAnswer": "Communication problems",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-26T08:02:48.299Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T08:02:48.299Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69771fa82a918e0335e70152"
+  },
+  "sectionId": {
+    "$oid": "69771ce42a918e0335e70122"
+  },
+  "questionNumber": 5,
+  "questionText": "What do employers need to focus on more when managing remote teams?",
+  "questionType": "multiple-choice",
+  "options": [
+    "Employee attendance",
+    "Office discipline",
+    "Working hours",
+    "Results and outcomes"
+  ],
+  "correctAnswer": "Results and outcomes",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-26T08:02:48.299Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T08:02:48.299Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697720892a918e0335e701fb"
+  },
+  "sectionId": {
+    "$oid": "69771ce42a918e0335e70122"
+  },
+  "questionNumber": 6,
+  "questionText": "Remote work was common in most industries in the past.",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "FALSE",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-26T08:06:33.392Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T08:06:33.392Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697720892a918e0335e701fc"
+  },
+  "sectionId": {
+    "$oid": "69771ce42a918e0335e70122"
+  },
+  "questionNumber": 7,
+  "questionText": "Remote workers always feel isolated.",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "FALSE",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-26T08:06:33.392Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T08:06:33.392Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697720892a918e0335e701fd"
+  },
+  "sectionId": {
+    "$oid": "69771ce42a918e0335e70122"
+  },
+  "questionNumber": 8,
+  "questionText": "Companies can save money by reducing office space",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "TRUE",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-26T08:06:33.392Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T08:06:33.392Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697720892a918e0335e701fe"
+  },
+  "sectionId": {
+    "$oid": "69771ce42a918e0335e70122"
+  },
+  "questionNumber": 9,
+  "questionText": "Hybrid work models allow employees to work both at home and in offices.",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "TRUE",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-26T08:06:33.392Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T08:06:33.392Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697720892a918e0335e701ff"
+  },
+  "sectionId": {
+    "$oid": "69771ce42a918e0335e70122"
+  },
+  "questionNumber": 10,
+  "questionText": "Remote work completely replaces traditional office work",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "FALSE",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-26T08:06:33.393Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-26T08:06:33.393Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c7eef105dbb5fc9d2b199"
+  },
+  "sectionId": {
+    "$oid": "69771d822a918e0335e70131"
+  },
+  "questionNumber": 1,
+  "questionText": "Tourism is important mainly because it",
+  "questionType": "multiple-choice",
+  "options": [
+    "reduces global travel",
+    "supports economic growth",
+    "replaces local culture",
+    "limits employment"
+  ],
+  "correctAnswer": "supports economic growth",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-30T09:50:39.809Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:50:39.809Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c7eef105dbb5fc9d2b19a"
+  },
+  "sectionId": {
+    "$oid": "69771d822a918e0335e70131"
+  },
+  "questionNumber": 2,
+  "questionText": "Which group benefits from tourism-related jobs?",
+  "questionType": "multiple-choice",
+  "options": [
+    "Only tourists",
+    "International companies",
+    "Local residents",
+    "Government officials"
+  ],
+  "correctAnswer": "Local residents",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-30T09:50:39.809Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:50:39.809Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c7eef105dbb5fc9d2b19b"
+  },
+  "sectionId": {
+    "$oid": "69771d822a918e0335e70131"
+  },
+  "questionNumber": 3,
+  "questionText": "What problem is caused by increased demand for housing?",
+  "questionType": "multiple-choice",
+  "options": [
+    "Lower rent prices",
+    "Better infrastructure",
+    "Affordable living",
+    "Rising costs"
+  ],
+  "correctAnswer": "Rising costs",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-30T09:50:39.809Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:50:39.809Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c7eef105dbb5fc9d2b19c"
+  },
+  "sectionId": {
+    "$oid": "69771d822a918e0335e70131"
+  },
+  "questionNumber": 4,
+  "questionText": "How can tourism affect local traditions?",
+  "questionType": "multiple-choice",
+  "options": [
+    "They completely disappear",
+    "They are legally protected",
+    "They may lose authenticity",
+    "They become more complex"
+  ],
+  "correctAnswer": "They may lose authenticity",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-30T09:50:39.809Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:50:39.809Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c7eef105dbb5fc9d2b19d"
+  },
+  "sectionId": {
+    "$oid": "69771d822a918e0335e70131"
+  },
+  "questionNumber": 5,
+  "questionText": "What causes environmental damage?",
+  "questionType": "multiple-choice",
+  "options": [
+    "Lack of tourists",
+    "Resort construction",
+    "Cultural festivals",
+    "Local transport only"
+  ],
+  "correctAnswer": "Resort construction",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-30T09:50:39.809Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:50:39.809Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c7eef105dbb5fc9d2b19e"
+  },
+  "sectionId": {
+    "$oid": "69771d822a918e0335e70131"
+  },
+  "questionNumber": 6,
+  "questionText": "What is the main goal of sustainable tourism?",
+  "questionType": "multiple-choice",
+  "options": [
+    "Increase tourist numbers",
+    "Focus only on profit",
+    "Balance benefits and protection",
+    "Stop tourism completely"
+  ],
+  "correctAnswer": "Balance benefits and protection",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-30T09:50:39.809Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:50:39.809Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c7feb105dbb5fc9d2b1b1"
+  },
+  "sectionId": {
+    "$oid": "69771d822a918e0335e70131"
+  },
+  "questionNumber": 7,
+  "questionText": "Tourism is the largest industry in every country",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "NOT GIVEN",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-30T09:54:51.514Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:54:51.514Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c7feb105dbb5fc9d2b1b2"
+  },
+  "sectionId": {
+    "$oid": "69771d822a918e0335e70131"
+  },
+  "questionNumber": 8,
+  "questionText": "Tourism can raise the standard of living for locals",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "TRUE",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-30T09:54:51.514Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:54:51.514Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c7feb105dbb5fc9d2b1b3"
+  },
+  "sectionId": {
+    "$oid": "69771d822a918e0335e70131"
+  },
+  "questionNumber": 9,
+  "questionText": "Housing becomes cheaper in tourist areas.",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "FALSE",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-30T09:54:51.514Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:54:51.514Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c7feb105dbb5fc9d2b1b4"
+  },
+  "sectionId": {
+    "$oid": "69771d822a918e0335e70131"
+  },
+  "questionNumber": 10,
+  "questionText": "Overcrowding affects public services.",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "TRUE",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-30T09:54:51.514Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:54:51.514Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c7feb105dbb5fc9d2b1b5"
+  },
+  "sectionId": {
+    "$oid": "69771d822a918e0335e70131"
+  },
+  "questionNumber": 11,
+  "questionText": "Tourism always improves cultural authenticity.",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "FALSE",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-30T09:54:51.514Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:54:51.514Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c7feb105dbb5fc9d2b1b6"
+  },
+  "sectionId": {
+    "$oid": "69771d822a918e0335e70131"
+  },
+  "questionNumber": 12,
+  "questionText": "Environmental damage occurs only in cities.",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "FALSE",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-30T09:54:51.514Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:54:51.514Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697c7feb105dbb5fc9d2b1b7"
+  },
+  "sectionId": {
+    "$oid": "69771d822a918e0335e70131"
+  },
+  "questionNumber": 13,
+  "questionText": "Sustainable tourism focuses on long-term benefits.",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "TRUE",
+  "alternativeAnswers": [],
+  "points": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-30T09:54:51.514Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-30T09:54:51.514Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697dd58ffbcfb9a981f609ac"
+  },
+  "sectionId": {
+    "$oid": "69771de32a918e0335e70138"
+  },
+  "questionNumber": 14,
+  "questionText": "Match the headings with the correct paragraphs (A–D).",
+  "questionType": "matching-headings",
+  "options": [
+    "The influence of culture on writing",
+    "The origins of written communication",
+    "Writing in the digital age",
+    "The evolution from pictures to symbols",
+    "The decline of spoken language",
+    "The continued importance of spoken language"
+  ],
+  "correctAnswer": "See items",
+  "items": [
+    {
+      "label": "A",
+      "text": "A.\tWriting systems developed as societies grew more complex. Early humans relied on spoken language, but as trade and administration expanded, permanent records became necessary. The earliest known writing systems appeared around 5,000 years ago in Mesopotamia and Egypt",
+      "correctAnswer": "The origins of written communication",
+      "_id": {
+        "$oid": "697dd58ffbcfb9a981f609ad"
+      }
+    }
+  ],
+  "alternativeAnswers": [],
+  "points": 1,
+  "imageUrl": "",
+  "explanation": "",
+  "createdAt": {
+    "$date": "2026-01-31T10:12:31.908Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:12:31.908Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697dd639fbcfb9a981f609c1"
+  },
+  "sectionId": {
+    "$oid": "69771de32a918e0335e70138"
+  },
+  "questionNumber": 15,
+  "questionText": "Match the headings with the correct paragraphs (A–D).",
+  "questionType": "matching-headings",
+  "options": [
+    "The influence of culture on writing",
+    "The origins of written communication",
+    "Writing in the digital age",
+    "The evolution from pictures to symbols",
+    "The decline of spoken language",
+    "The continued importance of spoken language"
+  ],
+  "correctAnswer": "See items",
+  "items": [
+    {
+      "label": "B",
+      "text": "B.\tInitially, writing consisted of pictographs representing objects or ideas. Over time, these evolved into more abstract symbols, allowing complex thoughts to be recorded efficiently. This development played a key role in the advancement of law, science, and literature",
+      "correctAnswer": "The evolution from pictures to symbols",
+      "_id": {
+        "$oid": "697dd639fbcfb9a981f609c2"
+      }
+    }
+  ],
+  "alternativeAnswers": [],
+  "points": 1,
+  "imageUrl": "",
+  "explanation": "",
+  "createdAt": {
+    "$date": "2026-01-31T10:15:21.793Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:15:21.793Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697dd6affbcfb9a981f609d7"
+  },
+  "sectionId": {
+    "$oid": "69771de32a918e0335e70138"
+  },
+  "questionNumber": 16,
+  "questionText": "Match the headings with the correct paragraphs (A–D).",
+  "questionType": "matching-headings",
+  "options": [
+    "The influence of culture on writing",
+    "The origins of written communication",
+    "Writing in the digital age",
+    "The evolution from pictures to symbols",
+    "The decline of spoken language",
+    "The continued importance of spoken language"
+  ],
+  "correctAnswer": "See items",
+  "items": [
+    {
+      "label": "C",
+      "text": "Different regions created distinct writing systems. Alphabetic systems, such as those used in Europe, represent individual sounds, while logographic systems, like Chinese characters, represent words or meanings. Each system reflects the needs and history of its culture",
+      "correctAnswer": "The influence of culture on writing",
+      "_id": {
+        "$oid": "697dd6affbcfb9a981f609d8"
+      }
+    }
+  ],
+  "alternativeAnswers": [],
+  "points": 1,
+  "imageUrl": "",
+  "explanation": "",
+  "createdAt": {
+    "$date": "2026-01-31T10:17:19.208Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:17:19.208Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697dd824fbcfb9a981f60aa4"
+  },
+  "sectionId": {
+    "$oid": "69771de32a918e0335e70138"
+  },
+  "questionNumber": 17,
+  "questionText": "Match the headings with the correct paragraphs (A–D).",
+  "questionType": "matching-headings",
+  "options": [
+    "The influence of culture on writing",
+    "The origins of written communication",
+    "Writing in the digital age",
+    "The evolution from pictures to symbols",
+    "The decline of spoken language",
+    "The continued importance of spoken language"
+  ],
+  "correctAnswer": "See items",
+  "items": [
+    {
+      "label": "D",
+      "text": "In the modern era, digital technology has transformed writing once again. Typing and electronic communication have replaced handwritten texts in many contexts. Despite this shift, writing remains a fundamental tool for communication and knowledge preservation.",
+      "correctAnswer": "Writing in the digital age",
+      "_id": {
+        "$oid": "697dd824fbcfb9a981f60aa5"
+      }
+    }
+  ],
+  "alternativeAnswers": [],
+  "points": 1,
+  "imageUrl": "",
+  "explanation": "",
+  "createdAt": {
+    "$date": "2026-01-31T10:23:32.572Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:23:32.572Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697dd87bfbcfb9a981f60abc"
+  },
+  "sectionId": {
+    "$oid": "69771de32a918e0335e70138"
+  },
+  "questionNumber": 18,
+  "questionText": "Match the headings with the correct paragraphs (A–D).",
+  "questionType": "matching-headings",
+  "options": [
+    "The influence of culture on writing",
+    "The origins of written communication",
+    "Writing in the digital age",
+    "The evolution from pictures to symbols",
+    "The decline of spoken language",
+    "The continued importance of spoken language"
+  ],
+  "correctAnswer": "See items",
+  "items": [
+    {
+      "label": "E",
+      "text": "Despite the importance of writing, spoken language has never disappeared. Oral communication continues to play a central role in daily interaction, storytelling, and cultural traditions. Even in highly literate societies, speech remains essential for social connection and the transmission of ideas.",
+      "correctAnswer": "The continued importance of spoken language",
+      "_id": {
+        "$oid": "697dd87bfbcfb9a981f60abd"
+      }
+    }
+  ],
+  "alternativeAnswers": [],
+  "points": 1,
+  "imageUrl": "",
+  "explanation": "",
+  "createdAt": {
+    "$date": "2026-01-31T10:24:59.497Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:24:59.497Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "697dda7dfbcfb9a981f60adc"
+  },
+  "sectionId": {
+    "$oid": "69771de32a918e0335e70138"
+  },
+  "questionNumber": 19,
+  "questionText": "Writing systems emerged when societies required ________ records for trade and administration",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "permanent",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:33:33.752Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:33:33.752Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697dda7dfbcfb9a981f60add"
+  },
+  "sectionId": {
+    "$oid": "69771de32a918e0335e70138"
+  },
+  "questionNumber": 20,
+  "questionText": "Early systems used________ to represent ideas before developing abstract symbols.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "pictographs",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:33:33.752Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:33:33.752Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697dda7dfbcfb9a981f60ade"
+  },
+  "sectionId": {
+    "$oid": "69771de32a918e0335e70138"
+  },
+  "questionNumber": 21,
+  "questionText": "Different regions produced writing systems shaped by their________ and needs.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "culture",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:33:33.753Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:33:33.753Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697dda7dfbcfb9a981f60adf"
+  },
+  "sectionId": {
+    "$oid": "69771de32a918e0335e70138"
+  },
+  "questionNumber": 22,
+  "questionText": "Alphabetic systems record individual________while logographic systems represent meanings.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "sounds",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:33:33.753Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:33:33.753Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697dda7dfbcfb9a981f60ae0"
+  },
+  "sectionId": {
+    "$oid": "69771de32a918e0335e70138"
+  },
+  "questionNumber": 23,
+  "questionText": "Today,________ technology has changed how people write,",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "digital",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:33:33.753Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:33:33.753Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697dda7dfbcfb9a981f60ae1"
+  },
+  "sectionId": {
+    "$oid": "69771de32a918e0335e70138"
+  },
+  "questionNumber": 24,
+  "questionText": "Yet writing continues to support communication and________ preservation.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "knowledge",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:33:33.753Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:33:33.753Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697dda7dfbcfb9a981f60ae2"
+  },
+  "sectionId": {
+    "$oid": "69771de32a918e0335e70138"
+  },
+  "questionNumber": 25,
+  "questionText": "Alphabetic writing systems represent individual__________ rather than whole meanings.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "Sounds",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:33:33.753Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:33:33.753Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697dda7dfbcfb9a981f60ae3"
+  },
+  "sectionId": {
+    "$oid": "69771de32a918e0335e70138"
+  },
+  "questionNumber": 26,
+  "questionText": "Even with modern digital changes, writing is still essential for preserving__________.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "Knowledge",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:33:33.753Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:33:33.753Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697ddbadfbcfb9a981f60b0d"
+  },
+  "sectionId": {
+    "$oid": "69771e322a918e0335e7013d"
+  },
+  "questionNumber": 27,
+  "questionText": "There are three main types of memory.",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "TRUE",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:38:37.281Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:38:37.281Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697ddbadfbcfb9a981f60b0e"
+  },
+  "sectionId": {
+    "$oid": "69771e322a918e0335e7013d"
+  },
+  "questionNumber": 28,
+  "questionText": "Short-term memory can store unlimited information.",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "FALSE",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:38:37.281Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:38:37.281Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697ddbadfbcfb9a981f60b0f"
+  },
+  "sectionId": {
+    "$oid": "69771e322a918e0335e7013d"
+  },
+  "questionNumber": 29,
+  "questionText": "Emotional events are easier to remember",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "TRUE",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:38:37.282Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:38:37.282Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697ddbadfbcfb9a981f60b10"
+  },
+  "sectionId": {
+    "$oid": "69771e322a918e0335e7013d"
+  },
+  "questionNumber": 30,
+  "questionText": "Memory ability never changes with age",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "FALSE",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:38:37.282Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:38:37.282Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697ddbadfbcfb9a981f60b11"
+  },
+  "sectionId": {
+    "$oid": "69771e322a918e0335e7013d"
+  },
+  "questionNumber": 31,
+  "questionText": "Repetition helps improve memory",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "TRUE",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:38:37.282Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:38:37.282Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697ddbadfbcfb9a981f60b12"
+  },
+  "sectionId": {
+    "$oid": "69771e322a918e0335e7013d"
+  },
+  "questionNumber": 32,
+  "questionText": "Stress can affect memory performance",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "TRUE",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:38:37.282Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:38:37.282Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697ddbadfbcfb9a981f60b13"
+  },
+  "sectionId": {
+    "$oid": "69771e322a918e0335e7013d"
+  },
+  "questionNumber": 33,
+  "questionText": "Scientists have found a way to prevent memory loss completely",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "NOT GIVEN",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:38:37.282Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:38:37.282Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697dde67fbcfb9a981f60be5"
+  },
+  "sectionId": {
+    "$oid": "69771e322a918e0335e7013d"
+  },
+  "questionNumber": 34,
+  "questionText": "Human memory enables the storage and________ of information",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "recall",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:50:15.952Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:50:15.952Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697dde67fbcfb9a981f60be6"
+  },
+  "sectionId": {
+    "$oid": "69771e322a918e0335e7013d"
+  },
+  "questionNumber": 35,
+  "questionText": "Short-term memory is limited unless supported by________.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "repetition",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:50:15.953Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:50:15.953Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697dde67fbcfb9a981f60be7"
+  },
+  "sectionId": {
+    "$oid": "69771e322a918e0335e7013d"
+  },
+  "questionNumber": 36,
+  "questionText": "Long-term memory can last for a________ period",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "long",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:50:15.953Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:50:15.953Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697dde67fbcfb9a981f60be8"
+  },
+  "sectionId": {
+    "$oid": "69771e322a918e0335e7013d"
+  },
+  "questionNumber": 37,
+  "questionText": "Emotional experiences are often remembered more________.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "clearly",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:50:15.953Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:50:15.953Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697dde67fbcfb9a981f60be9"
+  },
+  "sectionId": {
+    "$oid": "69771e322a918e0335e7013d"
+  },
+  "questionNumber": 38,
+  "questionText": "Memory can be strengthened using techniques like visualization and________.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "association",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:50:15.953Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:50:15.953Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697dde67fbcfb9a981f60bea"
+  },
+  "sectionId": {
+    "$oid": "69771e322a918e0335e7013d"
+  },
+  "questionNumber": 39,
+  "questionText": "However, factors such as stress, fatigue, and ________ can negatively affect memory.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "aging",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:50:15.953Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:50:15.953Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "697dde67fbcfb9a981f60beb"
+  },
+  "sectionId": {
+    "$oid": "69771e322a918e0335e7013d"
+  },
+  "questionNumber": 40,
+  "questionText": "Therefore, memory remains powerful but not ________.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "perfect",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-01-31T10:50:15.953Z"
+  },
+  "updatedAt": {
+    "$date": "2026-01-31T10:50:15.953Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69806d867c1102973e1b5ee0"
+  },
+  "sectionId": {
+    "$oid": "69806b507c1102973e1b5eaa"
+  },
+  "questionNumber": 1,
+  "questionText": "Choose the correct heading (i–vi) for each paragraph A–E. One heading is not used.",
+  "questionType": "matching-headings",
+  "options": [
+    "Institutional regulation of scripts",
+    "From pictures to sounds",
+    "Digital transformation of writing",
+    "The origins of administrative records",
+    "Literacy expansion through alphabets",
+    "Calligraphic traditions"
+  ],
+  "correctAnswer": "See items",
+  "items": [
+    {
+      "label": "A",
+      "text": "Paragraph ____",
+      "correctAnswer": "The origins of administrative records",
+      "_id": {
+        "$oid": "69806d867c1102973e1b5ee1"
+      }
+    }
+  ],
+  "alternativeAnswers": [],
+  "points": 1,
+  "imageUrl": "",
+  "explanation": "",
+  "createdAt": {
+    "$date": "2026-02-02T09:25:26.314Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T09:25:26.314Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69806e267c1102973e1b5efa"
+  },
+  "sectionId": {
+    "$oid": "69806b507c1102973e1b5eaa"
+  },
+  "questionNumber": 2,
+  "questionText": "Choose the correct heading (i–vi) for each paragraph A–E. One heading is not used.",
+  "questionType": "matching-headings",
+  "options": [
+    "Institutional regulation of scripts",
+    "From pictures to sounds",
+    "Digital transformation of writing",
+    "The origins of administrative records",
+    "Literacy expansion through alphabets",
+    "Calligraphic traditions"
+  ],
+  "correctAnswer": "See items",
+  "items": [
+    {
+      "label": "B",
+      "text": "Paragraph ____",
+      "correctAnswer": "From pictures to sounds",
+      "_id": {
+        "$oid": "69806e267c1102973e1b5efb"
+      }
+    }
+  ],
+  "alternativeAnswers": [],
+  "points": 1,
+  "imageUrl": "",
+  "explanation": "",
+  "createdAt": {
+    "$date": "2026-02-02T09:28:06.824Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T09:28:06.824Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69806e967c1102973e1b5f15"
+  },
+  "sectionId": {
+    "$oid": "69806b507c1102973e1b5eaa"
+  },
+  "questionNumber": 3,
+  "questionText": "Choose the correct heading (i–vi) for each paragraph A–E. One heading is not used.",
+  "questionType": "matching-headings",
+  "options": [
+    "Institutional regulation of scripts",
+    "From pictures to sounds",
+    "Digital transformation of writing",
+    "The origins of administrative records",
+    "Literacy expansion through alphabets",
+    "Calligraphic traditions"
+  ],
+  "correctAnswer": "See items",
+  "items": [
+    {
+      "label": "C",
+      "text": "Paragraph ____",
+      "correctAnswer": "Literacy expansion through alphabets",
+      "_id": {
+        "$oid": "69806e967c1102973e1b5f16"
+      }
+    }
+  ],
+  "alternativeAnswers": [],
+  "points": 1,
+  "imageUrl": "",
+  "explanation": "",
+  "createdAt": {
+    "$date": "2026-02-02T09:29:58.420Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T09:29:58.420Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69806f1a7c1102973e1b5f31"
+  },
+  "sectionId": {
+    "$oid": "69806b507c1102973e1b5eaa"
+  },
+  "questionNumber": 4,
+  "questionText": "Choose the correct heading (i–vi) for each paragraph A–E. One heading is not used.",
+  "questionType": "matching-headings",
+  "options": [
+    "Institutional regulation of scripts",
+    "From pictures to sounds",
+    "Digital transformation of writing",
+    "The origins of administrative records",
+    "Literacy expansion through alphabets",
+    "Calligraphic traditions"
+  ],
+  "correctAnswer": "See items",
+  "items": [
+    {
+      "label": "D",
+      "text": "Paragraph_______",
+      "correctAnswer": "Digital transformation of writing",
+      "_id": {
+        "$oid": "69806f1a7c1102973e1b5f32"
+      }
+    }
+  ],
+  "alternativeAnswers": [],
+  "points": 1,
+  "imageUrl": "",
+  "explanation": "",
+  "createdAt": {
+    "$date": "2026-02-02T09:32:10.255Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T09:32:10.255Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69806fe57c1102973e1b5f4e"
+  },
+  "sectionId": {
+    "$oid": "69806b507c1102973e1b5eaa"
+  },
+  "questionNumber": 5,
+  "questionText": "Choose the correct heading (i–vi) for each paragraph A–E. One heading is not used.",
+  "questionType": "matching-headings",
+  "options": [
+    "Institutional regulation of scripts",
+    "From pictures to sounds",
+    "Digital transformation of writing",
+    "The origins of administrative records",
+    "Literacy expansion through alphabets",
+    "Calligraphic traditions"
+  ],
+  "correctAnswer": "See items",
+  "items": [
+    {
+      "label": "E",
+      "text": "Paragraph_________",
+      "correctAnswer": "Institutional regulation of scripts",
+      "_id": {
+        "$oid": "69806fe57c1102973e1b5f4f"
+      }
+    }
+  ],
+  "alternativeAnswers": [],
+  "points": 1,
+  "imageUrl": "",
+  "explanation": "",
+  "createdAt": {
+    "$date": "2026-02-02T09:35:33.762Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T09:35:33.762Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698077f37c1102973e1b62e2"
+  },
+  "sectionId": {
+    "$oid": "69806b507c1102973e1b5eaa"
+  },
+  "questionNumber": 6,
+  "questionText": "Early record keeping relied primarily on:",
+  "questionType": "multiple-choice",
+  "options": [
+    "alphabets",
+    "pictographs",
+    "cuneiform syllables",
+    "numeric codes"
+  ],
+  "correctAnswer": "pictographs",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-02T10:09:55.676Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T10:09:55.676Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698077f37c1102973e1b62e3"
+  },
+  "sectionId": {
+    "$oid": "69806b507c1102973e1b5eaa"
+  },
+  "questionNumber": 7,
+  "questionText": "Abstract symbols allowed writing to represent:",
+  "questionType": "multiple-choice",
+  "options": [
+    "only objects",
+    "only numbers",
+    "ideas and sounds",
+    "gestures"
+  ],
+  "correctAnswer": "ideas and sounds",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-02T10:09:55.677Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T10:09:55.677Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698077f37c1102973e1b62e4"
+  },
+  "sectionId": {
+    "$oid": "69806b507c1102973e1b5eaa"
+  },
+  "questionNumber": 8,
+  "questionText": "Alphabetic systems accelerated literacy by:",
+  "questionType": "multiple-choice",
+  "options": [
+    "increasing symbol count",
+    "standardizing calligraphy",
+    "reducing symbol inventory",
+    "limiting regional variants"
+  ],
+  "correctAnswer": "reducing symbol inventory",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-02T10:09:55.678Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T10:09:55.678Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698077f37c1102973e1b62e5"
+  },
+  "sectionId": {
+    "$oid": "69806b507c1102973e1b5eaa"
+  },
+  "questionNumber": 9,
+  "questionText": "Digital platforms primarily emphasize:",
+  "questionType": "multiple-choice",
+  "options": [
+    "permanence",
+    "speed and global reach",
+    "formality",
+    "regional standards"
+  ],
+  "correctAnswer": "speed and global reach",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-02T10:09:55.678Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T10:09:55.678Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698078627c1102973e1b6302"
+  },
+  "sectionId": {
+    "$oid": "69806b507c1102973e1b5eaa"
+  },
+  "questionNumber": 10,
+  "questionText": "Early writing represented __________ objects.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "concrete",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-02T10:11:46.216Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T10:11:46.216Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698078627c1102973e1b6303"
+  },
+  "sectionId": {
+    "$oid": "69806b507c1102973e1b5eaa"
+  },
+  "questionNumber": 11,
+  "questionText": "Symbols became capable of representing __________.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "ideas and sounds",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-02T10:11:46.216Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T10:11:46.216Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698078627c1102973e1b6304"
+  },
+  "sectionId": {
+    "$oid": "69806b507c1102973e1b5eaa"
+  },
+  "questionNumber": 12,
+  "questionText": "Alphabets reduced the number of __________ required",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "symbols",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-02T10:11:46.216Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T10:11:46.216Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698078627c1102973e1b6305"
+  },
+  "sectionId": {
+    "$oid": "69806b507c1102973e1b5eaa"
+  },
+  "questionNumber": 13,
+  "questionText": "Institutional standardization stabilized __________ norms.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "orthographic",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-02T10:11:46.216Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T10:11:46.216Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69807f1a7c1102973e1b6351"
+  },
+  "sectionId": {
+    "$oid": "69806ba07c1102973e1b5eb5"
+  },
+  "questionNumber": 14,
+  "questionText": "Which paragraph (A–D) contains the following information?",
+  "questionType": "matching-information",
+  "options": [
+    "Urban surfaces such as asphalt and concrete store heat, elevating local temperatures relative to rural areas",
+    "Sparse vegetation reduces cooling via evapotranspiration, exacerbating thermal retention.",
+    "Anthropogenic heat from transport and buildings compounds ambient temperature increases",
+    "Mitigation measures include reflective materials, green roofs, and expanded urban forestry."
+  ],
+  "correctAnswer": "See items",
+  "items": [
+    {
+      "label": "A",
+      "text": "Additional heat from vehicles and buildings",
+      "correctAnswer": "Anthropogenic heat from transport and buildings compounds ambient temperature increases",
+      "_id": {
+        "$oid": "69807f1a7c1102973e1b6352"
+      }
+    }
+  ],
+  "alternativeAnswers": [],
+  "points": 1,
+  "imageUrl": "",
+  "explanation": "",
+  "createdAt": {
+    "$date": "2026-02-02T10:40:26.703Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T10:40:26.703Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69807f7f7c1102973e1b6370"
+  },
+  "sectionId": {
+    "$oid": "69806ba07c1102973e1b5eb5"
+  },
+  "questionNumber": 15,
+  "questionText": "Which paragraph (A–D) contains the following information?",
+  "questionType": "matching-information",
+  "options": [
+    "Urban surfaces such as asphalt and concrete store heat, elevating local temperatures relative to rural areas",
+    "Sparse vegetation reduces cooling via evapotranspiration, exacerbating thermal retention.",
+    "Anthropogenic heat from transport and buildings compounds ambient temperature increases.",
+    "Mitigation measures include reflective materials, green roofs, and expanded urban forestry."
+  ],
+  "correctAnswer": "See items",
+  "items": [
+    {
+      "label": "B",
+      "text": "Cooling reduced by limited plant cover",
+      "correctAnswer": "Sparse vegetation reduces cooling via evapotranspiration, exacerbating thermal retention.",
+      "_id": {
+        "$oid": "69807f7f7c1102973e1b6371"
+      }
+    }
+  ],
+  "alternativeAnswers": [],
+  "points": 1,
+  "imageUrl": "",
+  "explanation": "",
+  "createdAt": {
+    "$date": "2026-02-02T10:42:07.601Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-02T10:42:07.601Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698192ea35114250994ca6d8"
+  },
+  "sectionId": {
+    "$oid": "69806ba07c1102973e1b5eb5"
+  },
+  "questionNumber": 16,
+  "questionText": "Which paragraph (A–D) contains the following information?",
+  "questionType": "matching-information",
+  "options": [
+    "Urban surfaces such as asphalt and concrete store heat, elevating local temperatures relative to rural areas.",
+    "Sparse vegetation reduces cooling via evapotranspiration, exacerbating thermal retention",
+    "Anthropogenic heat from transport and buildings compounds ambient temperature increases.",
+    "Mitigation measures include reflective materials, green roofs, and expanded urban forestry"
+  ],
+  "correctAnswer": "See items",
+  "items": [
+    {
+      "label": "C",
+      "text": "Materials that store daytime heat",
+      "correctAnswer": "Urban surfaces such as asphalt and concrete store heat, elevating local temperatures relative to rural areas.",
+      "_id": {
+        "$oid": "698192ea35114250994ca6d9"
+      }
+    }
+  ],
+  "alternativeAnswers": [],
+  "points": 1,
+  "imageUrl": "",
+  "explanation": "",
+  "createdAt": {
+    "$date": "2026-02-03T06:17:14.641Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:17:14.641Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6981934135114250994ca6f9"
+  },
+  "sectionId": {
+    "$oid": "69806ba07c1102973e1b5eb5"
+  },
+  "questionNumber": 17,
+  "questionText": "Which paragraph (A–D) contains the following information?",
+  "questionType": "matching-information",
+  "options": [
+    "Urban surfaces such as asphalt and concrete store heat, elevating local temperatures relative to rural areas.",
+    "Sparse vegetation reduces cooling via evapotranspiration, exacerbating thermal retention",
+    "Anthropogenic heat from transport and buildings compounds ambient temperature increases.",
+    "Mitigation measures include reflective materials, green roofs, and expanded urban forestry"
+  ],
+  "correctAnswer": "See items",
+  "items": [
+    {
+      "label": "D",
+      "text": "Policy-relevant mitigation strategies",
+      "correctAnswer": "Mitigation measures include reflective materials, green roofs, and expanded urban forestry",
+      "_id": {
+        "$oid": "6981934135114250994ca6fa"
+      }
+    }
+  ],
+  "alternativeAnswers": [],
+  "points": 1,
+  "imageUrl": "",
+  "explanation": "",
+  "createdAt": {
+    "$date": "2026-02-03T06:18:41.650Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:18:41.650Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "698193dc35114250994ca71b"
+  },
+  "sectionId": {
+    "$oid": "69806ba07c1102973e1b5eb5"
+  },
+  "questionNumber": 18,
+  "questionText": "Which paragraph (A–D) contains the following information?",
+  "questionType": "matching-information",
+  "options": [
+    "Urban surfaces such as asphalt and concrete store heat, elevating local temperatures relative to rural areas.",
+    "Sparse vegetation reduces cooling via evapotranspiration, exacerbating thermal retention",
+    "Anthropogenic heat from transport and buildings compounds ambient temperature increases.",
+    "Mitigation measures include reflective materials, green roofs, and expanded urban forestry"
+  ],
+  "correctAnswer": "See items",
+  "items": [
+    {
+      "label": "E",
+      "text": "Tree planting as a cooling approach",
+      "correctAnswer": "Mitigation measures include reflective materials, green roofs, and expanded urban forestry",
+      "_id": {
+        "$oid": "698193dc35114250994ca71c"
+      }
+    }
+  ],
+  "alternativeAnswers": [],
+  "points": 1,
+  "imageUrl": "",
+  "explanation": "",
+  "createdAt": {
+    "$date": "2026-02-03T06:21:16.594Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:21:16.594Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6981944d35114250994ca73e"
+  },
+  "sectionId": {
+    "$oid": "69806ba07c1102973e1b5eb5"
+  },
+  "questionNumber": 19,
+  "questionText": "Which paragraph (A–D) contains the following information?",
+  "questionType": "matching-information",
+  "options": [
+    "Urban surfaces such as asphalt and concrete store heat, elevating local temperatures relative to rural areas.",
+    "Sparse vegetation reduces cooling via evapotranspiration, exacerbating thermal retention",
+    "Anthropogenic heat from transport and buildings compounds ambient temperature increases.",
+    "Mitigation measures include reflective materials, green roofs, and expanded urban forestry"
+  ],
+  "correctAnswer": "See items",
+  "items": [
+    {
+      "label": "F",
+      "text": "Reflective surfaces to reduce absorption",
+      "correctAnswer": "Mitigation measures include reflective materials, green roofs, and expanded urban forestry",
+      "_id": {
+        "$oid": "6981944d35114250994ca73f"
+      }
+    }
+  ],
+  "alternativeAnswers": [],
+  "points": 1,
+  "imageUrl": "",
+  "explanation": "",
+  "createdAt": {
+    "$date": "2026-02-03T06:23:09.985Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:23:09.985Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6981953b35114250994ca762"
+  },
+  "sectionId": {
+    "$oid": "69806ba07c1102973e1b5eb5"
+  },
+  "questionNumber": 20,
+  "questionText": "Urban areas are always warmer than rural areas at night",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "Not Given",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:27:07.197Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:27:07.197Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6981953b35114250994ca763"
+  },
+  "sectionId": {
+    "$oid": "69806ba07c1102973e1b5eb5"
+  },
+  "questionNumber": 21,
+  "questionText": "Evapotranspiration contributes to natural cooling.",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "True",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:27:07.198Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:27:07.198Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6981953b35114250994ca764"
+  },
+  "sectionId": {
+    "$oid": "69806ba07c1102973e1b5eb5"
+  },
+  "questionNumber": 22,
+  "questionText": "Transport is a source of anthropogenic heat",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "True",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:27:07.198Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:27:07.198Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6981953b35114250994ca765"
+  },
+  "sectionId": {
+    "$oid": "69806ba07c1102973e1b5eb5"
+  },
+  "questionNumber": 23,
+  "questionText": "Reflective materials increase heat storage.",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "False",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:27:07.198Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:27:07.198Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6981953b35114250994ca766"
+  },
+  "sectionId": {
+    "$oid": "69806ba07c1102973e1b5eb5"
+  },
+  "questionNumber": 24,
+  "questionText": "Urban forestry can mitigate heat.",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "True",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:27:07.198Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:27:07.198Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6981953b35114250994ca767"
+  },
+  "sectionId": {
+    "$oid": "69806ba07c1102973e1b5eb5"
+  },
+  "questionNumber": 25,
+  "questionText": "Mitigation strategies are ineffective in dense cities.",
+  "questionType": "true-false-not-given",
+  "options": [],
+  "correctAnswer": "False",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:27:07.198Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:27:07.198Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6981968335114250994ca7a6"
+  },
+  "sectionId": {
+    "$oid": "69806bc67c1102973e1b5ec0"
+  },
+  "questionNumber": 26,
+  "questionText": "Sleep supports __________ consolidation",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "memory",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:32:35.961Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:32:35.961Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6981968335114250994ca7a7"
+  },
+  "sectionId": {
+    "$oid": "69806bc67c1102973e1b5ec0"
+  },
+  "questionNumber": 27,
+  "questionText": "Environmental cues such as __________ entrain circadian rhythms.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "light",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:32:35.961Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:32:35.961Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6981968335114250994ca7a8"
+  },
+  "sectionId": {
+    "$oid": "69806bc67c1102973e1b5ec0"
+  },
+  "questionNumber": 28,
+  "questionText": "Long-term sleep loss is linked to __________ risks.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "health",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:32:35.961Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:32:35.961Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6981968335114250994ca7a9"
+  },
+  "sectionId": {
+    "$oid": "69806bc67c1102973e1b5ec0"
+  },
+  "questionNumber": 29,
+  "questionText": "Executive functioning benefits from adequate __________.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "sleep",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:32:35.962Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:32:35.962Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6981968335114250994ca7aa"
+  },
+  "sectionId": {
+    "$oid": "69806bc67c1102973e1b5ec0"
+  },
+  "questionNumber": 30,
+  "questionText": "Sleep patterns change across the __________.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "lifespan",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:32:35.962Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:32:35.962Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6981968335114250994ca7ab"
+  },
+  "sectionId": {
+    "$oid": "69806bc67c1102973e1b5ec0"
+  },
+  "questionNumber": 31,
+  "questionText": "Restorative efficiency varies with __________.",
+  "questionType": "sentence-completion",
+  "options": [],
+  "correctAnswer": "age",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:32:35.962Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:32:35.962Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698198f035114250994ca7ea"
+  },
+  "sectionId": {
+    "$oid": "69806bc67c1102973e1b5ec0"
+  },
+  "questionNumber": 32,
+  "questionText": "Circadian rhythms are primarily regulated by:",
+  "questionType": "multiple-choice",
+  "options": [
+    "nutrition",
+    "light exposure",
+    "temperature only",
+    "genetics alone"
+  ],
+  "correctAnswer": "light exposure",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:42:56.745Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:42:56.745Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698198f035114250994ca7eb"
+  },
+  "sectionId": {
+    "$oid": "69806bc67c1102973e1b5ec0"
+  },
+  "questionNumber": 33,
+  "questionText": "Chronic sleep deprivation is associated with",
+  "questionType": "multiple-choice",
+  "options": [
+    "reduced risk",
+    "no health effects",
+    "cardiometabolic risks",
+    "improved cognition"
+  ],
+  "correctAnswer": "cardiometabolic risks",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:42:56.745Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:42:56.745Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698198f035114250994ca7ec"
+  },
+  "sectionId": {
+    "$oid": "69806bc67c1102973e1b5ec0"
+  },
+  "questionNumber": 34,
+  "questionText": "Executive functioning is supported by:",
+  "questionType": "multiple-choice",
+  "options": [
+    "fragmented sleep",
+    "adequate sleep",
+    "daytime naps only",
+    "stimulants"
+  ],
+  "correctAnswer": "adequate sleep",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:42:56.745Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:42:56.745Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698198f035114250994ca7ed"
+  },
+  "sectionId": {
+    "$oid": "69806bc67c1102973e1b5ec0"
+  },
+  "questionNumber": 35,
+  "questionText": "Sleep architecture varies mainly across:",
+  "questionType": "multiple-choice",
+  "options": [
+    "regions",
+    "cultures",
+    "the lifespan",
+    "seasons"
+  ],
+  "correctAnswer": "the lifespan",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:42:56.745Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:42:56.745Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69819bee35114250994ca814"
+  },
+  "sectionId": {
+    "$oid": "69806bc67c1102973e1b5ec0"
+  },
+  "questionNumber": 36,
+  "questionText": "What entrains circadian rhythms?",
+  "questionType": "short-answer",
+  "options": [],
+  "correctAnswer": "light exposure",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:55:42.092Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:55:42.092Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69819bee35114250994ca815"
+  },
+  "sectionId": {
+    "$oid": "69806bc67c1102973e1b5ec0"
+  },
+  "questionNumber": 37,
+  "questionText": "What type of risks increase with chronic sleep loss?",
+  "questionType": "short-answer",
+  "options": [],
+  "correctAnswer": "health risks",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:55:42.093Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:55:42.093Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69819bee35114250994ca816"
+  },
+  "sectionId": {
+    "$oid": "69806bc67c1102973e1b5ec0"
+  },
+  "questionNumber": 38,
+  "questionText": "What cognitive domain benefits from sleep?",
+  "questionType": "short-answer",
+  "options": [],
+  "correctAnswer": "executive functioning",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:55:42.093Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:55:42.093Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69819bee35114250994ca817"
+  },
+  "sectionId": {
+    "$oid": "69806bc67c1102973e1b5ec0"
+  },
+  "questionNumber": 39,
+  "questionText": "What varies across the lifespan in sleep?",
+  "questionType": "short-answer",
+  "options": [],
+  "correctAnswer": "sleep architecture",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:55:42.093Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:55:42.093Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "69819bee35114250994ca818"
+  },
+  "sectionId": {
+    "$oid": "69806bc67c1102973e1b5ec0"
+  },
+  "questionNumber": 40,
+  "questionText": "What exposure is a key zeitgeber?",
+  "questionType": "short-answer",
+  "options": [],
+  "correctAnswer": "light",
+  "alternativeAnswers": [],
+  "points": 1,
+  "items": [],
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-02-03T06:55:42.093Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-03T06:55:42.093Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6981a9353fd2550c1d6feab7"
+  },
+  "sectionId": {
+    "$oid": "6981a51735114250994caf7f"
+  },
+  "questionNumber": 1,
+  "questionText": "The chart shows the percentage of household waste recycled in three countries between 2005 and\n2015.\nSummarise the information by selecting and reporting the main features, and make comparisons\nwhere relevant.\nCountry A: 2005 = 20%, 2010 = 35%, 2015 = 50%\nCountry B: 2005 = 10%, 2010 = 25%, 2015 = 30%\nCountry C: 2005 = 40%, 2010 = 45%, 2015 = 60%",
+  "questionType": "writing-task",
+  "options": [],
+  "correctAnswer": "Manual Grading",
+  "items": [],
+  "alternativeAnswers": [],
+  "points": 1,
+  "imageUrl": "",
+  "explanation": "",
+  "createdAt": {
+    "$date": "2026-02-03T07:52:21.638Z"
+  },
+  "updatedAt": {
+    "$date": "2026-02-04T06:56:48.636Z"
+  },
+  "__v": 0
+}]

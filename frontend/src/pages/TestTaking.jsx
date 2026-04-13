@@ -45,6 +45,9 @@ const TestTaking = () => {
   // Exit confirmation modal state
   const [showExitModal, setShowExitModal] = useState(false);
 
+  // Fullscreen State
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
   // Resizable split pane state
   const [splitPos, setSplitPos] = useState(50); // percent
   const isDragging = useRef(false);
@@ -166,6 +169,27 @@ const TestTaking = () => {
       }
     };
   }, []);
+
+  // --- Fullscreen Toggle Logic ---
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
+  }, []);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch((err) => {
+        toast.error(`Error attempting to enable fullscreen: ${err.message}`);
+      });
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  };
 
   // ✅ Block browser close / refresh (native browser dialog)
   useEffect(() => {
@@ -399,6 +423,10 @@ const TestTaking = () => {
 
       toast.success("Test submitted successfully!");
 
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch((err) => console.error(err));
+      }
+
       // Navigate to results (you'll create this page next)
       setTimeout(() => {
         navigate(`/results/${resultResponse.result._id}`);
@@ -459,6 +487,11 @@ const TestTaking = () => {
         );
       }
       toast.success("Test submitted. Redirecting to results...");
+      
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch((err) => console.error(err));
+      }
+
       setTimeout(() => {
         navigate(`/results/${resultResponse.result._id}`);
       }, 1200);
@@ -661,10 +694,21 @@ const TestTaking = () => {
             </div>
           </div>
 
-          {/* Timer - Compact */}
-          <div
-            className={`text-center px-3 py-1 rounded-lg shadow-md transition-all duration-300 flex-shrink-0 self-center ${
-              isOffline
+          {/* Controls Group */}
+          <div className="flex items-center gap-2 flex-shrink-0 self-center">
+            {/* Fullscreen Button */}
+            <button
+              onClick={toggleFullscreen}
+              className="px-3 py-2 text-sm bg-white hover:bg-gray-50 rounded-lg text-gray-700 shadow transition-all border border-gray-200 flex items-center justify-center h-full"
+              title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+            >
+              {isFullscreen ? "🗗 Exit" : "⛶ Fullscreen"}
+            </button>
+
+            {/* Timer - Compact */}
+            <div
+              className={`text-center px-3 py-1 rounded-lg shadow-md transition-all duration-300 ${
+                isOffline
                 ? "bg-gray-400"
                 : timeRemaining < 300
                   ? "bg-gradient-to-br from-red-500 to-red-600 animate-pulse"
@@ -672,16 +716,17 @@ const TestTaking = () => {
                     ? "bg-gradient-to-br from-orange-500 to-orange-600"
                     : "bg-gradient-to-br from-blue-500 to-indigo-600"
             }`}
-          >
-            <p className="text-[9px] text-white/80 font-medium leading-none mb-0.5">⏱️ Time Left</p>
-            <p className={`text-xl font-bold tracking-wider leading-none ${
-              timeRemaining < 300 && !isOffline ? "text-white animate-pulse" : "text-white"
-            }`}>
-              {formatTime(timeRemaining)}
-            </p>
-            {timeRemaining < 300 && !isOffline && (
-              <p className="text-[9px] text-white font-semibold mt-0.5">⚠️ Hurry!</p>
-            )}
+            >
+              <p className="text-[9px] text-white/80 font-medium leading-none mb-0.5">⏱️ Time Left</p>
+              <p className={`text-xl font-bold tracking-wider leading-none ${
+                timeRemaining < 300 && !isOffline ? "text-white animate-pulse" : "text-white"
+              }`}>
+                {formatTime(timeRemaining)}
+              </p>
+              {timeRemaining < 300 && !isOffline && (
+                <p className="text-[9px] text-white font-semibold mt-0.5">⚠️ Hurry!</p>
+              )}
+            </div>
           </div>
         </div>
 
