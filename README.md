@@ -36,6 +36,9 @@ A full-featured Learning Management System designed specifically for IELTS prepa
 
 ## 🌟 Recent Major Updates
 
+- **Admin-Controlled User Management 👤**: Removed public sign-up flows entirely. The platform now operates on an exclusive access model where strictly administrators can create, update, or delete user accounts, increasing institutional control and security.
+- **Interactive Form Completion Architecture 📝**: Deployed a fully mapped "Form Builder" UI allowing admins to dynamically generate authentic IELTS-style input tables. The live test renderer seamlessly assigns increasing Roman/Numerical sequence IDs exclusively to interactive blanks, bypassing static headings completely.
+- **Comprehensive Answer Review System 📊**: Added a robust unified `AnswerReview` page with dynamic UI state handling that natively renders complex numerical string indexes, completely eliminating visually ambiguous row labels and mismatched index anomalies.
 - **Dual-Track Architecture (Academic vs General) 🛡️**: The platform now enforces a strict separation between "Academic" and "General Training" tracks. Students are physically locked to their assigned tracks via an API-level filter, and any changes made by an admin trigger a synchronous, real-time update on the student's dashboard without a manual logout.
 - **Advanced Grading Engine 🧠**: Completely overhauled the auto-grading algorithm. It now features "fuzzy matching" that safely strips structural noise from user answers (e.g., articles like `a`, `an`, `the`, embedded HTML tags, specific punctuation). It resolves complex matching questions dynamically regardless of capitalization.
 - **Deep Security Hardening 🔒**: Successfully audited against 100+ critical edge-cases. The platform now intrinsically blocks concurrent multi-device sessions, prevents form double-submissions, and strictly denies IDOR (Insecure Direct Object Reference) attempts.
