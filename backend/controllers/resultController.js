@@ -148,161 +148,187 @@ const calculateBandScore = (correctAnswers, totalQuestions, module) => {
 // ==========================================
 // Helper to calculate points for a question
 const calculatePoints = (userAnswer, question) => {
-  // 1. Composite Types (Map Labeling, Matching, Table Completion, Form Completion)
+  // 1. Composite Types (Map Labeling, Matching, Table Completion, Form Completion, Flow Chart, Diagram)
   if (
     question.questionType === "map-labeling" ||
     question.questionType === "matching-headings" ||
     question.questionType === "matching-information" ||
     question.questionType === "matching-features" ||
     question.questionType === "table-completion" ||
-    question.questionType === "form-completion"
+    question.questionType === "form-completion" ||
+    question.questionType === "flow-chart-completion" ||
+    question.questionType === "diagram-labeling"
   ) {
     let items = question.items || [];
     if (question.questionType === "form-completion") {
       items = items.filter(item => item.text && item.text.includes("__________"));
     }
-    
-    let scored = 0;
-    let attempted = 0;
-    const total = items.length;
-    const itemDetails = {}; // Map label -> boolean (isCorrect)
 
-    if (!userAnswer || typeof userAnswer !== "object") {
-      // Mark all as incorrect
-      items.forEach((item) => {
-        itemDetails[item.label] = false;
-      });
-      return { scored: 0, total, attempted: 0, itemDetails };
-    }
+    // If items array is empty, we decide if we should fall through to single-answer grading.
+    // We fall through if items are missing but we have a top-level correctAnswer or if it's a type that can be standalone.
+    if (items.length === 0) {
+      // Don't enter the composite grading loop. 
+      // Instead, we literally do nothing here and let the function continue to standard types.
+    } else {
+      let scored = 0;
+      let attempted = 0;
+      const total = items.length;
+      const itemDetails = {}; // Map label -> boolean (isCorrect)
 
-    items.forEach((item, index) => {
-      // For form-completion, item.label is visual text, so we use its row index as the key
-      const itemKey = question.questionType === "form-completion" ? String(index + 1) : item.label;
-      const userVal = userAnswer[itemKey] || userAnswer[String(itemKey)];
-      let isItemCorrect = false;
-
-      // Check if this specific item was attempted
-      if (userVal && userVal.trim() !== "") {
-        attempted++;
-
-        // SPECIAL HANDLING FOR MATCHING TYPES (Headings, Information, Features)
-        // Correct answer is usually a single letter (A, B, C...)
-        // User answer might be "Paragraph A" or "Section B" or just "A"
-        let normalizedUserVal = userVal;
-
-        if (
-          question.questionType === "matching-headings" ||
-          question.questionType === "matching-information" ||
-          question.questionType === "matching-features"
-        ) {
-          // Extract just the letter if it looks like "Paragraph X"
-          // Regex to find a lone letter or "Paragraph X"
-          // But simpler: just take the last word if it's a single letter?
-          // Or safer: specific replace.
-          const match = userVal.match(/\b([A-Z])\b/i); // Find a single letter boundary
-          if (match) {
-            normalizedUserVal = match[0].toUpperCase();
-          }
-        }
-
-        // Check correctness using the normalized value for matching types
-        // For others (Map/Table), use original userVal
-        const valToCheck =
-          question.questionType === "matching-headings" ||
-          question.questionType === "matching-information" ||
-          question.questionType === "matching-features"
-            ? normalizedUserVal
-            : userVal;
-
-        // Use question options or item options for resolution
-        const targetOptions =
-          question.options && question.options.length > 0
-            ? question.options
-            : item.options && item.options.length > 0
-              ? item.options
-              : [];
-
-        // 2. Resolve Correct Answer to Label if it's a long string found in options
-        // If correctAnswer is NOT a single letter, try to find it in options.
-        let resolvedCorrectAnswer = item.correctAnswer;
-
-        if (
-          item.correctAnswer &&
-          item.correctAnswer.length > 1 &&
-          targetOptions.length > 0
-        ) {
-          const normCorrect = normalizeAnswer(item.correctAnswer);
-
-          // Strategy 1: Exact Match (Normalized)
-          let optionIndex = targetOptions.findIndex(
-            (opt) => normalizeAnswer(opt) === normCorrect,
-          );
-
-          // Strategy 2: Inclusion (if exact match fails)
-          if (optionIndex === -1) {
-            optionIndex = targetOptions.findIndex((opt) => {
-              const normOpt = normalizeAnswer(opt);
-              if (normCorrect.length < 15 || normOpt.length < 15) return false;
-              return (
-                normOpt.includes(normCorrect) || normCorrect.includes(normOpt)
-              );
-            });
-          }
-
-          // Strategy 3: Token Overlap (Best effort for messy text)
-          if (optionIndex === -1 && normCorrect.length > 20) {
-            optionIndex = targetOptions.findIndex((opt) => {
-              const normOpt = normalizeAnswer(opt);
-              const tokensCorrect = new Set(
-                normCorrect.split(" ").filter((t) => t.length > 3),
-              );
-              const tokensOpt = new Set(
-                normOpt.split(" ").filter((t) => t.length > 3),
-              );
-
-              if (tokensCorrect.size < 5) return false;
-
-              let shared = 0;
-              tokensCorrect.forEach((t) => {
-                if (tokensOpt.has(t)) shared++;
-              });
-
-              const overlap = shared / tokensCorrect.size;
-              return overlap > 0.6;
-            });
-          }
-
-          if (optionIndex !== -1) {
-            // Convert Index to Letter (0->A, 1->B)
-            resolvedCorrectAnswer = String.fromCharCode(65 + optionIndex);
-            // console.log(`[Grading] Resolved long answer to ${resolvedCorrectAnswer} for item ${item.label}`);
-          } else {
-            console.warn(
-              `[Grading Warning] Could not resolve correct answer text to any option for Item ${item.label}. DB Mismatch likely.`,
-            );
-            console.warn(
-              `Correct Text: ${item.correctAnswer.substring(0, 50)}...`,
-            );
-          }
-        }
-
-        if (
-          isAnswerCorrect(
-            valToCheck,
-            resolvedCorrectAnswer,
-            item.options || [],
-            [],
-            question.questionType,
-          )
-        ) {
-          scored++;
-          isItemCorrect = true;
-        }
+      if (!userAnswer || typeof userAnswer !== "object") {
+        // Mark all as incorrect
+        items.forEach((item) => {
+          itemDetails[item.label] = false;
+        });
+        return { scored: 0, total, attempted: 0, itemDetails };
       }
-      itemDetails[item.label] = isItemCorrect;
-    });
 
-    return { scored, total, attempted, itemDetails };
+      items.forEach((item, index) => {
+        // Standard lookup using label (or calculated question number for matching-headings)
+        const primaryKey = question.questionType === "form-completion" 
+          ? String(index + 1) 
+          : question.questionType === "matching-headings"
+            ? (item.label || (question.questionNumber + index).toString())
+            : (item.label || String(index + 1));
+
+        let userVal = userAnswer[primaryKey] || userAnswer[String(primaryKey)];
+
+        // FALLBACK 1: If primary lookup failed but we are in matching-headings, try simple index "1", "2"...
+        if ((!userVal || (typeof userVal === "string" && userVal.trim() === "")) && question.questionType === "matching-headings") {
+          userVal = userAnswer[String(index + 1)];
+        }
+        
+        // FALLBACK 2: If still no value and we used a label, try index "1", "2"... 
+        // (Existing fallback logic for other types)
+        if ((!userVal || (typeof userVal === "string" && userVal.trim() === "")) && primaryKey !== String(index + 1)) {
+          userVal = userAnswer[String(index + 1)];
+        }
+
+        let isItemCorrect = false;
+
+        // Check if this specific item was attempted
+        if (userVal && (typeof userVal === "string" ? userVal.trim() !== "" : !!userVal)) {
+          attempted++;
+
+          // SPECIAL HANDLING FOR MATCHING TYPES (Headings, Information, Features)
+          let normalizedUserVal = userVal;
+          const romanToLetterMap = {
+            i: "A", ii: "B", iii: "C", iv: "D", v: "E", 
+            vi: "F", vii: "G", viii: "H", ix: "I", x: "J", 
+            xi: "K", xii: "L", xiii: "M", xiv: "N", xv: "O"
+          };
+
+          if (
+            question.questionType === "matching-headings" ||
+            question.questionType === "matching-information" ||
+            question.questionType === "matching-features"
+          ) {
+            // 1. Try to extract a simple Letter (A, B, C...)
+            const letterMatch = userVal.match(/\b([A-Z])\b/i);
+            if (letterMatch) {
+              normalizedUserVal = letterMatch[0].toUpperCase();
+            } 
+            // 2. If no letter, check if the user provided a Roman Numeral (i, ii, iii...)
+            else if (romanToLetterMap[userVal.toLowerCase().trim()]) {
+              normalizedUserVal = romanToLetterMap[userVal.toLowerCase().trim()];
+            }
+          }
+
+          const valToCheck =
+            question.questionType === "matching-headings" ||
+            question.questionType === "matching-information" ||
+            question.questionType === "matching-features"
+              ? normalizedUserVal
+              : userVal;
+
+          const targetOptions =
+            question.options && question.options.length > 0
+              ? question.options
+              : item.options && item.options.length > 0
+                ? item.options
+                : [];
+
+          let resolvedCorrectAnswer = item.correctAnswer;
+
+          // Strategy 0: Resolve Correct Answer if it is a Roman Numeral
+          if (
+            item.correctAnswer &&
+            romanToLetterMap[item.correctAnswer.toLowerCase().trim()]
+          ) {
+            resolvedCorrectAnswer = romanToLetterMap[item.correctAnswer.toLowerCase().trim()];
+          }
+
+          // Strategy 1: String Search resolution for long text answers
+          if (
+            resolvedCorrectAnswer === item.correctAnswer && // Only if not already resolved by roman strategy
+            item.correctAnswer &&
+            item.correctAnswer.length > 2 && 
+            targetOptions.length > 0
+          ) {
+            const normCorrect = normalizeAnswer(item.correctAnswer);
+
+            // Strategy 1.1: Exact Match (Normalized)
+            let optionIndex = targetOptions.findIndex(
+              (opt) => normalizeAnswer(opt) === normCorrect,
+            );
+
+            // Strategy 1.2: Inclusion (if exact match fails)
+            if (optionIndex === -1) {
+              optionIndex = targetOptions.findIndex((opt) => {
+                const normOpt = normalizeAnswer(opt);
+                if (normCorrect.length < 15 || normOpt.length < 15) return false;
+                return (
+                  normOpt.includes(normCorrect) || normCorrect.includes(normOpt)
+                );
+              });
+            }
+
+            // Strategy 1.3: Token Overlap (Best effort for messy text)
+            if (optionIndex === -1 && normCorrect.length > 20) {
+              optionIndex = targetOptions.findIndex((opt) => {
+                const normOpt = normalizeAnswer(opt);
+                const tokensCorrect = new Set(
+                  normCorrect.split(" ").filter((t) => t.length > 3),
+                );
+                const tokensOpt = new Set(
+                  normOpt.split(" ").filter((t) => t.length > 3),
+                );
+
+                if (tokensCorrect.size < 5) return false;
+
+                let shared = 0;
+                tokensCorrect.forEach((t) => {
+                  if (tokensOpt.has(t)) shared++;
+                });
+
+                const overlap = shared / tokensCorrect.size;
+                return overlap > 0.6;
+              });
+            }
+
+            if (optionIndex !== -1) {
+              resolvedCorrectAnswer = String.fromCharCode(65 + optionIndex);
+            }
+          }
+
+          if (
+            isAnswerCorrect(
+              valToCheck,
+              resolvedCorrectAnswer,
+              [], // alternativeAnswers (empty for sub-items)
+              question.questionType, // questionType
+              null, // summaryConfig (not used here)
+            )
+          ) {
+            scored++;
+            isItemCorrect = true;
+          }
+        }
+        itemDetails[item.label] = isItemCorrect;
+      });
+
+      return { scored, total, attempted, itemDetails };
+    }
   }
 
   // 2. Multiple Choice Multi
@@ -688,6 +714,17 @@ exports.getResultById = async (req, res) => {
       return res.status(404).json({ error: "Result not found" });
     }
 
+    // Authorization check: Only owner or staff can view
+    if (
+      result.userId._id.toString() !== req.user.userId &&
+      req.user.role !== "admin" &&
+      req.user.role !== "teacher"
+    ) {
+      return res.status(403).json({
+        error: "Access denied. You can only view your own results.",
+      });
+    }
+
     res.json({ result });
   } catch (error) {
     console.error("Get result error:", error);
@@ -992,16 +1029,24 @@ exports.createManualResult = async (req, res) => {
 // ==========================================
 exports.getStudentAnalytics = async (req, res) => {
   try {
-    const userId = req.user.userId;
+    let userId = req.user.userId;
 
-    // 1. Get Trend Data (Last 10 results)
+    // Allow teachers/admins to view a specific student's analytics
+    if (
+      req.query.userId &&
+      (req.user.role === "admin" || req.user.role === "teacher")
+    ) {
+      userId = req.query.userId;
+    }
+
+    // 1. Get Trend Data (Last 15 results)
     const trendResults = await Result.find({
       userId,
       bandScore: { $ne: null }, // Only graded tests
     })
       .sort({ createdAt: -1 }) // Latest first for line chart
       .select("bandScore module createdAt")
-      .limit(15); // Limit to latest 10 tests
+      .limit(15);
 
     const trendData = trendResults.reverse().map((r) => {
       const date = new Date(r.createdAt);

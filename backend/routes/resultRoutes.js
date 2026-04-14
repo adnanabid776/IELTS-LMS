@@ -33,6 +33,6 @@ router.post(
 router.post("/create-manual", resultController.createManualResult);
 
 //get all results
-router.get("/", resultController.getAllResults);
+router.get("/", roleCheck("teacher", "admin"), resultController.getAllResults);
 
 module.exports = router;

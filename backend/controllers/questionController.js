@@ -69,8 +69,8 @@ exports.createQuestion = async (req, res) => {
       wordLimit,
       allowNumber,
       tableStructure,
-      features, // ✅ ADDED
-      summaryConfig, // ✅ ADDED
+      features, 
+      summaryConfig, 
     });
 
     //update the section's total questions
@@ -335,6 +335,7 @@ exports.bulkCreateQuestions = async (req, res) => {
         "table-completion",
         "diagram-labeling",
         "map-labeling",
+        "flow-chart-completion"
       ];
 
       if (!q.correctAnswer && !typesWithoutTopLevelAnswer.includes(q.questionType)) {

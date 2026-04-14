@@ -220,13 +220,13 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
         formData.questionType === "form-completion") &&
       (!formData.items || formData.items.length === 0)
     ) {
-      // Only if we truly have no items (e.g. converting a question type??)
-      // Usually we don't convert types deeply, but just in case:
+      // For Matching Headings, we default to empty labels so Smart Numbering takes over.
+      const isHeading = formData.questionType === "matching-headings";
       setFormData((prev) => ({
         ...prev,
         items: [
-          { label: "A", text: "", correctAnswer: "" },
-          { label: "B", text: "", correctAnswer: "" },
+          { label: isHeading ? "" : "A", text: "", correctAnswer: "" },
+          { label: isHeading ? "" : "B", text: "", correctAnswer: "" },
         ],
       }));
     }
@@ -239,7 +239,8 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
   };
 
   const addItem = () => {
-    const nextLabel = String.fromCharCode(65 + formData.items.length); // A, B, C...
+    const isHeading = formData.questionType === "matching-headings";
+    const nextLabel = isHeading ? "" : String.fromCharCode(65 + formData.items.length); // A, B, C...
     setFormData((prev) => ({
       ...prev,
       items: [...prev.items, { label: nextLabel, text: "", correctAnswer: "" }],
@@ -1506,18 +1507,27 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
                   <div className="space-y-4">
                     {formData.items.map((item, index) => (
                       <div key={index} className="flex gap-3 items-start">
-                        <div className="flex-shrink-0">
-                          <input
-                            type="text"
-                            value={item.label}
-                            onChange={(e) =>
-                              handleItemChange(index, "label", e.target.value)
-                            }
-                            className="w-14 h-10 bg-blue-600 text-white rounded-lg text-center font-bold text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                            title="Edit label"
-                          />
+                        <div 
+                          className="flex-shrink-0 w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center font-bold text-lg"
+                          title={!item.label && formData.questionType === "matching-headings" ? "Automatic label based on Question Number" : ""}
+                        >
+                          {formData.questionType === "matching-headings"
+                            ? (item.label || (parseInt(question?.questionNumber || 0) + index).toString())
+                            : item.label}
                         </div>
                         <div className="flex-1 space-y-2">
+                          <div className="flex gap-2 items-center">
+                            <span className="text-xs font-bold text-gray-400">Label (Optional):</span>
+                            <input
+                              type="text"
+                              value={item.label}
+                              onChange={(e) =>
+                                handleItemChange(index, "label", e.target.value)
+                              }
+                              className="w-20 px-2 py-0.5 border border-gray-200 rounded text-xs focus:ring-1 focus:ring-blue-500"
+                              placeholder="e.g. 4"
+                            />
+                          </div>
                           <input
                             type="text"
                             value={item.text}

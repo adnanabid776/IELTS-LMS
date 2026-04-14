@@ -69,6 +69,7 @@ const questionSchema = new mongoose.Schema(
           "matching-headings",
           "matching-information",
           "matching-features",
+          "matching-endings",
           "table-completion",
           "diagram-labeling",
           "map-labeling",

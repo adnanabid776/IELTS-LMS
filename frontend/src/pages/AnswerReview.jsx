@@ -136,20 +136,20 @@ const AnswerReview = () => {
           <div
             key={index}
             className={`bg-white rounded-lg shadow p-6 border-l-4 ${item.isCorrect
-                ? "border-green-500"
-                : item.isPartial
-                  ? "border-yellow-500"
-                  : "border-red-500"
+              ? "border-green-500"
+              : item.isPartial
+                ? "border-yellow-500"
+                : "border-red-500"
               }`}
           >
             {/* Question */}
             <div className="flex items-start gap-3 mb-4">
               <span
                 className={`px-3 py-1 rounded-full text-sm font-bold ${item.isCorrect
-                    ? "bg-green-100 text-green-800"
-                    : item.isPartial
-                      ? "bg-yellow-100 text-yellow-800"
-                      : "bg-red-100 text-red-800"
+                  ? "bg-green-100 text-green-800"
+                  : item.isPartial
+                    ? "bg-yellow-100 text-yellow-800"
+                    : "bg-red-100 text-red-800"
                   }`}
               >
                 {item.isCorrect ? "✓" : item.isPartial ? "⚠" : "✗"}
@@ -225,21 +225,21 @@ const AnswerReview = () => {
                       <div
                         key={idx}
                         className={`p-2 rounded flex items-center gap-2 ${isUserCorrectPick
-                            ? "bg-green-50 border border-green-300"
-                            : isUserWrongPick
-                              ? "bg-red-50 border border-red-300"
-                              : isMissedCorrect
-                                ? "bg-yellow-50 border border-yellow-300"
-                                : "bg-gray-50"
+                          ? "bg-green-50 border border-green-300"
+                          : isUserWrongPick
+                            ? "bg-red-50 border border-red-300"
+                            : isMissedCorrect
+                              ? "bg-yellow-50 border border-yellow-300"
+                              : "bg-gray-50"
                           }`}
                       >
                         <span className={`font-bold text-sm min-w-[20px] ${isUserCorrectPick
-                            ? "text-green-700"
-                            : isUserWrongPick
-                              ? "text-red-700"
-                              : isMissedCorrect
-                                ? "text-yellow-700"
-                                : "text-gray-500"
+                          ? "text-green-700"
+                          : isUserWrongPick
+                            ? "text-red-700"
+                            : isMissedCorrect
+                              ? "text-yellow-700"
+                              : "text-gray-500"
                           }`}>
                           {optionLetter}.
                         </span>
@@ -274,8 +274,10 @@ const AnswerReview = () => {
                 item.questionType === "matching-information" ||
                 item.questionType === "matching-features" ||
                 item.questionType === "map-labeling" ||
+                item.questionType === "diagram-labeling" ||
+                item.questionType === "flow-chart-completion" ||
                 item.questionType === "form-completion") &&
-                item.items ? (
+                item.items && item.items.length > 0 ? (
                 <div className="mt-4">
                   <p className="text-sm font-semibold text-gray-700 mb-2">
                     Detailed Answers:
@@ -303,17 +305,27 @@ const AnswerReview = () => {
                             displayItems = displayItems.filter(subItem => subItem.text && subItem.text.includes("__________"));
                           }
                           return displayItems.map((subItem, idx) => {
-                            // Form completion uses sequence strings "1", "2" for keys. Other composites use label.
+                            // Form completion uses sequence strings "1", "2" for keys. 
+                            // Matching headings uses actual question numbers as keys (e.g. 16, 17, 18).
                             const itemKey = item.questionType === "form-completion"
                               ? String(idx + 1)
-                              : (subItem.label || String(idx + 1));
+                              : item.questionType === "matching-headings"
+                                ? (subItem.label || (item.questionNumber + idx).toString())
+                                : (subItem.label || String(idx + 1));
 
-                            const displayLabel = subItem.label || subItem.text;
+                            const displayLabel = item.questionType === "matching-headings"
+                              ? (subItem.label || (item.questionNumber + idx).toString())
+                              : (subItem.label || subItem.text);
 
                             let userVal =
                               typeof item.studentAnswer === "object"
-                                ? item.studentAnswer?.[itemKey]
+                                ? item.studentAnswer?.[itemKey] || item.studentAnswer?.[String(itemKey)] || ""
                                 : "";
+
+                            // FALLBACK: If lookup failed by label/number, try simple index (e.g. "1")
+                            if (!userVal && itemKey !== String(idx + 1) && typeof item.studentAnswer === "object") {
+                              userVal = item.studentAnswer?.[String(idx + 1)] || "";
+                            }
                             let correctVal = subItem.correctAnswer;
 
                             // [FIX] Convert Letter back to Roman Numeral for Matching Headings display
@@ -329,6 +341,16 @@ const AnswerReview = () => {
                                 "viii",
                                 "ix",
                                 "x",
+                                "xi",
+                                "xii",
+                                "xiii",
+                                "xiv",
+                                "xv",
+                                "xvi",
+                                "xvii",
+                                "xviii",
+                                "xix",
+                                "xx",
                               ];
                               const toRoman = (char) => {
                                 if (!char || char.length !== 1) return char;
@@ -337,8 +359,8 @@ const AnswerReview = () => {
                                 return romans[index] || char;
                               };
 
-                              // If value is a single letter (A-J), convert it.
-                              if (/^[A-J]$/i.test(userVal))
+                              // If value is a single letter (A-O), convert it.
+                              if (/^[A-O]$/i.test(userVal))
                                 userVal = toRoman(userVal);
 
                               // If correctVal is text, try to find it in options to get index
@@ -420,8 +442,8 @@ const AnswerReview = () => {
                     </p>
                     <p
                       className={`text-sm px-3 py-2 rounded ${item.isCorrect
-                          ? "bg-green-50 text-green-800 border border-green-200"
-                          : "bg-red-50 text-red-800 border border-red-200"
+                        ? "bg-green-50 text-green-800 border border-green-200"
+                        : "bg-red-50 text-red-800 border border-red-200"
                         }`}
                     >
                       {formatAnswer(item.studentAnswer)}
@@ -469,8 +491,8 @@ const AnswerReview = () => {
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
             className={`px-4 py-2 rounded-lg border ${currentPage === 1
-                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                : "bg-white text-blue-600 hover:bg-blue-50 border-blue-600"
+              ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+              : "bg-white text-blue-600 hover:bg-blue-50 border-blue-600"
               }`}
           >
             ← Previous
@@ -484,8 +506,8 @@ const AnswerReview = () => {
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
             className={`px-4 py-2 rounded-lg border ${currentPage === totalPages
-                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                : "bg-white text-blue-600 hover:bg-blue-50 border-blue-600"
+              ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+              : "bg-white text-blue-600 hover:bg-blue-50 border-blue-600"
               }`}
           >
             Next →
