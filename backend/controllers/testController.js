@@ -434,3 +434,25 @@ exports.bulkUploadTest = async (req, res) => {
     });
   }
 };
+// Sync/Recalculate all totals for a test (Repair Utility)
+exports.recalculateTotals = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { syncTestAndSectionTotals } = require("./questionController");
+
+    const result = await syncTestAndSectionTotals(null, id);
+
+    if (!result) {
+      return res.status(404).json({ error: "Test not found or could not be synced" });
+    }
+
+    res.json({
+      message: "Test totals recalculated successfully",
+      testId: id,
+      newTotal: result.testTotal,
+    });
+  } catch (error) {
+    console.error("Recalculate totals error:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+};

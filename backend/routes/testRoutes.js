@@ -31,6 +31,13 @@ router.get("/:id", testController.getTestById);
 //updating test
 router.put("/:id", roleCheck("admin", "teacher"), testController.updateTest);
 
+// Sync test totals (repair route)
+router.post(
+  "/:id/sync-totals",
+  roleCheck("admin", "teacher"),
+  testController.recalculateTotals,
+);
+
 //delete test
 router.delete("/:id", roleCheck("admin"), testController.deleteTest);
 

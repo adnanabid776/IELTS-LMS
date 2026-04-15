@@ -2,6 +2,87 @@ const Question = require("../models/Question");
 const Section = require("../models/Section");
 const Test = require("../models/Test");
 
+// Helper function to keep Test and Section totals in sync with reality
+const syncTestAndSectionTotals = async (sectionId, testId) => {
+  try {
+    if (!sectionId && !testId) return;
+
+    // Resolve IDs if only one is provided
+    if (!testId && sectionId) {
+      const section = await Section.findById(sectionId);
+      if (section) testId = section.testId;
+    }
+    if (!sectionId && testId) {
+      // If we only have testId, we might need to sync ALL sections of that test
+      const allSections = await Section.find({ testId });
+      for (const sec of allSections) {
+        await syncTestAndSectionTotals(sec._id, testId);
+      }
+      // Return final state
+      const updatedTest = await Test.findById(testId);
+      return { testTotal: updatedTest?.totalQuestions };
+    }
+
+    // 1. Sync Section Total
+    const sectionQuestions = await Question.find({ sectionId });
+    let sectionTotal = 0;
+    
+    // Exact list of composite types from resultController.js
+    const compositeTypes = [
+      "map-labeling",
+      "matching-headings",
+      "matching-information",
+      "matching-features",
+      "table-completion",
+      "form-completion",
+      "flow-chart-completion",
+      "diagram-labeling"
+    ];
+
+    sectionQuestions.forEach((q) => {
+      // IELTS logic: Each sub-item in a composite question counts as 1.
+      // Standard questions count as 1.
+      if (compositeTypes.includes(q.questionType) && q.items && q.items.length > 0) {
+        let itemsCount = q.items.length;
+        if (q.questionType === "form-completion") {
+          itemsCount = q.items.filter(item => item.text && item.text.includes("__________")).length;
+        }
+        sectionTotal += itemsCount > 0 ? itemsCount : 1;
+      } else {
+        sectionTotal += 1;
+      }
+    });
+    await Section.findByIdAndUpdate(sectionId, { totalQuestions: sectionTotal });
+
+    // 2. Sync Test Total Questions and Total Sections
+    const sections = await Section.find({ testId });
+    let testTotal = 0;
+    for (const sec of sections) {
+      const questions = await Question.find({ sectionId: sec._id });
+      questions.forEach((q) => {
+        if (compositeTypes.includes(q.questionType) && q.items && q.items.length > 0) {
+          let itemsCount = q.items.length;
+          if (q.questionType === "form-completion") {
+            itemsCount = q.items.filter(item => item.text && item.text.includes("__________")).length;
+          }
+          testTotal += itemsCount > 0 ? itemsCount : 1;
+        } else {
+          testTotal += 1;
+        }
+      });
+    }
+
+    await Test.findByIdAndUpdate(testId, {
+      totalQuestions: testTotal,
+      totalSections: sections.length,
+    });
+
+    return { sectionTotal, testTotal };
+  } catch (error) {
+    console.error("Sync Totals Error:", error);
+  }
+};
+
 //creating a Question
 exports.createQuestion = async (req, res) => {
   try {
@@ -73,15 +154,8 @@ exports.createQuestion = async (req, res) => {
       summaryConfig, 
     });
 
-    //update the section's total questions
-    await Section.findByIdAndUpdate(sectionId, {
-      $inc: { totalQuestions: 1 },
-    });
-
-    //update the test's totalQuestions
-    await Test.findByIdAndUpdate(section.testId, {
-      $inc: { totalQuestions: 1 },
-    });
+    // Sync totals
+    await syncTestAndSectionTotals(sectionId, section.testId);
     res.status(201).json({
       message: "Question Created Successfully!",
       _id: question._id,
@@ -189,8 +263,10 @@ exports.updateQuestion = async (req, res) => {
       { new: true, runValidators: true },
     );
 
-    if (!question) {
-      return res.status(404).json({ error: "Question not found" });
+    // Sync totals if items changed
+    if (items !== undefined) {
+      const section = await Section.findById(question.sectionId);
+      await syncTestAndSectionTotals(question.sectionId, section?.testId);
     }
 
     res.json({
@@ -218,17 +294,8 @@ exports.deleteQuestion = async (req, res) => {
     // Delete question
     await Question.findByIdAndDelete(id);
 
-    // Update section's totalQuestions
-    await Section.findByIdAndUpdate(question.sectionId, {
-      $inc: { totalQuestions: -1 },
-    });
-
-    // Update test's totalQuestions
-    if (section) {
-      await Test.findByIdAndUpdate(section.testId, {
-        $inc: { totalQuestions: -1 },
-      });
-    }
+    // Sync totals
+    await syncTestAndSectionTotals(question.sectionId, section?.testId);
 
     res.json({
       message: "Question deleted successfully",
@@ -259,24 +326,11 @@ exports.bulkDeleteQuestions = async (req, res) => {
     // 2. Delete questions
     await Question.deleteMany({ _id: { $in: questionIds } });
 
-    // 3. Update section counts
-    const sectionCounts = {};
-    questions.forEach((q) => {
-      if (q.sectionId) {
-        sectionCounts[q.sectionId] = (sectionCounts[q.sectionId] || 0) + 1;
-      }
-    });
-
-    for (const [sectionId, count] of Object.entries(sectionCounts)) {
-      const section = await Section.findByIdAndUpdate(sectionId, {
-        $inc: { totalQuestions: -count },
-      });
-
-      if (section && section.testId) {
-        await Test.findByIdAndUpdate(section.testId, {
-          $inc: { totalQuestions: -count },
-        });
-      }
+    // 3. Sync all affected sections and the test
+    const sectionIds = Object.keys(sectionCounts);
+    for (const sectionId of sectionIds) {
+      const section = await Section.findById(sectionId);
+      await syncTestAndSectionTotals(sectionId, section?.testId);
     }
 
     res.json({
@@ -381,17 +435,8 @@ exports.bulkCreateQuestions = async (req, res) => {
     // Insert all questions
     const createdQuestions = await Question.insertMany(questions);
 
-    // Update section's totalQuestions
-    await Section.findByIdAndUpdate(sectionId, {
-      $inc: { totalQuestions: questions.length },
-    });
-
-    // Update test's totalQuestions (FIXED!)
-    if (section) {
-      await Test.findByIdAndUpdate(section.testId, {
-        $inc: { totalQuestions: questions.length },
-      });
-    }
+    // Sync totals
+    await syncTestAndSectionTotals(sectionId, section.testId);
 
     res.status(201).json({
       message: `${createdQuestions.length} questions created successfully`,
@@ -604,3 +649,5 @@ exports.getSectionsForDropdown = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
+// Export the sync helper for use in Test controller or repair routes
+exports.syncTestAndSectionTotals = syncTestAndSectionTotals;
