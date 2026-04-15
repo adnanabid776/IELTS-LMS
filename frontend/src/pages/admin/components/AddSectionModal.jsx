@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createSection } from "../../../services/api";
 import { toast } from "react-toastify";
 import { uploadAudio, uploadImage } from "../../../services/uploadApi";
+import { resolveImageUrl } from "../../../utils/urlHelper";
 
 const AddSectionModal = ({
   testId,
@@ -25,6 +26,7 @@ const AddSectionModal = ({
     // Writing fields
     taskType: "task1",
     taskImageUrl: "",
+    passageImageUrl: "",
     wordLimit: 150,
   });
   const [loading, setLoading] = useState(false);
@@ -61,6 +63,23 @@ const AddSectionModal = ({
     } catch (error) {
       console.error("Image upload error:", error);
       toast.error("Failed to upload image file.");
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
+  const handlePassageImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    try {
+      setUploadingImage(true);
+      const data = await uploadImage(file);
+      setFormData((prev) => ({ ...prev, passageImageUrl: data.url }));
+      toast.success("Passage image uploaded successfully!");
+    } catch (error) {
+      console.error("Image upload error:", error);
+      toast.error("Failed to upload passage image.");
     } finally {
       setUploadingImage(false);
     }
@@ -251,6 +270,34 @@ const AddSectionModal = ({
                 read
               </p>
             </div>
+
+            {/* Passage Image URL (for Reading) */}
+            {testModule === "reading" && (
+              <div className="bg-amber-50 p-4 rounded-xl border border-amber-200">
+                <label className="block text-sm font-bold text-amber-800 mb-2">
+                  Passage Image (For General Reading Ads/Notices)
+                </label>
+                <div className="flex flex-col md:flex-row gap-3">
+                  <input
+                    type="url"
+                    name="passageImageUrl"
+                    value={formData.passageImageUrl}
+                    onChange={handleChange}
+                    className="flex-1 px-4 py-2.5 border-2 border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white"
+                    placeholder="https://example.com/passage-image.png"
+                  />
+                  <label className={`md:w-48 flex items-center justify-center px-4 py-2.5 rounded-lg font-semibold cursor-pointer transition ${
+                    uploadingImage ? "bg-gray-400 text-gray-200" : "bg-amber-600 text-white hover:bg-amber-700 shadow-md"
+                  }`}>
+                    {uploadingImage ? "Uploading..." : "🖼️ Upload Image"}
+                    <input type="file" accept="image/*" onChange={handlePassageImageUpload} className="hidden" disabled={uploadingImage} />
+                  </label>
+                </div>
+                <p className="text-[10px] text-amber-700 mt-2 font-medium">
+                  Use this for advertisements, notices, or visual aids in General Training Reading.
+                </p>
+              </div>
+            )}
 
             {/* Audio URL (for Listening) */}
             <div>

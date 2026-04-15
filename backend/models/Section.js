@@ -27,6 +27,10 @@ const sectionSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    passageImageUrl: {
+      type: String,
+      trim: true,
+    },
 
     // For Listening: audio file URL
     audioUrl: {

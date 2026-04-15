@@ -16,6 +16,7 @@ import DashboardLayout from "../components/Layout/DashboardLayout";
 import QuestionRenderer from "../components/QuestionRenderer";
 import WritingTestTaking from "./WritingTestTaking";
 import OfflineQueue from "../utils/OfflineQueue";
+import { resolveImageUrl } from "../utils/urlHelper";
 
 const TestTaking = () => {
   const { testId } = useParams();
@@ -811,6 +812,15 @@ const TestTaking = () => {
                   <h4 className="text-sm font-bold text-gray-800">Reading Passage</h4>
                 </div>
                 <div className="overflow-y-auto flex-1 p-4">
+                  {currentSection.passageImageUrl && (
+                    <div className="mb-6 rounded-xl overflow-hidden shadow-sm border border-gray-100 flex justify-center bg-gray-50 p-2">
+                       <img 
+                          src={resolveImageUrl(currentSection.passageImageUrl)} 
+                          alt="Passage Illustration" 
+                          className="max-w-full h-auto rounded-lg"
+                       />
+                    </div>
+                  )}
                   <div className="prose max-w-none text-gray-700 whitespace-pre-wrap leading-relaxed text-sm">
                     {currentSection.passageText}
                   </div>

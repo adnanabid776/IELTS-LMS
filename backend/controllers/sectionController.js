@@ -22,6 +22,7 @@ exports.createSection = async (req, res) => {
       // Writing fields
       taskType,
       taskImageUrl,
+      passageImageUrl,
       wordLimit,
       // Cue card (for writing prompts)
       cueCard,
@@ -57,6 +58,7 @@ exports.createSection = async (req, res) => {
       duration,
       taskType,
       taskImageUrl,
+      passageImageUrl,
       wordLimit,
       cueCard,
     });
@@ -140,6 +142,7 @@ exports.updateSection = async (req, res) => {
       // Writing fields
       taskType,
       taskImageUrl,
+      passageImageUrl,
       wordLimit,
       // Cue card
       cueCard,
@@ -160,6 +163,7 @@ exports.updateSection = async (req, res) => {
         duration,
         taskType,
         taskImageUrl,
+        passageImageUrl,
         wordLimit,
         cueCard,
       },

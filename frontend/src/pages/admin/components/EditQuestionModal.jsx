@@ -401,10 +401,14 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
         formData.questionType === "map-labeling" ||
         formData.questionType === "matching-features" ||
         formData.questionType === "table-completion" ||
-        formData.questionType === "form-completion"
+        formData.questionType === "form-completion" ||
+        formData.questionType === "flow-chart-completion" ||
+        formData.questionType === "diagram-labeling"
       ) {
         if (formData.questionType === "form-completion") {
             submitData.items = formData.items.filter((i) => i.label.trim() || i.text.trim() || i.correctAnswer.trim());
+        } else if (["flow-chart-completion", "diagram-labeling", "map-labeling"].includes(formData.questionType)) {
+            submitData.items = formData.items.filter((i) => i.text.trim() || i.label.trim());
         } else {
             submitData.items = formData.items.filter((i) => i.text.trim());
         }
@@ -664,15 +668,46 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
                 </div>
               )}
 
-            {/* FORM COMPLETION SPECIFIC UI */}
-            {formData.questionType === "form-completion" && (
+            {/* FORM / FLOW-CHART / DIAGRAM / MAP COMPLETION UI */}
+            {(formData.questionType === "form-completion" ||
+              formData.questionType === "flow-chart-completion" ||
+              formData.questionType === "diagram-labeling" ||
+              formData.questionType === "map-labeling") && (
               <div className="space-y-6">
+                 {/* Image Upload for visual questions */}
+                 {(formData.questionType === "flow-chart-completion" ||
+                  formData.questionType === "diagram-labeling" ||
+                  formData.questionType === "map-labeling") && (
+                  <div className="bg-blue-50 p-4 rounded-lg border-2 border-blue-200">
+                    <label className="block text-sm font-bold text-gray-700 mb-2">
+                       Question Image (Flowchart/Diagram/Map)
+                    </label>
+                    <div className="flex flex-col md:flex-row gap-3">
+                      <input
+                        type="url"
+                        name="imageUrl"
+                        value={formData.imageUrl}
+                        onChange={handleChange}
+                        className="flex-1 px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                        placeholder="https://example.com/diagram.png"
+                      />
+                      <label className={`md:w-48 flex items-center justify-center px-4 py-2 rounded-lg font-semibold cursor-pointer transition ${
+                        uploadingImage ? "bg-gray-400 text-gray-200" : "bg-blue-600 text-white hover:bg-blue-700"
+                      }`}>
+                        {uploadingImage ? "Uploading..." : "📁 Upload Image"}
+                        <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" disabled={uploadingImage} />
+                      </label>
+                    </div>
+                  </div>
+                )}
+
                 <div className="bg-green-50 p-4 rounded-lg border-2 border-green-200">
-                  <label className="block text-sm font-bold text-gray-700 mb-3">
-                    Form Builder <span className="text-red-500">*</span>
-                  </label>
+                  <h4 className="font-bold text-gray-700 mb-2">
+                    {formData.questionType === "flow-chart-completion" ? "📜 Flow Chart Builder" : "🧩 Items Builder"}
+                  </h4>
                   <p className="text-xs text-gray-500 mb-4">
-                    Create the visual rows for the form. Use the <strong>Label</strong> column for the left side (e.g. "Name:") and the <strong>Value</strong> column for the right side. Include <code className="bg-gray-200 px-1 rounded">__________</code> (10 underscores) in the Value if it requires a student answer. If the row is just a sub-heading, only fill the Label.
+                    Add the steps or labels. Use <strong>Label</strong> for the identifier (e.g. "Step 1" or "6") and <strong>Text</strong> for the description. 
+                    Include <code className="bg-gray-200 px-1 rounded">__________</code> (10 underscores) for blanks.
                   </p>
 
                   <div className="space-y-4">

@@ -326,7 +326,14 @@ exports.bulkDeleteQuestions = async (req, res) => {
     // 2. Delete questions
     await Question.deleteMany({ _id: { $in: questionIds } });
 
-    // 3. Sync all affected sections and the test
+    // 3. Update section counts for syncing
+    const sectionCounts = {};
+    questions.forEach((q) => {
+      if (q.sectionId) {
+        sectionCounts[q.sectionId] = (sectionCounts[q.sectionId] || 0) + 1;
+      }
+    });
+
     const sectionIds = Object.keys(sectionCounts);
     for (const sectionId of sectionIds) {
       const section = await Section.findById(sectionId);

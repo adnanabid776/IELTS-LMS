@@ -1169,7 +1169,7 @@ const ListeningTestTaking = () => {
       {currentSection?.audioUrl && (
         <div className="mb-6">
           <AudioPlayer
-            key={currentSection._id}
+            key={currentSection.audioUrl}
             audioUrl={currentSection.audioUrl}
             title={currentSection.title}
             playOnce={!!currentSection.playOnceOnly}

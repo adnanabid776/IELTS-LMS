@@ -13,6 +13,7 @@ import {
 import { toast } from "react-toastify";
 import DashboardLayout from "../components/Layout/DashboardLayout";
 import EssayEditor from "../components/EssayEditor";
+import { resolveImageUrl } from "../utils/urlHelper";
 
 const WritingTestTaking = () => {
   const { testId } = useParams();
@@ -433,7 +434,7 @@ const WritingTestTaking = () => {
         {displayTask.taskImageUrl && (
           <div className="mb-6">
             <img
-              src={displayTask.taskImageUrl}
+              src={resolveImageUrl(displayTask.taskImageUrl)}
               alt="Task diagram"
               className="w-full max-w-3xl mx-auto rounded-lg border-2 border-gray-200"
             />

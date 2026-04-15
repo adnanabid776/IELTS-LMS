@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { updateSection } from "../../../services/api";
 import { toast } from "react-toastify";
 import { uploadAudio, uploadImage } from "../../../services/uploadApi";
+import { resolveImageUrl } from "../../../utils/urlHelper";
 
 const EditSectionModal = ({ section, testModule, onClose, onSuccess }) => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,7 @@ const EditSectionModal = ({ section, testModule, onClose, onSuccess }) => {
     // Writing fields
     taskType: "task1",
     taskImageUrl: "",
+    passageImageUrl: "",
     wordLimit: 150,
   });
   const [loading, setLoading] = useState(false);
@@ -59,6 +61,23 @@ const EditSectionModal = ({ section, testModule, onClose, onSuccess }) => {
     }
   };
 
+  const handlePassageImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    try {
+      setUploadingImage(true);
+      const data = await uploadImage(file);
+      setFormData((prev) => ({ ...prev, passageImageUrl: data.url }));
+      toast.success("Passage image uploaded successfully!");
+    } catch (error) {
+      console.error("Image upload error:", error);
+      toast.error("Failed to upload passage image.");
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
   useEffect(() => {
     if (section) {
       setFormData({
@@ -76,6 +95,7 @@ const EditSectionModal = ({ section, testModule, onClose, onSuccess }) => {
         // Writing fields
         taskType: section.taskType || "task1",
         taskImageUrl: section.taskImageUrl || "",
+        passageImageUrl: section.passageImageUrl || "",
         wordLimit: section.wordLimit || 150,
       });
     }
@@ -236,6 +256,37 @@ const EditSectionModal = ({ section, testModule, onClose, onSuccess }) => {
                 placeholder="Paste the reading passage here..."
               />
             </div>
+
+            {/* Passage Image URL (for Reading) */}
+            {testModule === "reading" && (
+              <div className="bg-amber-50 p-4 rounded-xl border border-amber-200 shadow-sm">
+                <label className="block text-sm font-bold text-amber-800 mb-2">
+                  Passage Image (Ads/Notices/Visuals)
+                </label>
+                <div className="flex flex-col md:flex-row gap-3">
+                  <input
+                    type="url"
+                    name="passageImageUrl"
+                    value={formData.passageImageUrl}
+                    onChange={handleChange}
+                    className="flex-1 px-4 py-2.5 border-2 border-amber-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white"
+                    placeholder="https://example.com/passage-image.png"
+                  />
+                  <label className={`md:w-48 flex items-center justify-center px-4 py-2.5 rounded-lg font-semibold cursor-pointer transition ${
+                    uploadingImage ? "bg-gray-400 text-gray-200" : "bg-amber-600 text-white hover:bg-amber-700 shadow-md"
+                  }`}>
+                    {uploadingImage ? "Uploading..." : "🖼️ Upload Image"}
+                    <input type="file" accept="image/*" onChange={handlePassageImageUpload} className="hidden" disabled={uploadingImage} />
+                  </label>
+                </div>
+                {formData.passageImageUrl && (
+                  <div className="mt-3 p-2 bg-white rounded border border-amber-200">
+                    <p className="text-[10px] text-amber-600 font-bold mb-1 uppercase">Preview:</p>
+                    <img src={resolveImageUrl(formData.passageImageUrl)} alt="Preview" className="max-h-32 rounded" />
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Audio URL */}
             <div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { resolveImageUrl } from "../utils/urlHelper";
 
 const QuestionRenderer = ({ question, answers, handleAnswerChange, handleSummaryAnswerChange }) => {
   return (
@@ -691,7 +692,7 @@ const QuestionRenderer = ({ question, answers, handleAnswerChange, handleSummary
         <div className="ml-14 mt-4 overflow-x-auto">
           {question.imageUrl && (
             <div className="mb-6 object-contain overflow-hidden rounded border border-gray-200 flex justify-center bg-white p-2">
-              <img src={question.imageUrl} alt="Form Diagram" className="max-w-full h-auto max-h-96" />
+              <img src={resolveImageUrl(question.imageUrl)} alt="Form Diagram" className="max-w-full h-auto max-h-96" />
             </div>
           )}
           <div className="border-2 border-gray-800 rounded bg-white max-w-4xl overflow-hidden shadow-sm">
@@ -772,7 +773,7 @@ const QuestionRenderer = ({ question, answers, handleAnswerChange, handleSummary
           {question.imageUrl && (
             <div className="mb-6 object-contain overflow-hidden rounded border border-gray-200 flex justify-center bg-white p-2">
               <img
-                src={question.imageUrl}
+                src={resolveImageUrl(question.imageUrl)}
                 alt="Writing Task Prompt Diagram"
                 className="max-w-full h-auto max-h-[500px]"
               />
