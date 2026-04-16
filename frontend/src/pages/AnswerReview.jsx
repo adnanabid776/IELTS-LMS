@@ -323,9 +323,9 @@ const AnswerReview = () => {
                                 : "";
 
                             // FALLBACK: If lookup failed by label/number, try simple index (e.g. "1")
-                            if (!userVal && itemKey !== String(idx + 1) && typeof item.studentAnswer === "object") {
-                              userVal = item.studentAnswer?.[String(idx + 1)] || "";
-                            }
+                            // if (!userVal && itemKey !== String(idx + 1) && typeof item.studentAnswer === "object") {
+                            //   userVal = item.studentAnswer?.[String(idx + 1)] || "";
+                            // }
                             let correctVal = subItem.correctAnswer;
 
                             // [FIX] Convert Letter back to Roman Numeral for Matching Headings display

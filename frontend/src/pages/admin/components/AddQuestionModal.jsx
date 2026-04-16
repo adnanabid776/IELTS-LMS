@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { createQuestion } from "../../../services/api";
 import { toast } from "react-toastify";
+import { uploadImage } from "../../../services/uploadApi";
 
 const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
   const [formData, setFormData] = useState({
@@ -37,6 +38,7 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const questionTypes = [
     {
@@ -122,6 +124,23 @@ const AddQuestionModal = ({ sections, onClose, onSuccess }) => {
   const currentType = questionTypes.find(
     (t) => t.value === formData.questionType,
   );
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    try {
+      setUploadingImage(true);
+      const data = await uploadImage(file);
+      setFormData((prev) => ({ ...prev, imageUrl: data.url }));
+      toast.success("Image uploaded successfully!");
+    } catch (error) {
+      console.error("Image upload error:", error);
+      toast.error("Failed to upload image file.");
+    } finally {
+      setUploadingImage(false);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;

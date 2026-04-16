@@ -210,6 +210,8 @@ exports.bulkUploadTest = async (req, res) => {
       difficulty,
       description,
       instructions,
+      testType,
+      testFormat,
       sections,
     } = req.body;
     const userId = req.user.userId;
@@ -348,6 +350,8 @@ exports.bulkUploadTest = async (req, res) => {
       duration,
       difficulty: difficulty || "medium",
       instructions: instructions || "",
+      testType: testType || "academic",
+      testFormat: testFormat || "full",
       createdBy: userId,
       totalQuestions: totalQuestionCount,
       totalSections: sections.length,
