@@ -257,11 +257,11 @@ const EditSectionModal = ({ section, testModule, onClose, onSuccess }) => {
               />
             </div>
 
-            {/* Passage Image URL (for Reading) */}
-            {testModule === "reading" && (
+            {/* Passage Image URL (for Reading & Listening) */}
+            {(testModule === "reading" || testModule === "listening") && (
               <div className="bg-amber-50 p-4 rounded-xl border border-amber-200 shadow-sm">
                 <label className="block text-sm font-bold text-amber-800 mb-2">
-                  Passage Image (Ads/Notices/Visuals)
+                  {testModule === "listening" ? "Visuals / Diagrams (For Listening)" : "Passage Image (Ads/Notices/Visuals)"}
                 </label>
                 <div className="flex flex-col md:flex-row gap-3">
                   <input

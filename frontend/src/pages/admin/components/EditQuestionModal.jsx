@@ -325,7 +325,7 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
       formData.questionType === "form-completion"
     ) {
       const validItems = formData.items.filter(
-        (item) => item.text.trim() || item.correctAnswer,
+        (item) => (item.text && item.text.trim()) || (item.label && typeof item.label === 'string' ? item.label.trim() : item.label) || (item.correctAnswer && typeof item.correctAnswer === 'string' ? item.correctAnswer.trim() : item.correctAnswer)
       );
       if (validItems.length < 1) {
         // Changed to 1 to match AddModal logic, or keep 2? matching usually needs pairs but 1 is min tech requirement
@@ -425,11 +425,11 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
         formData.questionType === "diagram-labeling"
       ) {
         if (formData.questionType === "form-completion") {
-            submitData.items = formData.items.filter((i) => i.label.trim() || i.text.trim() || i.correctAnswer.trim());
+            submitData.items = formData.items.filter((i) => (i.label && i.label.trim()) || (i.text && i.text.trim()) || (i.correctAnswer && i.correctAnswer.trim()));
         } else if (["flow-chart-completion", "diagram-labeling", "map-labeling"].includes(formData.questionType)) {
-            submitData.items = formData.items.filter((i) => i.text.trim() || i.label.trim());
+            submitData.items = formData.items.filter((i) => (i.text && i.text.trim()) || (i.label && i.label.trim()));
         } else {
-            submitData.items = formData.items.filter((i) => i.text.trim());
+            submitData.items = formData.items.filter((i) => (i.text && i.text.trim()) || (i.label && i.label.trim()) || (i.correctAnswer && i.correctAnswer.trim()));
         }
         submitData.features = formData.features.filter((f) =>
           typeof f === "string" ? f.trim() : f.text?.trim(),
@@ -1415,7 +1415,7 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
                         <div className="flex-shrink-0">
                           <input
                             type="text"
-                            value={item.label}
+                            value={item.label || ""}
                             onChange={(e) =>
                               handleItemChange(index, "label", e.target.value)
                             }
@@ -1426,7 +1426,7 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
                         <div className="flex-1">
                           <input
                             type="text"
-                            value={item.correctAnswer}
+                            value={item.correctAnswer || ""}
                             onChange={(e) =>
                               handleItemChange(
                                 index,

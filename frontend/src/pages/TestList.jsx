@@ -274,9 +274,11 @@ const TestList = () => {
 
                 <div className="flex items-center gap-1.5">
                   <span className={`px-2 py-1 rounded text-[10px] font-bold tracking-tight ${
-                    test.testType === "general" ? "bg-teal-100 text-teal-800" : "bg-indigo-100 text-indigo-800"
+                    test.module === "listening" 
+                      ? "bg-gray-100 text-gray-800" // Shared look
+                      : test.testType === "general" ? "bg-teal-100 text-teal-800" : "bg-indigo-100 text-indigo-800"
                   }`}>
-                    {(test.testType || "academic").toUpperCase()}
+                    {test.module === "listening" ? "SHARED (A&G)" : (test.testType || "academic").toUpperCase()}
                   </span>
 
                   {/* Difficulty Badge */}

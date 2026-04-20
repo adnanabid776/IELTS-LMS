@@ -14,6 +14,10 @@ const TestManagement = () => {
   const [filteredTests, setFilteredTests] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
+
   // Filters
   const [moduleFilter, setModuleFilter] = useState("all");
   const [difficultyFilter, setDifficultyFilter] = useState("all");
@@ -76,6 +80,7 @@ const TestManagement = () => {
     }
 
     setFilteredTests(filtered);
+    setCurrentPage(1); // Reset to first page on filter change
   };
 
   const handleDelete = async (testId, testTitle) => {
@@ -108,7 +113,13 @@ const TestManagement = () => {
    *   2+ sections → "full"
    */
   const getEffectiveFormat = (test) => {
-    if (test.testFormat === "mock") return "mock";
+    // Let the database be the source of truth if explicitly set
+    if (test.testFormat && test.testFormat !== "full" && test.testFormat !== "item-wise") 
+      return test.testFormat; 
+    
+    if (test.testFormat === "item-wise" || !test.testFormat === "full")
+      return test.testFormat;
+
     const sections = test.totalSections || 1;
     return sections === 1 ? "item-wise" : "full";
   };
@@ -139,6 +150,17 @@ const TestManagement = () => {
     reading: tests.filter((t) => t.module === "reading").length,
     listening: tests.filter((t) => t.module === "listening").length,
     writing: tests.filter((t) => t.module === "writing").length,
+  };
+
+  // Pagination Logic
+  const indexOfLastTest = currentPage * itemsPerPage;
+  const indexOfFirstTest = indexOfLastTest - itemsPerPage;
+  const currentTests = filteredTests.slice(indexOfFirstTest, indexOfLastTest);
+  const totalPages = Math.ceil(filteredTests.length / itemsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -316,14 +338,14 @@ const TestManagement = () => {
       {/* Tests Grid */}
       {!loading && filteredTests.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredTests.map((test) => (
+          {currentTests.map((test) => (
             <div
               key={test._id}
-              className="bg-white rounded-lg shadow-lg border-2 border-gray-200 hover:border-blue-500 transition overflow-hidden"
+              className="bg-white rounded-lg shadow-lg border-2 border-gray-200 hover:border-blue-500 transition overflow-hidden flex flex-col"
             >
               {/* Card Header */}
               <div
-                className={`bg-gradient-to-r ${getModuleColor(test.module)} text-white px-4 py-3`}
+                className={`bg-gradient-to-r ${getModuleColor(test.module)} text-white px-4 py-3 shrink-0`}
               >
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -334,17 +356,17 @@ const TestManagement = () => {
                         {test.module}
                       </span>
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-white/30 tracking-tight">
+                    <div className="flex items-center gap-1.5 flex-wrap justify-end">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-white/30 tracking-tight whitespace-nowrap">
                         {getEffectiveFormat(test).toUpperCase()}
                       </span>
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-tight ${
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-tight whitespace-nowrap ${
                         test.testType === "general" ? "bg-teal-400/30" : "bg-indigo-400/30"
                       }`}>
                         {(test.testType || "academic").toUpperCase()}
                       </span>
                       <span
-                        className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                        className={`px-2 py-0.5 rounded text-[10px] font-bold whitespace-nowrap ${
                           test.difficulty === "easy"
                             ? "bg-green-300/80 text-green-900"
                             : test.difficulty === "medium"
@@ -359,12 +381,12 @@ const TestManagement = () => {
               </div>
 
               {/* Card Content */}
-              <div className="p-4">
+              <div className="p-4 flex-1 flex flex-col">
                 <h3 className="font-bold text-gray-800 mb-2 text-lg line-clamp-2">
                   {test.title}
                 </h3>
 
-                <div className="space-y-2 text-sm text-gray-600 mb-4">
+                <div className="space-y-2 text-sm text-gray-600 mb-4 flex-1">
                   <div className="flex items-center gap-2">
                     <span className="font-semibold">Sections:</span>
                     <span>{test.totalSections || 0}</span>
@@ -380,7 +402,7 @@ const TestManagement = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 shrink-0">
                   <button
                     onClick={() =>
                       navigate(`/admin/tests/${test._id}/sections`)
@@ -407,6 +429,58 @@ const TestManagement = () => {
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Pagination Controls */}
+      {!loading && filteredTests.length > itemsPerPage && (
+        <div className="mt-8 flex justify-center items-center gap-2">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+          >
+            Previous
+          </button>
+          
+          <div className="flex gap-1">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+              // Show limited pages (first, last, and current neighbors)
+              if (
+                page === 1 || 
+                page === totalPages || 
+                (page >= currentPage - 1 && page <= currentPage + 1)
+              ) {
+                return (
+                  <button
+                    key={page}
+                    onClick={() => handlePageChange(page)}
+                    className={`w-10 h-10 rounded-lg font-medium transition ${
+                      currentPage === page
+                        ? "bg-blue-600 text-white shadow-md cursor-default"
+                        : "text-gray-700 hover:bg-blue-50 hover:text-blue-600 border border-transparent"
+                    }`}
+                  >
+                    {page}
+                  </button>
+                );
+              } else if (
+                page === currentPage - 2 || 
+                page === currentPage + 2
+              ) {
+                return <span key={page} className="w-8 flex items-center justify-center text-gray-400">...</span>;
+              }
+              return null;
+            })}
+          </div>
+
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+          >
+            Next
+          </button>
         </div>
       )}
 

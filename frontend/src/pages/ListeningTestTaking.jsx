@@ -34,6 +34,12 @@ const ListeningTestTaking = () => {
     [sections, currentSectionIndex],
   );
 
+  // Get global audio section (typically section 1 holds the full audio)
+  const globalAudioSection = useMemo(
+    () => sections.find((s) => s.audioUrl) || null,
+    [sections]
+  );
+
   // Get questions for current section
   const currentQuestions = useMemo(
     () => questions.filter((q) => q.sectionId === currentSection?._id),
@@ -389,12 +395,12 @@ const ListeningTestTaking = () => {
   };
 
   const handleAudioEnded = async () => {
-    if (!currentSection || !session) return;
+    if (!globalAudioSection || !session) return;
     try {
       const token = localStorage.getItem("token");
       await axios.post(
         `${API_URL}/sessions/mark-audio-played`,
-        { sessionId: session._id, sectionId: currentSection._id },
+        { sessionId: session._id, sectionId: globalAudioSection._id },
         { headers: { Authorization: `Bearer ${token}` } },
       );
       // Update local session state to reflect change immediately
@@ -402,7 +408,7 @@ const ListeningTestTaking = () => {
         ...prev,
         audioPlayedSections: [
           ...(prev.audioPlayedSections || []),
-          currentSection._id,
+          globalAudioSection._id,
         ],
       }));
     } catch (error) {
@@ -1166,16 +1172,16 @@ const ListeningTestTaking = () => {
       </div>
 
       {/* Audio Player */}
-      {currentSection?.audioUrl && (
+      {globalAudioSection?.audioUrl && (
         <div className="mb-6">
           <AudioPlayer
-            key={currentSection.audioUrl}
-            audioUrl={currentSection.audioUrl}
-            title={currentSection.title}
-            playOnce={!!currentSection.playOnceOnly}
-            disableSeeking={!!currentSection.disableReplay}
+            key={globalAudioSection.audioUrl}
+            audioUrl={globalAudioSection.audioUrl}
+            title={test?.title || "Listening Test Audio"}
+            playOnce={!!globalAudioSection.playOnceOnly}
+            disableSeeking={!!globalAudioSection.disableReplay}
             initialPlayed={session?.audioPlayedSections?.includes(
-              currentSection._id,
+              globalAudioSection._id,
             )}
             onEnded={handleAudioEnded}
           />

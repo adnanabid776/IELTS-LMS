@@ -54,7 +54,10 @@ exports.getAllTests = async (req, res) => {
 
     // Filter by studentType for students
     if (req.user.role === "student") {
-      filter.testType = req.userDoc.studentType || "academic";
+      filter.$or = [
+        { testType: req.userDoc.studentType || "academic" },
+        { module: "listening" } // Universal bypass for listening
+      ];
     }
 
     const tests = await Test.find(filter)
@@ -85,10 +88,10 @@ exports.getTestById = async (req, res) => {
       return res.status(404).json({ error: "Test not found" });
     }
 
-    // Security check: If student, ensure testType matches
-    if (req.user.role === "student") {
+    // Security check: If student, ensure testType matches (Universal bypass for listening)
+    if (req.user.role === "student" && test.module !== "listening") {
       const studentType = req.userDoc?.studentType || "academic";
-      if (test.testType !== studentType) {
+      if (test.testType !== studentType && test.testType !== "both") {
         return res.status(403).json({
           error: "Unauthorized: This test is not in your current category (Academic/General)",
         });
@@ -116,6 +119,7 @@ exports.updateTest = async (req, res) => {
     const { id } = req.params;
     const {
       title,
+      module,
       description,
       duration,
       difficulty,
@@ -129,6 +133,7 @@ exports.updateTest = async (req, res) => {
       id,
       {
         title,
+        module,
         description,
         duration,
         difficulty,

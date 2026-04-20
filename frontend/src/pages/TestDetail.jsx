@@ -99,6 +99,16 @@ const TestDetail = () => {
 
               <span
                 className={`px-2 py-1 rounded text-xs font-semibold ${
+                  test.module === "listening"
+                    ? "bg-gray-100 text-gray-800"
+                    : test.testType === "general" ? "bg-teal-100 text-teal-800" : "bg-indigo-100 text-indigo-800"
+                }`}
+              >
+                {test.module === "listening" ? "SHARED (A&G)" : (test.testType || "academic").toUpperCase()}
+              </span>
+              
+              <span
+                className={`px-2 py-1 rounded text-xs font-semibold ${
                   test.difficulty === "easy"
                     ? "bg-green-100 text-green-700"
                     : test.difficulty === "medium"

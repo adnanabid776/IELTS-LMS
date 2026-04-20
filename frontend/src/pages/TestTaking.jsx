@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState, useMemo } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import {
   getQuestionsBySectionId,
@@ -42,6 +42,16 @@ const TestTaking = () => {
 
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
   const [isSyncing, setIsSyncing] = useState(false);
+
+  // Dynamic Audio Logic
+  const isItemWise = test ? (test.testFormat === "item-wise" || test.totalSections < 2 || test.duration < 30) : false;
+
+  const globalAudioSection = useMemo(() => {
+    if (isItemWise) return null;
+    return sections.find((s) => s.audioUrl) || null;
+  }, [sections, isItemWise]);
+
+  const activeAudioSection = globalAudioSection?.audioUrl ? globalAudioSection : currentSection;
 
   // Exit confirmation modal state
   const [showExitModal, setShowExitModal] = useState(false);
@@ -777,18 +787,18 @@ const TestTaking = () => {
           </div>
 
           {/* Audio Player (for listening) */}
-          {currentSection.audioUrl && (
+          {activeAudioSection?.audioUrl && (
             <div className="mb-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200">
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-xl animate-pulse">🎧</span>
                 <h4 className="text-base font-bold text-gray-800">Listen to the Audio</h4>
               </div>
-              <audio key={currentSection.audioUrl} controls className="w-full rounded-lg">
-                <source src={currentSection.audioUrl} type="audio/mpeg" />
+              <audio key={activeAudioSection.audioUrl} controls className="w-full rounded-lg">
+                <source src={resolveImageUrl(activeAudioSection.audioUrl)} type="audio/mpeg" />
                 Your browser does not support the audio element.
               </audio>
               <p className="text-sm text-green-700 mt-2 flex items-center gap-1">
-                <span>🔄</span> You can replay the audio as needed
+                <span>🔄</span> You can replay the audio as needed (Test Format: {isItemWise ? "Section-wise" : "Full Exam"})
               </p>
             </div>
           )}
@@ -889,6 +899,18 @@ const TestTaking = () => {
                   {answeredInSection}/{questions.length} Answered
                 </span>
               </div>
+              
+              {/* Listening module image support (maps, diagrams, etc.) */}
+              {currentSection.passageImageUrl && (
+                <div className="mb-6 rounded-xl overflow-hidden shadow-sm border border-gray-100 flex justify-center bg-gray-50 p-2">
+                   <img 
+                      src={resolveImageUrl(currentSection.passageImageUrl)} 
+                      alt="Section Visual" 
+                      className="max-w-full h-auto rounded-lg"
+                   />
+                </div>
+              )}
+
               {questions.length > 0 ? (
                 <div className="space-y-5">
                   {questions.map((question) => (
