@@ -358,9 +358,44 @@ exports.bulkCreateQuestions = async (req, res) => {
       return res.status(400).json({ error: "Questions array is required" });
     }
 
+    // ✅ ADD: Sanitize and Fix common JSON formatting errors (stringified arrays)
+    const sanitizedQuestions = questions.map((q, idx) => {
+      const sanitized = { ...q };
+      
+      // Fields that are expected to be arrays but often get stringified in manual JSON edits
+      const arrayFields = ['alternativeAnswers', 'options', 'items'];
+      
+      arrayFields.forEach(field => {
+        if (typeof sanitized[field] === 'string' && (sanitized[field].trim().startsWith('[') || sanitized[field].trim().startsWith('{'))) {
+          try {
+            // Attempt to repair the stringified JSON
+            const parsed = JSON.parse(sanitized[field]);
+            sanitized[field] = parsed;
+          } catch (e) {
+            // If it's a "pseudo-JSON" string (like the one in user's terminal), try a more aggressive cleanup
+            try {
+               // Replace single quotes with double quotes for JSON parsing
+               const fixedJson = sanitized[field]
+                 .replace(/'/g, '"')
+                 .replace(/(\w+):/g, '"$1":') // Ensure keys are quoted
+                 .replace(/,\s*]/g, ']') // Remove trailing commas
+                 .replace(/,\s*}/g, '}');
+               sanitized[field] = JSON.parse(fixedJson);
+            } catch (innerError) {
+              console.warn(`⚠️ Unable to repair malformed JSON in question ${q.questionNumber || idx + 1} field: ${field}`);
+            }
+          }
+        }
+      });
+      
+      return sanitized;
+    });
+
+    const questionsToProcess = sanitizedQuestions;
+
     // ✅ ADD: Validate each question has required fields
-    for (let i = 0; i < questions.length; i++) {
-      const q = questions[i];
+    for (let i = 0; i < questionsToProcess.length; i++) {
+      const q = questionsToProcess[i];
 
       if (!q.sectionId) {
         return res.status(400).json({
@@ -407,7 +442,7 @@ exports.bulkCreateQuestions = async (req, res) => {
     }
 
     // ✅ ADD: Verify section exists
-    const sectionId = questions[0].sectionId;
+    const sectionId = questionsToProcess[0].sectionId;
     const section = await Section.findById(sectionId);
 
     if (!section) {
@@ -415,7 +450,7 @@ exports.bulkCreateQuestions = async (req, res) => {
     }
 
     // ✅ ADD: Check for duplicate question numbers
-    const questionNumbers = questions.map((q) => q.questionNumber);
+    const questionNumbers = questionsToProcess.map((q) => q.questionNumber);
     const duplicates = questionNumbers.filter(
       (num, index) => questionNumbers.indexOf(num) !== index,
     );
@@ -440,7 +475,7 @@ exports.bulkCreateQuestions = async (req, res) => {
     }
 
     // Insert all questions
-    const createdQuestions = await Question.insertMany(questions);
+    const createdQuestions = await Question.insertMany(questionsToProcess);
 
     // Sync totals
     await syncTestAndSectionTotals(sectionId, section.testId);

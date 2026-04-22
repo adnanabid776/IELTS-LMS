@@ -39,28 +39,39 @@ exports.uploadImage = async (req, res) => {
     const hasCloudinary = process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET;
 
     if (hasCloudinary) {
-      // Upload to Cloudinary
-      const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: "ielts-lms/writing-tasks",
-        resource_type: "image",
-        transformation: [
-          { width: 1200, height: 800, crop: "limit" }, // Max size
-          { quality: "auto" }, // Auto optimize
-          { fetch_format: "auto" }, // Auto format (webp if supported)
-        ],
-      });
+      try {
+        // Upload to Cloudinary
+        const result = await cloudinary.uploader.upload(req.file.path, {
+          folder: "ielts-lms/writing-tasks",
+          resource_type: "image",
+          transformation: [
+            { width: 1200, height: 800, crop: "limit" }, // Max size
+            { quality: "auto" }, // Auto optimize
+            { fetch_format: "auto" }, // Auto format (webp if supported)
+          ],
+        });
 
-      // Keep the local file as a backup! (Removed fs.unlinkSync)
-
-      // Return URL
-      return res.json({
-        message: "Image uploaded successfully to Cloud",
-        url: result.secure_url,
-        publicId: result.public_id,
-      });
+        // Return Cloudinary URL
+        return res.json({
+          message: "Image uploaded successfully to Cloud",
+          url: result.secure_url,
+          publicId: result.public_id,
+        });
+      } catch (cloudinaryError) {
+        console.warn("⚠️ CLOUDINARY TIMEOUT/ERROR: Falling back to local storage.", cloudinaryError.message);
+        
+        // FALLBACK: Return local path instead of failing
+        const localUrl = `/${req.file.path.replace(/\\/g, '/')}`;
+        return res.json({
+          message: "Image uploaded locally (Cloud Fallback)",
+          url: localUrl,
+          publicId: null,
+          isLocal: true,
+          error: cloudinaryError.message
+        });
+      }
     } else {
-      // Fallback: Local Storage
-      // Multer already saved the file to uploads/, we just return the URL
+      // Fallback: Local Storage (Manual Mode)
       const localUrl = `/${req.file.path.replace(/\\/g, '/')}`;
       
       return res.json({
@@ -70,17 +81,22 @@ exports.uploadImage = async (req, res) => {
       });
     }
   } catch (error) {
-    console.error("❌ Upload image error:", error);
+    console.error("❌ Critical Upload error:", error);
 
-    // Clean up temp file if exists
+    // Clean up temp file ONLY if it wasn't already successfully handled as a local fallback
     if (req.file && req.file.path && fs.existsSync(req.file.path)) {
-      fs.unlinkSync(req.file.path);
+      // Only delete if we didn't return a 200 response above
+      if (!res.headersSent) {
+        fs.unlinkSync(req.file.path);
+      }
     }
 
-    res.status(500).json({
-      error: "Image upload failed",
-      details: error.message,
-    });
+    if (!res.headersSent) {
+      res.status(500).json({
+        error: "Image upload failed",
+        details: error.message,
+      });
+    }
   }
 };
 
@@ -100,25 +116,36 @@ exports.uploadAudio = async (req, res) => {
     const hasCloudinary = process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET;
 
     if (hasCloudinary) {
-      // Upload to Cloudinary (audio counts as 'video' resource_type)
-      const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: "ielts-lms/audio",
-        resource_type: "video", // Audio files use 'video' type
-        format: "mp3", // Convert to mp3
-      });
+      try {
+        // Upload to Cloudinary (audio counts as 'video' resource_type)
+        const result = await cloudinary.uploader.upload(req.file.path, {
+          folder: "ielts-lms/audio",
+          resource_type: "video", // Audio files use 'video' type
+          format: "mp3", // Convert to mp3
+        });
 
-      // Keep the local file as a backup! (Removed fs.unlinkSync)
-
-      // Return Cloudinary URL
-      return res.json({
-        message: "Audio uploaded successfully to Cloud",
-        url: result.secure_url,
-        publicId: result.public_id,
-        duration: result.duration, // Audio length in seconds
-      });
+        // Return Cloudinary URL
+        return res.json({
+          message: "Audio uploaded successfully to Cloud",
+          url: result.secure_url,
+          publicId: result.public_id,
+          duration: result.duration, // Audio length in seconds
+        });
+      } catch (cloudinaryError) {
+        console.warn("⚠️ CLOUDINARY AUDIO ERROR: Falling back to local storage.", cloudinaryError.message);
+        
+        // FALLBACK: Return local path instead of failing
+        const localUrl = `/${req.file.path.replace(/\\/g, '/')}`;
+        return res.json({
+          message: "Audio uploaded locally (Cloud Fallback)",
+          url: localUrl,
+          publicId: null,
+          isLocal: true,
+          error: cloudinaryError.message
+        });
+      }
     } else {
       // Fallback: Local Storage
-      // Multer already saved the file to uploads/, we just return the URL
       const localUrl = `/${req.file.path.replace(/\\/g, '/')}`;
       
       return res.json({
@@ -128,17 +155,21 @@ exports.uploadAudio = async (req, res) => {
       });
     }
   } catch (error) {
-    console.error("❌ Upload audio error:", error);
+    console.error("❌ Critical Audio Upload error:", error);
 
-    // Clean up temp file if exists
+    // Clean up temp file ONLY if it wasn't already successfully handled as a local fallback
     if (req.file && req.file.path && fs.existsSync(req.file.path)) {
-      fs.unlinkSync(req.file.path);
+      if (!res.headersSent) {
+        fs.unlinkSync(req.file.path);
+      }
     }
 
-    res.status(500).json({
-      error: "Audio upload failed",
-      details: error.message,
-    });
+    if (!res.headersSent) {
+      res.status(500).json({
+        error: "Audio upload failed",
+        details: error.message,
+      });
+    }
   }
 };
 
