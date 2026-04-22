@@ -148,11 +148,22 @@ const AudioPlayer = ({
           )}
         </button>
 
-        {/* Progress Bar */}
+        {/* Progress Bar & Status */}
         <div className="flex-1">
+          <div className="flex justify-between items-center mb-1">
+            <span className="text-[10px] uppercase tracking-widest font-bold text-gray-500">
+              {disableSeeking ? "🔒 Strict Mode (Seek Disabled)" : "🔊 Audio Progress"}
+            </span>
+            {playOnce && (
+              <span className="text-[10px] uppercase tracking-widest font-bold text-blue-600">
+                {hasPlayedOnce ? "✓ Played Once" : "⏱️ Single Play Only"}
+              </span>
+            )}
+          </div>
+
           <div
-            className={`h-3 bg-gray-300 rounded-full relative overflow-hidden ${
-              disableSeeking ? "cursor-not-allowed" : "cursor-pointer"
+            className={`h-3 rounded-full relative overflow-hidden ${
+              disableSeeking ? "bg-gray-200 cursor-default" : "bg-gray-300 cursor-pointer"
             }`}
             onClick={disableSeeking ? undefined : handleSeek}
           >
@@ -160,7 +171,7 @@ const AudioPlayer = ({
             <div
               className={`h-full rounded-full transition-all ${
                 disableSeeking
-                  ? "bg-gray-500"
+                  ? "bg-blue-400/50"
                   : "bg-gradient-to-r from-blue-500 to-indigo-600"
               }`}
               style={{ width: `${progressPercentage}%` }}
@@ -169,14 +180,14 @@ const AudioPlayer = ({
             {/* Playhead (Hidden if seeking disabled) */}
             {!disableSeeking && (
               <div
-                className="absolute top-0 w-1 h-full bg-blue-700"
+                className="absolute top-0 w-1 h-full bg-blue-700 shadow-[0_0_8px_rgba(37,99,235,0.5)]"
                 style={{ left: `${progressPercentage}%` }}
               />
             )}
           </div>
 
           {/* Time Display */}
-          <div className="flex justify-between text-sm text-gray-600 mt-1">
+          <div className="flex justify-between text-xs font-medium text-gray-500 mt-1.5 font-mono">
             <span>{formatTime(currentTime)}</span>
             <span>{formatTime(duration)}</span>
           </div>

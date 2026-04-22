@@ -553,19 +553,27 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
                 </div>
               )}
 
-            {/* Image URL (For Map Labeling or Visual Questions) */}
-            <div>
+            {/* Universal Image Upload (Optional for all questions) */}
+            <div className="bg-blue-50 p-4 rounded-lg border-2 border-blue-200">
               <label className="block text-sm font-bold text-gray-700 mb-2">
-                Image URL (Optional - for Maps/Diagrams/Forms)
+                Question Image (Optional)
               </label>
-              <input
-                type="url"
-                name="imageUrl"
-                value={formData.imageUrl}
-                onChange={handleChange}
-                className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="https://example.com/image.png"
-              />
+              <div className="flex flex-col md:flex-row gap-3">
+                <input
+                  type="url"
+                  name="imageUrl"
+                  value={formData.imageUrl}
+                  onChange={handleChange}
+                  className="flex-1 px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                  placeholder="https://example.com/image.png (or use Upload button →)"
+                />
+                <label className={`md:w-48 flex items-center justify-center px-4 py-2 rounded-lg font-semibold cursor-pointer transition ${
+                  uploadingImage ? "bg-gray-400 text-gray-200" : "bg-blue-600 text-white hover:bg-blue-700"
+                }`}>
+                  {uploadingImage ? "Uploading..." : "📁 Upload Image"}
+                  <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" disabled={uploadingImage} />
+                </label>
+              </div>
             </div>
 
             {/* Question Text */}
@@ -693,32 +701,7 @@ const EditQuestionModal = ({ question, onClose, onSuccess }) => {
               formData.questionType === "diagram-labeling" ||
               formData.questionType === "map-labeling") && (
               <div className="space-y-6">
-                 {/* Image Upload for visual questions */}
-                 {(formData.questionType === "flow-chart-completion" ||
-                  formData.questionType === "diagram-labeling" ||
-                  formData.questionType === "map-labeling") && (
-                  <div className="bg-blue-50 p-4 rounded-lg border-2 border-blue-200">
-                    <label className="block text-sm font-bold text-gray-700 mb-2">
-                       Question Image (Flowchart/Diagram/Map)
-                    </label>
-                    <div className="flex flex-col md:flex-row gap-3">
-                      <input
-                        type="url"
-                        name="imageUrl"
-                        value={formData.imageUrl}
-                        onChange={handleChange}
-                        className="flex-1 px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-                        placeholder="https://example.com/diagram.png"
-                      />
-                      <label className={`md:w-48 flex items-center justify-center px-4 py-2 rounded-lg font-semibold cursor-pointer transition ${
-                        uploadingImage ? "bg-gray-400 text-gray-200" : "bg-blue-600 text-white hover:bg-blue-700"
-                      }`}>
-                        {uploadingImage ? "Uploading..." : "📁 Upload Image"}
-                        <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" disabled={uploadingImage} />
-                      </label>
-                    </div>
-                  </div>
-                )}
+                 {/* Image Upload moved to global section above */}
 
                 <div className="bg-green-50 p-4 rounded-lg border-2 border-green-200">
                   <h4 className="font-bold text-gray-700 mb-2">

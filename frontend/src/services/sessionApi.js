@@ -43,3 +43,11 @@ export const submitTestSession = async (sessionId) => {
   const response = await apiClient.post("/sessions/submit", { sessionId });
   return response.data;
 };
+
+export const markAudioPlayed = async (sessionId, sectionId) => {
+  const response = await apiClient.post("/sessions/mark-audio-played", {
+    sessionId,
+    sectionId,
+  });
+  return response.data;
+};

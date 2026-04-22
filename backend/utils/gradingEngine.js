@@ -28,7 +28,33 @@ const isAnswerCorrect = (
   )
     return false; // No correct answer defined = cannot be correct
 
-  // Normalize
+  // Special handling for Multiple Choice Multi (Letter comparison)
+  if (questionType === "multiple-choice-multi") {
+    const multiNorm = (val) => {
+      if (!val) return "";
+      return val.toString()
+        .replace(/[^a-zA-Z]/g, "") // Remove all non-letters
+        .toLowerCase()
+        .split("")
+        .sort()
+        .join("");
+    };
+    
+    const user = multiNorm(userAnswer);
+    const correct = multiNorm(correctAnswer);
+    
+    if (user && correct && user === correct) return true;
+    
+    // Check alternatives
+    if (alternativeAnswers && alternativeAnswers.length > 0) {
+      for (let alt of alternativeAnswers) {
+        if (user === multiNorm(alt)) return true;
+      }
+    }
+    return false;
+  }
+
+  // Normalize for all other types
   const normUser = normalizeAnswer(userAnswer);
   const normCorrect = normalizeAnswer(correctAnswer);
 
@@ -297,70 +323,58 @@ const calculatePoints = (userAnswer, question) => {
 
   // 2. Multiple Choice Multi (Per-answer scoring)
   if (question.questionType === "multiple-choice-multi") {
+    // Determine how many separate marks this question represents.
+    const totalPossible = (question.items && question.items.length > 0)
+      ? question.items.length
+      : (question.points > 1 ? question.points : 1);
+
     const isAttempted =
       userAnswer &&
       (Array.isArray(userAnswer) ? userAnswer.length > 0 : !!userAnswer);
 
-    // Normalize user answer to a sorted set of uppercase letters
-    let userLetters = [];
-    if (Array.isArray(userAnswer)) {
-      userLetters = userAnswer.map((v) => v.toString().trim().toUpperCase());
-    } else if (typeof userAnswer === "string" && userAnswer.trim()) {
-      userLetters = userAnswer
-        .toUpperCase()
-        .split(/[\s,]+/)
-        .map((v) => v.trim())
-        .filter((v) => v.length > 0);
-    }
-
-    // Normalize correct answer to a sorted set of uppercase letters
-    let correctLetters = [];
-    if (question.correctAnswer && typeof question.correctAnswer === "string") {
-      correctLetters = question.correctAnswer
-        .toUpperCase()
-        .split(/[\s,]+/)
-        .map((v) => v.trim())
-        .filter((v) => v.length > 0);
-    }
-
-    // If correctAnswer has single letters concatenated like "AC", split them
-    if (
-      correctLetters.length === 1 &&
-      correctLetters[0].length > 1 &&
-      /^[A-Z]+$/.test(correctLetters[0])
-    ) {
-      correctLetters = correctLetters[0].split("");
-    }
-    // Same for user answer
-    if (
-      userLetters.length === 1 &&
-      userLetters[0].length > 1 &&
-      /^[A-Z]+$/.test(userLetters[0])
-    ) {
-      userLetters = userLetters[0].split("");
-    }
-
-    // Total points = number of correct answers expected
-    const totalPoints = correctLetters.length;
-
-    // Count how many correct letters the user selected
-    const correctPicks = userLetters.filter((l) =>
-      correctLetters.includes(l)
-    ).length;
-
-    // Count wrong picks (user selected but not in correct)
-    const wrongPicks = userLetters.filter(
-      (l) => !correctLetters.includes(l)
-    ).length;
-
-    // Score: correct picks minus wrong picks, minimum 0
-    const scored = Math.max(0, correctPicks - wrongPicks);
-
-    return {
-      scored: scored,
-      total: totalPoints,
-      attempted: isAttempted ? 1 : 0,
+    const multiNorm = (val) => {
+      if (!val) return [];
+      const str = Array.isArray(val) ? val.join(",") : val.toString();
+      return str
+        .replace(/[^a-zA-Z]/g, "")
+        .toLowerCase()
+        .split("");
     };
+
+    const userLetters = multiNorm(userAnswer);
+    const correctLetters = multiNorm(question.correctAnswer);
+
+    if (totalPossible > 1) {
+      // PARTIAL CREDIT: Award 1 mark for each correct letter found
+      let scored = 0;
+      const remainingCorrect = [...correctLetters];
+      userLetters.forEach((letter) => {
+        const idx = remainingCorrect.indexOf(letter);
+        if (idx !== -1) {
+          scored++;
+          remainingCorrect.splice(idx, 1);
+        }
+      });
+
+      return {
+        scored: Math.min(scored, totalPossible),
+        total: totalPossible,
+        attempted: userLetters.length > 0 ? totalPossible : 0,
+      };
+    } else {
+      // LEGACY ALL-OR-NOTHING: Standard 1-point questions
+      const isCorrect = isAnswerCorrect(
+        userAnswer,
+        question.correctAnswer,
+        question.alternativeAnswers,
+        "multiple-choice-multi"
+      );
+      return {
+        scored: isCorrect ? 1 : 0,
+        total: 1,
+        attempted: userLetters.length > 0 ? 1 : 0,
+      };
+    }
   }
 
   // 3. Standard Types (Short Answer, MC-Std, Matching-Endings, etc)

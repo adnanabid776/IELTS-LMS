@@ -17,9 +17,9 @@ const AddSectionModal = ({
     passageText: "",
     audioUrl: "",
     audioScript: "", // ✅ ADDED
-    playOnceOnly: false, // ✅ ADDED
-    disableReplay: true, // ✅ ADDED
-    lockNavigationDuringAudio: false, // ✅ ADDED
+    playOnceOnly: testModule === "listening", // ✅ Default to true for listening
+    disableReplay: testModule === "listening", // ✅ Default to true for listening
+    lockNavigationDuringAudio: false,
     instructions: "",
     questionRange: "",
     duration: 20,

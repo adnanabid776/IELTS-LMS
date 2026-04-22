@@ -367,7 +367,7 @@ const EditSectionModal = ({ section, testModule, onClose, onSuccess }) => {
                       className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
                     />
                     <span className="text-gray-700 font-medium">
-                      Disable Replay (Hide seek bar)
+                      Disable Replay (Lock/Hide seek bar)
                     </span>
                   </label>
 

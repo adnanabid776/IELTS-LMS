@@ -33,7 +33,33 @@ const isAnswerCorrect = (
   )
     return false; // No correct answer defined = cannot be correct
 
-  // Normalize
+  // Special handling for Multiple Choice Multi (Letter comparison)
+  if (questionType === "multiple-choice-multi") {
+    const multiNorm = (val) => {
+      if (!val) return "";
+      return val.toString()
+        .replace(/[^a-zA-Z]/g, "") // Remove all non-letters
+        .toLowerCase()
+        .split("")
+        .sort()
+        .join("");
+    };
+    
+    const user = multiNorm(userAnswer);
+    const correct = multiNorm(correctAnswer);
+    
+    if (user && correct && user === correct) return true;
+    
+    // Check alternatives
+    if (alternativeAnswers && alternativeAnswers.length > 0) {
+      for (let alt of alternativeAnswers) {
+        if (user === multiNorm(alt)) return true;
+      }
+    }
+    return false;
+  }
+
+  // Normalize for all other types
   const normUser = normalizeAnswer(userAnswer);
   const normCorrect = normalizeAnswer(correctAnswer);
 
@@ -333,23 +359,56 @@ const calculatePoints = (userAnswer, question) => {
 
   // 2. Multiple Choice Multi
   if (question.questionType === "multiple-choice-multi") {
-    // For multi-choice, we need to check how many were selected vs total allowed?
-    // IF items exist (unlikely for MC-Multi in this schema), handle like composite.
+    // Determine how many separate marks this question represents.
+    // IELTS "Choose TWO" questions usually count as TWO separate slots in the 1-40 score.
+    const totalPossible = (question.items && question.items.length > 0)
+      ? question.items.length
+      : (question.points > 1 ? question.points : 1);
 
-    // Attempted logic:
-    const isAttempted = userAnswer && userAnswer.length > 0;
-
-    const isCorrect = isAnswerCorrect(
-      userAnswer,
-      question.correctAnswer,
-      question.alternativeAnswers,
-      question.questionType,
-    );
-    return {
-      scored: isCorrect ? 1 : 0,
-      total: 1,
-      attempted: isAttempted ? 1 : 0,
+    const multiNorm = (val) => {
+      if (!val) return [];
+      // Handle array or string inputs
+      const str = Array.isArray(val) ? val.join(",") : val.toString();
+      return str
+        .replace(/[^a-zA-Z]/g, "")
+        .toLowerCase()
+        .split("");
     };
+
+    const userLetters = multiNorm(userAnswer);
+    const correctLetters = multiNorm(question.correctAnswer);
+
+    if (totalPossible > 1) {
+      // PARTIAL CREDIT: Award 1 mark for each correct letter found
+      let scored = 0;
+      const remainingCorrect = [...correctLetters];
+      userLetters.forEach((letter) => {
+        const idx = remainingCorrect.indexOf(letter);
+        if (idx !== -1) {
+          scored++;
+          remainingCorrect.splice(idx, 1);
+        }
+      });
+
+      return {
+        scored: Math.min(scored, totalPossible),
+        total: totalPossible,
+        attempted: userLetters.length > 0 ? totalPossible : 0,
+      };
+    } else {
+      // LEGACY ALL-OR-NOTHING: Standard 1-point questions
+      const isCorrect = isAnswerCorrect(
+        userAnswer,
+        question.correctAnswer,
+        question.alternativeAnswers,
+        "multiple-choice-multi"
+      );
+      return {
+        scored: isCorrect ? 1 : 0,
+        total: 1,
+        attempted: userLetters.length > 0 ? 1 : 0,
+      };
+    }
   }
 
   // 3. Standard Types (Short Answer, MC-Std, etc)

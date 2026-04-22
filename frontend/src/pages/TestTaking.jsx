@@ -10,10 +10,12 @@ import {
   submitTestResult,
   updateSubmissionStatus,
   pauseTestSession,
+  markAudioPlayed,
 } from "../services/api";
 import { toast } from "react-toastify";
 import DashboardLayout from "../components/Layout/DashboardLayout";
 import QuestionRenderer from "../components/QuestionRenderer";
+import AudioPlayer from "../components/AudioPlayer";
 import WritingTestTaking from "./WritingTestTaking";
 import OfflineQueue from "../utils/OfflineQueue";
 import { resolveImageUrl } from "../utils/urlHelper";
@@ -363,6 +365,23 @@ const TestTaking = () => {
         sessionId: session._id,
         answers: answersArray,
       });
+    }
+  };
+
+  const handleAudioEnded = async () => {
+    if (!activeAudioSection || !session) return;
+    try {
+      await markAudioPlayed(session._id, activeAudioSection._id);
+      // Update local session state to reflect change immediately
+      setSession((prev) => ({
+        ...prev,
+        audioPlayedSections: [
+          ...(prev.audioPlayedSections || []),
+          activeAudioSection._id,
+        ],
+      }));
+    } catch (error) {
+      console.error("Failed to mark audio played:", error);
     }
   };
 
@@ -788,18 +807,21 @@ const TestTaking = () => {
 
           {/* Audio Player (for listening) */}
           {activeAudioSection?.audioUrl && (
-            <div className="mb-4 p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-xl animate-pulse">🎧</span>
-                <h4 className="text-base font-bold text-gray-800">Listen to the Audio</h4>
-              </div>
-              <audio key={activeAudioSection.audioUrl} controls className="w-full rounded-lg">
-                <source src={resolveImageUrl(activeAudioSection.audioUrl)} type="audio/mpeg" />
-                Your browser does not support the audio element.
-              </audio>
-              <p className="text-sm text-green-700 mt-2 flex items-center gap-1">
-                <span>🔄</span> You can replay the audio as needed (Test Format: {isItemWise ? "Section-wise" : "Full Exam"})
-              </p>
+            <div className="mb-4">
+              <AudioPlayer 
+                key={activeAudioSection.audioUrl}
+                audioUrl={resolveImageUrl(activeAudioSection.audioUrl)}
+                title="Listen to the Audio"
+                playOnce={!!activeAudioSection.playOnceOnly}
+                disableSeeking={!!activeAudioSection.disableReplay}
+                initialPlayed={session?.audioPlayedSections?.includes(activeAudioSection._id)}
+                onEnded={handleAudioEnded}
+              />
+              {!activeAudioSection.disableReplay && (
+                <p className="text-sm text-green-700 mt-2 flex items-center gap-1 bg-green-50 p-2 rounded-lg border border-green-100">
+                  <span>🔄</span> You can replay the audio as needed (Test Format: {isItemWise ? "Section-wise" : "Full Exam"})
+                </p>
+              )}
             </div>
           )}
 

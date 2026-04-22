@@ -95,7 +95,7 @@ const Dashboard = () => {
           ? (
             gradedResults.reduce((sum, r) => sum + r.bandScore, 0) /
             gradedResults.length
-          ).toFixed(1)
+          ).toFixed(0) //for showing round-off value because 0 is not considered in IELTS
           : 0;
 
       const highestBand =

@@ -106,6 +106,13 @@ const QuestionRenderer = ({ question, answers, handleAnswerChange, handleSummary
             <span className="inline-block mt-2 px-3 py-1 bg-gray-100 text-gray-500 text-xs rounded-full font-medium">
               {question.questionType.replace(/-/g, " ").toUpperCase()}
             </span>
+            
+            {/* Universal Question Image (Applies to all types) */}
+            {question.imageUrl && (
+              <div className="mt-4 mb-2 object-contain overflow-hidden rounded border border-gray-200 flex justify-center bg-white p-2">
+                <img src={resolveImageUrl(question.imageUrl)} alt="Question attachment" className="max-w-full h-auto max-h-96" />
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -690,11 +697,7 @@ const QuestionRenderer = ({ question, answers, handleAnswerChange, handleSummary
         question.questionType === "map-labeling" ||
         question.questionType === "flow-chart-completion") && (
         <div className="ml-14 mt-4 overflow-x-auto">
-          {question.imageUrl && (
-            <div className="mb-6 object-contain overflow-hidden rounded border border-gray-200 flex justify-center bg-white p-2">
-              <img src={resolveImageUrl(question.imageUrl)} alt="Form Diagram" className="max-w-full h-auto max-h-96" />
-            </div>
-          )}
+          {/* Universal Image Display is now handled at the top of the component */}
           <div className="border-2 border-gray-800 rounded bg-white max-w-4xl overflow-hidden shadow-sm">
             <table className="w-full border-collapse">
               <tbody>
