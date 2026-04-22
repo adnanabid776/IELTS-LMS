@@ -16,8 +16,9 @@ A full-featured Learning Management System designed specifically for IELTS prepa
 - **Full Mock Tests**: Simulates real exam conditions for Reading, Listening, Writing, and Speaking modules.
 - **Advanced Interactive UI**: Custom interactive question components natively mimicking IELTS types (e.g., dynamic *Form-Completion* with interactive table blanks, *Multiple-Choice Multi* scaling).
 - **Subjective Essay Editor**: Dedicated Writing Module interface with enforced character counting and embedded rich graphic prompts.
-- **Instant Feedback**: Highly complex backend grading engine automatically filters and recursively scales multi-point objective arrays.
+- **Instant Feedback**: Highly complex backend grading engine with **Partial Credit** support for multi-select questions. Automatically resolves slot-based marks for "Choose X" types without errors.
 - **Progress Tracking**: Detailed analytics charts showing band score trends and module-wise performance.
+- **Strict Audio Mode**: Non-interactive listening experience that prevents seeking or replaying, mimicking official IELTS laboratory conditions.
 - **Optimized Experience**: Fast React Suspense rendering mapped to paginated grid layouts.
 
 ### 👩‍🏫 Teacher Portal
@@ -29,9 +30,9 @@ A full-featured Learning Management System designed specifically for IELTS prepa
 
 ### 🛠 Admin Portal
 
-- **Bulk JSON Imports**: Ultra-fast test generation via structured JSON bulk-uploads allowing 40+ questions to be imported instantly.
-- **Advanced Question Bank**: Create and edit up to 18 distinct complex question structures dynamically.
-- **Hybrid Local Storage**: Robust localized API bypasses cloud requirements, safely injecting audio files and prompt imagery directly into a secure `/uploads` root. 
+- **Bulk JSON Imports**: Ultra-fast test generation via structured JSON bulk-uploads with **Automatic Data Cleaning**.
+- **Advanced Question Bank**: Create and edit up to 18 distinct complex question structures dynamically with universal image support.
+- **Hybrid Media Delivery**: Robust localized API with **Cloudinary Integration** and automatic Local fallback, ensuring images and audio are always reachable.
 - **System Analytics**: Live overview of platform usage, total tests taken, and active users globally.
 
 ## 🌟 Recent Major Updates
@@ -42,7 +43,13 @@ A full-featured Learning Management System designed specifically for IELTS prepa
 - **Dual-Track Architecture (Academic vs General) 🛡️**: The platform now enforces a strict separation between "Academic" and "General Training" tracks. Students are physically locked to their assigned tracks via an API-level filter, and any changes made by an admin trigger a synchronous, real-time update on the student's dashboard without a manual logout.
 - **Advanced Grading Engine 🧠**: Completely overhauled the auto-grading algorithm. It now features "fuzzy matching" that safely strips structural noise from user answers (e.g., articles like `a`, `an`, `the`, embedded HTML tags, specific punctuation). It resolves complex matching questions dynamically regardless of capitalization.
 - **Deep Security Hardening 🔒**: Successfully audited against 100+ critical edge-cases. The platform now intrinsically blocks concurrent multi-device sessions, prevents form double-submissions, and strictly denies IDOR (Insecure Direct Object Reference) attempts.
-- **Enhanced JSON Bulk Uploader ⚙️**: Admins can now mass-inject full test suites using complex, nested JSON configurations that seamlessly handle composite items (like diagram or map labeling).
+- **Enhanced JSON Bulk Uploader ⚙️**: Admins can now mass-inject full test suites using complex, nested JSON configurations. Includes an **Intelligent Sanitizer** that automatically detects and repairs "stringified array" formatting errors during manual data entry.
+- **Strict IELTS Audio Mode 🎧**: Enforces a non-interactive audio player that prevents students from seeking, skipping, or replaying listening sections. Integrated with backend session tracking to persist "played" status across refreshes and page navigation.
+- **Partial Credit Grading Engine 2.0 🧠**: Upgraded the scoring logic for "Choose TWO/THREE" questions (Multiple-Choice Multi). The system now awards 1 mark per correct letter found and accurately calculates the total question slots, matching official IELTS scoring standards.
+- **Hybrid Media Resilience System ☁️**: Implemented an automatic local-storage fallback for all media assets. If a Cloudinary upload fails (due to timeouts or limits), the system automatically preserves and serves the file locally, ensuring 100% media availability for students.
+- **Universal Image Integration 🖼️**: Refactored the question Modal architecture to allow direct physical file uploads for *all* question types. Images and diagrams are now universally rendered across all test modules (MCQs, Short Answers, Matching).
+- **Project Content Scaling 📈**: Reached a massive milestone of **175+ Full Tests** and **3,700+ Verified Questions**, covering both Academic and General Training tracks.
+- **Admin Persistence Layer 🔒**: Fixed architectural bugs to ensure Test Module and Format updates are persistent across all management panels.
 
 ## 🛠 Tech Stack
 
@@ -59,6 +66,7 @@ A full-featured Learning Management System designed specifically for IELTS prepa
 - **Framework**: Express.js
 - **Database**: MongoDB (with Mongoose ODM)
 - **Authentication**: JWT (JSON Web Tokens)
+- **Cloud Storage**: Cloudinary (with automatic Local Fallback)
 - **File Handling**: Multer (for audio/image uploads)
 
 ## ⚙️ Installation & Setup
