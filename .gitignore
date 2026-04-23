@@ -1,0 +1,29 @@
+# Root .gitignore for IELTS-LMS
+
+# Dependencies
+node_modules/
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+*.env
+
+# Build Output
+dist/
+build/
+.next/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Project Specific
+backend/uploads/
+frontend/dist/
