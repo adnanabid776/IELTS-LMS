@@ -159,10 +159,23 @@ const WritingTestTaking = () => {
   useEffect(() => {
     if (loading || !session || isSubmitting) return;
 
-    setTimeRemaining(session.timeRemaining || test.duration * 60);
+    // Initialize time from session
+    setTimeRemaining(session.timeRemaining || (test.duration || 60) * 60);
 
     const timer = setInterval(() => {
       setTimeRemaining((prev) => {
+        // --- WRITING SPECIFIC STAGED TIMER ---
+        if (test.module === "writing" && sections.length >= 2) {
+          // If we are at the 40-minute mark (20 mins spent) and still on Task 1
+          if (prev === 2401 && currentSectionIndex === 0) {
+            toast.info("Task 1 time is up! Switching to Task 2.", { 
+              toastId: "task-switch",
+              autoClose: 5000 
+            });
+            setCurrentSectionIndex(1);
+          }
+        }
+
         if (prev <= 1) {
           handleSubmitTest();
           return 0;
@@ -172,7 +185,7 @@ const WritingTestTaking = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [session, loading, isSubmitting]);
+  }, [session, loading, isSubmitting, test, currentSectionIndex, sections.length]);
 
   // Load test data
   const loadTestData = async () => {
@@ -305,16 +318,21 @@ const WritingTestTaking = () => {
     }));
   };
 
-  const handleNextSection = () => {
-    if (currentSectionIndex < sections.length - 1) {
-      setCurrentSectionIndex((prev) => prev + 1);
+  const handlePreviousSection = () => {
+    if (currentSectionIndex > 0) {
+      // Writing Lock: Prevent going back to Task 1 if time is <= 40 minutes (2400s)
+      if (test.module === "writing" && currentSectionIndex === 1 && timeRemaining <= 2400) {
+        toast.error("Task 1 is locked as the time for it has expired.");
+        return;
+      }
+      setCurrentSectionIndex((prev) => prev - 1);
       window.scrollTo(0, 0);
     }
   };
 
-  const handlePreviousSection = () => {
-    if (currentSectionIndex > 0) {
-      setCurrentSectionIndex((prev) => prev - 1);
+  const handleNextSection = () => {
+    if (currentSectionIndex < sections.length - 1) {
+      setCurrentSectionIndex((prev) => prev + 1);
       window.scrollTo(0, 0);
     }
   };
@@ -428,6 +446,15 @@ const WritingTestTaking = () => {
         </div>
       </div>
 
+      {/* Instructions */}
+        <div className="mb-6 p-4 bg-blue-50 border-l-4 border-blue-600 rounded">
+          <h3 className="font-semibold text-gray-800 mb-2">Instructions:</h3>
+          <p className="text-gray-700">{displayTask.instructions}</p>
+          <p className="text-sm text-gray-600 mt-2">
+            <strong>Minimum words:</strong> {displayTask.wordLimit}
+          </p>
+        </div>
+
       {/* Task Content */}
       <div className="bg-white rounded-lg shadow p-6 mb-6">
         {/* Task Image (if Task 1) */}
@@ -441,14 +468,7 @@ const WritingTestTaking = () => {
           </div>
         )}
 
-        {/* Instructions */}
-        <div className="mb-6 p-4 bg-blue-50 border-l-4 border-blue-600 rounded">
-          <h3 className="font-semibold text-gray-800 mb-2">Instructions:</h3>
-          <p className="text-gray-700">{displayTask.instructions}</p>
-          <p className="text-sm text-gray-600 mt-2">
-            <strong>Minimum words:</strong> {displayTask.wordLimit}
-          </p>
-        </div>
+        
 
         {/* Essay Editor */}
         <EssayEditor
@@ -463,7 +483,7 @@ const WritingTestTaking = () => {
       <div className="flex items-center justify-between">
         <button
           onClick={handlePreviousSection}
-          disabled={currentSectionIndex === 0}
+          disabled={currentSectionIndex === 0 || (test.module === "writing" && currentSectionIndex === 1 && timeRemaining <= 2400)}
           className="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           ← Previous Task

@@ -103,11 +103,10 @@ const CreateUserModal = ({ onClose, onSuccess }) => {
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.firstName
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.firstName
                   ? 'border-red-500 focus:ring-red-500'
                   : 'border-gray-300 focus:ring-blue-500'
-              }`}
+                }`}
               placeholder="John"
             />
             {errors.firstName && (
@@ -125,11 +124,10 @@ const CreateUserModal = ({ onClose, onSuccess }) => {
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.lastName
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.lastName
                   ? 'border-red-500 focus:ring-red-500'
                   : 'border-gray-300 focus:ring-blue-500'
-              }`}
+                }`}
               placeholder="Doe"
             />
             {errors.lastName && (
@@ -147,11 +145,10 @@ const CreateUserModal = ({ onClose, onSuccess }) => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.email
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${errors.email
                   ? 'border-red-500 focus:ring-red-500'
                   : 'border-gray-300 focus:ring-blue-500'
-              }`}
+                }`}
               placeholder="john@example.com"
             />
             {errors.email && (
@@ -170,11 +167,10 @@ const CreateUserModal = ({ onClose, onSuccess }) => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className={`w-full px-4 py-2 pr-10 border rounded-lg focus:outline-none focus:ring-2 ${
-                  errors.password
+                className={`w-full px-4 py-2 pr-10 border rounded-lg focus:outline-none focus:ring-2 ${errors.password
                     ? "border-red-500 focus:ring-red-500"
                     : "border-gray-300 focus:ring-blue-500"
-                }`}
+                  }`}
                 placeholder="Min 6 characters"
               />
               <button
@@ -247,11 +243,10 @@ const CreateUserModal = ({ onClose, onSuccess }) => {
             <button
               type="submit"
               disabled={loading}
-              className={`px-6 py-2 rounded-lg font-semibold ${
-                loading
+              className={`px-6 py-2 rounded-lg font-semibold ${loading
                   ? 'bg-gray-400 text-gray-200 cursor-not-allowed'
                   : 'bg-blue-600 text-white hover:bg-blue-700'
-              }`}
+                }`}
             >
               {loading ? 'Creating...' : 'Create User'}
             </button>
