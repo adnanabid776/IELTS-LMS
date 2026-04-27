@@ -27,7 +27,12 @@ const WritingTestTaking = () => {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const [essays, setEssays] = useState({}); // { sectionId: essayText }
   const [loading, setLoading] = useState(true);
-  const [timeRemaining, setTimeRemaining] = useState(3600);
+  
+  // Independent timers
+  const [task1Time, setTask1Time] = useState(1200); // 20 mins max
+  const [task2Time, setTask2Time] = useState(2400); // 40 mins max
+  const [timeRemaining, setTimeRemaining] = useState(3600); // Total
+
   const [session, setSession] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showExitModal, setShowExitModal] = useState(false);
@@ -36,6 +41,7 @@ const WritingTestTaking = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const autoSaveInterval = useRef(null);
+  const timersInitialized = useRef(false);
 
   // Load test data
   useEffect(() => {
@@ -159,29 +165,44 @@ const WritingTestTaking = () => {
   useEffect(() => {
     if (loading || !session || isSubmitting) return;
 
-    // Initialize time from session
-    setTimeRemaining(session.timeRemaining || (test.duration || 60) * 60);
+    if (!timersInitialized.current) {
+      // Initialize total time from session only once
+      const totalTime = session.timeRemaining || (test.duration || 60) * 60;
+      setTimeRemaining(totalTime);
+      
+      // Distribute time based on standard 20/40 split if possible
+      setTask1Time(Math.max(0, totalTime - 2400));
+      setTask2Time(Math.min(totalTime, 2400));
+      timersInitialized.current = true;
+    }
 
     const timer = setInterval(() => {
       setTimeRemaining((prev) => {
-        // --- WRITING SPECIFIC STAGED TIMER ---
-        if (test.module === "writing" && sections.length >= 2) {
-          // If we are at the 40-minute mark (20 mins spent) and still on Task 1
-          if (prev === 2401 && currentSectionIndex === 0) {
-            toast.info("Task 1 time is up! Switching to Task 2.", { 
-              toastId: "task-switch",
-              autoClose: 5000 
-            });
-            setCurrentSectionIndex(1);
-          }
-        }
-
         if (prev <= 1) {
           handleSubmitTest();
           return 0;
         }
         return prev - 1;
       });
+
+      // --- WRITING SPECIFIC INDEPENDENT TIMERS ---
+      if (test.module === "writing" && sections.length >= 2) {
+        if (currentSectionIndex === 0) {
+          setTask1Time((prev) => {
+            if (prev <= 1) {
+              toast.info("Task 1 time is up! Switching to Task 2.", { 
+                toastId: "task-switch",
+                autoClose: 5000 
+              });
+              setCurrentSectionIndex(1);
+              return 0;
+            }
+            return prev - 1;
+          });
+        } else if (currentSectionIndex === 1) {
+          setTask2Time((prev) => Math.max(0, prev - 1));
+        }
+      }
     }, 1000);
 
     return () => clearInterval(timer);
@@ -415,10 +436,10 @@ const WritingTestTaking = () => {
               <p className="text-sm text-gray-600 mb-1">Time Remaining</p>
               <p
                 className={`text-3xl font-bold ${
-                  timeRemaining < 300 ? "text-red-600" : "text-blue-600"
+                  (currentSectionIndex === 0 ? task1Time : task2Time) < 300 ? "text-red-600" : "text-blue-600"
                 }`}
               >
-                {formatTime(timeRemaining)}
+                {formatTime(currentSectionIndex === 0 ? task1Time : task2Time)}
               </p>
             </div>
           </div>

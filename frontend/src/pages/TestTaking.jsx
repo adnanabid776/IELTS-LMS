@@ -155,12 +155,33 @@ const TestTaking = () => {
   const timeRemainingRef = useRef(timeRemaining);
   const sessionRef = useRef(session);
   const isSubmittingRef = useRef(isSubmitting);
+  const autoAdvancedSections = useRef(new Set());
 
   useEffect(() => {
     timeRemainingRef.current = timeRemaining;
     sessionRef.current = session;
     isSubmittingRef.current = isSubmitting;
   }, [timeRemaining, session, isSubmitting]);
+
+  // ✅ NEW: Auto-advance to next section when all questions are answered
+  useEffect(() => {
+    const answeredCount = questions.filter((q) => answers[q._id]).length;
+    
+    if (questions.length > 0 && answeredCount === questions.length) {
+      if (!autoAdvancedSections.current.has(currentSectionIndex)) {
+        autoAdvancedSections.current.add(currentSectionIndex);
+        
+        const timer = setTimeout(() => {
+          if (currentSectionIndex < sections.length - 1) {
+             toast.success("Section complete! Moving to next section.", { autoClose: 2000, toastId: "auto-advance" });
+             setCurrentSectionIndex(prev => prev + 1);
+             document.getElementById("dashboard-main-content")?.scrollTo(0, 0);
+          }
+        }, 1200);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [answers, questions, currentSectionIndex, sections.length]);
 
   // Actual Cleanup Effect
   useEffect(() => {

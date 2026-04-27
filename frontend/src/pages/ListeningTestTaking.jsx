@@ -61,11 +61,32 @@ const ListeningTestTaking = () => {
   // Anti-Cheat Refs
   const sessionRef = useRef(session);
   const isSubmittingRef = useRef(submitting);
+  const autoAdvancedSections = useRef(new Set());
 
   useEffect(() => {
     sessionRef.current = session;
     isSubmittingRef.current = submitting;
   }, [session, submitting]);
+
+  // ✅ NEW: Auto-advance to next section when all questions are answered
+  useEffect(() => {
+    const answeredCount = currentQuestions.filter((q) => answers[q._id]).length;
+    
+    if (currentQuestions.length > 0 && answeredCount === currentQuestions.length) {
+      if (!autoAdvancedSections.current.has(currentSectionIndex)) {
+        autoAdvancedSections.current.add(currentSectionIndex);
+        
+        const timer = setTimeout(() => {
+          if (currentSectionIndex < sections.length - 1) {
+             toast.success("Section complete! Moving to next section.", { autoClose: 2000, toastId: "auto-advance-list" });
+             setCurrentSectionIndex(prev => prev + 1);
+             window.scrollTo(0, 0);
+          }
+        }, 1200);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [answers, currentQuestions, currentSectionIndex, sections.length]);
 
   // ✅ Block browser close / refresh
   useEffect(() => {
