@@ -19,6 +19,7 @@ import AudioPlayer from "../components/AudioPlayer";
 import WritingTestTaking from "./WritingTestTaking";
 import OfflineQueue from "../utils/OfflineQueue";
 import { resolveImageUrl } from "../utils/urlHelper";
+import { updateMockResultModule } from "../services/api";
 
 const TestTaking = () => {
   const { testId } = useParams();
@@ -37,6 +38,9 @@ const TestTaking = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [searchParams] = useSearchParams();
   const assignmentId = searchParams.get("assignmentId");
+  const mockExamId = searchParams.get("mockExamId");
+  const mockResultId = searchParams.get("mockResultId");
+  const writingTestId = searchParams.get("writingTestId");
   const [moduleCheck, setModuleCheck] = useState({
     loading: true,
     module: null,
@@ -454,7 +458,15 @@ const TestTaking = () => {
       }
 
       // Submit session
-      await submitTestSession(session._id);
+      try {
+        await submitTestSession(session._id);
+      } catch (e) {
+        if (e.response && e.response.status === 400 && e.response.data.error === "Test already submitted") {
+          console.log("Test was already submitted. Proceeding to calculate...");
+        } else {
+          throw e;
+        }
+      }
 
       // Calculate results
       const resultResponse = await submitTestResult(session._id);
@@ -476,6 +488,27 @@ const TestTaking = () => {
 
       if (document.fullscreenElement && document.exitFullscreen) {
         document.exitFullscreen().catch((err) => console.error(err));
+      }
+
+      // --- MOCK EXAM PROGRESSION ---
+      if (mockExamId && mockResultId && writingTestId) {
+        // Update mock result with reading band
+        try {
+          await updateMockResultModule({
+            mockExamId,
+            module: "reading",
+            resultId: resultResponse.result._id,
+            bandScore: resultResponse.result.bandScore,
+          });
+        } catch (e) {
+          console.error("Failed to update mock result:", e);
+        }
+
+        toast.info("📖 Reading complete! Moving to Writing...", { autoClose: 3000 });
+        setTimeout(() => {
+          navigate(`/test-taking/${writingTestId}?mockExamId=${mockExamId}&mockResultId=${mockResultId}`);
+        }, 2000);
+        return;
       }
 
       // Navigate to results (you'll create this page next)

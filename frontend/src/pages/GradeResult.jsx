@@ -96,13 +96,7 @@ const GradeResult = () => {
 
     const overallBand = calculateOverallBand();
 
-    if (!gradingNotes.trim()) {
-      toast.error("Please provide feedback for the student");
-      return;
-    }
-
     if (overallBand < 0) {
-      // Allow 0, but usually 1-9. Relaxed check.
       toast.error("Please set appropriate scores");
       return;
     }

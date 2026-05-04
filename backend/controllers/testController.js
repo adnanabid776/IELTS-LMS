@@ -56,7 +56,8 @@ exports.getAllTests = async (req, res) => {
     if (req.user.role === "student") {
       filter.$or = [
         { testType: req.userDoc.studentType || "academic" },
-        { module: "listening" } // Universal bypass for listening
+        { module: "listening" }, // Universal bypass for listening
+        { testFormat: "mock" }   // Mock tests are available to all students
       ];
     }
 
@@ -88,8 +89,9 @@ exports.getTestById = async (req, res) => {
       return res.status(404).json({ error: "Test not found" });
     }
 
-    // Security check: If student, ensure testType matches (Universal bypass for listening)
-    if (req.user.role === "student" && test.module !== "listening") {
+    // Security check: If student, ensure testType matches
+    // Universal bypass for: listening module AND mock format tests
+    if (req.user.role === "student" && test.module !== "listening" && test.testFormat !== "mock") {
       const studentType = req.userDoc?.studentType || "academic";
       if (test.testType !== studentType && test.testType !== "both") {
         return res.status(403).json({

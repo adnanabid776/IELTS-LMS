@@ -218,8 +218,8 @@ const AudioPlayer = ({
           </span>
         </div>
 
-        {/* Playback Speed */}
-        <div className="flex items-center gap-2">
+        {/* No need for Playback Speed - or maybe used in near future.*/}
+        {/* <div className="flex items-center gap-2">
           <span className="text-sm text-gray-600 mr-2">Speed:</span>
           {[0.75, 1, 1.25, 1.5].map((rate) => (
             <button
@@ -234,7 +234,7 @@ const AudioPlayer = ({
               {rate}x
             </button>
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

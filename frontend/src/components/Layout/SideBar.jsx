@@ -44,6 +44,7 @@ const SideBar = ({ user, forceCollapsed = false }) => {
       return [
         ...commonItems.slice(0, 1), // Dashboard
         { id: "tests", icon: "📝", label: "Online Tests", path: "/tests" },
+        { id: "mock-exams", icon: "🎯", label: "Mock Exams", path: "/mock-exams" },
         {
           id: "assigned",
           icon: "📋",
@@ -88,6 +89,12 @@ const SideBar = ({ user, forceCollapsed = false }) => {
           label: "Pending Reviews",
           path: "/pending-reviews",
         },
+        {
+          id: "mock-evaluations",
+          icon: "🎯",
+          label: "Mock Evaluations",
+          path: "/mock-evaluations",
+        },
         ...commonItems.slice(1), // Profile
       ];
     }
@@ -113,6 +120,12 @@ const SideBar = ({ user, forceCollapsed = false }) => {
           icon: "📝",
           label: "Manage Tests",
           path: "/admin/tests",
+        },
+        {
+          id: "mock-exams",
+          icon: "🎯",
+          label: "Mock Exams",
+          path: "/admin/mock-exams",
         },
         ...commonItems.slice(1), // Profile
       ];

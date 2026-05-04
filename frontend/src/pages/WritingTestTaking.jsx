@@ -9,6 +9,7 @@ import {
   submitTestResult,
   updateSubmissionStatus,
   getQuestionsBySectionId,
+  updateMockResultModule,
 } from "../services/api";
 import { toast } from "react-toastify";
 import DashboardLayout from "../components/Layout/DashboardLayout";
@@ -20,6 +21,8 @@ const WritingTestTaking = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const assignmentId = searchParams.get("assignmentId");
+  const mockExamId = searchParams.get("mockExamId");
+  const mockResultId = searchParams.get("mockResultId");
 
   // State
   const [test, setTest] = useState(null);
@@ -291,7 +294,15 @@ const WritingTestTaking = () => {
       await saveEssays();
 
       // Submit session
-      await submitTestSession(session._id);
+      try {
+        await submitTestSession(session._id);
+      } catch (e) {
+        if (e.response && e.response.status === 400 && e.response.data.error === "Test already submitted") {
+          console.log("Test was already submitted. Proceeding to calculate...");
+        } else {
+          throw e;
+        }
+      }
 
       // Calculate results (will be null for Writing until teacher grades)
       const resultResponse = await submitTestResult(session._id);
@@ -310,6 +321,26 @@ const WritingTestTaking = () => {
 
       if (document.fullscreenElement && document.exitFullscreen) {
         document.exitFullscreen().catch((err) => console.error(err));
+      }
+
+      // --- MOCK EXAM FINALIZATION ---
+      if (mockExamId && mockResultId) {
+        try {
+          await updateMockResultModule({
+            mockExamId,
+            module: "writing",
+            resultId: resultResponse.result._id,
+            bandScore: null, // Writing is manually graded
+          });
+        } catch (e) {
+          console.error("Failed to update mock result:", e);
+        }
+
+        toast.success("🎉 Mock Exam Complete! Your teacher will evaluate Writing & Speaking.", { autoClose: 5000 });
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 2500);
+        return;
       }
 
       setTimeout(() => {
@@ -412,7 +443,7 @@ const WritingTestTaking = () => {
   const currentEssay = essays[currentSection._id] || "";
 
   return (
-    <DashboardLayout title={test.title}>
+    <DashboardLayout title={test.title} hideHeader={true} collapseSidebar={true}>
       {/* Header */}
       <div className="bg-white rounded-lg shadow mb-6 p-6">
         <div className="flex items-center justify-between">

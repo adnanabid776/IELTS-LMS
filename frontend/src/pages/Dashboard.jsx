@@ -8,6 +8,7 @@ import {
   getTeacherPendingReviews,
   getAdminDashboardStats,
   getStudentAnalytics,
+  getMyMockResults,
 } from "../services/api";
 import { toast } from "react-toastify";
 import DashboardCharts from "../components/DashboardCharts";
@@ -76,6 +77,14 @@ const Dashboard = () => {
       const response = await getUserResults();
       const results = response.results || [];
 
+      // Fetch Mock Results
+      let mockResults = [];
+      try {
+        mockResults = await getMyMockResults();
+      } catch (err) {
+        console.error("Failed to fetch mock results:", err);
+      }
+
       // Fetch Analytics (Charts)
       let analytics = { trendData: [], moduleData: [] };
       try {
@@ -84,7 +93,21 @@ const Dashboard = () => {
         console.error("Failed to fetch analytics:", err);
       }
 
-      const totalTests = results.length;
+      // Merge regular and mock results for "Recent Results"
+      const transformedMockResults = mockResults.map(mr => ({
+        _id: mr._id,
+        testId: { title: mr.mockExamId?.title || "Mock Exam" },
+        module: "mock",
+        createdAt: mr.createdAt,
+        bandScore: mr.overallBand,
+        status: mr.status
+      }));
+
+      const allRecentResults = [...results, ...transformedMockResults]
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .slice(0, 5);
+
+      const totalTests = results.length + mockResults.length;
 
       // Filter out ungraded tests for average calculation
       const gradedResults = results.filter(
@@ -102,7 +125,6 @@ const Dashboard = () => {
         gradedResults.length > 0
           ? Math.max(...gradedResults.map((r) => r.bandScore))
           : 0;
-      const recentResults = results.slice(0, 5);
 
       let assignedTests = 0;
       try {
@@ -117,7 +139,7 @@ const Dashboard = () => {
         averageBand,
         highestBand,
         assignedTests,
-        recentResults,
+        recentResults: allRecentResults,
         trendData: analytics.trendData || [],
         moduleData: analytics.moduleData || [],
       });
@@ -180,8 +202,12 @@ const Dashboard = () => {
     return "text-red-600";
   };
 
-  const handleViewAnalysis = (resultId) => {
-    navigate(`/results/${resultId}`);
+  const handleViewAnalysis = (resultId, module) => {
+    if (module === "mock") {
+      navigate(`/mock-results/${resultId}`);
+    } else {
+      navigate(`/results/${resultId}`);
+    }
   };
 
   const handleReviewNow = (resultId) => {
@@ -342,7 +368,7 @@ const Dashboard = () => {
                         </td>
                         <td className="px-6 py-4">
                           <button
-                            onClick={() => handleViewAnalysis(result._id)}
+                            onClick={() => handleViewAnalysis(result._id, result.module)}
                             className="px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 text-sm font-semibold"
                           >
                             View

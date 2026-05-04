@@ -76,8 +76,12 @@ const TestList = () => {
 
   // ✅ Filtered + Sorted Tests Calculation
   const getFilteredTests = () => {
-    let filtered = tests;
+    let filtered = [...tests];
 
+    // 1. Filter out Mock modules (they should only appear in Full Mock Exams section)
+    filtered = filtered.filter((test) => test.testFormat !== "mock");
+
+    // 2. Filter by Type (Full vs Item-wise)
     if (testTypeFilter === "full") {
       filtered = filtered.filter((test) => !isItemWise(test));
     } else if (testTypeFilter === "item-wise") {

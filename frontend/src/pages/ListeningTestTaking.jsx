@@ -1,15 +1,21 @@
 import React, { useEffect, useState, useCallback, useMemo, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import DashboardLayout from "../components/Layout/DashboardLayout";
 import AudioPlayer from "../components/AudioPlayer";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { resolveImageUrl } from "../utils/urlHelper";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 const ListeningTestTaking = () => {
   const { testId } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const mockExamId = searchParams.get("mockExamId");
+  const mockResultId = searchParams.get("mockResultId");
+  const readingTestId = searchParams.get("readingTestId");
+  const writingTestId = searchParams.get("writingTestId");
 
   // State
   const [test, setTest] = useState(null);
@@ -371,18 +377,31 @@ const ListeningTestTaking = () => {
       const token = localStorage.getItem("token");
 
       // Final save
-      await saveAnswersToBackend();
+      try {
+        await saveAnswersToBackend();
+      } catch (e) {
+        // Ignore auto-save errors during final submit
+      }
 
       // Submit session
-      await axios.post(
-        `${API_URL}/sessions/submit`,
-        { sessionId: session._id },
-        { headers: { Authorization: `Bearer ${token}` } },
-      );
+      try {
+        await axios.post(
+          `${API_URL}/sessions/submit`,
+          { sessionId: session._id },
+          { headers: { Authorization: `Bearer ${token}` } },
+        );
+      } catch (e) {
+        // If it's already submitted (e.g. from auto-save expiry), ignore and proceed to calculate
+        if (e.response && e.response.status === 400 && e.response.data.error === "Test already submitted") {
+          console.log("Test was already submitted. Proceeding to calculate...");
+        } else {
+          throw e;
+        }
+      }
 
       // Calculate result
       const resultResponse = await axios.post(
-        `${API_URL}/results/calculate`,
+        `${API_URL}/results/submit`,
         { sessionId: session._id },
         { headers: { Authorization: `Bearer ${token}` } },
       );
@@ -391,6 +410,32 @@ const ListeningTestTaking = () => {
 
       if (document.fullscreenElement && document.exitFullscreen) {
         document.exitFullscreen().catch((err) => console.error(err));
+      }
+
+      // --- MOCK EXAM PROGRESSION ---
+      if (mockExamId && mockResultId && readingTestId) {
+        // Update mock result with listening band
+        try {
+          const token = localStorage.getItem("token");
+          await axios.put(
+            `${API_URL}/mock-results/update-module`,
+            {
+              mockExamId,
+              module: "listening",
+              resultId: resultResponse.data.result._id,
+              bandScore: resultResponse.data.result.bandScore,
+            },
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+        } catch (e) {
+          console.error("Failed to update mock result:", e);
+        }
+
+        toast.info("🎧 Listening complete! Moving to Reading...", { autoClose: 3000 });
+        setTimeout(() => {
+          navigate(`/test-taking/${readingTestId}?mockExamId=${mockExamId}&mockResultId=${mockResultId}&writingTestId=${writingTestId}`);
+        }, 2000);
+        return;
       }
 
       setTimeout(() => {
@@ -492,7 +537,7 @@ const ListeningTestTaking = () => {
         return (
           <div
             key={questionId}
-            className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-4 hover:shadow-md transition"
+            className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-6 hover:shadow-md transition-all duration-300 relative overflow-hidden"
           >
             <div className="flex items-start gap-3 mb-4">
               <span className="text-lg font-bold text-blue-600 bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">
@@ -548,7 +593,7 @@ const ListeningTestTaking = () => {
         return (
           <div
             key={questionId}
-            className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-4 hover:shadow-md transition"
+            className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-6 hover:shadow-md transition-all duration-300 relative overflow-hidden"
           >
             <div className="flex items-start gap-3 mb-3">
               <span className="text-lg font-bold text-blue-600 bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">
@@ -616,7 +661,7 @@ const ListeningTestTaking = () => {
         return (
           <div
             key={questionId}
-            className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-4 hover:shadow-md transition"
+            className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-6 hover:shadow-md transition-all duration-300 relative overflow-hidden"
           >
             <div className="flex items-start gap-3">
               <span className="text-lg font-bold text-blue-600 bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">
@@ -681,7 +726,7 @@ const ListeningTestTaking = () => {
         return (
           <div
             key={questionId}
-            className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-4 hover:shadow-md transition"
+            className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-6 hover:shadow-md transition-all duration-300 relative overflow-hidden"
           >
             <div className="flex items-start gap-3 mb-4">
               {/* TEMPORARY DEBUG */}
@@ -720,82 +765,95 @@ const ListeningTestTaking = () => {
         return (
           <div
             key={questionId}
-            className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-4 hover:shadow-md transition"
+            className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-6 hover:shadow-md transition-all duration-300 relative overflow-hidden"
           >
-             <div className="mb-6">
-               <span className="text-lg font-bold text-blue-600 bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mb-3">
-                 {question.questionNumber}
-               </span>
-               <p className="text-gray-800 font-medium whitespace-pre-line leading-relaxed">
-                 {question.questionText}
-               </p>
-               {question.wordLimit && (
-                 <p className="text-sm font-semibold text-gray-500 mt-2">
-                   Word Limit: {question.wordLimit} words {question.allowNumber ? "(Numbers allowed)" : "(No numbers)"}
-                 </p>
-               )}
-             </div>
-             
-             {formImage && (
-                <div className="mb-6 object-contain overflow-hidden rounded border border-gray-200 flex justify-center">
-                    <img src={formImage} alt="Form Diagram" className="max-w-full h-auto max-h-96" />
+            {/* Header / Instructions */}
+            <div className="flex items-start gap-4 mb-8">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider">
+                    Form Completion
+                  </span>
+                  {question.wordLimit && (
+                    <span className="text-xs font-bold text-orange-600 bg-orange-50 px-2 py-1 rounded-md border border-orange-100">
+                      Limit: {question.wordLimit} words
+                    </span>
+                  )}
                 </div>
-             )}
+                <p className="text-gray-800 font-bold text-lg leading-tight">
+                  {question.questionText}
+                </p>
+              </div>
+            </div>
 
-             <div className="border-2 border-gray-800 rounded bg-white max-w-4xl overflow-hidden shadow-sm">
-               <table className="w-full border-collapse">
-                 <tbody>
-                    {(question.items || []).map((item, index) => {
-                       const hasBlank = item.text && item.text.includes("__________");
-                       const isSubheading = !item.text && item.label;
-                       
-                       return (
-                          <tr key={index} className="border-b border-gray-300 last:border-0 hover:bg-gray-50 transition-colors">
-                            {isSubheading ? (
-                                <td colSpan={2} className="bg-gray-100 px-5 py-4 text-center border-b border-gray-400">
-                                   <span className="font-extrabold text-gray-800 uppercase tracking-widest">{item.label}</span>
-                                </td>
-                            ) : (
-                                <>
-                                  <td className="px-5 py-3 text-gray-700 font-bold border-r border-gray-300 w-1/3 align-top">
-                                     {item.label}
-                                  </td>
-                                  <td className="px-5 py-3 text-gray-800 font-medium align-top leading-relaxed">
-                                     {hasBlank ? (
-                                         item.text.split(/________+/).map((part, pIdx, parts) => {
-                                            const itemSubKey = String(index + 1);
-                                            const currentVal = userAnswer && typeof userAnswer === 'object' ? userAnswer[itemSubKey] : "";
-                                            
-                                            return (
-                                               <span key={pIdx}>
-                                                 {part}
-                                                 {pIdx < parts.length - 1 && (
-                                                   <span className="whitespace-nowrap inline-flex items-center gap-1 mx-2">
-                                                     <strong className="text-gray-900 border border-gray-900 bg-gray-100 rounded-full w-5 h-5 flex items-center justify-center text-xs mr-1 shadow-sm font-bold">{itemSubKey}</strong>
-                                                     <input
-                                                       type="text"
-                                                       value={currentVal || ""}
-                                                       onChange={(e) => handleAnswerChange(questionId, { ...userAnswer, [itemSubKey]: e.target.value })}
-                                                       className="w-32 sm:w-48 px-2 py-1 border-b-2 border-gray-400 focus:border-blue-600 focus:outline-none bg-transparent transition-colors text-blue-900 font-bold"
-                                                       placeholder="..."
-                                                     />
-                                                   </span>
-                                                 )}
-                                               </span>
-                                            );
-                                         })
-                                     ) : (
-                                         item.text
-                                     )}
-                                  </td>
-                                </>
-                            )}
-                          </tr>
-                       );
-                    })}
-                 </tbody>
-               </table>
-             </div>
+            {formImage && (
+              <div className="mb-8 p-4 bg-gray-50 rounded-xl border border-gray-100 shadow-inner flex justify-center">
+                <img
+                  src={resolveImageUrl(formImage)}
+                  alt="Form Diagram"
+                  className="max-w-full h-auto max-h-96 rounded shadow-sm"
+                />
+              </div>
+            )}
+
+            <div className="border border-blue-100 rounded-2xl bg-white max-w-4xl mx-auto overflow-hidden shadow-sm">
+              <table className="w-full border-collapse">
+                <tbody>
+                  {(question.items || []).map((item, index) => {
+                    const hasBlank = item.text && item.text.includes("__________");
+                    const isSubheading = !item.text && item.label;
+
+                    return (
+                      <tr key={index} className="border-b border-gray-100 last:border-0 hover:bg-blue-50/30 transition-colors">
+                        {isSubheading ? (
+                          <td colSpan={2} className="bg-blue-50/50 px-6 py-4 text-center border-b border-blue-100">
+                            <span className="font-black text-blue-900 uppercase tracking-[0.2em] text-sm">
+                              {item.label}
+                            </span>
+                          </td>
+                        ) : (
+                          <>
+                            <td className="px-6 py-4 text-gray-600 font-bold border-r border-gray-100 w-1/3 align-top text-sm">
+                              {item.label}
+                            </td>
+                            <td className="px-6 py-4 text-gray-800 font-medium align-top leading-relaxed">
+                              {hasBlank ? (
+                                item.text.split(/________+/).map((part, pIdx, parts) => {
+                                  const itemSubKey = String(index + 1);
+                                  const currentVal = userAnswer && typeof userAnswer === 'object' ? userAnswer[itemSubKey] : "";
+
+                                  return (
+                                    <span key={pIdx}>
+                                      {part}
+                                      {pIdx < parts.length - 1 && (
+                                        <span className="whitespace-nowrap inline-flex items-center gap-1 mx-2">
+                                          <strong className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-[10px] shadow-sm font-black shrink-0">
+                                            {itemSubKey}
+                                          </strong>
+                                          <input
+                                            type="text"
+                                            value={currentVal || ""}
+                                            onChange={(e) => handleAnswerChange(questionId, { ...userAnswer, [itemSubKey]: e.target.value })}
+                                            className="w-32 sm:w-48 px-2 py-1 border-b-2 border-blue-200 focus:border-blue-600 focus:outline-none bg-transparent transition-all text-blue-900 font-bold placeholder:text-blue-200"
+                                            placeholder="..."
+                                          />
+                                        </span>
+                                      )}
+                                    </span>
+                                  );
+                                })
+                              ) : (
+                                item.text
+                              )}
+                            </td>
+                          </>
+                        )}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         );
       }
@@ -804,26 +862,36 @@ const ListeningTestTaking = () => {
         return (
           <div
             key={questionId}
-            className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-4 hover:shadow-md transition"
+            className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-6 hover:shadow-md transition-all duration-300 relative overflow-hidden"
           >
-            <div className="flex items-start gap-3 mb-4">
-              <span className="text-lg font-bold text-blue-600 bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">
-                {question.questionNumber}
-              </span>
-              <p className="text-gray-800 font-medium flex-1">
-                {question.questionText}
-              </p>
+            {/* Header / Instructions */}
+            <div className="flex items-start gap-4 mb-8">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider">
+                    Table Completion
+                  </span>
+                  {question.wordLimit && (
+                    <span className="text-xs font-bold text-orange-600 bg-orange-50 px-2 py-1 rounded-md border border-orange-100">
+                      Limit: {question.wordLimit} words
+                    </span>
+                  )}
+                </div>
+                <p className="text-gray-800 font-bold text-lg leading-tight">
+                  {question.questionText}
+                </p>
+              </div>
             </div>
 
             {question.tableStructure && (
-              <div className="ml-11 mt-4 overflow-x-auto">
-                <table className="min-w-full border-collapse border border-gray-300 bg-white text-sm rounded-lg overflow-hidden shadow-sm">
-                  <thead className="bg-gray-100">
+              <div className="overflow-x-auto rounded-2xl border border-blue-100 shadow-sm">
+                <table className="min-w-full border-collapse bg-white text-sm">
+                  <thead className="bg-blue-600">
                     <tr>
                       {question.tableStructure.headers.map((header, idx) => (
                         <th
                           key={idx}
-                          className="border border-gray-300 px-4 py-3 text-left font-bold text-gray-700 uppercase tracking-wider"
+                          className="px-6 py-4 text-left font-black text-white uppercase tracking-widest text-xs"
                         >
                           {header}
                         </th>
@@ -834,35 +902,35 @@ const ListeningTestTaking = () => {
                     {question.tableStructure.rows.map((row, rIdx) => (
                       <tr
                         key={rIdx}
-                        className={rIdx % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                        className={`transition-colors border-b border-gray-100 last:border-0 ${
+                          rIdx % 2 === 0 ? "bg-white" : "bg-blue-50/20"
+                        } hover:bg-blue-50/50`}
                       >
                         {row.map((cell, cIdx) => (
                           <td
                             key={cIdx}
-                            className="border border-gray-300 px-4 py-2"
+                            className="px-6 py-4 text-gray-700 border-r border-gray-100 last:border-0"
                           >
                             {cell.split(/(\{\{\d+\}\})/g).map((part, pIdx) => {
                               const match = part.match(/\{\{(\d+)\}\}/);
                               if (match) {
-                                const answerIndex = match[1]; // "1", "2"...
-                                // userAnswer here allows object access
-                                const currentVal =
-                                  userAnswer?.[answerIndex] || "";
+                                const answerIndex = match[1];
+                                const currentVal = userAnswer?.[answerIndex] || "";
 
                                 return (
                                   <span
                                     key={pIdx}
-                                    className="inline-flex items-center gap-1"
+                                    className="inline-flex items-center gap-2"
                                   >
-                                    <span className="text-xs font-bold text-gray-500 select-none">
-                                      ({answerIndex})
+                                    <span className="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-[10px] shadow-sm font-black shrink-0">
+                                      {answerIndex}
                                     </span>
                                     <input
                                       type="text"
-                                      className={`w-32 px-2 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors ${
+                                      className={`w-32 sm:w-44 px-3 py-1.5 border-b-2 rounded-md transition-all duration-200 focus:outline-none font-bold ${
                                         currentVal
-                                          ? "bg-blue-50 border-blue-400 font-medium text-blue-800"
-                                          : "border-gray-300"
+                                          ? "bg-blue-100 border-blue-500 text-blue-900"
+                                          : "bg-blue-50/50 border-blue-200 text-gray-800 focus:border-blue-600"
                                       }`}
                                       value={currentVal}
                                       onChange={(e) => {
@@ -875,11 +943,12 @@ const ListeningTestTaking = () => {
                                           [answerIndex]: e.target.value,
                                         });
                                       }}
+                                      placeholder="..."
                                     />
                                   </span>
                                 );
                               }
-                              return <span key={pIdx}>{part}</span>;
+                              return <span key={pIdx} className="font-medium">{part}</span>;
                             })}
                           </td>
                         ))}
@@ -898,58 +967,46 @@ const ListeningTestTaking = () => {
         return (
           <div
             key={questionId}
-            className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-4 hover:shadow-md transition"
+            className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-6 hover:shadow-md transition-all duration-300 relative overflow-hidden"
           >
-            <div className="flex items-start gap-3 mb-4">
-              <span className="text-lg font-bold text-blue-600 bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">
+            <div className="flex items-start gap-4 mb-8">
+              <span className="text-lg font-bold text-blue-600 bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
                 {question.questionNumber}
               </span>
-              <p className="text-gray-800 font-medium flex-1">
+              <p className="text-gray-800 font-bold text-lg leading-tight flex-1">
                 {question.questionText}
               </p>
             </div>
 
-            <div className="ml-11 space-y-4">
+            <div className="space-y-6">
               {/* Reference List (Features/Options) */}
-              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                <h5 className="font-bold text-gray-700 mb-2">
+              <div className="bg-blue-50/50 p-6 rounded-2xl border border-blue-100 shadow-inner">
+                <h5 className="font-black text-blue-800 mb-4 uppercase tracking-widest text-xs">
                   {question.questionType === "matching-features"
                     ? "List of Features"
-                    : "Options"}
+                    : "Available Options"}
                 </h5>
-                <ul className="space-y-1">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {question.features && question.features.length > 0
                     ? question.features.map((feat, idx) => (
-                        <li key={idx} className="text-sm text-gray-600">
-                          <span className="font-bold mr-2 text-gray-800">
-                            {feat.label}.
+                        <div key={idx} className="flex items-center gap-3 bg-white p-2.5 rounded-xl border border-blue-100 shadow-sm">
+                          <span className="bg-blue-600 text-white rounded-lg px-2 py-1 text-[10px] font-black min-w-[24px] text-center">
+                            {feat.label}
                           </span>
-                          {feat.text}
-                        </li>
+                          <span className="text-sm text-gray-700 font-medium">{feat.text}</span>
+                        </div>
                       ))
                     : question.options.map((opt, idx) => (
-                        <li key={idx} className="text-sm text-gray-600">
-                          <span className="font-bold mr-2 text-gray-800">
+                        <div key={idx} className="flex items-center gap-3 bg-white p-2.5 rounded-xl border border-blue-100 shadow-sm">
+                          <span className="bg-blue-600 text-white rounded-lg px-2 py-1 text-[10px] font-black min-w-[24px] text-center">
                             {question.questionType === "matching-headings"
-                              ? [
-                                  "i",
-                                  "ii",
-                                  "iii",
-                                  "iv",
-                                  "v",
-                                  "vi",
-                                  "vii",
-                                  "viii",
-                                  "ix",
-                                  "x",
-                                ][idx] || idx + 1
+                              ? ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"][idx] || idx + 1
                               : String.fromCharCode(65 + idx)}
-                            .
                           </span>
-                          {opt}
-                        </li>
+                          <span className="text-sm text-gray-700 font-medium">{opt}</span>
+                        </div>
                       ))}
-                </ul>
+                </div>
               </div>
 
               {/* Questions/Items */}
@@ -957,12 +1014,12 @@ const ListeningTestTaking = () => {
                 {(question.items || []).map((item, idx) => (
                   <div
                     key={idx}
-                    className="flex flex-col sm:flex-row sm:items-center gap-3 bg-blue-50 p-3 rounded-lg border border-blue-100"
+                    className="flex flex-col sm:flex-row sm:items-center gap-4 bg-white p-4 rounded-xl border border-gray-100 shadow-sm hover:border-blue-200 transition-all"
                   >
-                    <span className="font-bold text-blue-800 w-8 h-8 bg-white rounded-full flex items-center justify-center border border-blue-200 shadow-sm shrink-0">
+                    <span className="bg-blue-600 text-white rounded-full w-7 h-7 flex items-center justify-center text-[10px] shadow-md font-black shrink-0">
                       {item.label || idx + 1}
                     </span>
-                    <p className="flex-1 text-gray-700 font-medium">
+                    <p className="flex-1 text-gray-700 font-bold text-sm">
                       {item.text}
                     </p>
                     <select
@@ -980,13 +1037,13 @@ const ListeningTestTaking = () => {
                           [item.label || idx + 1]: e.target.value,
                         });
                       }}
-                      className="w-full sm:w-40 p-2 border border-gray-300 rounded-lg focus:border-blue-500 outline-none"
+                      className="w-full sm:w-44 p-2.5 bg-blue-50/50 border-2 border-blue-100 rounded-xl focus:border-blue-500 focus:bg-white outline-none font-bold text-blue-900 text-sm transition-all cursor-pointer"
                     >
                       <option value="">Select...</option>
                       {question.features && question.features.length > 0
                         ? question.features.map((feat, fIdx) => (
                             <option key={fIdx} value={feat.label}>
-                              {feat.label}
+                              {feat.label} - {feat.text.substring(0, 30)}...
                             </option>
                           ))
                         : question.options.map((opt, optIdx) => (
@@ -994,35 +1051,13 @@ const ListeningTestTaking = () => {
                               key={optIdx}
                               value={
                                 question.questionType === "matching-headings"
-                                  ? [
-                                      "i",
-                                      "ii",
-                                      "iii",
-                                      "iv",
-                                      "v",
-                                      "vi",
-                                      "vii",
-                                      "viii",
-                                      "ix",
-                                      "x",
-                                    ][optIdx] || optIdx + 1
+                                  ? ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"][optIdx] || optIdx + 1
                                   : String.fromCharCode(65 + optIdx)
                               }
                             >
                               {question.questionType === "matching-headings"
-                                ? [
-                                    "i",
-                                    "ii",
-                                    "iii",
-                                    "iv",
-                                    "v",
-                                    "vi",
-                                    "vii",
-                                    "viii",
-                                    "ix",
-                                    "x",
-                                  ][optIdx] || optIdx + 1
-                                : String.fromCharCode(65 + optIdx)}
+                                ? ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"][optIdx] || optIdx + 1
+                                : String.fromCharCode(65 + optIdx)} - {opt.substring(0, 30)}...
                             </option>
                           ))}
                     </select>
@@ -1037,66 +1072,67 @@ const ListeningTestTaking = () => {
         return (
           <div
             key={questionId}
-            className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-4 hover:shadow-md transition"
+            className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-6 hover:shadow-md transition-all duration-300 relative overflow-hidden"
           >
-            <div className="flex items-start gap-3 mb-4">
-              <span className="text-lg font-bold text-blue-600 bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0">
+            <div className="flex items-start gap-4 mb-8">
+              <span className="text-lg font-bold text-blue-600 bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm">
                 {question.questionNumber}
               </span>
               <div className="flex-1">
-                <p className="text-gray-800 font-medium mb-3">
+                <p className="text-gray-800 font-bold text-lg leading-tight mb-2">
                   {question.questionText}
                 </p>
-                {question.imageUrl && (
-                  <div className="mb-4 bg-gray-100 rounded-lg p-2 border border-gray-200">
-                    <img
-                      src={question.imageUrl}
-                      alt="Map/Diagram"
-                      className="max-h-96 mx-auto rounded-lg"
-                    />
-                  </div>
-                )}
-                <div className="space-y-4">
-                  {question.items &&
-                    question.items.map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="flex flex-col sm:flex-row sm:items-center gap-3 bg-blue-50 p-3 rounded-lg border border-blue-100"
-                      >
-                        <span className="font-bold text-blue-800 w-8 h-8 bg-white rounded-full flex items-center justify-center border border-blue-200 shadow-sm shrink-0">
-                          {item.label}
-                        </span>
-                        <p className="flex-1 text-gray-700 font-medium">
-                          {item.text}
-                        </p>
-                        <select
-                          value={userAnswer[item.label] || ""} // Store as object { "A": "Option X" } logic needs update or simplified string map?
-                          // Let's assume for map labeling we simplify to just selecting from dropdown for that specific item line
-                          // Actually, if it's one question doc with many items, we need to handle sub-answers.
-                          // For simplicity in this iteration, let's treat the Main Answer as an object/JSON string?
-                          // Or better: Each item is a "question" in UI?
-                          // Backend schema suggests `items` inside one Question doc.
-                          // So `answers[questionId]` should be an object: { "A": "i", "B": "ii" }
-                          onChange={(e) => {
-                            const newAns =
-                              typeof userAnswer === "object"
-                                ? { ...userAnswer }
-                                : {};
-                            newAns[item.label] = e.target.value;
-                            handleAnswerChange(questionId, newAns);
-                          }}
-                          className="w-full sm:w-48 p-2 border border-gray-300 rounded-lg focus:border-blue-500 outline-none"
-                        >
-                          <option value="">Select Label...</option>
-                          {question.options.map((opt, oIdx) => (
-                            <option key={oIdx} value={opt}>
-                              {opt}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    ))}
+                <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase tracking-wider">
+                  Map / Diagram Labeling
+                </span>
+              </div>
+            </div>
+
+            <div className="space-y-8">
+              {question.imageUrl && (
+                <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 shadow-inner flex justify-center">
+                  <img
+                    src={resolveImageUrl(question.imageUrl)}
+                    alt="Map/Diagram"
+                    className="max-h-[500px] w-auto rounded-xl shadow-lg border border-white"
+                  />
                 </div>
+              )}
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {question.items &&
+                  question.items.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-4 bg-white p-4 rounded-xl border border-gray-100 shadow-sm hover:border-blue-200 transition-all"
+                    >
+                      <span className="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-xs shadow-md font-black shrink-0">
+                        {item.label}
+                      </span>
+                      <p className="flex-1 text-gray-700 font-bold text-sm">
+                        {item.text}
+                      </p>
+                      <select
+                        value={userAnswer[item.label] || ""}
+                        onChange={(e) => {
+                          const newAns =
+                            typeof userAnswer === "object"
+                              ? { ...userAnswer }
+                              : {};
+                          newAns[item.label] = e.target.value;
+                          handleAnswerChange(questionId, newAns);
+                        }}
+                        className="w-32 p-2.5 bg-blue-50/50 border-2 border-blue-100 rounded-xl focus:border-blue-500 focus:bg-white outline-none font-bold text-blue-900 text-xs transition-all cursor-pointer"
+                      >
+                        <option value="">Select...</option>
+                        {question.options && question.options.map((opt, optIdx) => (
+                          <option key={optIdx} value={opt}>
+                            {opt}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  ))}
               </div>
             </div>
           </div>
@@ -1140,7 +1176,7 @@ const ListeningTestTaking = () => {
   }
 
   return (
-    <DashboardLayout title="Listening Test">
+    <DashboardLayout title="Listening Test" hideHeader={true} collapseSidebar={true}>
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-lg p-6 mb-6 text-white">
         <div className="flex items-center justify-between">

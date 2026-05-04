@@ -1,4 +1,5 @@
 const Result = require("../models/Result");
+const MockResult = require("../models/MockResult");
 const mongoose = require("mongoose");
 const Session = require("../models/Session");
 const Test = require("../models/Test");
@@ -803,12 +804,21 @@ exports.getUserResults = async (req, res) => {
     if (module) filter.module = module;
 
     const results = await Result.find(filter)
-      .populate("testId", "title module")
+      .populate({
+        path: "testId",
+        select: "title module testFormat",
+      })
       .sort({ createdAt: -1 });
 
+    // Filter out results where the testFormat is 'mock'
+    // This prevents individual mock components from leaking into standalone history
+    const filteredResults = results.filter(
+      (r) => r.testId && r.testId.testFormat !== "mock",
+    );
+
     res.json({
-      count: results.length,
-      results,
+      count: filteredResults.length,
+      results: filteredResults,
     });
   } catch (error) {
     console.error("Get user results error:", error);
@@ -954,7 +964,7 @@ exports.teacherGradeResult = async (req, res) => {
     const { bandScore, writingScores, gradingNotes } = req.body;
 
     // Validate
-    if (!bandScore || bandScore < 0 || bandScore > 9) {
+    if (bandScore === undefined || bandScore === null || bandScore < 0 || bandScore > 9) {
       return res
         .status(400)
         .json({ error: "Band score must be between 0 and 9" });
@@ -1098,21 +1108,40 @@ exports.getStudentAnalytics = async (req, res) => {
       userId = req.query.userId;
     }
 
-    // 1. Get Trend Data (Last 15 results)
+    // 1. Get Trend Data (Last 15 regular results)
     const trendResults = await Result.find({
       userId,
       bandScore: { $ne: null }, // Only graded tests
     })
-      .sort({ createdAt: -1 }) // Latest first for line chart
+      .sort({ createdAt: -1 })
       .select("bandScore module createdAt")
       .limit(15);
 
-    const trendData = trendResults.reverse().map((r) => {
+    // Get Mock Results for trend
+    const mockResults = await MockResult.find({
+      userId,
+      overallBand: { $ne: null }
+    })
+      .sort({ createdAt: -1 })
+      .select("overallBand createdAt")
+      .limit(15);
+
+    // Combine and sort
+    const combinedTrendResults = [
+      ...trendResults,
+      ...mockResults.map(mr => ({
+        bandScore: mr.overallBand,
+        module: "mock",
+        createdAt: mr.createdAt
+      }))
+    ].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 15);
+
+    const trendData = combinedTrendResults.reverse().map((r) => {
       const date = new Date(r.createdAt);
       return {
         date: `${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`,
         score: r.bandScore,
-        module: r.module,
+        module: r.module === "mock" ? "Mock Exam" : r.module.charAt(0).toUpperCase() + r.module.slice(1),
       };
     });
 
@@ -1133,16 +1162,34 @@ exports.getStudentAnalytics = async (req, res) => {
       },
     ]);
 
+    // Get Mock Average
+    const mockStats = await MockResult.aggregate([
+      {
+        $match: {
+          userId: new mongoose.Types.ObjectId(userId),
+          overallBand: { $ne: null },
+        },
+      },
+      {
+        $group: {
+          _id: "mock",
+          averageScore: { $avg: "$overallBand" },
+          testsTaken: { $sum: 1 },
+        },
+      },
+    ]);
+
     // Format for charts
     const moduleData = [
       { name: "Reading", score: 0, count: 0 },
       { name: "Listening", score: 0, count: 0 },
       { name: "Writing", score: 0, count: 0 },
+      { name: "Mock Exam", score: 0, count: 0 },
     ];
 
-    moduleStats.forEach((stat) => {
+    [...moduleStats, ...mockStats].forEach((stat) => {
       const index = moduleData.findIndex(
-        (m) => m.name.toLowerCase() === stat._id,
+        (m) => m.name.toLowerCase() === stat._id || (stat._id === "mock" && m.name === "Mock Exam")
       );
       if (index !== -1) {
         moduleData[index].score = Math.round(stat.averageScore * 10) / 10;

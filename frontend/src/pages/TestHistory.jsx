@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserResults } from "../services/api";
+import { getMyMockResults, deleteMockResult } from "../services/mockApi";
 import { toast } from "react-toastify";
 import DashboardLayout from "../components/Layout/DashboardLayout";
 
@@ -22,9 +23,27 @@ const TestHistory = () => {
   const fetchResults = async () => {
     try {
       setLoading(true);
-      const module = selectedModule === "all" ? null : selectedModule;
-      const response = await getUserResults(module);
-      setResults(response.results || []);
+      if (selectedModule === "mock") {
+        const mockResults = await getMyMockResults();
+        // Transform mock results to match the table structure
+        const transformedResults = mockResults.map((mr) => ({
+          _id: mr._id,
+          testId: { title: mr.mockExamId?.title || "Mock Exam" },
+          module: "mock",
+          createdAt: mr.createdAt,
+          bandScore: mr.overallBand,
+          status: mr.status,
+          listeningBand: mr.listeningBand,
+          readingBand: mr.readingBand,
+          writingBand: mr.writingBand,
+          speakingBand: mr.speakingBand,
+        }));
+        setResults(transformedResults);
+      } else {
+        const module = selectedModule === "all" ? null : selectedModule;
+        const response = await getUserResults(module);
+        setResults(response.results || []);
+      }
     } catch (error) {
       console.error("Fetch results error: ", error);
       toast.error("Failed to load test history");
@@ -33,8 +52,25 @@ const TestHistory = () => {
     }
   };
 
-  const handleViewResult = (resultId) => {
-    navigate(`/results/${resultId}`);
+  const handleViewResult = (resultId, module) => {
+    if (module === "mock") {
+      navigate(`/mock-results/${resultId}`);
+    } else {
+      navigate(`/results/${resultId}`);
+    }
+  };
+
+  const handleDeleteMock = async (resultId) => {
+    if (window.confirm("Are you sure you want to delete this mock exam result? This action cannot be undone.")) {
+      try {
+        await deleteMockResult(resultId);
+        toast.success("Mock result deleted successfully");
+        fetchResults(); // Refresh list
+      } catch (error) {
+        console.error("Delete mock error:", error);
+        toast.error("Failed to delete mock result");
+      }
+    }
   };
   const getBandColor = (band) => {
     if (band >= 7) {
@@ -118,6 +154,16 @@ const TestHistory = () => {
         >
           ✍️ Writing
         </button>
+        <button
+          onClick={() => handleModuleChange("mock")}
+          className={`px-4 py-2 rounded-lg font-medium transition ${
+            selectedModule === "mock"
+              ? "bg-orange-600 text-white"
+              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+          }`}
+        >
+          🎓 Full Mock Exams
+        </button>
       </div>
       {/* Results Count & Pagination Info */}
       {!loading && results.length > 0 && (
@@ -177,7 +223,9 @@ const TestHistory = () => {
                               ? "bg-green-100 text-green-800"
                               : result.module === "writing"
                                 ? "bg-purple-100 text-purple-800"
-                                : "bg-gray-100 text-gray-800"
+                                : result.module === "mock"
+                                  ? "bg-orange-100 text-orange-800"
+                                  : "bg-gray-100 text-gray-800"
                         }`}
                       >
                         {result.module.toUpperCase()}
@@ -187,8 +235,15 @@ const TestHistory = () => {
                       {formatDate(result.createdAt)}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-900">
-                      {result.module === "reading" ||
-                      result.module === "listening" ? (
+                      {result.module === "mock" ? (
+                        <div className="flex flex-col gap-1 text-xs">
+                          <span>L: {result.listeningBand || "-"}</span>
+                          <span>R: {result.readingBand || "-"}</span>
+                          <span>W: {result.writingBand || "-"}</span>
+                          <span>S: {result.speakingBand || "-"}</span>
+                        </div>
+                      ) : result.module === "reading" ||
+                        result.module === "listening" ? (
                         // Auto-graded: show correctAnswers/totalQuestions (percentage%)
                         <>
                           {result.correctAnswers}/{result.totalQuestions} (
@@ -207,16 +262,33 @@ const TestHistory = () => {
                       <span
                         className={`font-bold text-lg ${getBandColor(result.bandScore)}`}
                       >
-                        {result.bandScore}
+                        {result.module === "mock" && result.bandScore === null ? (
+                          <span className="text-sm font-normal italic text-orange-500">Pending</span>
+                        ) : (
+                          result.bandScore
+                        )}
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <button
-                        onClick={() => handleViewResult(result._id)}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-semibold"
-                      >
-                        View Details
-                      </button>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => handleViewResult(result._id, result.module)}
+                          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-semibold whitespace-nowrap"
+                        >
+                          View Details
+                        </button>
+                        {result.module === "mock" && (
+                          <button
+                            onClick={() => handleDeleteMock(result._id)}
+                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors shadow-sm border border-red-100"
+                            title="Delete Mock Result"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                          </button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}

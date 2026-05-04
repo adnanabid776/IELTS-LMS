@@ -34,6 +34,8 @@ const testRoutes = require("./routes/testRoutes");
 const sessionRoutes = require("./routes/sessionRoutes");
 const assignmentRoutes = require("./routes/assignmentRoutes");
 const uploadRoutes = require("./routes/uploadRoutes");
+const mockExamRoutes = require("./routes/mockExamRoutes");
+const mockResultRoutes = require("./routes/mockResultRoutes");
 const uploadController = require("./controllers/uploadController");
 
 //use routes
@@ -45,6 +47,8 @@ app.use("/api/results", resultRoutes);
 app.use("/api/sessions", sessionRoutes);
 app.use("/api/assignments", assignmentRoutes);
 app.use("/api/upload", uploadRoutes);
+app.use("/api/mock-exams", mockExamRoutes);
+app.use("/api/mock-results", mockResultRoutes);
 app.use("/uploads", express.static("uploads"));
 
 uploadController.configureCloudinary();

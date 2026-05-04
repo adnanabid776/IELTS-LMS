@@ -143,11 +143,15 @@ const EditTestModal = ({ isOpen, onClose, test, onUpdated }) => {
               Module
             </span>
             <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-              formData.testType === "academic" 
-                ? "bg-purple-100 text-purple-700" 
-                : "bg-teal-100 text-teal-700"
+              formData.testFormat === "mock"
+                ? "bg-amber-100 text-amber-700"
+                : formData.testType === "academic" 
+                  ? "bg-purple-100 text-purple-700" 
+                  : "bg-teal-100 text-teal-700"
             }`}>
-              {formData.testType?.charAt(0).toUpperCase() + formData.testType?.slice(1)}
+              {formData.testFormat === "mock" 
+                ? "All (Mock)" 
+                : formData.testType?.charAt(0).toUpperCase() + formData.testType?.slice(1)}
             </span>
           </div>
           <div>
@@ -258,17 +262,23 @@ const EditTestModal = ({ isOpen, onClose, test, onUpdated }) => {
 
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">
-                  IELTS Category <span className="text-red-500">*</span>
+                  IELTS Category {formData.testFormat !== "mock" && <span className="text-red-500">*</span>}
                 </label>
-                <select
-                  name="testType"
-                  value={formData.testType}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border-2 border-indigo-200 bg-indigo-50 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all font-medium"
-                >
-                  <option value="academic">🎓 Academic</option>
-                  <option value="general">🌏 General</option>
-                </select>
+                {formData.testFormat === "mock" ? (
+                  <div className="w-full px-4 py-3 border-2 border-amber-200 bg-amber-50 rounded-xl text-amber-700 font-semibold cursor-not-allowed">
+                    🌐 All Students (Mock tests are universal)
+                  </div>
+                ) : (
+                  <select
+                    name="testType"
+                    value={formData.testType}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border-2 border-indigo-200 bg-indigo-50 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all font-medium"
+                  >
+                    <option value="academic">🎓 Academic</option>
+                    <option value="general">🌏 General</option>
+                  </select>
+                )}
               </div>
             </div>
 

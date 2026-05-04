@@ -26,6 +26,8 @@ const TestHistory = lazy(() => import("./pages/TestHistory"));
 const AnswerReview = lazy(() => import("./pages/AnswerReview"));
 const AssignedTests = lazy(() => import("./pages/AssignedTests"));
 const ListeningTestTaking = lazy(() => import("./pages/ListeningTestTaking"));
+const StudentMockExams = lazy(() => import("./pages/StudentMockExams"));
+const MockResultView = lazy(() => import("./pages/MockResultView"));
 
 // Lazy-loaded Teacher Pages
 const MyStudents = lazy(() => import("./pages/teacher/MyStudents"));
@@ -36,12 +38,15 @@ const AssignmentDetail = lazy(() => import("./pages/teacher/AssignmentDetail"));
 const ReviewSubmission = lazy(() => import("./pages/teacher/ReviewSubmission"));
 const PendingReviews = lazy(() => import("./pages/PendingReviews"));
 const GradeResult = lazy(() => import("./pages/GradeResult"));
+const MockResultEvaluation = lazy(() => import("./pages/MockResultEvaluation"));
+const MockResultsList = lazy(() => import("./pages/MockResultsList"));
 
 // Lazy-loaded Admin Pages
 const UserManagement = lazy(() => import("./pages/admin/UserManagement"));
 const QuestionManagement = lazy(() => import("./pages/admin/QuestionManagement"));
 const SectionManagement = lazy(() => import("./pages/admin/SectionManagement"));
 const TestManagement = lazy(() => import("./pages/admin/TestManagement"));
+const MockExamManagement = lazy(() => import("./pages/admin/MockExamManagement"));
 
 // Loading Fallback Component
 const Loader = () => (
@@ -135,6 +140,22 @@ function App() {
               element={
                 <ProtectedRoute allowedRoles={["student"]}>
                   <TestHistory />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/mock-exams"
+              element={
+                <ProtectedRoute allowedRoles={["student"]}>
+                  <StudentMockExams />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/mock-results/:mockResultId"
+              element={
+                <ProtectedRoute allowedRoles={["student", "teacher", "admin"]}>
+                  <MockResultView />
                 </ProtectedRoute>
               }
             />
@@ -235,6 +256,22 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/mock-evaluate/:mockResultId"
+              element={
+                <ProtectedRoute allowedRoles={["teacher", "admin"]}>
+                  <MockResultEvaluation />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/mock-evaluations"
+              element={
+                <ProtectedRoute allowedRoles={["teacher", "admin"]}>
+                  <MockResultsList />
+                </ProtectedRoute>
+              }
+            />
 
             {/* ================================================
                 ADMIN-ONLY ROUTES
@@ -268,6 +305,14 @@ function App() {
               element={
                 <ProtectedRoute allowedRoles={["admin"]}>
                   <SectionManagement />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/mock-exams"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <MockExamManagement />
                 </ProtectedRoute>
               }
             />
