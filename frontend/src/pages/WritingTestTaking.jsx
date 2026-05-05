@@ -437,7 +437,7 @@ const WritingTestTaking = () => {
     // Default word limits if missing
     wordLimit:
       currentSection.wordLimit ||
-      (currentSection.taskType === "task1" ? 150 : 250),
+      (currentSection.taskType?.startsWith("task1") ? 150 : 250),
   };
 
   const currentEssay = essays[currentSection._id] || "";
@@ -450,7 +450,7 @@ const WritingTestTaking = () => {
           <div>
             <h2 className="text-2xl font-bold text-gray-800">{test.title}</h2>
             <p className="text-gray-600 mt-1">
-              {displayTask.taskType === "task1" ? "Task 1" : "Task 2"} -{" "}
+              {displayTask.taskType?.startsWith("task1") ? "Task 1" : "Task 2"} -{" "}
               {displayTask.title}
             </p>
           </div>
@@ -501,7 +501,7 @@ const WritingTestTaking = () => {
       {/* Instructions */}
         <div className="mb-6 p-4 bg-blue-50 border-l-4 border-blue-600 rounded">
           <h3 className="font-semibold text-gray-800 mb-2">Instructions:</h3>
-          <p className="text-gray-700">{displayTask.instructions}</p>
+          <p className="text-gray-700 whitespace-pre-wrap leading-relaxed">{displayTask.instructions}</p>
           <p className="text-sm text-gray-600 mt-2">
             <strong>Minimum words:</strong> {displayTask.wordLimit}
           </p>
@@ -527,7 +527,7 @@ const WritingTestTaking = () => {
           value={currentEssay}
           onChange={(text) => handleEssayChange(currentSection._id, text)}
           minWords={displayTask.wordLimit || 150}
-          placeholder={`Write your ${displayTask.taskType === "task1" ? "summary" : "essay"} here...`}
+          placeholder={`Write your ${displayTask.taskType === "task1-letter" ? "letter" : displayTask.taskType === "task1" ? "summary" : "essay"} here...`}
         />
       </div>
 

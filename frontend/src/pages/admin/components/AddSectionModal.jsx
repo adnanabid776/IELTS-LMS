@@ -84,13 +84,16 @@ const AddSectionModal = ({
       setUploadingImage(false);
     }
   };
-
+//i'll look at this later for more understand because this code is like not making sense.
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => {
+      const updates = { [name]: value };
+      if (name === "taskType") {
+        updates.wordLimit = value === "task2" ? 250 : 150;
+      }
+      return { ...prev, ...updates };
+    });
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
@@ -421,9 +424,8 @@ const AddSectionModal = ({
                       onChange={handleChange}
                       className="w-full px-4 py-2.5 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                      <option value="task1">
-                        Task 1 (150 words - Diagram/Chart)
-                      </option>
+                      <option value="task1">Task 1 (150 words - Diagram/Chart)</option>
+                      <option value="task1-letter">Task 1 (150 words - Letter)</option>
                       <option value="task2">Task 2 (250 words - Essay)</option>
                     </select>
                   </div>

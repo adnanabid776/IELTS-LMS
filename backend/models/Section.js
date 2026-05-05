@@ -81,7 +81,7 @@ const sectionSchema = new mongoose.Schema(
     },
     taskType: {
       type: String,
-      enum: ["task1", "task2"],
+      enum: ["task1", "task1-letter", "task2"],
       // Only used when test.module = 'writing'
     },
     taskImageUrl: {
