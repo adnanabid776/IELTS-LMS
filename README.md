@@ -4,11 +4,8 @@ A full-featured Learning Management System designed specifically for IELTS prepa
 
 <img width="1365" height="600" alt="Screenshot 2026-05-12 124026" src="https://github.com/user-attachments/assets/d7a2d0cd-3d67-4e69-8c04-78c91052b389" />
 <img width="1365" height="598" alt="Screenshot 2026-05-12 124213" src="https://github.com/user-attachments/assets/9125684c-b0a4-4cb6-8922-55dfa8eb15b3" />
-<img width="1365" height="598" alt="Screenshot 2026-05-12 124216" src="https://github.com/user-attachments/assets/5226a6da-1671-4386-9c4a-f04e676a2fa5" />
 <img width="1365" height="597" alt="Screenshot 2026-05-12 124302" src="https://github.com/user-attachments/assets/3484fde8-67d7-4b3a-89ac-68d84dd1b603" />
-<img width="1365" height="597" alt="Screenshot 2026-05-12 124304" src="https://github.com/user-attachments/assets/4a904017-c38b-4105-8c8d-7f377f2ab171" />
 <img width="1365" height="597" alt="Screenshot 2026-05-12 124430" src="https://github.com/user-attachments/assets/71c10008-9512-429c-8049-5e39da72f71b" />
-<img width="1365" height="597" alt="Screenshot 2026-05-12 124431" src="https://github.com/user-attachments/assets/06e9b04f-73b4-4f65-b1e5-067145ac9a05" />
 
 
 
