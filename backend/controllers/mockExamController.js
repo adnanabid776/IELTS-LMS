@@ -2,6 +2,7 @@ const MockExam = require("../models/MockExam");
 const Test = require("../models/Test");
 const Section = require("../models/Section");
 const Question = require("../models/Question");
+const MockResult = require("../models/MockResult");
 
 // Helper to create a single test from the mock JSON payload
 const createTestFromPayload = async (testPayload, module, userId, createdIds) => {
@@ -111,7 +112,7 @@ exports.uploadMockExamJson = async (req, res) => {
       if (createdIds.sectionIds.length > 0) await Section.deleteMany({ _id: { $in: createdIds.sectionIds } });
       if (createdIds.testIds.length > 0) await Test.deleteMany({ _id: { $in: createdIds.testIds } });
       if (createdIds.mockExamId) await MockExam.findByIdAndDelete(createdIds.mockExamId);
-    } catch (cleanupError) {}
+    } catch (cleanupError) { }
 
     res.status(500).json({ error: "Failed to upload mock exam. Changes rolled back." });
   }
@@ -146,9 +147,12 @@ exports.deleteMockExam = async (req, res) => {
 
     // We can either soft delete or hard delete. 
     // Soft delete is safer.
-    exam.isActive = false;
-    await exam.save();
+    // exam.isActive = false;
+    // await exam.save();
 
+    //hard delete the mock test as if there's no need to keeping that
+    await MockResult.deleteMany({ mockExamId: exam._id });
+    await MockExam.findByIdAndDelete(req.params.id);
     res.json({ message: "Mock Exam deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: "Server error" });
